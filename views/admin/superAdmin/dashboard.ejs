@@ -1,0 +1,509 @@
+<%- include('../../layouts/header.ejs') %>
+
+<body class="flex">
+    <!-- Main Content Area -->
+    <main class="ml-64">
+        <div class="bg-[#f6f6f6] rounded-l-[50px] p-8 shadow-md">
+            <div class="bg-white rounded-l-[25px] rounded-r-[25px] p-6 shadow-md border-[2px]">
+                <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
+            </div>
+
+            <!-- Stats Cards Row -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-6">
+                <!-- Total Flat -->
+
+                <div
+                    class="bg-white rounded-[25px] shadow border border-[#54B7C5] p-6 justify-center align-center flex items-start gap-4"
+                >
+                    <!-- Icon on left -->
+                    <div class="bg-[#54B7C5]/10 p-2 rounded-lg">
+                        <svg
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="30"
+                            height="30"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke="#54B7C5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M18 18V6h-5v12h5Zm0 0h2M4 18h2.5m3.5-5.5V12M6 6l7-2v16l-7-2V6Z"
+                            />
+                        </svg>
+                    </div>
+
+                    <!-- Text content on right -->
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold">1200</span>
+                        <span class="text-gray-500 text-sm">Total Flat</span>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-[25px] shadow border border-[#54B7C5] p-6 justify-center align-center flex items-start gap-4"
+                >
+                    <!-- Icon on left -->
+                    <div class="bg-[#54B7C5]/10 p-2 rounded-lg">
+                        <svg
+                            class=""
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="30"
+                            height="30"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke="#54B7C5"
+                                stroke-width="2"
+                                d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                            />
+                        </svg>
+                    </div>
+
+                    <!-- Text content on right -->
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold">21456</span>
+                        <span class="text-gray-500 text-sm">Active Users</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold">21750</span>
+                        <span class="text-gray-500 text-sm">Total Users</span>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-[25px] shadow border border-[#54B7C5] p-6 justify-center align-center flex items-start gap-4"
+                >
+                    <!-- Icon on left -->
+                    <div class="bg-[#54B7C5]/10 p-2 rounded-lg">
+                        <svg
+                            class=""
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="30"
+                            height="30"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke="#54B7C5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z"
+                            />
+                        </svg>
+                    </div>
+
+                    <!-- Text content on right -->
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold">10</span>
+                        <span class="text-gray-500 text-sm">Total Clients</span>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-[25px] shadow border border-[#54B7C5] p-6 justify-center align-center flex items-start gap-4"
+                >
+                    <!-- Icon on left -->
+                    <div class="bg-[#54B7C5]/10 p-2 rounded-lg">
+                        <svg
+                            class=""
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="30"
+                            height="30"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke="#54B7C5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 12c.263 0 .524-.06.767-.175a2 2 0 0 0 .65-.491c.186-.21.333-.46.433-.734.1-.274.15-.568.15-.864a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 12 9.736a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 16 9.736c0 .295.052.588.152.861s.248.521.434.73a2 2 0 0 0 .649.488 1.809 1.809 0 0 0 1.53 0 2.03 2.03 0 0 0 .65-.488c.185-.209.332-.457.433-.73.1-.273.152-.566.152-.861 0-.974-1.108-3.85-1.618-5.121A.983.983 0 0 0 17.466 4H6.456a.986.986 0 0 0-.93.645C5.045 5.962 4 8.905 4 9.736c.023.59.241 1.148.611 1.567.37.418.865.667 1.389.697Zm0 0c.328 0 .651-.091.94-.266A2.1 2.1 0 0 0 7.66 11h.681a2.1 2.1 0 0 0 .718.734c.29.175.613.266.942.266.328 0 .651-.091.94-.266.29-.174.537-.427.719-.734h.681a2.1 2.1 0 0 0 .719.734c.289.175.612.266.94.266.329 0 .652-.091.942-.266.29-.174.536-.427.718-.734h.681c.183.307.43.56.719.734.29.174.613.266.941.266a1.819 1.819 0 0 0 1.06-.351M6 12a1.766 1.766 0 0 1-1.163-.476M5 12v7a1 1 0 0 0 1 1h2v-5h3v5h7a1 1 0 0 0 1-1v-7m-5 3v2h2v-2h-2Z"
+                            />
+                        </svg>
+                    </div>
+
+                    <!-- Text content on right -->
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold">120</span>
+                        <span class="text-gray-500 text-sm">Total Service Providers</span>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-[25px] shadow border border-[#54B7C5] p-6 justify-center align-center flex items-start gap-4"
+                >
+                    <!-- Icon on left -->
+                    <div class="bg-[#54B7C5]/10 p-2 rounded-lg">
+                        <svg
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="30"
+                            height="30"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke="#54B7C5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="m11.5 11.5 2.071 1.994M4 10h5m11 0h-1.5M12 7V4M7 7V4m10 3V4m-7 13H8v-2l5.227-5.292a1.46 1.46 0 0 1 2.065 2.065L10 17Zm-5 3h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"
+                            />
+                        </svg>
+                    </div>
+
+                    <!-- Text content on right -->
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold">24</span>
+                        <span class="text-gray-500 text-sm">Pending Maintenance</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 pb-8">
+                <!-- chat -->
+                <div class="flex h-[calc(79vh-8rem)] bg-white border rounded-[25px]">
+                    <div class="w-full border-r">
+                        <div class="p-4 border-b">
+                            <h3 class="font-bold text-lg">Live Support</h3>
+                            <div class="relative mt-2">
+                                <input
+                                    type="text"
+                                    placeholder="Search"
+                                    class="w-full pl-8 pr-4 py-2 border rounded-lg"
+                                />
+                                <svg
+                                    class="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="p-4 hover:bg-gray-50 cursor-pointer">
+                            <div class="flex justify-between">
+                                <span class="font-medium">Elmer Laverty</span>
+                                <span class="text-xs text-gray-500">12m</span>
+                            </div>
+                            <p class="text-sm text-gray-500 truncate">Ament Minim mollit non...</p>
+                        </div>
+
+                        <div class="p-4 hover:bg-gray-50 cursor-pointer">
+                            <div class="flex justify-between">
+                                <span class="font-medium">Florencio Dorrance</span>
+                                <span class="text-xs text-gray-500">24m</span>
+                            </div>
+                            <p class="text-sm text-gray-500 truncate">woohoooo</p>
+                        </div>
+                    </div>
+                    <!-- <div class="w-full flex flex-col">
+                        <div class="p-4 border-b">
+                            <h3 class="font-bold">Elmer Laverty</h3>
+                        </div>
+
+                        <div class="flex-1 overflow-y-auto p-4 space-y-4">
+                            <div class="flex items-start gap-2">
+                                <div class="bg-gray-200 rounded-full w-8 h-8"></div>
+                                <div>
+                                    <div class="bg-gray-100 rounded-lg p-3 max-w-xs">
+                                        <p>
+                                            Amet minim mollit non deserunt ullamco est sit aliqua
+                                            dolor.
+                                        </p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">09:40 AM</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-2 justify-end">
+                                <div>
+                                    <div class="bg-blue-500 text-white rounded-lg p-3 max-w-xs">
+                                        <p>
+                                            Amet minim mollit non deserunt ullamco est sit aliqua
+                                            dolor do amet sint.
+                                        </p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1 text-right">09:40 AM</p>
+                                </div>
+                                <div class="bg-blue-500 rounded-full w-8 h-8"></div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border-t">
+                            <div class="relative">
+                                <input
+                                    type="text"
+                                    placeholder="Write Here..."
+                                    class="w-full pl-4 pr-12 py-3 border rounded-lg"
+                                />
+                                <button class="absolute right-2 top-2 text-blue-500">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+                <!-- Building Management Requests -->
+                <div class="bg-white border rounded-[25px] p-4 h-[calc(50vh-8rem)] overflow-y-auto">
+                    <h2 class="text-[#888] text-lg text-center font-bold mb-4">
+                        Building Management Requests
+                    </h2>
+
+                    <!-- Request Card -->
+                    <div
+                        class="flex justify-between items-center bg-[#f6f6f6] border rounded-xl p-4 mb-4"
+                    >
+                        <div>
+                            <h3 class="font-semibold text-md">Building A - Maintenance Request</h3>
+                            <p class="text-sm text-gray-500">Elevator not working</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <!-- View -->
+                            <button
+                                class="text-blue-600 hover:text-blue-800 p-2 rounded-full hover:bg-blue-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="#54B7C5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                    />
+                                </svg>
+                            </button>
+
+                            <!-- Reject -->
+                            <button
+                                class="text-red-600 hover:text-red-800 p-2 rounded-full hover:bg-red-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                            <!-- Approve -->
+                            <button
+                                class="text-green-600 hover:text-green-800 p-2 rounded-full hover:bg-green-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M5 13l4 4L19 7"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Add more requests here similarly -->
+                    <div
+                        class="flex justify-between items-center bg-[#f6f6f6] border rounded-xl p-4 mb-4"
+                    >
+                        <div>
+                            <h3 class="font-semibold text-md">Building A - Maintenance Request</h3>
+                            <p class="text-sm text-gray-500">Elevator not working</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <!-- View -->
+                            <button
+                                class="text-blue-600 hover:text-blue-800 p-2 rounded-full hover:bg-blue-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="#54B7C5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                    />
+                                </svg>
+                            </button>
+
+                            <!-- Reject -->
+                            <button
+                                class="text-red-600 hover:text-red-800 p-2 rounded-full hover:bg-red-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                            <!-- Approve -->
+                            <button
+                                class="text-green-600 hover:text-green-800 p-2 rounded-full hover:bg-green-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M5 13l4 4L19 7"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Provider Requests -->
+                <div class="bg-white border rounded-[25px] p-4 h-[calc(50vh-8rem)] overflow-y-auto">
+                    <h2 class="text-[#888] text-lg text-center font-bold mb-4">
+                        Building Management Requests
+                    </h2>
+
+                    <!-- Request Card -->
+                    <div
+                        class="flex justify-between items-center bg-[#f6f6f6] border rounded-xl p-4 mb-4"
+                    >
+                        <div>
+                            <h3 class="font-semibold text-md">Building A - Maintenance Request</h3>
+                            <p class="text-sm text-gray-500">Elevator not working</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <!-- View -->
+                            <button
+                                class="text-blue-600 hover:text-blue-800 p-2 rounded-full hover:bg-blue-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="#54B7C5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                    />
+                                </svg>
+                            </button>
+
+                            <!-- Reject -->
+                            <button
+                                class="text-red-600 hover:text-red-800 p-2 rounded-full hover:bg-red-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                            <!-- Approve -->
+                            <button
+                                class="text-green-600 hover:text-green-800 p-2 rounded-full hover:bg-green-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M5 13l4 4L19 7"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Add more requests here similarly -->
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+<%- include('../../layouts/footer.ejs') %>
