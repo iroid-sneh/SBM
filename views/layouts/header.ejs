@@ -4,20 +4,32 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
+        <!-- <link href="../../src/input.css" rel="stylesheet" /> -->
+        <link href="https://unpkg.com/flowbite@latest/dist/flowbite.min.css" rel="stylesheet" />
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-            integrity="sha512-olnMnnSo3bD2YaeAcR2ZCBK4Gdn6Kn5Rogghrhybqrg64UUMtStMBE/g3tMl9k+9nxWTz8eGcfXexQfDwCh1NQ=="
+            integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
             rel="stylesheet"
         />
+
         <style>
             body {
                 font-family: "Inter", sans-serif;
+            }
+            .active-menu-item {
+                background-color: white;
+                color: #0a2d61;
+                font-weight: 500;
+            }
+            .active-menu-item:hover {
+                background-color: white !important;
             }
         </style>
     </head>
@@ -36,8 +48,8 @@
                     <ul class="space-y-2 px-4">
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 bg-white text-[#0A2D61] rounded-xl font-medium"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/dashboard"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'dashboard' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-home"></i>
                                 <span>Dashboard</span>
@@ -45,8 +57,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/finance"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'finance' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-wallet"></i>
                                 <span>Finance</span>
@@ -54,8 +66,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/accounts"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'accounts' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-user"></i>
                                 <span>Accounts</span>
@@ -63,8 +75,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/invoices"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'Inter' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-file-invoice"></i>
                                 <span>Invoices</span>
@@ -72,8 +84,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/services"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'services' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-concierge-bell"></i>
                                 <span>Services</span>
@@ -81,8 +93,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/maintenance"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'maintenance' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-tools"></i>
                                 <span>Maintenance</span>
@@ -90,8 +102,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/events"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'events' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-calendar"></i>
                                 <span>Events</span>
@@ -99,8 +111,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/advertisement"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'advertisement' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-bullhorn"></i>
                                 <span>Advertisement</span>
@@ -108,8 +120,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/push-notification"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'push-notification' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-bell"></i>
                                 <span>Push Notifications</span>
@@ -117,8 +129,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/feedback"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'feedback' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-comment"></i>
                                 <span>Feedback</span>
@@ -126,8 +138,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/rewards"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'rewards' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-gift"></i>
                                 <span>Rewards</span>
@@ -135,8 +147,8 @@
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="flex items-center space-x-3 py-2 px-3 hover:bg-[#153A70] rounded-xl"
+                                href="<%= process.env.APP_URL_ADMIN %>/super-admin/settings"
+                                class="flex items-center space-x-3 py-2 px-3 <%= currentPage === 'settings' ? 'active-menu-item' : 'hover:bg-[#153A70]' %> rounded-xl"
                             >
                                 <i class="fas fa-cog"></i>
                                 <span>Settings</span>
@@ -150,6 +162,7 @@
             <div class="p-4">
                 <button
                     class="w-full py-2 bg-white text-[#0A2D61] rounded-xl font-semibold hover:bg-gray-200"
+                    onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/super-admin/login'"
                 >
                     Logout
                 </button>
