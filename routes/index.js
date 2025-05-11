@@ -1,5 +1,5 @@
 import express from "express";
-import adminRoutes from "../src/admin/admin.routes.js";
+import adminRoutes from "../src/admin/admin/admin.routes.js";
 import superAdminRoutes from "../src/admin/SuperAdmin/superAdmin.routes.js";
 const router = express.Router();
 

@@ -30,28 +30,6 @@ class superAdminServices {
     }
 
     /**
-     * @description: Finance Page
-     * @param {*} req
-     * @param {*} res
-     */
-    static async financePage(req, res) {
-        return res.render("adminPanels/superAdmin/finance", {
-            currentPage: "finance",
-        });
-    }
-
-    /**
-     * @description: Page
-     * @param {*} req
-     * @param {*} res
-     */
-    static async accountsPage(req, res) {
-        return res.render("adminPanels/superAdmin/accounts", {
-            currentPage: "accounts",
-        });
-    }
-
-    /**
      * @description: Page
      * @param {*} req
      * @param {*} res

@@ -1,6 +1,8 @@
 import express from "express";
 import asyncWrap from "express-async-wrapper";
 import superAdminController from "./superAdmin.controller";
+import financeRoutes from "./finance/finance.routes";
+import accountsRoutes from "./accounts/accounts.routes";
 const router = express.Router();
 
 router.get("/login", asyncWrap(superAdminController.loginPage));
@@ -9,9 +11,9 @@ router.post("/login", asyncWrap(superAdminController.login));
 
 router.get("/dashboard", asyncWrap(superAdminController.dashboardPage));
 
-router.get("/finance", asyncWrap(superAdminController.financePage));
+router.use("/finance", financeRoutes);
 
-router.get("/accounts", asyncWrap(superAdminController.accountsPage));
+router.use("/accounts", accountsRoutes);
 
 router.get("/invoices", asyncWrap(superAdminController.invoicesPage));
 

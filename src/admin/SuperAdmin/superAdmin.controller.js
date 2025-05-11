@@ -32,26 +32,6 @@ class superAdminController {
     }
 
     /**
-     * @description: Fianance Page for Super Admin
-     * @param {*} req
-     * @param {*} res
-     */
-    static async financePage(req, res) {
-        const data = await superAdminService.financePage(req, res);
-        return;
-    }
-
-    /**
-     * @description: Page for Super Admin
-     * @param {*} req
-     * @param {*} res
-     */
-    static async accountsPage(req, res) {
-        const data = await superAdminService.accountsPage(req, res);
-        return;
-    }
-
-    /**
      * @description: Page for Super Admin
      * @param {*} req
      * @param {*} res

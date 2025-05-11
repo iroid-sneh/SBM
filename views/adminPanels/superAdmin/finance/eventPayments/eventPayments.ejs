@@ -1,9 +1,26 @@
-<%- include('../../layouts/header.ejs') %>
+<%- include('../../../../layouts/header.ejs') %>
+<head></head>
+
 <body class="flex">
     <main class="ml-64">
         <div class="bg-[#f6f6f6] rounded-l-[50px] p-8 shadow-md">
-            <div class="bg-white rounded-l-[25px] rounded-r-[25px] p-6 shadow-md border-[2px]">
+            <div
+                class="bg-white rounded-l-[25px] rounded-r-[25px] p-6 shadow-md border-[2px] flex justify-between items-center"
+            >
                 <h1 class="text-3xl font-bold text-gray-800">Finance</h1>
+
+                <!-- Super Admin Profile Info -->
+                <div class="flex items-center space-x-3">
+                    <img
+                        src="https://i.pravatar.cc/40?img=11"
+                        alt="Profile"
+                        class="w-10 h-10 rounded-full shadow-md"
+                    />
+                    <div class="text-right">
+                        <div class="text-base font-semibold text-gray-800">Thomas Lewis</div>
+                        <div class="text-sm text-gray-500">Super Admin</div>
+                    </div>
+                </div>
             </div>
 
             <!-- Stats Cards Row -->
@@ -130,6 +147,7 @@
                     <div class="flex flex-col gap-2 items-end">
                         <button
                             class="rounded-full px-3 py-1 bg-[#163f75] hover:bg-[#4c97f8] text-white text-xs flex items-center gap-1 h-7"
+                            onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/finance/event-payments/release %>`"
                         >
                             <svg
                                 class="w-3 h-3 text-white"
@@ -150,52 +168,133 @@
                             </svg>
                             Release
                         </button>
-                        <a href="#" class="text-[#163f75] text-xs hover:underline">View Payment</a>
                     </div>
                 </div>
             </div>
 
             <div class="w-full h-[1px] bg-[#54B7C5] my-2"></div>
-            <div class="bg-[#f6f6f6] rounded-l-[50px] p-8 shadow-md">
+            <div class="bg-[#f6f6f6] rounded-l-[50px] rounded-r-[50px] p-8 shadow-md">
                 <!-- Filter Section -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6">
-                    <!-- Category Dropdown -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                        <select
-                            class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                        >
-                            <option>Rent/Annual Services Collection</option>
-                            <option>Events Tickets Payment</option>
-                            <option>Maintenance Fees</option>
-                        </select>
-                    </div>
-
-                    <!-- Reset Button -->
-                    <div class="flex items-end">
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-2 px-4 items-end"
+                >
+                    <!-- Category Slide Switcher -->
+                    <div
+                        id="categorySwitcher"
+                        class="flex bg-white rounded-full overflow-hidden w-fit h-[47px]"
+                    >
                         <button
-                            class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm hover:bg-gray-50"
+                            class="category-btn w-[150px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-white text-gray-700"
+                            onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/finance/received-payments`"
                         >
-                            Reset
+                            Received Payment
+                        </button>
+                        <button
+                            class="category-btn w-[200px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-white text-gray-700"
+                            onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/finance/rent-services`"
+                        >
+                            Rent/Annual Services Collection
+                        </button>
+                        <button
+                            class="category-btn w-[180px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-[#163f75] text-white"
+                            onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/finance/event-payments`"
+                        >
+                            Events Tickets Payment
                         </button>
                     </div>
 
-                    <!-- Date From -->
-                    <div>
+                    <!-- Reset Button -->
+                    <div class="flex items-end"></div>
+
+                    <!-- From Date Picker -->
+                    <div class="relative max-w-sm">
                         <label class="block text-sm font-medium text-gray-700 mb-1">From</label>
-                        <input
-                            type="date"
-                            class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                        />
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                            >
+                                <svg
+                                    class="w-4 h-4 text-gray-500"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                datepicker
+                                datepicker-orientation="bottom"
+                                datepicker-format="dd-mm-yyyy"
+                                type="text"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                placeholder="Select date"
+                            />
+                        </div>
                     </div>
 
-                    <!-- Date To -->
-                    <div>
+                    <!-- To Date Picker with Search Button -->
+                    <div class="relative max-w-sm">
+                        <div class="flex justify-end gap-2 mb-1">
+                            <!-- Reset Button -->
+                            <button
+                                class="flex items-center gap-1 text-sm text-[#163f75] hover:underline font-medium"
+                            >
+                                <svg
+                                    class="w-5 h-5 text-gray-800 dark:text-white"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke="#163f75"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M12 8v4l3 3M3.22302 14C4.13247 18.008 7.71683 21 12 21c4.9706 0 9-4.0294 9-9 0-4.97056-4.0294-9-9-9-3.72916 0-6.92858 2.26806-8.29409 5.5M7 9H3V5"
+                                    />
+                                </svg>
+                                Reset
+                            </button>
+                            <!-- Search Button -->
+                            <button
+                                class="bg-[#163f75] hover:bg-[#1e4b8f] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                            >
+                                Search
+                            </button>
+                        </div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">To</label>
-                        <input
-                            type="date"
-                            class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                        />
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                            >
+                                <svg
+                                    class="w-4 h-4 text-gray-500"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                datepicker
+                                datepicker-orientation="bottom"
+                                datepicker-format="dd-mm-yyyy"
+                                type="text"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                placeholder="Select date"
+                            />
+                        </div>
                     </div>
                 </div>
 
@@ -287,6 +386,7 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <!-- Flowbite DataTables JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <!-- Simple DataTables (for export functionality) -->
@@ -315,6 +415,18 @@
                 });
             });
         });
+
+        document.querySelectorAll(".category-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".category-btn").forEach((b) => {
+                    b.classList.remove("bg-[#163f75]", "text-white");
+                    b.classList.add("bg-white", "text-gray-700");
+                });
+
+                btn.classList.remove("bg-white", "text-gray-700");
+                btn.classList.add("bg-[#163f75]", "text-white");
+            });
+        });
     </script>
 </body>
-<%- include('../../layouts/footer.ejs') %>
+<%- include('../../../../layouts/footer.ejs') %>

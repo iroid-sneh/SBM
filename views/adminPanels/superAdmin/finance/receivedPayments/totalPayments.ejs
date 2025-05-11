@@ -1,0 +1,464 @@
+<%- include('../../../../layouts/header.ejs') %>
+<head>
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .finance-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+
+<body class="flex">
+    <main class="ml-64">
+        <div class="bg-[#f6f6f6] rounded-l-[50px] p-8 shadow-md">
+            <div class="flex justify-end m-3">
+                <button
+                    class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/finance/received-payments`"
+                >
+                    Back
+                </button>
+            </div>
+            <div class="bg-[#eaeae9] rounded-l-[25px] rounded-r-[25px] shadow-md border-[2px]">
+                <div class="bg-white rounded-l-[25px] rounded-r-[25px] p-6 shadow-md border-[2px]">
+                    <div class="flex justify-between items-center">
+                        <!-- Left side - Finance title -->
+                        <div class="flex items-center space-x-2">
+                            <h1 class="text-3xl font-bold text-gray-800">Finance >></h1>
+                            <h1 class="text-2xl text-gray-500 ml-2">Total Payments</h1>
+                        </div>
+
+                        <!-- Right side - Profile info -->
+                        <div class="flex items-center space-x-3">
+                            <img
+                                src="https://i.pravatar.cc/40?img=11"
+                                alt="Profile"
+                                class="w-10 h-10 rounded-full shadow-md"
+                            />
+                            <div class="text-right">
+                                <div class="text-base font-semibold text-gray-800">
+                                    Thomas Lewis
+                                </div>
+                                <div class="text-sm text-gray-500">Super Admin</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-1 p-2">
+                    <!-- Date pickers and buttons aligned to right -->
+                    <div class="flex justify-end">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex justify-end gap-2 mt-6">
+                                <button
+                                    class="flex items-center gap-1 text-sm text-[#163f75] hover:underline font-medium"
+                                >
+                                    <svg
+                                        class="w-5 h-5"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke="#163f75"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 8v4l3 3M3.22302 14C4.13247 18.008 7.71683 21 12 21c4.9706 0 9-4.0294 9-9 0-4.97056-4.0294-9-9-9-3.72916 0-6.92858 2.26806-8.29409 5.5M7 9H3V5"
+                                        />
+                                    </svg>
+                                    Reset
+                                </button>
+                            </div>
+                            <div class="relative">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    From
+                                </label>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                                    >
+                                        <svg
+                                            class="w-4 h-4 text-gray-500"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        datepicker
+                                        datepicker-orientation="bottom"
+                                        datepicker-format="dd-mm-yyyy"
+                                        type="text"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                        placeholder="Select date"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="flex items-end">
+                                <div class="relative">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                                        To
+                                    </label>
+                                    <div class="relative">
+                                        <div
+                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                                        >
+                                            <svg
+                                                class="w-4 h-4 text-gray-500"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <input
+                                            datepicker
+                                            datepicker-orientation="bottom"
+                                            datepicker-format="dd-mm-yyyy"
+                                            type="text"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                            placeholder="Select date"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-[1px] bg-[#54B7C5] my-4"></div>
+
+            <!-- Rest of your existing code remains the same -->
+            <div class="bg-[#f6f6f6] rounded-l-[50px] rounded-r-[50px] p-8 shadow-md">
+                <!-- Filter Section -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-2 px-4 items-end">
+                    <!-- Category Slide Switcher - takes first column -->
+                    <div
+                        id="categorySwitcher"
+                        class="flex bg-white rounded-full overflow-hidden w-fit h-[47px]"
+                    >
+                        <button
+                            class="category-btn w-[150px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-[#163f75] text-white"
+                            onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/finance/received-payments`"
+                        >
+                            Received Payment
+                        </button>
+                        <button
+                            class="category-btn w-[200px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-white text-gray-700"
+                            onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/finance/rent-services`"
+                        >
+                            Rent/Annual Services Collection
+                        </button>
+                        <button
+                            class="category-btn w-[180px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-white text-gray-700"
+                            onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/finance/event-payments`"
+                        >
+                            Events Tickets Payment
+                        </button>
+                    </div>
+
+                    <!-- Empty middle column for spacing -->
+                    <div class="hidden md:block"></div>
+
+                    <!-- Search Button - takes third column and aligned to end -->
+                    <div class="flex justify-end">
+                        <button
+                            class="bg-[#163f75] hover:bg-[#1e4b8f] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DataTable Section -->
+                <div class="overflow-x-auto">
+                    <table
+                        id="transactionsTable"
+                        class="min-w-full divide-y divide-gray-200"
+                        datatables="true"
+                    >
+                        <thead class="bg-[#eaeae9] rounded-r-[50px] rounded-l-[50px]">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Transaction Time
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Invoice
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Category
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Bussiness Name
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Admin Name
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Address
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Release
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    16:05:10
+                                </td>
+                                <td
+                                    class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900"
+                                >
+                                    <a
+                                        href="#"
+                                        onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
+                                        class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
+                                    >
+                                        203458
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Service
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Power Moves
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Sandra Pugh
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-900">
+                                    Flat 312, Marassi Residence Bld. 2122 Street, Diyar
+                                </td>
+                                <td
+                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[red]"
+                                >
+                                    BHD 25.000
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination Info -->
+                    <div class="mt-4 text-sm text-gray-600 px-6">Showing 1 of 28</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Invoice Modal -->
+    <div
+        id="invoice-modal"
+        tabindex="-1"
+        class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-10 flex items-center justify-center backdrop-blur-sm"
+    >
+        <div
+            class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 md:mx-auto p-6 border border-gray-100"
+        >
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">Invoice</h3>
+                <button
+                    data-modal-hide="invoice-modal"
+                    class="text-gray-500 text-red-500 hover:text-red-600 text-2xl"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Invoice Content -->
+            <div class="space-y-4">
+                <!-- Invoice Header -->
+                <div class="flex justify-between items-end">
+                    <h2 class="text-xl font-bold">Invoice #302</h2>
+                    <p class="text-gray-500">09-02-2025</p>
+                </div>
+
+                <!-- Items Table -->
+                <div class="overflow-x-auto mt-4">
+                    <table class="min-w-full">
+                        <thead class="mb-1">
+                            <tr class="rounded-r-[50px] rounded-l-[50px]">
+                                <!-- This enables the rounding -->
+                                <th
+                                    class="px-4 py-3 text-left font-medium text-white bg-[#163f75] first:rounded-l-lg last:rounded-r-lg"
+                                >
+                                    Item
+                                </th>
+                                <th class="px-4 py-3 text-left font-medium text-white bg-[#163f75]">
+                                    Qty
+                                </th>
+                                <th class="px-4 py-3 text-left font-medium text-white bg-[#163f75]">
+                                    U.Price
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-left font-medium text-white bg-[#163f75] last:rounded-r-lg"
+                                >
+                                    T.Price
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                class="border-b bg-[#f6f6f6] border-gray-200 rounded-r-[50px] rounded-l-[50px] mt-2"
+                            >
+                                <td class="px-1 py-2 first:rounded-l-lg last:rounded-r-lg">
+                                    1. Hoodie
+                                </td>
+                                <td class="px-1 py-2">1</td>
+                                <td class="px-1 py-2">2.000</td>
+                                <td class="px-1 py-2 last:rounded-r-lg">2.000</td>
+                            </tr>
+                            <tr
+                                class="border-b bg-[#f6f6f6] border-gray-200 rounded-r-[50px] rounded-l-[50px] mt-2"
+                            >
+                                <td class="px-1 py-2 first:rounded-l-lg last:rounded-r-lg">
+                                    2. T-shirt
+                                </td>
+                                <td class="px-1 py-2">5</td>
+                                <td class="px-1 py-2">0.700</td>
+                                <td class="px-1 py-2 last:rounded-r-lg">3.500</td>
+                            </tr>
+                            <tr
+                                class="border-b bg-[#f6f6f6] border-gray-200 rounded-r-[50px] rounded-l-[50px] mt-2"
+                            >
+                                <td class="px-1 py-2 first:rounded-l-lg last:rounded-r-lg">
+                                    3. Blazer
+                                </td>
+                                <td class="px-1 py-2">2</td>
+                                <td class="px-1 py-2">1.500</td>
+                                <td class="px-1 py-2 last:rounded-r-lg">3.000</td>
+                            </tr>
+                            <tr
+                                class="border-b bg-[#f6f6f6] border-gray-200 rounded-r-[50px] rounded-l-[50px] mt-2"
+                            >
+                                <td class="px-1 py-2 first:rounded-l-lg last:rounded-r-lg">
+                                    4. Trouser
+                                </td>
+                                <td class="px-1 py-2">3</td>
+                                <td class="px-1 py-2">1.800</td>
+                                <td class="px-1 py-2 last:rounded-r-lg">5.400</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Summary -->
+                <div class="grid grid-cols-2 gap-2 max-w-xs ml-auto mt-4">
+                    <div class="text-right text-[green]">Discount</div>
+                    <div class="text-right text-[green]">-20%</div>
+
+                    <div class="text-right">Delivery Fee</div>
+                    <div class="text-right">00</div>
+
+                    <div class="text-right">Tax</div>
+                    <div class="text-right">1.112</div>
+
+                    <!-- Combined green highlight row -->
+                    <div
+                        class="col-span-2 bg-[lightgreen] rounded-lg px-4 py-2 flex justify-between items-center"
+                    >
+                        <div class="font-bold">Total Price</div>
+                        <div class="font-bold">
+                            <span>12.232</span>
+                            <span class="text-gray-500 line-through ml-2">15.290</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-end space-x-3 mt-6 pt-4 border-t">
+                <button
+                    class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                >
+                    Download
+                </button>
+                <button class="px-4 py-2 bg-[#163f75] text-white rounded-lg hover:bg-blue-700">
+                    Print
+                </button>
+            </div>
+        </div>
+    </div>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+    <!-- Flowbite DataTables JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <!-- Simple DataTables (for export functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize Flowbite DataTable
+            const dataTable = new DataTable("#transactionsTable", {
+                perPage: 10,
+                perPageSelect: [5, 10, 20, 50],
+                labels: {
+                    placeholder: "Search transactions...",
+                    perPage: "{select} entries per page",
+                    noRows: "No transactions found",
+                    info: "Showing {start} to {end} of {rows} entries",
+                },
+            });
+        });
+
+        document.querySelectorAll(".category-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".category-btn").forEach((b) => {
+                    b.classList.remove("bg-[#163f75]", "text-white");
+                    b.classList.add("bg-white", "text-gray-700");
+                });
+
+                btn.classList.remove("bg-white", "text-gray-700");
+                btn.classList.add("bg-[#163f75]", "text-white");
+            });
+        });
+        document
+            .querySelector('[data-modal-hide="invoice-modal"]')
+            .addEventListener("click", function () {
+                document.getElementById("invoice-modal").classList.add("hidden");
+            });
+        document.getElementById("invoice-modal").addEventListener("click", function (e) {
+            if (e.target === this) {
+                this.classList.add("hidden");
+            }
+        });
+    </script>
+</body>
+<%- include('../../../../layouts/footer.ejs') %>
