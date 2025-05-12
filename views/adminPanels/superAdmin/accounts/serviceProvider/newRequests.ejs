@@ -1,0 +1,505 @@
+<%- include('../../../../layouts/header.ejs', {currentPage: 'accounts'}) %>
+<head>
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .finance-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body class="flex">
+    <main class="ml-64">
+        <div class="bg-[#f6f6f6] rounded-l-[50px] p-8 shadow-md">
+            <div class="flex justify-end m-3">
+                <button
+                    class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/accounts/service-provider`"
+                >
+                    Back
+                </button>
+            </div>
+            <div class="bg-[#eaeae9] rounded-l-[25px] rounded-r-[25px] shadow-md border-[2px]">
+                <div class="bg-white rounded-l-[25px] rounded-r-[25px] p-6 shadow-md border-[2px]">
+                    <div class="flex justify-between items-center">
+                        <!-- Left side - Finance title -->
+                        <div class="flex items-center space-x-2">
+                            <h1 class="text-3xl font-bold text-gray-800">Accounts >></h1>
+                            <h1 class="text-2xl text-gray-500 ml-2">New Requests</h1>
+                        </div>
+
+                        <!-- Right side - Profile info -->
+                        <div class="flex items-center space-x-3">
+                            <img
+                                src="https://i.pravatar.cc/40?img=11"
+                                alt="Profile"
+                                class="w-10 h-10 rounded-full shadow-md"
+                            />
+                            <div class="text-right">
+                                <div class="text-base font-semibold text-gray-800">
+                                    Thomas Lewis
+                                </div>
+                                <div class="text-sm text-gray-500">Super Admin</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-1 p-2 flex items-center justify-between">
+                    <!-- File icon at the start -->
+                    <button class="flex items-center m-2">
+                        <svg
+                            class="w-6 h-6 text-gray-800 transform scale-x-[-1]"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke="#163f75"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z"
+                            />
+                        </svg>
+                    </button>
+
+                    <!-- Category switcher centered -->
+                    <div class="flex-1 flex justify-end">
+                        <div
+                            id="categorySwitcher"
+                            class="flex bg-white rounded-full overflow-hidden w-fit h-[47px]"
+                        >
+                            <button
+                                class="category-btn w-[80px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-white text-gray-700"
+                                onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/accounts/users`"
+                            >
+                                Users
+                            </button>
+                            <button
+                                class="category-btn w-[140px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-[#163f75] text-white"
+                                onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/accounts/service-provider`"
+                            >
+                                Service Provider
+                            </button>
+                            <button
+                                class="category-btn w-[160px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-white text-gray-700"
+                                onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/accounts/building-management`"
+                            >
+                                Building Management
+                            </button>
+                            <button
+                                class="category-btn w-[100px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-white text-gray-700"
+                                onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/accounts/security`"
+                            >
+                                Security
+                            </button>
+                            <button
+                                class="category-btn w-[110px] h-[38px] px-3 text-xs rounded-full m-1 flex items-center justify-center text-center bg-white text-gray-700"
+                                onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/accounts/technician`"
+                            >
+                                Technician
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-1"></div>
+
+            <div class="bg-[#f6f6f6] p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-2 px-4 items-center mb-3">
+                    <!-- Search Input -->
+                    <div class="relative"></div>
+
+                    <!-- Empty middle column for spacing -->
+                    <div class="hidden md:block"></div>
+
+                    <!-- Request Type Buttons -->
+                    <div class="flex justify-end items-center space-x-1">
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                            >
+                                <svg
+                                    class="h-5 w-5 text-gray-400"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Search"
+                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-full bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#163f75] focus:border-[#163f75] sm:text-sm"
+                            />
+                        </div>
+
+                        <div class="flex space-x-2">
+                            <button
+                                class="w-[130px] h-[38px] px-3 text-sm rounded-full flex items-center justify-center bg-[#163f75] text-white hover:bg-gray-400 transition-colors"
+                                onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/accounts/service-provider/new-requests`"
+                            >
+                                New Requests
+                            </button>
+                            <button
+                                class="w-[150px] h-[38px] px-3 text-sm rounded-full flex items-center justify-center bg-white text-black hover:bg-gray-400 transition-colors"
+                                onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/accounts/service-provider/previous-requests`"
+                            >
+                                Previous Requests
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTable Section -->
+                <div class="overflow-x-auto">
+                    <table id="usersTable" class="min-w-full" datatables="true">
+                        <thead class="bg-[#eaeae9] rounded-t-[30px]">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider first:rounded-l-lg last:rounded-r-lg"
+                                >
+                                    Name
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Admin
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Service Type
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    City
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Contact No.
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Selected Plan
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider last:rounded-r-lg"
+                                >
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-[#f6f6f6]">
+                            <!-- User 1 -->
+                            <tr>
+                                <td class="flex items-center p-4 mr-12 space-x-1 whitespace-nowrap">
+                                    <img
+                                        class="w-10 h-10 rounded-full"
+                                        src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png"
+                                        alt="Neil Sims avatar"
+                                    />
+                                    <div
+                                        class="text-base font-semibold text-gray-900 dark:text-white"
+                                    >
+                                        Super Clean Services
+                                    </div>
+                                </td>
+                                <td
+                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                                >
+                                    Marry Kuca
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Cleaning
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Manama
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    +773 39876543
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Premium
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <button
+                                        data-modal-target="reject-user-modal"
+                                        data-modal-toggle="reject-user-modal"
+                                        class="inline-flex items-center justify-center w-[80px] h-[38px] px-3 rounded-full bg-[#54B7C5] text-white hover:bg-[#54B7C5]/80 focus:outline-none focus:ring-2 focus:ring-[#54B7C5]/50"
+                                    >
+                                        Reject
+                                    </button>
+                                    <button
+                                        data-modal-target="accept-user-modal"
+                                        data-modal-toggle="accept-user-modal"
+                                        class="inline-flex items-center justify-center w-[80px] h-[38px] px-3 rounded-full bg-[#163f75] text-white hover:bg-[#163f75]/80 focus:outline-none focus:ring-2 focus:ring-[#163f75]/50"
+                                    >
+                                        Accept
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination Info -->
+                    <div class="mt-4 text-sm text-gray-600 px-6">Showing 1 of 28</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Accept Confirmation Modal -->
+    <div
+        id="accept-user-modal"
+        tabindex="-1"
+        class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center"
+    >
+        <div class="bg-white rounded-3xl shadow-lg w-full max-w-md mx-4 p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center border-b pb-2">
+                <h3 class="text-lg font-semibold text-center w-full">Confirmation</h3>
+                <button
+                    data-modal-hide="accept-user-modal"
+                    class="text-red-500 text-sm absolute right-6 top-5 hover:text-red-600"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="text-center mt-6">
+                <p class="text-gray-600">Are you sure you want to accept this request?</p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-center space-x-4 mt-8">
+                <button
+                    data-modal-hide="accept-user-modal"
+                    class="bg-[#54B7C5] hover:bg-[#48aab8] text-white font-semibold rounded-full px-6 py-2 w-[120px]"
+                >
+                    Cancel
+                </button>
+                <button
+                    id="confirm-accept"
+                    data-modal-hide="accept-user-modal"
+                    data-modal-target="assign-building-modal"
+                    data-modal-toggle="assign-building-modal"
+                    class="bg-[#163f75] hover:bg-[#1e4b8f] text-white font-semibold rounded-full px-6 py-2 w-[120px]"
+                >
+                    Yes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Modal -->
+    <div
+        id="reject-user-modal"
+        tabindex="-1"
+        class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center"
+    >
+        <div class="bg-white rounded-3xl shadow-lg w-full max-w-md mx-4 p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center border-b pb-2">
+                <h3 class="text-lg font-semibold text-center w-full">Rejection Reason</h3>
+                <button
+                    data-modal-hide="reject-user-modal"
+                    class="text-red-500 text-sm absolute right-6 top-5 hover:text-red-600"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="mt-6">
+                <textarea
+                    rows="4"
+                    placeholder="Write here"
+                    class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#54B7C5]/50 text-sm"
+                ></textarea>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-center space-x-4 mt-8">
+                <button
+                    data-modal-hide="reject-user-modal"
+                    class="bg-[#54B7C5] hover:bg-[#48aab8] text-white font-semibold rounded-full px-6 py-2 w-[120px]"
+                >
+                    Cancel
+                </button>
+                <button
+                    id="confirm-reject"
+                    class="bg-[#163f75] hover:bg-[#1e4b8f] text-white font-semibold rounded-full px-6 py-2 w-[120px]"
+                >
+                    Reject
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Assign Building/Complex -->
+    <div
+        id="assign-building-modal"
+        tabindex="-1"
+        class="fixed inset-0 z-50 hidden w-full h-full overflow-y-auto overflow-x-hidden bg-black bg-opacity-20 backdrop-blur-sm justify-center items-center flex"
+    >
+        <div
+            class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md mx-4 md:mx-auto p-6 border border-gray-100"
+        >
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">Assign Building/Complex</h3>
+                <button
+                    data-modal-hide="assign-building-modal"
+                    class="text-red-500 text-2xl hover:text-red-600"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="space-y-4">
+                <!-- Dropdown -->
+                <div class="relative">
+                    <select
+                        id="building-select"
+                        class="w-full px-4 py-2 rounded-lg text-sm text-gray-700 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#54B7C5]/50 appearance-none"
+                        onchange="addSelectedBuilding()"
+                    >
+                        <option value="" disabled selected>Select Building/Complex</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                        <svg
+                            class="w-4 h-4 text-gray-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M19 9l-7 7-7-7"
+                            />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Selected Tags -->
+                <div id="selected-buildings" class="flex flex-wrap gap-2"></div>
+            </div>
+
+            <!-- Save Button -->
+            <div class="mt-6 flex justify-center">
+                <button
+                    id="save-building-btn"
+                    class="bg-[#54B7C5] text-white w-[200px] h-[48px] text-lg rounded-xl hover:bg-[#54B7C5]/90"
+                >
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+    <!-- Flowbite DataTables JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <!-- Simple DataTables (for export functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const allBuildings = [
+                "Building 1",
+                "Building 2",
+                "Building 3",
+                "Building 4",
+                "Building 5",
+                "Building 6",
+                "Building 7",
+                "Building 8",
+                "Building 9",
+                "Building 10",
+            ];
+
+            const selectedBuildings = new Set();
+            const buildingSelect = document.getElementById("building-select");
+            const selectedContainer = document.getElementById("selected-buildings");
+
+            function populateDropdown() {
+                if (!buildingSelect) return;
+
+                buildingSelect.innerHTML = "";
+                const defaultOption = document.createElement("option");
+                defaultOption.value = "";
+                defaultOption.textContent = "Select Building/Complex";
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                buildingSelect.appendChild(defaultOption);
+
+                allBuildings.forEach((building) => {
+                    const option = document.createElement("option");
+                    option.value = building;
+                    option.textContent = building;
+                    buildingSelect.appendChild(option);
+                });
+            }
+
+            function addSelectedBuilding() {
+                const selected = buildingSelect.value;
+                if (selected && !selectedBuildings.has(selected)) {
+                    selectedBuildings.add(selected);
+                    updateSelectedUI();
+                }
+                buildingSelect.value = "";
+            }
+
+            function updateSelectedUI() {
+                selectedContainer.innerHTML = "";
+                selectedBuildings.forEach((building) => {
+                    const tag = document.createElement("span");
+                    tag.className =
+                        "bg-[#54B7C5] text-white px-3 py-1 rounded-full flex items-center";
+                    tag.innerHTML = `
+                ${building}
+                <button onclick="removeBuilding('${building}')" class="ml-2 text-white hover:text-gray-200">&times;</button>
+            `;
+                    selectedContainer.appendChild(tag);
+                });
+            }
+
+            window.removeBuilding = function (building) {
+                selectedBuildings.delete(building);
+                updateSelectedUI();
+            };
+
+            populateDropdown();
+            updateSelectedUI();
+
+            buildingSelect.addEventListener("change", addSelectedBuilding);
+        });
+    </script>
+</body>
+<%- include('../../../../layouts/footer.ejs') %>
