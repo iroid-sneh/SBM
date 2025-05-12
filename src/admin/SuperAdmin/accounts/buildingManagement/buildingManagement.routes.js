@@ -8,4 +8,11 @@ router.get(
     asyncWrap(buildingManagementController.getBuildingManagementPage)
 );
 
+router.get("/new-requests", buildingManagementController.newRequestsPage);
+
+router.get(
+    "/previous-requests",
+    buildingManagementController.previousRequestsPage
+);
+
 export default router;
