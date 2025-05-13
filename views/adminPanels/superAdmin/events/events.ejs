@@ -189,9 +189,13 @@
                                         src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png"
                                         alt="Neil Sims avatar"
                                     />
-                                    <div class="text-base font-semibold text-gray-900">
-                                        Cook-out
-                                    </div>
+                                    <button
+                                        data-modal-toggle="event-details-modal"
+                                        data-modal-target="event-details-modal"
+                                        class="text-base font-semibold text-[#163f75] hover:underline"
+                                    >
+                                        Cook-Out
+                                    </button>
                                 </td>
                                 <td
                                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
@@ -394,33 +398,37 @@
                             <label class="inline-flex items-center">
                                 <input
                                     type="radio"
-                                    name="audience"
+                                    name="audience-create"
                                     class="form-radio text-[#57C1D1]"
                                     checked
-                                    onclick="toggleBuildingSelect(false, 'create-event-modal')"
+                                    onclick="toggleBuildingSelect(false, this)"
                                 />
                                 <span class="ml-2 text-gray-700">For All</span>
                             </label>
                             <label class="inline-flex items-center">
                                 <input
                                     type="radio"
-                                    name="audience"
+                                    name="audience-create"
                                     class="form-radio text-[#57C1D1]"
-                                    onclick="toggleBuildingSelect(true, 'create-event-modal')"
+                                    onclick="toggleBuildingSelect(true, this)"
                                 />
                                 <span class="ml-2 text-gray-700">Specific Building/Complex</span>
                             </label>
                         </div>
 
                         <!-- Building/Complex Select (hidden by default) -->
-                        <div id="buildingSelectContainer" class="hidden">
+                        <div id="" class="buildingSelectContainer hidden">
                             <select
-                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)] mt-3"
+                                id=""
+                                onchange="addSelectedBuilding(this)"
+                                class="building-select w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)] mt-3"
                             >
                                 <option value="" disabled selected>Select Building/Complex</option>
-                                <!-- Add your building options here -->
                             </select>
                         </div>
+
+                        <!-- Selected Tags -->
+                        <div id="" class="selected-buildings flex flex-wrap gap-2"></div>
 
                         <!-- Event Location -->
                         <input
@@ -587,33 +595,37 @@
                             <label class="inline-flex items-center">
                                 <input
                                     type="radio"
-                                    name="audience"
+                                    name="audience-edit"
                                     class="form-radio text-[#57C1D1]"
                                     checked
-                                    onclick="toggleBuildingSelect(false, 'edit-event-modal')"
+                                    onclick="toggleBuildingSelect(false, this)"
                                 />
                                 <span class="ml-2 text-gray-700">For All</span>
                             </label>
                             <label class="inline-flex items-center">
                                 <input
                                     type="radio"
-                                    name="audience"
+                                    name="audience-edit"
                                     class="form-radio text-[#57C1D1]"
-                                    onclick="toggleBuildingSelect(true, 'edit-event-modal')"
+                                    onclick="toggleBuildingSelect(true, this)"
                                 />
                                 <span class="ml-2 text-gray-700">Specific Building/Complex</span>
                             </label>
                         </div>
 
                         <!-- Building/Complex Select (hidden by default) -->
-                        <div id="buildingSelectContainer" class="hidden">
+                        <div id="" class="buildingSelectContainer hidden">
                             <select
-                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)] mt-3"
+                                id=""
+                                onchange="addSelectedBuilding(this)"
+                                class="building-select w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)] mt-3"
                             >
                                 <option value="" disabled selected>Select Building/Complex</option>
-                                <!-- Add your building options here -->
                             </select>
                         </div>
+
+                        <!-- Selected Tags -->
+                        <div id="" class="selected-buildings flex flex-wrap gap-2"></div>
 
                         <!-- Event Location -->
                         <input
@@ -658,14 +670,113 @@
             </div>
         </div>
     </div>
+
+    <!-- Event Details Modal -->
+    <div
+        id="event-details-modal"
+        tabindex="-1"
+        class="fixed inset-0 z-50 hidden overflow-y-auto overflow-x-hidden bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center w-full h-full"
+    >
+        <div class="relative p-4 w-full max-w-3xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-3xl shadow-lg">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between px-6 py-4 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900 w-full text-center">
+                        Event Details
+                    </h3>
+                    <button
+                        data-modal-hide="event-details-modal"
+                        class="text-red-500 hover:text-red-700 text-2xl"
+                    >
+                        &times;
+                    </button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="px-6 py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                        <!-- Image and Basic Info -->
+                        <div class="space-y-4">
+                            <div class="relative">
+                                <img
+                                    src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png"
+                                    alt="Event Image"
+                                    class="w-48 h-48 object-cover rounded-md cursor-pointer"
+                                    onclick="document.getElementById('image-modal').classList.remove('hidden')"
+                                />
+                                <!-- Event Title and Location -->
+                                <div class="pt-4">
+                                    <h4 class="text-lg font-semibold text-gray-800">Cook-Out</h4>
+                                    <p class="text-gray-600 text-sm">Links Restaurant</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Event Metadata -->
+                        <div class="space-y-2 text-sm text-gray-800">
+                            <div>
+                                <span class="font-medium">Date:</span>
+                                23-08-2024
+                            </div>
+                            <div>
+                                <span class="font-medium">Time:</span>
+                                10:00 AM
+                            </div>
+                            <div>
+                                <span class="font-medium">Capacity:</span>
+                                100
+                            </div>
+                            <div>
+                                <span class="font-medium">Booked:</span>
+                                60
+                            </div>
+                            <div>
+                                <span class="font-medium">Cost:</span>
+                                BHD15.000
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Description -->
+                    <div class="pt-6 text-sm text-gray-700">
+                        <h5 class="font-semibold text-gray-900 mb-2">Event Details:</h5>
+                        <p>
+                            Suitable for groups of 20 to 40 adults, a cook out normally involves
+                            splitting guests into teams and giving them a set period of time to
+                            produce a starter, main course and dessert under the guidance of the
+                            fantastic Royal Golf Club chefs, using only the set of ingredients
+                            provided. Points are awarded by our Head Chef for team work, creativity,
+                            use of all ingredients, tidiness, presentation and taste. Guests then
+                            sit down to enjoy the meal they have created and prizes are awarded to
+                            the winning team.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div
+        id="image-modal"
+        class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden"
+        onclick="this.classList.add('hidden')"
+    >
+        <img
+            src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png"
+            class="max-w-full max-h-full rounded-lg shadow-lg"
+            alt="Expanded Image"
+        />
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <script>
         // Function to toggle building select visibility
-        function toggleBuildingSelect(show, modalId = null) {
-            // If modalId is provided, find container within that modal
-            const container = modalId
-                ? document.querySelector(`#${modalId} #buildingSelectContainer`)
-                : document.getElementById("buildingSelectContainer");
+        function toggleBuildingSelect(show, element) {
+            // Traverse DOM to find the correct buildingSelectContainer within the same modal
+            const modal = element.closest('[id$="-event-modal"]'); // matches both "edit-event-modal", etc.
+            const container = modal?.querySelector(".buildingSelectContainer");
 
             if (!container) {
                 console.error("Building select container not found");
@@ -679,43 +790,97 @@
             }
         }
 
-        // Initialize event listeners for all modals
-        function initBuildingSelectToggles() {
-            // Find all audience radio groups in all modals
-            const radioGroups = document.querySelectorAll('input[name="audience"]');
+        document.addEventListener("DOMContentLoaded", function () {
+            const allBuildings = [
+                "Building 1",
+                "Building 2",
+                "Building 3",
+                "Building 4",
+                "Building 5",
+                "Building 6",
+                "Building 7",
+                "Building 8",
+                "Building 9",
+                "Building 10",
+            ];
 
-            radioGroups.forEach((radio) => {
-                radio.addEventListener("change", function () {
-                    // Find the closest modal ancestor to handle multiple modals
-                    const modal = this.closest('[id^="modal-"]') || document;
-                    const modalId = modal !== document ? modal.id : null;
+            // Stores selected buildings per modal (DOM element as key)
+            const modalSelections = new WeakMap();
 
-                    toggleBuildingSelect(this.value === "specific", modalId);
+            function populateDropdown(selectElement) {
+                if (!selectElement) return;
+
+                // Clear old options
+                selectElement.innerHTML = "";
+
+                const defaultOption = document.createElement("option");
+                defaultOption.value = "";
+                defaultOption.textContent = "Select Building/Complex";
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                selectElement.appendChild(defaultOption);
+
+                allBuildings.forEach((building) => {
+                    const option = document.createElement("option");
+                    option.value = building;
+                    option.textContent = building;
+                    selectElement.appendChild(option);
                 });
+            }
 
-                // Initialize state for each radio
-                if (radio.checked) {
-                    const modal = radio.closest('[id^="modal-"]') || document;
-                    const modalId = modal !== document ? modal.id : null;
-                    toggleBuildingSelect(radio.value === "specific", modalId);
+            // Attach dropdown logic to all select elements
+            document.querySelectorAll(".building-select").forEach((selectElement) => {
+                populateDropdown(selectElement);
+
+                // Get the closest container (modal or section)
+                const container = selectElement.closest(".buildingSelectContainer").parentElement;
+                const selectedContainer = container.querySelector(".selected-buildings");
+
+                // Initialize Set for this modal
+                modalSelections.set(container, new Set());
+
+                selectElement.addEventListener("change", () => {
+                    const selected = selectElement.value;
+                    const selectedSet = modalSelections.get(container);
+
+                    if (selected && !selectedSet.has(selected)) {
+                        selectedSet.add(selected);
+                        updateSelectedUI(selectedSet, selectedContainer, container);
+                    }
+
+                    selectElement.value = "";
+                });
+            });
+
+            window.removeBuilding = function (building, containerRef) {
+                const selectedSet = modalSelections.get(containerRef);
+                if (selectedSet) {
+                    selectedSet.delete(building);
+                    const selectedContainer = containerRef.querySelector(".selected-buildings");
+                    updateSelectedUI(selectedSet, selectedContainer, containerRef);
                 }
-            });
-        }
+            };
 
-        // Initialize when DOM is loaded
-        document.addEventListener("DOMContentLoaded", initBuildingSelectToggles);
+            function updateSelectedUI(selectedSet, selectedContainer, containerRef) {
+                selectedContainer.innerHTML = "";
+                selectedSet.forEach((building) => {
+                    const tag = document.createElement("span");
+                    tag.className =
+                        "bg-[#54B7C5] text-white px-3 py-1 rounded-full flex items-center";
 
-        // Also initialize if modals are loaded dynamically
-        if (typeof MutationObserver !== "undefined") {
-            const observer = new MutationObserver(function (mutations) {
-                initBuildingSelectToggles();
-            });
+                    // Use data attribute to store the building and modal reference
+                    const button = document.createElement("button");
+                    button.className = "ml-2 text-white hover:text-gray-200";
+                    button.innerHTML = "&times;";
+                    button.onclick = () => removeBuilding(building, containerRef);
 
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true,
-            });
-        }
+                    tag.textContent = building;
+                    tag.appendChild(button);
+
+                    selectedContainer.appendChild(tag);
+                });
+            }
+        });
     </script>
 </body>
 
