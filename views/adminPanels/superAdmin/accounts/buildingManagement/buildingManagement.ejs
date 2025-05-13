@@ -313,7 +313,7 @@
     <div
         id="show-building-management-details-modal"
         tabindex="-1"
-        class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center overflow-y-auto"
+        class="fixed inset-0 z-50 hidden overflow-y-auto overflow-x-hidden bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center w-full h-full"
     >
         <div class="bg-white rounded-3xl shadow-lg w-full max-w-5xl mx-4 p-8">
             <!-- Header -->
@@ -834,16 +834,18 @@
     <!-- Edit [Bussiness Details] of Building Management Modal -->
     <div
         id="edit-bussiness-details-of-building-management-modal"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+        tabindex="-1"
+        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full"
+        aria-hidden="true"
     >
         <!-- Modal Container -->
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md max-h-[90vh]">
+        <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md max-h-[90vh]">
             <!-- Modal Header -->
-            <div class="flex justify-between items-center p-4 border-b">
-                <h3 class="text-lg font-semibold text-gray-800">Edit Service Provider Details</h3>
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Edit Service Provider Details</h3>
                 <button
                     data-modal-hide="edit-bussiness-details-of-building-management-modal"
-                    class="text-gray-500 text-red-500 hover:text-red-600 text-2xl"
+                    class="text-red-500 hover:text-red-700 text-xl"
                 >
                     Close &times;
                 </button>
@@ -857,10 +859,10 @@
                         <img
                             src="https://i.pravatar.cc/80?img=11"
                             alt="Business Logo"
-                            class="w-24 h-24 rounded-full border-4 border-[#163f75] object-cover"
+                            class="w-24 h-24 rounded-full border-4 border-[#57C1D1] object-cover"
                         />
                         <button
-                            class="absolute bottom-0 right-0 bg-[#163f75] text-white p-1 rounded-full"
+                            class="absolute bottom-0 right-0 bg-[#57C1D1] text-white p-2 rounded-full shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -887,54 +889,44 @@
                 </div>
 
                 <!-- Form Fields -->
-                <div class="space-y-4">
+                <div class="space-y-5">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Commercial Name
-                        </label>
                         <input
+                            placeholder="Commercial Name"
                             type="text"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         />
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Business Landline
-                        </label>
                         <input
+                            placeholder="Business Landline"
                             type="text"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         />
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                VAT Number
-                            </label>
                             <input
+                                placeholder="VAT Number"
                                 type="text"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                             />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                CR Number
-                            </label>
                             <input
+                                placeholder="CR Number"
                                 type="text"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Business Email
-                        </label>
                         <input
+                            placeholder="Business Email"
                             type="email"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         />
                     </div>
 
@@ -950,7 +942,7 @@
                                 <input
                                     type="time"
                                     id="start-time-1"
-                                    class="w-full px-3 py-2 pl-10 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                    class="w-full px-4 py-3 pl-10 bg-white rounded-xl text-gray-700 text-sm focus:outline-none shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                                     min="09:00"
                                     max="18:00"
                                     required
@@ -959,7 +951,7 @@
                                     class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                                 >
                                     <svg
-                                        class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                        class="w-4 h-4 text-gray-500"
                                         aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="currentColor"
@@ -980,7 +972,7 @@
                                 <input
                                     type="time"
                                     id="end-time-1"
-                                    class="w-full px-3 py-2 pl-10 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                    class="w-full px-4 py-3 pl-10 bg-white rounded-xl text-gray-700 text-sm focus:outline-none shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                                     min="09:00"
                                     max="18:00"
                                     required
@@ -989,7 +981,7 @@
                                     class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                                 >
                                     <svg
-                                        class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                        class="w-4 h-4 text-gray-500"
                                         aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="currentColor"
@@ -1011,7 +1003,7 @@
                                 <input
                                     type="time"
                                     id="start-time-2"
-                                    class="w-full px-3 py-2 pl-10 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                    class="w-full px-4 py-3 pl-10 bg-white rounded-xl text-gray-700 text-sm focus:outline-none shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                                     min="09:00"
                                     max="18:00"
                                 />
@@ -1019,7 +1011,7 @@
                                     class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                                 >
                                     <svg
-                                        class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                        class="w-4 h-4 text-gray-500"
                                         aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="currentColor"
@@ -1040,7 +1032,7 @@
                                 <input
                                     type="time"
                                     id="end-time-2"
-                                    class="w-full px-3 py-2 pl-10 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                    class="w-full px-4 py-3 pl-10 bg-white rounded-xl text-gray-700 text-sm focus:outline-none shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                                     min="09:00"
                                     max="18:00"
                                 />
@@ -1048,7 +1040,7 @@
                                     class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                                 >
                                     <svg
-                                        class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                        class="w-4 h-4 text-gray-500"
                                         aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="currentColor"
@@ -1067,54 +1059,55 @@
 
                     <!-- Working Days -->
                     <div>
-                        <label class="block mb-2 text-sm font-medium">Working Day</label>
-                        <div class="flex flex-wrap gap-2" id="workingDays">
-                            <!-- Days will be toggled via JS -->
+                        <label class="block mb-2 text-sm font-medium text-gray-700">
+                            Working Day
+                        </label>
+                        <div class="flex flex-wrap gap-1" id="workingDays">
                             <button
                                 type="button"
-                                class="day-btn px-3 py-1 rounded border border-gray-300 hover:bg-gray-100"
+                                class="day-btn px-3 py-2 bg-white rounded-xl shadow-[0px_4px_10px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-sm"
                                 data-day="Sun"
                             >
                                 Sun
                             </button>
                             <button
                                 type="button"
-                                class="day-btn px-3 py-1 rounded border border-gray-300 hover:bg-gray-100"
+                                class="day-btn px-3 py-2 bg-white rounded-xl shadow-[0px_4px_10px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-sm"
                                 data-day="Mon"
                             >
                                 Mon
                             </button>
                             <button
                                 type="button"
-                                class="day-btn px-3 py-1 rounded border border-gray-300 hover:bg-gray-100"
+                                class="day-btn px-3 py-2 bg-white rounded-xl shadow-[0px_4px_10px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-sm"
                                 data-day="Tue"
                             >
                                 Tue
                             </button>
                             <button
                                 type="button"
-                                class="day-btn px-3 py-1 rounded border border-gray-300 hover:bg-gray-100"
+                                class="day-btn px-3 py-2 bg-white rounded-xl shadow-[0px_4px_10px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-sm"
                                 data-day="Wed"
                             >
                                 Wed
                             </button>
                             <button
                                 type="button"
-                                class="day-btn px-3 py-1 rounded border border-gray-300 hover:bg-gray-100"
+                                class="day-btn px-3 py-2 bg-white rounded-xl shadow-[0px_4px_10px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-sm"
                                 data-day="Thu"
                             >
                                 Thu
                             </button>
                             <button
                                 type="button"
-                                class="day-btn px-3 py-1 rounded border border-gray-300 hover:bg-gray-100"
+                                class="day-btn px-3 py-2 bg-white rounded-xl shadow-[0px_4px_10px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-sm"
                                 data-day="Fri"
                             >
                                 Fri
                             </button>
                             <button
                                 type="button"
-                                class="day-btn px-3 py-1 rounded border border-gray-300 hover:bg-gray-100"
+                                class="day-btn px-3 py-2 bg-white rounded-xl shadow-[0px_4px_10px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-sm"
                                 data-day="Sat"
                             >
                                 Sat
@@ -1123,9 +1116,8 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
                         <select
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         >
                             <option value="" disabled selected>Select City</option>
                             <option value="BHD">City 1</option>
@@ -1135,21 +1127,19 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Business Address
-                        </label>
                         <textarea
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                            placeholder="Business Address"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                             rows="2"
                         ></textarea>
                     </div>
-                </div>
-                <div class="flex justify-end p-4 border-t">
-                    <button
-                        class="bg-[#163f75] hover:bg-[#1e4b8f] text-white px-6 py-2 rounded-md font-medium transition-colors"
-                    >
-                        Save
-                    </button>
+                    <div class="flex justify-center p-4">
+                        <button
+                            class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
+                        >
+                            Save
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1157,17 +1147,19 @@
 
     <!-- Edit [1 Residence Details] of Building Management Modal -->
     <div
+        aria-hidden="true"
+        tabindex="-1"
         id="edit-residence-details-of-building-management-modal"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full"
     >
         <!-- Modal Container -->
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md max-h-[90vh]">
+        <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md max-h-[90vh]">
             <!-- Modal Header -->
-            <div class="flex justify-between items-center p-4 border-b">
-                <h3 class="text-lg font-semibold text-gray-800">Edit Residence Details</h3>
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Edit Residence Details</h3>
                 <button
                     data-modal-hide="edit-residence-details-of-building-management-modal"
-                    class="text-gray-500 text-red-500 hover:text-red-600 text-2xl"
+                    class="text-red-500 hover:text-red-700 text-xl"
                 >
                     Close &times;
                 </button>
@@ -1179,54 +1171,43 @@
                 <div class="space-y-4">
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Residence Type
-                            </label>
                             <select
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                             >
-                                <option value="" selected>Building</option>
+                                <option value="" selected>Residence Type</option>
+                                <option value="">Building</option>
                                 <option value="">Villas</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Number of Flat/Villa
-                            </label>
                             <input
+                                placeholder="Number of Flat/Villa"
                                 type="text"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Building/Area Name
-                        </label>
                         <input
+                            placeholder="Building/Area Name"
                             type="text"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         />
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Residence Address (Road and Block)
-                        </label>
                         <input
+                            placeholder="Building 2003, Road 2215"
                             type="text"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         />
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Select Manager Name
-                        </label>
                         <select
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         >
-                            <option value="" selected>Select</option>
+                            <option value="" selected>Select Manager Name</option>
                             <option value="">Jhon</option>
                             <option value="">Marcus</option>
                             <option value="">Peters</option>
@@ -1234,13 +1215,10 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Select Permission
-                        </label>
                         <select
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         >
-                            <option value="" selected>Select</option>
+                            <option value="" selected>Select Permission</option>
                             <option value="">Dashboard</option>
                             <option value="">Events</option>
                             <option value="">Reservations</option>
@@ -1249,9 +1227,9 @@
                         </select>
                     </div>
                 </div>
-                <div class="flex justify-end p-4 border-t">
+                <div class="flex justify-center p-6">
                     <button
-                        class="bg-[#163f75] hover:bg-[#1e4b8f] text-white px-6 py-2 rounded-md font-medium transition-colors"
+                        class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
                     >
                         Save
                     </button>
@@ -1262,17 +1240,19 @@
 
     <!-- Edit [Admin Details] of Building Management Modal -->
     <div
+        aria-hidden="true"
+        tabindex="-1"
         id="edit-admin-details-of-building-management-modal"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full"
     >
         <!-- Modal Container -->
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md max-h-[90vh]">
+        <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md max-h-[90vh]">
             <!-- Modal Header -->
-            <div class="flex justify-between items-center p-4 border-b">
-                <h3 class="text-lg font-semibold text-gray-800">Edit Admin Details</h3>
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Edit Admin Details</h3>
                 <button
                     data-modal-hide="edit-admin-details-of-building-management-modal"
-                    class="text-gray-500 text-red-500 hover:text-red-600 text-2xl"
+                    class="text-red-500 hover:text-red-700 text-2xl"
                 >
                     Close &times;
                 </button>
@@ -1284,60 +1264,52 @@
                 <div class="">
                     <div class="grid grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                First Name
-                            </label>
                             <input
+                                placeholder="First Name"
                                 type="text"
                                 value="Malcolm"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                             />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Middle Name
-                            </label>
                             <input
+                                placeholder="Middle Name"
                                 type="text"
                                 value=""
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                             />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Last Name
-                            </label>
                             <input
+                                placeholder="Last Name"
                                 type="text"
                                 value="Quaday"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                             />
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 mt-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
                             <input
+                                placeholder="Role"
                                 type="text"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                             />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Contact No.
-                            </label>
                             <input
+                                placeholder="Contact No."
                                 type="text"
                                 value="1234567890"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                             />
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-end p-4 border-t">
+                <div class="flex justify-center p-6">
                     <button
-                        class="bg-[#163f75] hover:bg-[#1e4b8f] text-white px-6 py-2 rounded-md font-medium transition-colors"
+                        class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
                     >
                         Save
                     </button>
@@ -1346,14 +1318,6 @@
         </div>
     </div>
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
-    <!-- Flowbite DataTables JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-    <!-- Simple DataTables (for export functionality) -->
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

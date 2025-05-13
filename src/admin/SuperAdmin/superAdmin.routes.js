@@ -3,6 +3,10 @@ import asyncWrap from "express-async-wrapper";
 import superAdminController from "./superAdmin.controller";
 import financeRoutes from "./finance/finance.routes";
 import accountsRoutes from "./accounts/accounts.routes";
+import invoicesRoutes from "./invoices/invoices.routes";
+import ServicesRoutes from "./services/services.routes";
+import maintenanceRoutes from "./maintenance/maintenance.routes";
+import eventsRoutes from "./events/events.routes";
 const router = express.Router();
 
 router.get("/login", asyncWrap(superAdminController.loginPage));
@@ -15,28 +19,28 @@ router.use("/finance", financeRoutes);
 
 router.use("/accounts", accountsRoutes);
 
-router.get("/invoices", asyncWrap(superAdminController.invoicesPage));
+router.use("/invoices", invoicesRoutes);
 
-router.get("/services", asyncWrap(superAdminController.servicesPage));
+router.use("/services", ServicesRoutes);
 
-router.get("/maintenance", asyncWrap(superAdminController.maintenancePage));
+router.use("/maintenance", maintenanceRoutes);
 
-router.get("/events", asyncWrap(superAdminController.eventsPage));
+router.use("/events", eventsRoutes);
 
-router.get(
-    "/advertisement",
-    asyncWrap(superAdminController.advertisementsPage)
-);
+// router.use(
+//     "/advertisement",
+//     asyncWrap(superAdminController.advertisementsPage)
+// );
 
-router.get(
-    "/push-notification",
-    asyncWrap(superAdminController.pushNotificationPage)
-);
+// router.use(
+//     "/push-notification",
+//     asyncWrap(superAdminController.pushNotificationPage)
+// );
 
-router.get("/feedback", asyncWrap(superAdminController.feedbackPage));
+// router.use("/feedback", asyncWrap(superAdminController.feedbackPage));
 
-router.get("/rewards", asyncWrap(superAdminController.rewardsPage));
+// router.use("/rewards", asyncWrap(superAdminController.rewardsPage));
 
-router.get("/settings", asyncWrap(superAdminController.settingsPage));
+// router.use("/settings", asyncWrap(superAdminController.settingsPage));
 
 export default router;

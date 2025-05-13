@@ -223,9 +223,7 @@
                                         src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png"
                                         alt="Neil Sims avatar"
                                     />
-                                    <div
-                                        class="text-base font-semibold text-gray-900 dark:text-white"
-                                    >
+                                    <div class="text-base font-semibold text-gray-900">
                                         Duserve Facilities Management
                                     </div>
                                 </td>
@@ -280,8 +278,9 @@
         id="accept-user-modal"
         tabindex="-1"
         class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center"
+        aria-hidden="true"
     >
-        <div class="bg-white rounded-3xl shadow-lg w-full max-w-md mx-4 p-6">
+        <div class="bg-[#F7F6F5] rounded-3xl shadow-lg w-full max-w-md mx-4 p-6">
             <!-- Header -->
             <div class="flex justify-between items-center border-b pb-2">
                 <h3 class="text-lg font-semibold text-center w-full">Confirmation</h3>
@@ -308,6 +307,9 @@
                 </button>
                 <button
                     id="confirm-accept"
+                    data-modal-hide="accept-user-modal"
+                    data-modal-target="assign-building-modal"
+                    data-modal-toggle="assign-building-modal"
                     class="bg-[#163f75] hover:bg-[#1e4b8f] text-white font-semibold rounded-full px-6 py-2 w-[120px]"
                 >
                     Yes
@@ -321,8 +323,9 @@
         id="reject-user-modal"
         tabindex="-1"
         class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center"
+        aria-hidden="true"
     >
-        <div class="bg-white rounded-3xl shadow-lg w-full max-w-md mx-4 p-6">
+        <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
             <!-- Header -->
             <div class="flex justify-between items-center border-b pb-2">
                 <h3 class="text-lg font-semibold text-center w-full">Rejection Reason</h3>
@@ -360,15 +363,6 @@
             </div>
         </div>
     </div>
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
-    <!-- Flowbite DataTables JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-    <!-- Simple DataTables (for export functionality) -->
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

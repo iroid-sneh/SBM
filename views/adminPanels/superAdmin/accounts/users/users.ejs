@@ -1,12 +1,4 @@
 <%- include('../../../../layouts/header.ejs', {currentPage: 'accounts'}) %>
-<head>
-    <style>
-        input[type="checkbox"]:checked {
-            background-color: #54b7c5;
-            border-color: #54b7c5;
-        }
-    </style>
-</head>
 <body class="flex">
     <main class="ml-64">
         <div class="bg-[#f6f6f6] rounded-l-[50px] p-8 shadow-md">
@@ -217,9 +209,7 @@
                                         src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png"
                                         alt="Neil Sims avatar"
                                     />
-                                    <div
-                                        class="text-base font-semibold text-gray-900 dark:text-white"
-                                    >
+                                    <div class="text-base font-semibold text-gray-900">
                                         Neil Sims
                                     </div>
                                 </td>
@@ -306,19 +296,21 @@
             </div>
         </div>
     </main>
-    <!-- Modal Backdrop -->
+    <!-- Edit User Details Modal -->
     <div
         id="edit-user-modal"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+        tabindex="-1"
+        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full"
+        aria-hidden="true"
     >
         <!-- Modal Container -->
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md">
+        <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md">
             <!-- Modal Header -->
-            <div class="flex justify-between items-center p-4 border-b">
-                <h3 class="text-lg font-semibold text-gray-800">Edit User Details</h3>
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Edit User Details</h3>
                 <button
                     data-modal-hide="edit-user-modal"
-                    class="text-gray-500 text-red-500 hover:text-red-600 text-2xl"
+                    class="text-red-400 hover:text-red-600 text-2xl"
                 >
                     Close &times;
                 </button>
@@ -332,10 +324,10 @@
                         <img
                             src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png"
                             alt="Profile"
-                            class="w-24 h-24 rounded-full border-4 border-[#163f75]"
+                            class="w-24 h-24 rounded-full border-4 border-[#57C1D1]"
                         />
                         <button
-                            class="absolute bottom-0 right-0 bg-[#163f75] text-white p-1 rounded-full"
+                            class="absolute bottom-0 right-0 bg-[#57C1D1] text-white p-2 rounded-full shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -362,171 +354,133 @@
                 </div>
 
                 <!-- Form Fields -->
-                <div class="space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                First Name
-                            </label>
-                            <input
-                                type="text"
-                                value="Malcolm"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
-                            />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Middle Name
-                            </label>
-                            <input
-                                type="text"
-                                value="Quaday"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                ID No.
-                            </label>
-                            <input
-                                type="text"
-                                value="123456789"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
-                            />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Nationality
-                            </label>
-                            <input
-                                type="text"
-                                value="Spain"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
-                            />
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Building/Complex
-                        </label>
+                <div class="space-y-5">
+                    <!-- Name Inputs -->
+                    <div class="grid grid-cols-3 gap-4">
                         <input
                             type="text"
-                            value="AlNaseem"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
+                            placeholder="First Name"
+                            value="Malcolm"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Middle Name"
+                            value=""
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Last Name"
+                            value="Quaday"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                         />
                     </div>
 
+                    <!-- ID and Nationality -->
                     <div class="grid grid-cols-2 gap-4">
-                        <!-- Flat/Villa Input -->
-                        <div class="flex flex-col">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Flat/Villa
-                            </label>
-                            <input
-                                type="text"
-                                value="234 - Villa"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
-                            />
-                        </div>
+                        <input
+                            type="text"
+                            placeholder="ID No."
+                            value="123456789"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Nationality"
+                            value="Spain"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        />
+                    </div>
 
-                        <!-- Association Member Checkbox -->
-                        <div class="flex flex-col justify-end">
-                            <div
-                                class="w-full border border-gray-300 rounded-md px-3 py-2 h-[42px] flex items-center"
-                            >
-                                <input
-                                    id="associationMember"
-                                    type="checkbox"
-                                    class="w-4 h-4 border border-gray-300 rounded-sm text-[#163f75] focus:ring-[#163f75]"
-                                />
-                                <label for="associationMember" class="ml-2 text-sm text-gray-700">
-                                    Association Member
-                                </label>
-                            </div>
+                    <!-- Building/Complex -->
+                    <input
+                        type="text"
+                        placeholder="Building/Complex"
+                        value="AlNaseem"
+                        class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    />
+
+                    <!-- Flat/Villa and Checkbox -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <input
+                            type="text"
+                            placeholder="Flat/Villa"
+                            value="234 - Villa"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        />
+
+                        <div
+                            class="flex items-center px-4 py-3 bg-white rounded-xl shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <input
+                                id="associationMember"
+                                type="checkbox"
+                                class="w-4 h-4 text-[#57C1D1] focus:ring-[#57C1D1] border border-gray-300 rounded"
+                            />
+                            <label for="associationMember" class="ml-2 text-sm text-gray-700">
+                                Association Member
+                            </label>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4 mt-4">
-                        <!-- Resident Checkbox (styled as input field) -->
-                        <div class="flex items-center">
-                            <div
-                                class="w-full border border-gray-300 rounded-md px-3 py-2 h-[42px] flex items-center"
-                            >
-                                <input
-                                    id="resident"
-                                    type="checkbox"
-                                    class="w-4 h-4 border border-gray-300 rounded-sm text-[#163f75] focus:ring-[#163f75]"
-                                    checked
-                                />
-                                <label for="resident" class="ml-2 text-sm text-gray-700">
-                                    Resident
-                                </label>
-                            </div>
+                    <!-- Checkboxes -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div
+                            class="flex items-center px-4 py-3 bg-white rounded-xl shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <input
+                                id="resident"
+                                type="checkbox"
+                                class="w-4 h-4 text-[#57C1D1] focus:ring-[#57C1D1] border border-gray-300 rounded"
+                                checked
+                            />
+                            <label for="resident" class="ml-2 text-sm text-gray-700">
+                                Resident
+                            </label>
                         </div>
 
-                        <!-- Owner Checkbox (styled as input field) -->
-                        <div class="flex items-center">
-                            <div
-                                class="w-full border border-gray-300 rounded-md px-3 py-2 h-[42px] flex items-center"
-                            >
-                                <input
-                                    id="owner"
-                                    type="checkbox"
-                                    class="w-4 h-4 border border-gray-300 rounded-sm text-[#163f75] focus:ring-[#163f75]"
-                                />
-                                <label for="owner" class="ml-2 text-sm text-gray-700">Owner</label>
-                            </div>
+                        <div
+                            class="flex items-center px-4 py-3 bg-white rounded-xl shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <input
+                                id="owner"
+                                type="checkbox"
+                                class="w-4 h-4 text-[#57C1D1] focus:ring-[#57C1D1] border border-gray-300 rounded"
+                            />
+                            <label for="owner" class="ml-2 text-sm text-gray-700">Owner</label>
                         </div>
                     </div>
 
+                    <!-- Contact Numbers -->
                     <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Contact No.
-                            </label>
-                            <input
-                                type="text"
-                                value="39876543"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
-                            />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">
-                                Emergency No.
-                            </label>
-                            <input
-                                type="text"
-                                value="39876543"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#163f75]"
-                            />
-                        </div>
+                        <input
+                            type="text"
+                            placeholder="Contact No."
+                            value="39876543"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Emergency No."
+                            value="39876543"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        />
                     </div>
                 </div>
             </div>
 
             <!-- Modal Footer -->
-            <div class="flex justify-end p-4 border-t">
+            <div class="flex justify-center p-6 border-t border-gray-200">
                 <button
-                    class="bg-[#163f75] hover:bg-[#1e4b8f] text-white px-6 py-2 rounded-md font-medium transition-colors"
+                    class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
                 >
                     Save
                 </button>
             </div>
         </div>
     </div>
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
-    <!-- Flowbite DataTables JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-    <!-- Simple DataTables (for export functionality) -->
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Initialize Flowbite DataTable
