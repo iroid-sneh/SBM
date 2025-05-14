@@ -1,0 +1,498 @@
+<%- include('../../../layouts/header.ejs', {currentPage: 'push-notification'}) %>
+
+<body class="flex">
+    <main class="ml-64">
+        <div class="bg-[#f6f6f6] rounded-l-[50px] p-8 shadow-md">
+            <div class="bg-[#eaeae9] rounded-l-[25px] rounded-r-[25px] shadow-md border-[2px]">
+                <div class="bg-white rounded-l-[25px] rounded-r-[25px] p-6 shadow-md border-[2px]">
+                    <div class="flex justify-between items-center">
+                        <!-- Left side - title -->
+                        <div class="flex items-center space-x-2">
+                            <h1 class="text-3xl font-bold text-gray-800">Push Notification</h1>
+                        </div>
+
+                        <!-- Right side - Profile info -->
+                        <div class="flex items-center">
+                            <svg
+                                class="w-7 h-7 text-gray-800 mr-6"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                fill="black"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M12 2a7 7 0 0 0-7 7 3 3 0 0 0-3 3v2a3 3 0 0 0 3 3h1a1 1 0 0 0 1-1V9a5 5 0 1 1 10 0v7.083A2.919 2.919 0 0 1 14.083 19H14a2 2 0 0 0-2-2h-1a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1a2 2 0 0 0 1.732-1h.351a4.917 4.917 0 0 0 4.83-4H19a3 3 0 0 0 3-3v-2a3 3 0 0 0-3-3 7 7 0 0 0-7-7Zm1.45 3.275a4 4 0 0 0-4.352.976 1 1 0 0 0 1.452 1.376 2.001 2.001 0 0 1 2.836-.067 1 1 0 1 0 1.386-1.442 4 4 0 0 0-1.321-.843Z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+
+                            <svg
+                                class="w-7 h-7 mr-6"
+                                fill="black"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
+                                ></path>
+                            </svg>
+                            <img
+                                src="https://i.pravatar.cc/40?img=11"
+                                alt="Profile"
+                                class="w-10 h-10 rounded-full shadow-md"
+                            />
+                            <div class="text-right">
+                                <div class="text-base font-semibold text-gray-800">
+                                    Thomas Lewis
+                                </div>
+                                <div class="text-sm text-gray-500">Super Admin</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-2 flex items-end justify-end">
+                    <!-- Date pickers and buttons aligned to right -->
+                    <div class="flex justify-end">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex justify-end gap-2 mt-6">
+                                <button
+                                    class="flex items-center gap-1 text-sm text-[#163f75] hover:underline font-medium"
+                                >
+                                    <svg
+                                        class="w-5 h-5"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke="#163f75"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 8v4l3 3M3.22302 14C4.13247 18.008 7.71683 21 12 21c4.9706 0 9-4.0294 9-9 0-4.97056-4.0294-9-9-9-3.72916 0-6.92858 2.26806-8.29409 5.5M7 9H3V5"
+                                        />
+                                    </svg>
+                                    Reset
+                                </button>
+                            </div>
+                            <div class="relative">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    From
+                                </label>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                                    >
+                                        <svg
+                                            class="w-4 h-4 text-gray-500"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        datepicker
+                                        datepicker-orientation="bottom"
+                                        datepicker-format="dd-mm-yyyy"
+                                        type="text"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                        placeholder="Select date"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="flex items-end">
+                                <div class="relative">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                                        To
+                                    </label>
+                                    <div class="relative">
+                                        <div
+                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                                        >
+                                            <svg
+                                                class="w-4 h-4 text-gray-500"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <input
+                                            datepicker
+                                            datepicker-orientation="bottom"
+                                            datepicker-format="dd-mm-yyyy"
+                                            type="text"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                            placeholder="Select date"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-[1px] my-4"></div>
+
+            <div class="bg-[#f6f6f6] rounded-l-[50px] rounded-r-[50px] p-8 shadow-md">
+                <!-- Filter Section -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-2 px-4 items-end">
+                    <!-- Category Slide Switcher - takes first column -->
+                    <div class="flex space-x-6 pb-1 border-b border-gray-200"></div>
+
+                    <!-- Empty middle column for spacing -->
+                    <div class="hidden md:block"></div>
+
+                    <!-- Search Button - takes third column and aligned to end -->
+                    <div class="flex items-end justify-end items-center space-x-1 mb-1">
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                            >
+                                <svg
+                                    class="h-5 w-5 text-gray-400"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Search"
+                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-full bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#163f75] focus:border-[#163f75] sm:text-sm"
+                            />
+                        </div>
+                        <div class="flex space-x-2">
+                            <button
+                                type="button"
+                                data-modal-target="create-push-notification-modal"
+                                data-modal-toggle="create-push-notification-modal"
+                                class="w-[190px] h-[38px] px-3 text-m font-semibold rounded-full flex items-center justify-center bg-white text-[#163f75] hover:bg-gray-400 transition-colors border-[1px] border-[#163f75] shadow-sm hover:shadow-md"
+                            >
+                                + Create Notification
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTable Section -->
+                <div class="overflow-x-auto">
+                    <table
+                        id="transactionsTable"
+                        class="min-w-full divide-y divide-gray-200"
+                        datatables="true"
+                    >
+                        <thead class="bg-[#eaeae9] rounded-r-[50px] rounded-l-[50px]">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Date/Time
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Category
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Send To
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Description
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    View
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Delete
+                                </th>
+                            </tr>
+                        </thead>
+                        <!-- 1 record -->
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    16:05:10
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Alert
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    All Users
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Our System will be under going maintenance for the next two days
+                                </td>
+                                <td
+                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700"
+                                >
+                                    <!-- View -->
+                                    <button
+                                        data-modal-target=""
+                                        data-modal-toggle=""
+                                        class="text-blue-600 hover:text-blue-800 p-2 rounded-full hover:bg-blue-100"
+                                    >
+                                        <svg
+                                            class="w-5 h-5"
+                                            fill="none"
+                                            stroke="#54B7C5"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                            />
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </td>
+                                <td
+                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700"
+                                >
+                                    <button
+                                        type="button"
+                                        data-modal-target=""
+                                        data-modal-toggle=""
+                                        class="inline-flex items-center px-3 py-2"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-gray-800 dark:text-white"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke="#F26E6E"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination Info -->
+                    <div class="mt-4 text-sm text-gray-600 px-6">Showing 1 of 28</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create push-notification Modal -->
+    <div
+        id="create-push-notification-modal"
+        tabindex="-1"
+        class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full hidden"
+        aria-hidden="true"
+    >
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-800">Create Push Notification</h3>
+                    <button
+                        class="text-red-500 hover:text-red-700 text-xl"
+                        data-modal-hide="create-push-notification-modal"
+                    >
+                        Close &times;
+                    </button>
+                </div>
+
+                <!-- Modal Content -->
+                <div class="p-6">
+                    <div class="space-y-5">
+                        <!-- Audience Selection -->
+                        <div class="flex items-center space-x-4">
+                            <label class="inline-flex items-center">
+                                <input
+                                    type="radio"
+                                    name="notification-type"
+                                    class="form-radio text-[#57C1D1]"
+                                    checked
+                                />
+                                <span class="ml-2 text-gray-700">Direct Notification</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input
+                                    type="radio"
+                                    name="notification-type"
+                                    class="form-radio text-[#57C1D1]"
+                                />
+                                <span class="ml-2 text-gray-700">Popup Notification</span>
+                            </label>
+                        </div>
+
+                        <!-- Preference Dropdown -->
+                        <select
+                            id="preference-select"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <option disabled selected>Select Category</option>
+                            <option>Alert</option>
+                            <option>Invoice</option>
+                            <option>Emergency</option>
+                            <option>Other</option>
+                        </select>
+
+                        <!-- Extra Select shown only when "Other" is selected -->
+                        <textarea
+                            id="other-category-select"
+                            rows="4"
+                            placeholder="Write Other Category"
+                            class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#54B7C5]/50 text-sm hidden"
+                        ></textarea>
+
+                        <!-- Notification Send To -->
+                        <select
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <option value="" disabled selected>Notification Send to</option>
+                            <option value="">All Users</option>
+                            <option value="">Selected User</option>
+                            <option value="">All Service Providers</option>
+                            <option value="">Selected Service Provider</option>
+                            <option value="">All Building Managements</option>
+                            <option value="">Selected Building Management</option>
+                        </select>
+
+                        <!-- Select Service Provider -->
+                        <select
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <option value="" disabled selected>Select Service Provider</option>
+                            <option value="">Service Provider Name1</option>
+                            <option value="">Service Provider Name2</option>
+                        </select>
+
+                        <!-- Description Of Message To Send -->
+                        <textarea
+                            rows="4"
+                            placeholder="Write Description"
+                            class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#54B7C5]/50 text-sm"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="flex justify-center p-6 border-t border-gray-200">
+                    <button
+                        data-modal-target="send-notification-confirmation-modal"
+                        data-modal-toggle="send-notification-confirmation-modal"
+                        class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
+                    >
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Send Notification Confirmation Modal -->
+    <div
+        id="send-notification-confirmation-modal"
+        tabindex="-1"
+        class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center"
+        aria-hidden="true"
+    >
+        <div class="bg-[#F7F6F5] rounded-3xl shadow-lg w-full max-w-md mx-4 p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center border-b pb-2">
+                <h3 class="text-lg font-semibold text-center w-full">Confirmation</h3>
+                <button
+                    data-modal-hide="send-notification-confirmation-modal"
+                    class="text-red-500 text-sm absolute right-6 top-5 hover:text-red-600"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="text-center mt-6">
+                <p class="text-gray-600">Are you sure you want to send this notification?</p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-center space-x-4 mt-8">
+                <button
+                    data-modal-hide="send-notification-confirmation-modal"
+                    class="bg-[#54B7C5] hover:bg-[#48aab8] text-white font-semibold rounded-full px-6 py-2 w-[120px]"
+                >
+                    Cancel
+                </button>
+                <button
+                    data-modal-hide="send-notification-confirmation-modal"
+                    data-modal-hide="create-push-notification-modal"
+                    class="bg-[#163f75] hover:bg-[#1e4b8f] text-white font-semibold rounded-full px-6 py-2 w-[120px]"
+                >
+                    Yes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const preferenceSelect = document.getElementById("preference-select");
+            const buildingSelect = document.getElementById("other-category-select");
+
+            preferenceSelect.addEventListener("change", function () {
+                const selectedOption = preferenceSelect.value;
+                if (selectedOption === "Other") {
+                    buildingSelect.classList.remove("hidden");
+                } else {
+                    buildingSelect.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+</body>
+
+<%- include('../../../layouts/footer.ejs') %>

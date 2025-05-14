@@ -7,6 +7,10 @@ import invoicesRoutes from "./invoices/invoices.routes";
 import ServicesRoutes from "./services/services.routes";
 import maintenanceRoutes from "./maintenance/maintenance.routes";
 import eventsRoutes from "./events/events.routes";
+import advertisementRoutes from "./advertisement/advertisement.routes";
+import pushNotificationRoutes from "./pushNotification/pushNotification.routes";
+import feedbackRoutes from "./feedback/feedback.routes";
+import rewardsRoutes from "./rewards/rewards.routes";
 const router = express.Router();
 
 router.get("/login", asyncWrap(superAdminController.loginPage));
@@ -27,19 +31,13 @@ router.use("/maintenance", maintenanceRoutes);
 
 router.use("/events", eventsRoutes);
 
-// router.use(
-//     "/advertisement",
-//     asyncWrap(superAdminController.advertisementsPage)
-// );
+router.use("/advertisement", advertisementRoutes);
 
-// router.use(
-//     "/push-notification",
-//     asyncWrap(superAdminController.pushNotificationPage)
-// );
+router.use("/push-notification", pushNotificationRoutes);
 
-// router.use("/feedback", asyncWrap(superAdminController.feedbackPage));
+router.use("/feedback", feedbackRoutes);
 
-// router.use("/rewards", asyncWrap(superAdminController.rewardsPage));
+router.use("/rewards", rewardsRoutes);
 
 // router.use("/settings", asyncWrap(superAdminController.settingsPage));
 
