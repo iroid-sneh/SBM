@@ -11,6 +11,7 @@ import advertisementRoutes from "./advertisement/advertisement.routes";
 import pushNotificationRoutes from "./pushNotification/pushNotification.routes";
 import feedbackRoutes from "./feedback/feedback.routes";
 import rewardsRoutes from "./rewards/rewards.routes";
+import settingsRoutes from "./settings/settings.routes";
 const router = express.Router();
 
 router.get("/login", asyncWrap(superAdminController.loginPage));
@@ -39,6 +40,6 @@ router.use("/feedback", feedbackRoutes);
 
 router.use("/rewards", rewardsRoutes);
 
-// router.use("/settings", asyncWrap(superAdminController.settingsPage));
+router.use("/settings", settingsRoutes);
 
 export default router;
