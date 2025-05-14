@@ -1,0 +1,252 @@
+<%- include('../../../layouts/header.ejs', {currentPage: 'settings'}) %>
+<head>
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .finance-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen bg-[#f6f6f6]">
+    <main class="ml-64">
+        <div class="min-h-screen bg-[#f6f6f6] rounded-l-[50px] p-8 shadow-md flex flex-col">
+            <div class="bg-[#eaeae9] rounded-l-[25px] rounded-r-[25px] shadow-md border-[2px]">
+                <div class="bg-white rounded-l-[25px] rounded-r-[25px] p-6 shadow-md border-[2px]">
+                    <div class="flex justify-between items-center">
+                        <!-- Left side - title -->
+                        <div class="flex items-center space-x-2">
+                            <h1 class="text-3xl font-bold text-gray-800">Settings >></h1>
+                            <h1 class="text-2xl text-gray-500 ml-2">Emergency Numbers</h1>
+                        </div>
+
+                        <!-- Right side - Profile info -->
+                        <div class="flex items-center">
+                            <img
+                                src="https://i.pravatar.cc/40?img=11"
+                                alt="Profile"
+                                class="w-10 h-10 rounded-full shadow-md"
+                            />
+                            <div class="text-right">
+                                <div class="text-base font-semibold text-gray-800">
+                                    Thomas Lewis
+                                </div>
+                                <div class="text-sm text-gray-500">Super Admin</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Request Type Buttons -->
+            <div class="flex justify-end items-end p-4">
+                <div class="relative">
+                    <div
+                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                        <svg
+                            class="h-5 w-5 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+                        </svg>
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-full bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#163f75] focus:border-[#163f75] sm:text-sm"
+                    />
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="bg-white rounded-l-[20px] rounded-r-[20px] p-6 shadow-md">
+                <div class="flex">
+                    <!-- Sidebar -->
+                    <div class="w-60 pr-6 border-r border-gray-300">
+                        <ul class="space-y-2 text-gray-700 text-sm font-medium">
+                            <li>
+                                <a
+                                    href="/super-admin/settings/personal-details"
+                                    class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                                >
+                                    Personal Details
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="/super-admin/settings/bank-details"
+                                    class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                                >
+                                    Bank Details
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="/super-admin/settings/sub-admin"
+                                    class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                                >
+                                    Sub Admin
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="/super-admin/settings/commission-details"
+                                    class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                                >
+                                    Commission Details
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="/super-admin/settings/emergency-numbers"
+                                    class="block px-4 py-2 rounded-md bg-[#def2f1] text-[#163f75] font-semibold"
+                                >
+                                    Emergency Numbers
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="/super-admin/settings/live-support"
+                                    class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                                >
+                                    Live Support
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Profile Info Card -->
+                    <div class="flex-1 pl-10 pr-6">
+                        <div class="space-y-6">
+                            <% if (!emergencyFile) { %>
+                            <!-- FILE UPLOAD UI (Screenshot 1) -->
+                            <div class="text-center mt-10">
+                                <h2 class="text-lg font-semibold mb-4">Upload Emergency Numbers</h2>
+                                <div
+                                    class="border-dashed border-2 border-gray-300 rounded-md p-6 bg-gray-50 max-w-md mx-auto"
+                                >
+                                    <label
+                                        for="emergencyUpload"
+                                        class="flex flex-col items-center justify-center cursor-pointer text-gray-500 hover:text-gray-700"
+                                    >
+                                        <svg
+                                            width="45"
+                                            height="45"
+                                            fill="none"
+                                            viewBox="0 0 20 20"
+                                            stroke="black"
+                                            stroke-width="1.8"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M6.15888 7.48807H5.38138C3.68555 7.48807 2.31055 8.86307 2.31055 10.5589V14.6214C2.31055 16.3164 3.68555 17.6914 5.38138 17.6914H14.6564C16.3522 17.6914 17.7272 16.3164 17.7272 14.6214V10.5506C17.7272 8.85974 16.3564 7.48807 14.6655 7.48807H13.8797"
+                                            />
+                                            <path
+                                                d="M10.0182 1.82521V11.8594"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M7.58984 4.26562L10.019 1.82562L12.449 4.26562"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                        <span class="mt-3">Please Upload Here (PDF)</span>
+                                        <input
+                                            type="file"
+                                            id="emergencyUpload"
+                                            name="emergencyFile"
+                                            accept="application/pdf"
+                                            class="hidden"
+                                        />
+                                    </label>
+                                </div>
+
+                                <button
+                                    class="mt-6 bg-[#49b8c0] w-[300px] h-[50px] hover:bg-[#38a3ab] text-white font-bold py-2 px-6 rounded-[15px] shadow transition duration-150 ease-in-out"
+                                >
+                                    Save
+                                </button>
+                            </div>
+
+                            <% } else { %>
+                            <!-- TABLE VIEW UI (Screenshot 2) -->
+                            <div class="overflow-x-auto mt-10">
+                                <table
+                                    class="min-w-full border border-gray-300 text-sm text-left text-gray-700"
+                                >
+                                    <thead class="bg-gray-100 text-gray-600">
+                                        <tr>
+                                            <th class="py-3 px-6 border-b">Date/Time</th>
+                                            <th class="py-3 px-6 border-b">Document</th>
+                                            <th class="py-3 px-6 border-b">Size</th>
+                                            <th class="py-3 px-6 border-b">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="bg-white">
+                                            <td class="py-3 px-6 border-b">
+                                                <%= emergencyFile.uploadedAt %>
+                                            </td>
+                                            <td class="py-3 px-6 border-b flex items-center gap-2">
+                                                <img
+                                                    src="/images/pdf-icon.png"
+                                                    class="w-5 h-5"
+                                                    alt="pdf"
+                                                />
+                                                <%= emergencyFile.name %>
+                                            </td>
+                                            <td class="py-3 px-6 border-b">
+                                                <%= emergencyFile.size %>
+                                            </td>
+                                            <td class="py-3 px-6 border-b flex items-center gap-4">
+                                                <a
+                                                    href="<%= emergencyFile.viewUrl %>"
+                                                    target="_blank"
+                                                    class="text-blue-600 hover:text-blue-800"
+                                                >
+                                                    👁️
+                                                </a>
+                                                <a
+                                                    href="<%= emergencyFile.downloadUrl %>"
+                                                    download
+                                                    class="text-green-600 hover:text-green-800"
+                                                >
+                                                    ⬇️
+                                                </a>
+                                                <a
+                                                    href="/super-admin/settings/emergency-numbers/delete"
+                                                    class="text-red-600 hover:text-red-800"
+                                                >
+                                                    🗑️
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+<%- include('../../../layouts/footer.ejs') %>

@@ -61,12 +61,10 @@ class settingsServices {
      * @param {*} res
      */
     static async emergencyNumbersPage(req, res) {
-        return (
-            res.render("adminPanels/superAdmin/settings/emergencyNumbers"),
-            {
-                currentPage: "settings",
-            }
-        );
+        return res.render("adminPanels/superAdmin/settings/emergencyNumbers", {
+            currentPage: "settings",
+            emergencyFile: null,
+        });
     }
 
     /**
