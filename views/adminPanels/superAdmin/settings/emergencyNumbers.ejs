@@ -74,7 +74,7 @@
 
             <!-- Main Content Area -->
             <div class="bg-white rounded-l-[20px] rounded-r-[20px] p-6 shadow-md">
-                <div class="flex">
+                <div class="flex h-[690px]">
                     <!-- Sidebar -->
                     <div class="w-60 pr-6 border-r border-gray-300">
                         <ul class="space-y-2 text-gray-700 text-sm font-medium">
@@ -129,7 +129,7 @@
                         </ul>
                     </div>
                     <!-- Profile Info Card -->
-                    <div class="flex-1 pl-10 pr-6">
+                    <div class="flex-1 p-10">
                         <div class="space-y-6">
                             <% if (!emergencyFile) { %>
                             <!-- FILE UPLOAD UI (Screenshot 1) -->
@@ -186,55 +186,151 @@
 
                             <% } else { %>
                             <!-- TABLE VIEW UI (Screenshot 2) -->
-                            <div class="overflow-x-auto mt-10">
-                                <table
-                                    class="min-w-full border border-gray-300 text-sm text-left text-gray-700"
-                                >
-                                    <thead class="bg-gray-100 text-gray-600">
+                            <div class="overflow-x-auto mt-2">
+                                <table class="min-w-full" datatables="true">
+                                    <thead class="bg-[#eaeae9] rounded-t-[30px]">
                                         <tr>
-                                            <th class="py-3 px-6 border-b">Date/Time</th>
-                                            <th class="py-3 px-6 border-b">Document</th>
-                                            <th class="py-3 px-6 border-b">Size</th>
-                                            <th class="py-3 px-6 border-b">Action</th>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider first:rounded-l-lg last:rounded-r-lg"
+                                            >
+                                                Date/Time
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                            >
+                                                Document
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                            >
+                                                Size
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider last:rounded-r-lg"
+                                            >
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr class="bg-white">
-                                            <td class="py-3 px-6 border-b">
+                                    <tbody class="divide-y divide-gray-200 bg-[white]">
+                                        <tr>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                            >
                                                 <%= emergencyFile.uploadedAt %>
                                             </td>
-                                            <td class="py-3 px-6 border-b flex items-center gap-2">
-                                                <img
-                                                    src="/images/pdf-icon.png"
-                                                    class="w-5 h-5"
-                                                    alt="pdf"
-                                                />
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex items-center gap-2"
+                                            >
+                                                <svg
+                                                    width="16"
+                                                    height="18"
+                                                    viewBox="0 0 16 18"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        d="M1.14204 0H10.8521L15.9992 5.04654V16.8743C15.9992 17.1727 15.8788 17.4588 15.6645 17.6698C15.4502 17.8807 15.1595 17.9993 14.8564 17.9993H1.1428C0.839713 17.9993 0.549037 17.8807 0.33472 17.6698C0.120403 17.4588 0 17.1727 0 16.8743V1.12495C-6.7324e-08 0.826727 0.120297 0.540704 0.334449 0.329756C0.548602 0.118808 0.839083 0.000198817 1.14204 0Z"
+                                                        fill="#E2574C"
+                                                    />
+                                                </svg>
+
                                                 <%= emergencyFile.name %>
                                             </td>
-                                            <td class="py-3 px-6 border-b">
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                            >
                                                 <%= emergencyFile.size %>
                                             </td>
-                                            <td class="py-3 px-6 border-b flex items-center gap-4">
-                                                <a
-                                                    href="<%= emergencyFile.viewUrl %>"
-                                                    target="_blank"
-                                                    class="text-blue-600 hover:text-blue-800"
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                            >
+                                                <!-- View -->
+                                                <button
+                                                    data-modal-target=""
+                                                    data-modal-toggle=""
+                                                    class="text-blue-600 hover:text-blue-800 p-2 rounded-full hover:bg-blue-100"
                                                 >
-                                                    👁️
-                                                </a>
-                                                <a
-                                                    href="<%= emergencyFile.downloadUrl %>"
-                                                    download
-                                                    class="text-green-600 hover:text-green-800"
+                                                    <svg
+                                                        class="w-5 h-5"
+                                                        fill="none"
+                                                        stroke="#54B7C5"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                        />
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                                <!-- Download -->
+                                                <button
+                                                    id="downloadBtn"
+                                                    data-modal-target=""
+                                                    data-modal-toggle=""
+                                                    class="text-blue-600 hover:text-blue-800 p-2 rounded-full hover:bg-blue-100"
                                                 >
-                                                    ⬇️
-                                                </a>
-                                                <a
-                                                    href="/super-admin/settings/emergency-numbers/delete"
-                                                    class="text-red-600 hover:text-red-800"
+                                                    <svg
+                                                        width="18"
+                                                        height="18"
+                                                        viewBox="0 0 18 18"
+                                                        fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        <g clip-path="url(#clip0_4766_65057)">
+                                                            <path
+                                                                d="M8.97538 11.6753V0.976562M8.97538 11.6753L5.85241 8.10929M8.97538 11.6753L12.0983 8.10929M1.16211 13.458L1.64747 15.6734C1.70783 16.0378 1.89117 16.3706 2.16698 16.6164C2.44279 16.8621 2.79444 17.006 3.16341 17.0241H14.788C15.157 17.006 15.5086 16.8621 15.7844 16.6164C16.0602 16.3706 16.2436 16.0378 16.3039 15.6734L16.7893 13.4574"
+                                                                stroke="#163F75"
+                                                                stroke-width="2"
+                                                                stroke-linecap="round"
+                                                                stroke-linejoin="round"
+                                                            />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_4766_65057">
+                                                                <rect
+                                                                    width="17.9518"
+                                                                    height="18"
+                                                                    fill="white"
+                                                                />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                </button>
+
+                                                <!-- Delete SVG -->
+                                                <button
+                                                    type="button"
+                                                    data-modal-target=""
+                                                    data-modal-toggle=""
+                                                    class="inline-flex items-center px-3 py-2"
                                                 >
-                                                    🗑️
-                                                </a>
+                                                    <svg
+                                                        class="w-6 h-6 text-gray-800 dark:text-white"
+                                                        aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="24"
+                                                        height="24"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            stroke="#F26E6E"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
+                                                        />
+                                                    </svg>
+                                                </button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -247,6 +343,23 @@
             </div>
         </div>
     </main>
+    <script>
+        document.getElementById("downloadBtn").addEventListener("click", function () {
+            // Method 1: For existing files
+            const link = document.createElement("a");
+            link.href = "<%= process.env.APP_URL_ADMIN %>/Icons/images/BMLogoSidebar.png";
+            link.download = "<%= emergencyFile.name %>"; // Optional
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Method 2: For dynamic content (text, JSON, etc.)
+            // const data = "Hello, world!";
+            // const blob = new Blob([data], { type: 'text/plain' });
+            // const url = URL.createObjectURL(blob);
+            // link.href = url;
+        });
+    </script>
 </body>
 
 <%- include('../../../layouts/footer.ejs') %>

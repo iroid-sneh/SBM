@@ -63,7 +63,12 @@ class settingsServices {
     static async emergencyNumbersPage(req, res) {
         return res.render("adminPanels/superAdmin/settings/emergencyNumbers", {
             currentPage: "settings",
-            emergencyFile: null,
+            emergencyFile: {
+                uploadedAt: "12:30:04 15/05/25",
+                name: "Emergency Numbers",
+                size: "2 MB",
+            },
+            // emergencyFile: null,
         });
     }
 

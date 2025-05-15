@@ -165,12 +165,54 @@
             <!-- Logout -->
             <div class="p-4">
                 <button
+                    data-modal-target="logout-confirmation-modal"
+                    data-modal-toggle="logout-confirmation-modal"
                     class="w-full py-2 bg-white text-[#0A2D61] rounded-xl font-semibold hover:bg-gray-200"
-                    onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/super-admin/login'"
                 >
                     Logout
                 </button>
             </div>
         </aside>
     </body>
+    <!-- Logout Confirmation Modal -->
+    <div
+        id="logout-confirmation-modal"
+        tabindex="-1"
+        class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center"
+        aria-hidden="true"
+    >
+        <div class="bg-[#F7F6F5] rounded-3xl shadow-lg w-full max-w-md mx-4 p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center border-b pb-2">
+                <h3 class="text-lg font-semibold text-center w-full">Logout</h3>
+                <button
+                    data-modal-hide="logout-confirmation-modal"
+                    class="text-red-500 text-sm absolute right-6 top-5 hover:text-red-600"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="text-center mt-6">
+                <p class="text-gray-600">Are you sure you want to logout?</p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-center space-x-4 mt-8">
+                <button
+                    data-modal-hide="logout-confirmation-modal"
+                    class="bg-[#54B7C5] hover:bg-[#48aab8] text-white font-semibold rounded-full px-6 py-2 w-[120px]"
+                >
+                    Cancel
+                </button>
+                <button
+                    onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/super-admin/login`"
+                    class="bg-[#163f75] hover:bg-[#1e4b8f] text-white font-semibold rounded-full px-6 py-2 w-[120px]"
+                >
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
 </html>
