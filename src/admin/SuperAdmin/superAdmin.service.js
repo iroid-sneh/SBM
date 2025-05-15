@@ -15,7 +15,7 @@ class superAdminServices {
      * @param {*} res
      */
     static async login(data, req, res) {
-        return res.redirect("/super-admin/dashboard");
+        return res.redirect("/superadmin/dashboard");
     }
 
     /**

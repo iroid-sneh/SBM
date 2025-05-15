@@ -1,17 +1,17 @@
 import express from "express";
-import adminRoutes from "../src/admin/admin/admin.routes.js";
 import superAdminRoutes from "../src/admin/SuperAdmin/superAdmin.routes.js";
+import serviceAndMaintenanceRoutes from "../src/admin/ServiceProvider&Maintenance/serviceProvider.routes.js";
 const router = express.Router();
 
-router.use("/admin", adminRoutes);
+router.use("/", serviceAndMaintenanceRoutes);
 
-router.use("/super-admin", superAdminRoutes);
+router.use("/superadmin", superAdminRoutes);
 
-router.get("/admin", (req, res) => {
-    return res.redirect("/admin/login");
+router.get("/", (req, res) => {
+    return res.redirect("/login");
 });
 
-router.get("/super-admin", (req, res) => {
-    return res.redirect("/super-admin/login");
+router.get("/superadmin", (req, res) => {
+    return res.redirect("/superadmin/login");
 });
 export default router;
