@@ -148,30 +148,33 @@
                         <!-- Signup link -->
                         <div class="text-center text-lg font-semibold pt-2">
                             Create an account?
-                            <a href="#" class="text-[#2C99AD] hover:underline">Signup</a>
+                            <a
+                                href="javascript:void(0);"
+                                onclick="openPreferenceModal()"
+                                class="text-[#2C99AD] hover:underline"
+                            >
+                                Signup
+                            </a>
                         </div>
                     </form>
 
                     <!-- Forgot Password Form -->
-                    <form id="forgot-form" class="hidden">
+                    <form id="forgot-form" class="hidden space-y-4">
                         <!-- Logo image above the card -->
                         <div
                             class="absolute -top-12 left-1/2 transform -translate-x-1/2 -translate-y-[50px]"
                         >
                             <img src="../Icons/images/TLogo.svg" alt="Logo" class="h-[150px]" />
                         </div>
+
                         <p class="text-gray-600 text-center text-lg mb-7">
                             Enter your phone number to receive a verification code to reset the
                             password
                         </p>
 
-                        <label class="text-sm font-semibold text-[#163f75] mb-1 block">
-                            Phone Number
-                        </label>
-                        <div class="flex items-center border-b border-gray-300 mb-5 pb-2">
-                            <!-- Flag + Arrow container -->
+                        <!-- Phone Input with Flag -->
+                        <div class="flex items-center bg-white px-4 py-4 rounded-[10px] shadow-xl">
                             <div class="relative flex items-center mr-3">
-                                <!-- Invisible select over the flag for native dropdown behavior -->
                                 <select
                                     id="forgotCountrySelect"
                                     class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
@@ -183,19 +186,14 @@
                                     <option value="kw">Kuwait</option>
                                     <option value="om">Oman</option>
                                 </select>
-
-                                <!-- Flag image -->
                                 <img
                                     id="forgotFlagIcon"
                                     src="https://flagcdn.com/w40/bh.png"
                                     class="w-6 h-4 object-cover border rounded-sm"
                                     alt="Country flag"
                                 />
-
-                                <!-- Down-chevron arrow -->
                                 <svg
                                     class="w-2.5 h-2.5 text-gray-600 ml-1 pointer-events-none"
-                                    aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 10 6"
@@ -209,67 +207,55 @@
                                     />
                                 </svg>
                             </div>
-
-                            <!-- Phone input -->
                             <input
                                 type="text"
-                                placeholder="Enter Your Phone Number"
-                                class="w-full bg-transparent focus:outline-none text-sm"
+                                placeholder="Phone Number"
+                                class="w-full text-m focus:outline-none"
                             />
                         </div>
 
                         <button
                             type="button"
                             onclick="showOTPModal()"
-                            class="bg-[#163f75] text-white rounded-full w-full py-2 mt-2 hover:bg-[#10294f] transition"
+                            class="bg-[#163f75] text-white text-m rounded-[10px] w-full py-4 hover:bg-[#10294f] transition"
                         >
                             Get Verification Code
                         </button>
 
-                        <p class="text-lg text-center font-medium mt-5 text-gray-500">
-                            <button
-                                href="#"
-                                onclick="showLogin()"
-                                class="text-black hover:underline"
-                            >
+                        <div class="text-center text-lg font-medium mt-3 text-gray-500">
+                            <button onclick="showLogin()" class="text-black hover:underline">
                                 &lt; Back
                             </button>
-                        </p>
+                        </div>
                     </form>
 
                     <!-- Reset Password Form -->
-                    <form id="reset-form" class="hidden max-w-md mx-auto">
-                        <h2 class="text-2xl text-center font-semibold text-black">
-                            Reset Password
-                        </h2>
-                        <p class="text-gray-500 text-center mb-6">Create your new Password</p>
+                    <form id="reset-form" class="hidden space-y-4">
+                        <!-- Logo image above the card -->
+                        <div
+                            class="absolute -top-12 left-1/2 transform -translate-x-1/2 -translate-y-[50px]"
+                        >
+                            <img src="../Icons/images/TLogo.svg" alt="Logo" class="h-[150px]" />
+                        </div>
+
+                        <p class="text-gray-600 text-center text-lg mb-2">
+                            Create your new password
+                        </p>
 
                         <!-- New Password -->
-                        <label
-                            for="new-password"
-                            class="text-sm font-semibold text-[#163f75] block mb-1"
-                        >
-                            Create New Password
-                        </label>
-                        <div
-                            class="flex items-center border-b border-gray-300 pb-2 mb-4 password-input-container"
-                        >
+                        <div class="flex items-center bg-white px-4 py-4 rounded-[10px] shadow-xl">
                             <input
                                 id="newPassword"
                                 name="newPassword"
                                 type="password"
-                                placeholder="Enter Your Password"
-                                class="w-full bg-transparent focus:outline-none text-sm password-input"
+                                placeholder="Create New Password"
+                                class="w-full text-m focus:outline-none"
                                 required
                             />
-                            <button
-                                id="toggleNewPassword"
-                                type="button"
-                                class="focus:outline-none toggle-password"
-                            >
+                            <button id="toggleNewPassword" type="button" class="ml-2">
                                 <svg
                                     id="newPasswordEyeIcon"
-                                    class="w-5 h-5 eye-icon"
+                                    class="w-5 h-5"
                                     fill="none"
                                     stroke="#111"
                                     viewBox="0 0 24 24"
@@ -291,31 +277,19 @@
                         </div>
 
                         <!-- Confirm Password -->
-                        <label
-                            for="confirm-password"
-                            class="text-sm font-semibold text-[#163f75] block mb-1"
-                        >
-                            Confirm New Password
-                        </label>
-                        <div
-                            class="flex items-center border-b border-gray-300 pb-2 mb-6 password-input-container"
-                        >
+                        <div class="flex items-center bg-white px-4 py-4 rounded-[10px] shadow-xl">
                             <input
                                 id="confirmPassword"
                                 name="confirmPassword"
                                 type="password"
-                                placeholder="Confirm Your Password"
-                                class="w-full bg-transparent focus:outline-none text-sm password-input"
+                                placeholder="Confirm New Password"
+                                class="w-full text-m focus:outline-none"
                                 required
                             />
-                            <button
-                                id="toggleConfirmPassword"
-                                type="button"
-                                class="focus:outline-none toggle-password"
-                            >
+                            <button id="toggleConfirmPassword" type="button" class="ml-2">
                                 <svg
                                     id="confirmPasswordEyeIcon"
-                                    class="w-5 h-5 eye-icon"
+                                    class="w-5 h-5"
                                     fill="none"
                                     stroke="#111"
                                     viewBox="0 0 24 24"
@@ -336,24 +310,18 @@
                             </button>
                         </div>
 
-                        <!-- Submit Button -->
                         <button
                             type="submit"
-                            class="bg-[#163f75] text-white rounded-full w-full py-2 hover:bg-[#10294f] transition"
+                            class="bg-[#163f75] text-white text-m rounded-[10px] w-full py-4 hover:bg-[#10294f] transition"
                         >
                             Save and Login
                         </button>
 
-                        <!-- Back Link -->
-                        <p class="text-lg text-center font-medium mt-5 text-gray-500">
-                            <button
-                                href="#"
-                                onclick="showLogin()"
-                                class="text-black hover:underline"
-                            >
+                        <div class="text-center text-lg font-medium mt-3 text-gray-500">
+                            <button onclick="showLogin()" class="text-black hover:underline">
                                 &lt; Back
                             </button>
-                        </p>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -374,6 +342,229 @@
                 class="absolute bottom-8 left-1/3 transform -translate-x-[540px] text-gray-800 text-5xl font-[600]"
             >
                 Service Provider Portal
+            </div>
+        </div>
+        <!-- OTP Modal -->
+        <div
+            id="otp-modal"
+            class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50"
+        >
+            <div
+                class="bg-[#F1F2F3] p-6 rounded-2xl shadow-xl w-[450px] max-w-full relative text-center"
+            >
+                <!-- Close Button -->
+                <button
+                    onclick="closeOTPModal()"
+                    class="absolute top-4 right-6 text-red-500 text-sm font-semibold"
+                >
+                    Close ✕
+                </button>
+
+                <!-- Logo -->
+                <div class="flex justify-center mb-4">
+                    <img src="../Icons/images/TLogo.svg" alt="Logo" class="h-20" />
+                </div>
+
+                <!-- Title -->
+                <h3 class="text-2xl font-semibold mb-2">Enter Verification Code</h3>
+
+                <!-- Subtitle -->
+                <p class="text-lg text-gray-500 mb-6">
+                    We have sent a verification code to your
+                    <br />
+                    phone number +973 12345 12345
+                </p>
+
+                <!-- OTP Inputs -->
+                <div class="flex justify-center gap-2 mb-4" id="otp-inputs">
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="0"
+                    />
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="1"
+                    />
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="2"
+                    />
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="3"
+                    />
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="4"
+                    />
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="5"
+                    />
+                </div>
+
+                <!-- Timer -->
+                <div class="text-sm text-gray-500 mb-6">
+                    Didn't receive OTP?
+                    <span id="otp-timer" class="text-blue-600 font-medium">00:44</span>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                    onclick="submitOTP()"
+                    class="bg-[#163f75] text-white px-6 py-2 rounded-[10px] w-full font-semibold hover:bg-[#102e58]"
+                >
+                    Submit
+                </button>
+            </div>
+        </div>
+        <!-- Add this at the bottom of your body (before scripts) -->
+        <div id="otp-error-toast" class="fixed top-4 right-4 hidden">
+            <div
+                class="flex items-center w-full max-w-xs p-4 mb-4 text-white bg-red-500 rounded-lg shadow"
+            >
+                <div
+                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg"
+                >
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        ></path>
+                    </svg>
+                </div>
+                <div class="ml-3 text-sm font-normal" id="otp-error-message">
+                    Please enter complete 6-digit OTP
+                </div>
+                <button
+                    type="button"
+                    onclick="hideOtpError()"
+                    class="ml-auto -mx-1.5 -my-1.5 bg-red-100 text-red-500 rounded-lg p-1.5 inline-flex h-8 w-8 hover:bg-red-200"
+                >
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        ></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Preference Modal -->
+        <div
+            id="preference-modal"
+            class="fixed inset-0 bg-black bg-opacity-40 hidden flex items-center justify-center z-50"
+        >
+            <div
+                class="bg-[#F1F2F3] px-8 py-6 rounded-[30px] shadow-xl w-[500px] max-w-full mx-4 relative"
+            >
+                <!-- Close Button -->
+                <button
+                    onclick="closePreferenceModal()"
+                    class="absolute top-4 right-6 text-gray-500 hover:text-gray-700"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                        />
+                    </svg>
+                </button>
+
+                <!-- Title -->
+                <h3 class="text-xl font-semibold justify-center text-center text-black mb-4">
+                    Select Your Preference
+                </h3>
+
+                <hr class="mb-6 border-gray-200" />
+
+                <!-- Selection Cards -->
+                <div class="flex justify-center gap-4 mb-6">
+                    <!-- Service Card -->
+                    <div
+                        id="service-card"
+                        onclick="selectServiceType('service')"
+                        class="flex flex-col items-center justify-center w-[120px] h-[120px] rounded-[10px] border-2 border-[#a8dadc] bg-[#f1faee] cursor-pointer transition hover:shadow-lg"
+                    >
+                        <img src="../Icons/images/Service.svg" alt="Service" class="h-10 mb-2" />
+                        <span class="text-sm font-medium text-[#1d3557]">Service</span>
+                    </div>
+
+                    <!-- Maintenance Card -->
+                    <div
+                        id="maintenance-card"
+                        onclick="selectServiceType('maintenance')"
+                        class="flex flex-col items-center justify-center w-[120px] h-[120px] rounded-[10px] border-2 border-transparent bg-[#f9f9f9] cursor-pointer transition hover:shadow-lg"
+                    >
+                        <img
+                            src="../Icons/images/Maintenance.svg"
+                            alt="Maintenance"
+                            class="h-10 mb-2"
+                        />
+                        <span class="text-sm font-medium text-[#1d3557]">Maintenance</span>
+                    </div>
+                </div>
+
+                <!-- Radio Group -->
+                <div class="text-left text-sm text-gray-700 mb-3 font-medium">
+                    Select Your Category
+                </div>
+
+                <div
+                    class="bg-white rounded-[10px] max-w-[410px] shadow-xl px-2 py-4 m-6 flex justify-between items-center"
+                >
+                    <label class="flex items-center gap-2">
+                        <input
+                            type="radio"
+                            name="category"
+                            value="freelancer"
+                            class="accent-[#163f75] scale-110"
+                        />
+                        <span class="text-sm font-medium text-gray-700">Freelancer</span>
+                    </label>
+
+                    <label class="flex items-center gap-2">
+                        <input
+                            type="radio"
+                            name="category"
+                            value="service-provider"
+                            class="accent-[#163f75] scale-110"
+                            checked
+                        />
+                        <span class="text-sm font-medium text-gray-700">Service Provider</span>
+                    </label>
+                </div>
+
+                <!-- Signup Button -->
+                <button
+                    onclick="submitPreference()"
+                    class="bg-[#163f75] text-white py-3 rounded-[10px] w-full font-medium hover:bg-[#10294f] transition text-base"
+                >
+                    Signup
+                </button>
             </div>
         </div>
     </body>
@@ -463,6 +654,7 @@
                 document.getElementById("otp-modal").classList.add("hidden");
                 document.getElementById("forgot-form").classList.add("hidden");
                 document.getElementById("reset-form").classList.remove("hidden");
+                formTitle.textContent = "Reset Password";
             } else {
                 showOtpError("Please enter all 6 digits of the OTP code");
                 // Optionally highlight empty fields
@@ -551,5 +743,31 @@
                 });
             });
         });
+
+        function closePreferenceModal() {
+            document.getElementById("preference-modal").classList.add("hidden");
+        }
+
+        function openPreferenceModal() {
+            document.getElementById("preference-modal").classList.remove("hidden");
+        }
+
+        function selectServiceType(type) {
+            const service = document.getElementById("service-card");
+            const maintenance = document.getElementById("maintenance-card");
+
+            if (type === "service") {
+                service.classList.add("border-[#a8dadc]", "bg-[#f1faee]");
+                maintenance.classList.remove("border-[#a8dadc]", "bg-[#f1faee]");
+            } else {
+                maintenance.classList.add("border-[#a8dadc]", "bg-[#f1faee]");
+                service.classList.remove("border-[#a8dadc]", "bg-[#f1faee]");
+            }
+        }
+
+        function submitPreference() {
+            // Add logic here to handle the form submission
+            console.log("Preference Submitted");
+        }
     </script>
 </html>
