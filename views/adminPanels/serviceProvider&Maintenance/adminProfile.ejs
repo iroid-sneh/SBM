@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Smart Building Services - Auth</title>
+        <!-- Tailwind CSS CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Flowbite CSS & JS -->
+        <!-- <link href="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.css" rel="stylesheet" /> -->
+        <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+        <style>
+            /* Optional animation */
+            @keyframes shake {
+                0%,
+                100% {
+                    transform: translateX(0);
+                }
+                20%,
+                60% {
+                    transform: translateX(-5px);
+                }
+                40%,
+                80% {
+                    transform: translateX(5px);
+                }
+            }
+            .shake {
+                animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+        </style>
+    </head>
+
+    <body class="bg-white font-sans min-h-100vh">
+        <!-- Decorative Top Image -->
+        <div class="relative">
+            <img src="../Icons/images/AuthBg.png" alt="Top Decoration" class="w-full" />
+        </div>
+
+        <!-- Main Content -->
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-8 mt-[-40px] relative">
+            <!-- Auth Box -->
+            <div class="w-[472px] px-6 transform -translate-x-[230px] -translate-y-[200px]">
+                <div id="auth-container">
+                    <div class="flex justify-start items-start">
+                        <!-- Title -->
+                        <h2
+                            class="text-2xl items-start justify-start text-center text-black mb-6"
+                            id="form-title"
+                        >
+                            Admin Profile
+                        </h2>
+                    </div>
+                    <!-- Admin Profile Form -->
+                    <form id="login-form" class="space-y-3">
+                        <!-- Add Profile Photo -->
+                        <div class="flex justify-center mb-6">
+                            <div class="relative w-24 h-24">
+                                <!-- Circular Background with Centered SVG -->
+                                <div
+                                    id="profilePlaceholder"
+                                    class="w-[95px] h-[95px] rounded-full border-4 border-[#57C1D1] flex items-center justify-center bg-gray-100 overflow-hidden"
+                                >
+                                    <!-- Your SVG Icon -->
+                                    <svg
+                                        class="w-10 h-10 text-gray-500"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                                        />
+                                    </svg>
+                                </div>
+
+                                <!-- Hidden File Input -->
+                                <input
+                                    id="imageUpload"
+                                    type="file"
+                                    accept="image/*"
+                                    class="hidden"
+                                />
+
+                                <!-- Camera Icon Button -->
+                                <label
+                                    for="imageUpload"
+                                    class="absolute bottom-0 right-0 bg-[#57C1D1] text-white p-2 rounded-full shadow-[0px_4px_10px_rgba(0,0,0,0.05)] cursor-pointer"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-4 w-4"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                                        />
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                                        />
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- First Name -->
+                        <div
+                            class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
+                        >
+                            <input
+                                type="text"
+                                placeholder="First Name"
+                                class="w-full h-[14px] text-m focus:outline-none"
+                            />
+                        </div>
+                        <!-- Last Name -->
+                        <div
+                            class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
+                        >
+                            <input
+                                type="text"
+                                placeholder="Last Name"
+                                class="w-full h-[14px] text-m focus:outline-none"
+                            />
+                        </div>
+                        <!-- Styled Native Role Select -->
+                        <div class="flex bg-white px-4 py-4 rounded-[10px] border shadow-xl">
+                            <select
+                                name="role"
+                                id="roleSelect"
+                                class="w-full h-[21px] text-m text-gray-400 focus:outline-none"
+                                required
+                            >
+                                <option value="" hidden>Your Role</option>
+                                <option value="admin">Admin</option>
+                                <option value="management">Management</option>
+                            </select>
+                        </div>
+
+                        <!-- Phone Input with Flag -->
+                        <div
+                            class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
+                        >
+                            <div class="relative flex items-center mr-3">
+                                <select
+                                    id="loginCountrySelect"
+                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                >
+                                    <option value="bh" selected>Bahrain</option>
+                                    <option value="sa">Saudi Arabia</option>
+                                    <option value="ae">UAE</option>
+                                    <option value="qa">Qatar</option>
+                                    <option value="kw">Kuwait</option>
+                                    <option value="om">Oman</option>
+                                </select>
+                                <img
+                                    id="loginFlagIcon"
+                                    src="https://flagcdn.com/w40/bh.png"
+                                    class="w-6 h-4 object-cover border rounded-sm"
+                                    alt="Country flag"
+                                />
+                                <svg
+                                    class="w-2.5 h-2.5 text-gray-600 ml-1 pointer-events-none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 10 6"
+                                >
+                                    <path
+                                        stroke="currentColor"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="m1 1 4 4 4-4"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Phone Number"
+                                class="w-full h-[14px] text-m focus:outline-none"
+                            />
+                        </div>
+
+                        <!-- Password Field -->
+                        <div
+                            class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
+                        >
+                            <input
+                                id="password-input"
+                                type="password"
+                                placeholder="Create Password"
+                                class="w-full h-[14px] text-m focus:outline-none"
+                            />
+                            <button type="button" id="togglePassword" class="ml-2">
+                                <svg
+                                    id="eyeIcon"
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="#111"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div
+                            class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
+                        >
+                            <input
+                                id="password-input"
+                                type="password"
+                                placeholder="Confirm Password"
+                                class="w-full h-[14px] text-m focus:outline-none"
+                            />
+                            <button type="button" id="togglePassword" class="ml-2">
+                                <svg
+                                    id="eyeIcon"
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="#111"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Logo -->
+            <div
+                class="fixed right-1 text-center top-[600px] transform -translate-x-[250px] -translate-y-[80px]"
+            >
+                <h2 class="text-5xl text-gray-600">You can leverage a variety of tools</h2>
+                <h2 class="text-5xl mt-2 text-gray-600">that will assist you in making</h2>
+                <h2 class="text-5xl mt-2 text-gray-600">
+                    strategic and effective selling decisions
+                </h2>
+            </div>
+        </div>
+
+        <!-- Bottom Decorative Image -->
+        <div class="fixed bottom-0 left-0 w-full">
+            <img src="../Icons/images/CurveBg.svg" alt="Footer Decoration" />
+            <div class="absolute bottom-8 left-1/3 transform -translate-x-[490px] font-[600]">
+                <h2 class="text-gray-800 text-4xl">
+                    Step 1
+                    <span class="text-gray-500 text-3xl">Out of 5</span>
+                </h2>
+            </div>
+
+            <div class="absolute bottom-8 left-1/3 transform -translate-x-[-640px] font-[600]">
+                <button onclick="" class="text-xl mr-8 font-medium text-black hover:underline">
+                    &lt; Back
+                </button>
+
+                <button
+                    type="submit"
+                    onclick="showOTPModal()"
+                    class="bg-[#163f75] text-white text-m rounded-[10px] w-[350px] py-3 hover:bg-[#10294f] transition"
+                >
+                    Save & Continue
+                </button>
+            </div>
+        </div>
+        <!-- OTP Modal -->
+        <div
+            id="otp-modal"
+            class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50"
+        >
+            <div
+                class="bg-[#F1F2F3] p-6 rounded-2xl shadow-xl w-[450px] max-w-full relative text-center"
+            >
+                <!-- Close Button -->
+                <button
+                    onclick="closeOTPModal()"
+                    class="absolute top-4 right-6 text-red-500 text-sm font-semibold"
+                >
+                    Close ✕
+                </button>
+
+                <!-- Logo -->
+                <div class="flex justify-center mb-4">
+                    <img src="../Icons/images/TLogo.svg" alt="Logo" class="h-20" />
+                </div>
+
+                <!-- Title -->
+                <h3 class="text-2xl font-semibold mb-2">Enter Verification Code</h3>
+
+                <!-- Subtitle -->
+                <p class="text-lg text-gray-500 mb-6">
+                    We have sent a verification code to your
+                    <br />
+                    phone number +973 12345 12345
+                </p>
+
+                <!-- OTP Inputs -->
+                <div class="flex justify-center gap-2 mb-4" id="otp-inputs">
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="0"
+                    />
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="1"
+                    />
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="2"
+                    />
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="3"
+                    />
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="4"
+                    />
+                    <input
+                        type="text"
+                        maxlength="1"
+                        class="w-12 h-12 text-center text-xl font-bold border border-gray-300 rounded-lg shadow otp-digit"
+                        data-index="5"
+                    />
+                </div>
+
+                <!-- Timer -->
+                <div class="text-sm text-gray-500 mb-6">
+                    Didn't receive OTP?
+                    <span id="otp-timer" class="text-blue-600 font-medium">00:44</span>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                    onclick="submitOTP()"
+                    class="bg-[#163f75] text-white px-6 py-2 rounded-[10px] w-full font-semibold hover:bg-[#102e58]"
+                >
+                    Submit
+                </button>
+            </div>
+        </div>
+        <!-- Add this at the bottom of your body (before scripts) -->
+        <div id="otp-error-toast" class="fixed top-4 right-4 hidden">
+            <div
+                class="flex items-center w-full max-w-xs p-4 mb-4 text-white bg-red-500 rounded-lg shadow"
+            >
+                <div
+                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg"
+                >
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        ></path>
+                    </svg>
+                </div>
+                <div class="ml-3 text-sm font-normal" id="otp-error-message">
+                    Please enter complete 6-digit OTP
+                </div>
+                <button
+                    type="button"
+                    onclick="hideOtpError()"
+                    class="ml-auto -mx-1.5 -my-1.5 bg-red-100 text-red-500 rounded-lg p-1.5 inline-flex h-8 w-8 hover:bg-red-200"
+                >
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        ></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </body>
+    <script>
+        let timerInterval;
+
+        const imageUpload = document.getElementById("imageUpload");
+        const profilePlaceholder = document.getElementById("profilePlaceholder");
+
+        imageUpload.addEventListener("change", function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    profilePlaceholder.innerHTML = `
+          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
+        `;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        // For Edit Modal
+        const imageUploadEdit = document.getElementById("imageUpload-edit");
+        const profilePlaceholderEdit = document.getElementById("profilePlaceholder-edit");
+
+        imageUploadEdit.addEventListener("change", function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    profilePlaceholderEdit.innerHTML = `
+          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
+        `;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // For login form
+        document.getElementById("loginCountrySelect").addEventListener("change", function () {
+            document.getElementById("loginFlagIcon").src = flagMap[this.value];
+        });
+
+        // For forgot password form
+        document.getElementById("forgotCountrySelect").addEventListener("change", function () {
+            document.getElementById("forgotFlagIcon").src = flagMap[this.value];
+        });
+
+        function setupOTPInputs() {
+            const otpInputs = document.querySelectorAll(".otp-digit");
+
+            otpInputs.forEach((input, index) => {
+                input.addEventListener("input", (e) => {
+                    let value = e.target.value;
+
+                    // Allow only digits
+                    if (!/^\d$/.test(value)) {
+                        e.target.value = "";
+                        return;
+                    }
+
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                });
+
+                input.addEventListener("keydown", (e) => {
+                    if (e.key === "Backspace" && e.target.value === "" && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                });
+
+                // Prevent typing non-digits using keypress
+                input.addEventListener("keypress", (e) => {
+                    if (!/[0-9]/.test(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+
+                // Optional: Clear input on focus
+                input.addEventListener("focus", (e) => {
+                    e.target.select(); // highlights the number for easy replacement
+                });
+            });
+        }
+
+        const formTitle = document.getElementById("form-title");
+
+        function showForgotPassword() {
+            document.getElementById("login-form").classList.add("hidden");
+            document.getElementById("reset-form").classList.add("hidden");
+            document.getElementById("forgot-form").classList.remove("hidden");
+            formTitle.textContent = "Forgot Password";
+        }
+
+        function clearOTPInputs() {
+            const otpInputs = document.querySelectorAll(".otp-digit");
+            otpInputs.forEach((input) => {
+                input.value = "";
+                input.classList.remove("border-red-500", "ring-2", "ring-red-200");
+            });
+
+            // Also hide error toast if it's still showing
+            hideOtpError();
+
+            // Optional: reset "Send OTP Again" label if modal was left open too long
+            const timerDisplay = document.getElementById("otp-timer");
+            if (timerDisplay.innerText === "Send OTP Again") {
+                timerDisplay.innerText = "00:50";
+                timerDisplay.classList.remove("text-[#163f75]", "cursor-pointer");
+                timerDisplay.classList.add("text-blue-600");
+                timerDisplay.onclick = null;
+            }
+        }
+
+        function showOTPModal() {
+            startOTPTimer();
+            document.getElementById("otp-modal").classList.remove("hidden");
+            setupOTPInputs();
+        }
+
+        function closeOTPModal() {
+            clearOTPInputs(); // must come before hiding modal
+            clearInterval(timerInterval);
+            document.getElementById("otp-modal").classList.add("hidden");
+        }
+
+        function submitOTP() {
+            const otpDigits = document.querySelectorAll(".otp-digit");
+            const otp = Array.from(otpDigits)
+                .map((digit) => digit.value)
+                .join("");
+
+            if (otp.length === 6) {
+                window.location.href = `<%= process.env.APP_ADMIN_URL %>/bussinessdetails`;
+            } else {
+                showOtpError("Please enter all 6 digits of the OTP code");
+                // Optionally highlight empty fields
+                otpDigits.forEach((digit) => {
+                    if (!digit.value) {
+                        digit.classList.add("border-red-500", "ring-2", "ring-red-200");
+                        digit.addEventListener(
+                            "input",
+                            function () {
+                                this.classList.remove("border-red-500", "ring-2", "ring-red-200");
+                            },
+                            { once: true }
+                        );
+                    }
+                });
+            }
+        }
+
+        function showOtpError(message) {
+            const toast = document.getElementById("otp-error-toast");
+            const messageEl = document.getElementById("otp-error-message");
+            messageEl.textContent = message || "Please enter complete 6-digit OTP";
+            toast.classList.remove("hidden");
+            setTimeout(hideOtpError, 5000); // Auto-hide after 5 seconds
+        }
+
+        function hideOtpError() {
+            document.getElementById("otp-error-toast").classList.add("hidden");
+        }
+
+        function startOTPTimer() {
+            const timerDisplay = document.getElementById("otp-timer");
+            let timeLeft = 50;
+
+            timerDisplay.classList.remove("cursor-pointer", "text-red-500");
+            timerDisplay.classList.add("text-blue-600");
+            timerDisplay.innerText = formatTime(timeLeft);
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerDisplay.innerText = "Send OTP Again";
+                    timerDisplay.classList.remove("text-blue-600");
+                    timerDisplay.classList.add("text-[#163f75]", "cursor-pointer");
+                    timerDisplay.onclick = resendOTP;
+                } else {
+                    timerDisplay.innerText = formatTime(timeLeft);
+                }
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+            const s = String(seconds % 60).padStart(2, "0");
+            return `${m}:${s}`;
+        }
+
+        function resendOTP() {
+            startOTPTimer();
+            const timerDisplay = document.getElementById("otp-timer");
+            timerDisplay.onclick = null;
+        }
+    </script>
+</html>

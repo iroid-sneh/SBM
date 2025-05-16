@@ -7,6 +7,28 @@ class serviceProviderServices {
     static async loginPage(req, res) {
         return res.render("adminPanels/serviceProvider&Maintenance/login");
     }
+
+    /**
+     * @description: Service Provider Sign up [adminprofile] page For Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async adminprofilePage(req, res) {
+        return res.render(
+            "adminPanels/serviceProvider&Maintenance/adminProfile"
+        );
+    }
+
+    /**
+     * @description: Service Provider Sign up [bussinessdetails] page For Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async bussinessdetailsPage(req, res) {
+        return res.render(
+            "adminPanels/serviceProvider&Maintenance/bussinessDetails"
+        );
+    }
 }
 
 export default serviceProviderServices;

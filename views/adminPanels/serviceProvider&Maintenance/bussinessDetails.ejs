@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Smart Building Services - Auth</title>
+        <!-- Tailwind CSS CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Flowbite CSS & JS -->
+        <!-- <link href="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.css" rel="stylesheet" /> -->
+        <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+        <style>
+            /* Optional animation */
+            @keyframes shake {
+                0%,
+                100% {
+                    transform: translateX(0);
+                }
+                20%,
+                60% {
+                    transform: translateX(-5px);
+                }
+                40%,
+                80% {
+                    transform: translateX(5px);
+                }
+            }
+            .shake {
+                animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+        </style>
+    </head>
+
+    <body class="bg-white font-sans min-h-100vh">
+        <!-- Decorative Top Image -->
+        <div class="relative">
+            <img src="../Icons/images/AuthBg.png" alt="Top Decoration" class="w-full" />
+        </div>
+
+        <!-- Main Content -->
+        <div
+            class="max-w-7xl mx-auto flex items-start justify-between px-8 mt-9 gap-6 transform -translate-x-[250px]"
+        >
+            <!-- Auth Box -->
+            <div class="w-[472px] flex-shrink-0 px-6 transform -translate-y-[270px]">
+                <div id="auth-container">
+                    <div class="flex justify-start items-start">
+                        <!-- Title -->
+                        <h2
+                            class="text-2xl items-start justify-start text-center text-black mb-6"
+                            id="form-title"
+                        >
+                            Bussiness Details
+                        </h2>
+                    </div>
+                    <!-- Admin Profile Form -->
+                    <form id="login-form" class="space-y-3">
+                        <!-- Add Profile Photo -->
+                        <div class="flex justify-center mb-6">
+                            <div class="relative w-24 h-24">
+                                <!-- Circular Background with Centered SVG -->
+                                <div
+                                    id="profilePlaceholder"
+                                    class="w-[95px] h-[95px] rounded-full border-4 border-[#57C1D1] flex items-center justify-center bg-gray-100 overflow-hidden"
+                                >
+                                    <!-- Your SVG Icon -->
+                                    <svg
+                                        class="w-10 h-10 text-gray-500"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                                        />
+                                    </svg>
+                                </div>
+
+                                <!-- Hidden File Input -->
+                                <input
+                                    id="imageUpload"
+                                    type="file"
+                                    accept="image/*"
+                                    class="hidden"
+                                />
+
+                                <!-- Camera Icon Button -->
+                                <label
+                                    for="imageUpload"
+                                    class="absolute bottom-0 right-0 bg-[#57C1D1] text-white p-2 rounded-full shadow-[0px_4px_10px_rgba(0,0,0,0.05)] cursor-pointer"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-4 w-4"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                                        />
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                                        />
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Commercial Name -->
+
+                        <input
+                            type="text"
+                            placeholder="Commercial Name"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                        />
+
+                        <!-- CR Number -->
+                        <div class="items-center grid grid-cols-2 gap-4 rounded-[10px]">
+                            <input
+                                type="text"
+                                placeholder="CR Number"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                            />
+                            <select
+                                name="role"
+                                id="roleSelect"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                                required
+                            >
+                                <option value="" hidden>Branch</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <!-- Styled Native Service Type Select -->
+                        <div class="items-center grid grid-cols-2 gap-4 rounded-[10px]">
+                            <select
+                                name="ServiceType"
+                                id="serviceType"
+                                required
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                                required
+                            >
+                                <option value="" hidden>Service Type</option>
+                                <option value="Pet Care">Pet Care</option>
+                                <option value="Tutors">Tutors</option>
+                                <option value="Trainers">Trainers</option>
+                            </select>
+                            <select
+                                name="role"
+                                id="roleSelect"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                                required
+                            >
+                                <option value="" hidden>Currency</option>
+                                <option value="BHD">BHD</option>
+                                <option value="USD">USD</option>
+                            </select>
+                        </div>
+
+                        <!-- Sub Category -->
+                        <select
+                            name="subCategory"
+                            id="subCategory"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl hidden"
+                            required
+                        >
+                            <option value="" hidden>Sub Category</option>
+                        </select>
+
+                        <!-- Dynamic container for Sub-Sub Categories -->
+                        <div id="subSubContainerWrapper" class="hidden gap-4 mt-4 grid"></div>
+
+                        <!-- Phone Input with Flag -->
+                        <div
+                            class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
+                        >
+                            <div class="relative flex items-center mr-3">
+                                <select
+                                    id="loginCountrySelect"
+                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                >
+                                    <option value="bh" selected>Bahrain</option>
+                                    <option value="sa">Saudi Arabia</option>
+                                    <option value="ae">UAE</option>
+                                    <option value="qa">Qatar</option>
+                                    <option value="kw">Kuwait</option>
+                                    <option value="om">Oman</option>
+                                </select>
+                                <img
+                                    id="loginFlagIcon"
+                                    src="https://flagcdn.com/w40/bh.png"
+                                    class="w-6 h-4 object-cover border rounded-sm"
+                                    alt="Country flag"
+                                />
+                                <svg
+                                    class="w-2.5 h-2.5 text-gray-600 ml-1 pointer-events-none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 10 6"
+                                >
+                                    <path
+                                        stroke="currentColor"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="m1 1 4 4 4-4"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Phone Number"
+                                class="w-full h-[14px] text-m focus:outline-none"
+                            />
+                        </div>
+
+                        <!-- Password Field -->
+
+                        <input
+                            id="password-input"
+                            type="email"
+                            placeholder="Bussiness Email"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                        />
+
+                        <!-- VAT Declaration and VAT Number -->
+                        <div class="grid grid-cols-2 gap-4 items-start">
+                            <!-- Checkbox and Label -->
+                            <label
+                                class="flex items-start gap-2 text-sm text-gray-600 leading-snug"
+                            >
+                                <input type="checkbox" class="mt-1 scale-110 accent-[#163f75]" />
+                                <p class="text-sm leading-snug">
+                                    By checking this box, I declare that our business is exempted or
+                                    not legally bound to any VAT registration in Bahrain
+                                </p>
+                            </label>
+
+                            <!-- VAT Number Input -->
+                            <input
+                                type="text"
+                                placeholder="VAT Number"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                            />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: Brief and Map with Dividers -->
+            <div class="flex items-stretch -translate-y-[40px]">
+                <!-- Divider 1 -->
+                <div class="w-px bg-gray-300 mx-6"></div>
+
+                <!-- Brief Form Section -->
+                <div class="w-[550px] mr-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">
+                            Brief about your business
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-4">It will be displayed in the app.</p>
+
+                        <!-- Textarea -->
+                        <div class="relative mb-6">
+                            <textarea
+                                rows="4"
+                                maxlength="250"
+                                placeholder="Describe your business here..."
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl resize-none"
+                            ></textarea>
+                            <p class="absolute right-3 bottom-[-20px] text-xs text-gray-400">
+                                Max 25 words
+                            </p>
+                        </div>
+
+                        <!-- Time -->
+                        <div class="flex justify-between gap-4 mb-6">
+                            <!-- Open Time -->
+                            <div class="relative w-40">
+                                <label
+                                    for="open1"
+                                    class="absolute left-3 top-2 text-sm text-gray-500 bg-white px-1 z-10 pointer-events-none"
+                                >
+                                    Open Time
+                                </label>
+                                <input
+                                    id="open1"
+                                    type="time"
+                                    class="peer w-full px-4 pt-6 pb-2 bg-white rounded-xl text-gray-700 text-sm border focus:outline-none shadow-xl"
+                                />
+                            </div>
+
+                            <!-- to -->
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-600">to</span>
+                            </div>
+
+                            <!-- Close Time -->
+                            <div class="relative w-40">
+                                <label
+                                    for="close1"
+                                    class="absolute left-3 top-2 text-sm text-gray-500 bg-white px-1 z-10 pointer-events-none"
+                                >
+                                    Close Time
+                                </label>
+                                <input
+                                    id="close1"
+                                    type="time"
+                                    class="peer w-full px-4 pt-6 pb-2 bg-white rounded-xl text-gray-700 text-sm border focus:outline-none shadow-xl"
+                                />
+                            </div>
+
+                            <!-- Open Time 2 -->
+                            <div class="relative w-40">
+                                <label
+                                    for="open2"
+                                    class="absolute left-3 top-2 text-sm text-gray-500 bg-white px-1 z-10 pointer-events-none"
+                                >
+                                    Open Time
+                                </label>
+                                <input
+                                    id="open2"
+                                    type="time"
+                                    class="peer w-full px-4 pt-6 pb-2 bg-white rounded-xl text-gray-700 text-sm border focus:outline-none shadow-xl"
+                                />
+                            </div>
+
+                            <!-- to -->
+                            <div class="flex items-center">
+                                <span class="text-sm text-gray-600">to</span>
+                            </div>
+
+                            <!-- Close Time 2 -->
+                            <div class="relative w-40">
+                                <label
+                                    for="close2"
+                                    class="absolute left-3 top-2 text-sm text-gray-500 bg-white px-1 z-10 pointer-events-none"
+                                >
+                                    Close Time
+                                </label>
+                                <input
+                                    id="close2"
+                                    type="time"
+                                    class="peer w-full px-4 pt-6 pb-2 bg-white rounded-xl text-gray-700 text-sm border focus:outline-none shadow-xl"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Working Days -->
+                        <div class="mb-6">
+                            <!-- Working Days -->
+
+                            <label class="block mb-2 text-sm font-medium text-gray-700">
+                                Working Day
+                            </label>
+                            <div class="flex flex-wrap gap-1" id="workingDays">
+                                <button
+                                    type="button"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    data-day="Sun"
+                                >
+                                    Sun
+                                </button>
+                                <button
+                                    type="button"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    data-day="Mon"
+                                >
+                                    Mon
+                                </button>
+                                <button
+                                    type="button"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    data-day="Tue"
+                                >
+                                    Tue
+                                </button>
+                                <button
+                                    type="button"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    data-day="Wed"
+                                >
+                                    Wed
+                                </button>
+                                <button
+                                    type="button"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    data-day="Thu"
+                                >
+                                    Thu
+                                </button>
+                                <button
+                                    type="button"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    data-day="Fri"
+                                >
+                                    Fri
+                                </button>
+                                <button
+                                    type="button"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    data-day="Sat"
+                                >
+                                    Sat
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- City + Address -->
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <select
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                            >
+                                <option hidden>Select City</option>
+                                <option>Manama</option>
+                                <option>Riffa</option>
+                                <option>Muharraq</option>
+                            </select>
+                            <div class="relative">
+                                <input
+                                    type="text"
+                                    placeholder="Business Address"
+                                    class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl pr-10"
+                                />
+                                <svg
+                                    class="absolute top-3.5 right-3 w-5 h-5 text-gray-500 pointer-events-none"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divider 2 -->
+                <div class="w-px bg-gray-300 mx-6"></div>
+
+                <!-- Map Section -->
+                <div
+                    class="w-[370px] h-64 rounded-[10px] border shadow overflow-hidden flex items-bottom justify-bottom transform -translate-y-[-100px]"
+                >
+                    <!-- TEMP Map Note -->
+                    <div class="text-white bg-black text-sm px-4 py-3">
+                        Google Maps Platform rejected your request. The provided API key is invalid.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Decorative Image -->
+        <div class="fixed bottom-0 left-0 w-full">
+            <img src="../Icons/images/CurveBg.svg" alt="Footer Decoration" />
+            <div class="absolute bottom-8 left-1/3 transform -translate-x-[490px] font-[600]">
+                <h2 class="text-gray-800 text-4xl">
+                    Step 2
+                    <span class="text-gray-500 text-3xl">Out of 5</span>
+                </h2>
+            </div>
+
+            <div class="absolute bottom-8 left-1/3 transform -translate-x-[-640px] font-[600]">
+                <button onclick="" class="text-xl mr-8 font-medium text-black hover:underline">
+                    &lt; Back
+                </button>
+
+                <button
+                    type="submit"
+                    onclick="showOTPModal()"
+                    class="bg-[#163f75] text-white text-m rounded-[10px] w-[350px] py-3 hover:bg-[#10294f] transition"
+                >
+                    Save & Continue
+                </button>
+            </div>
+        </div>
+    </body>
+    <script>
+        // Toggle class when clicked
+        document.querySelectorAll(".day-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("bg-[#54B7C5]");
+                btn.classList.toggle("text-black");
+                btn.classList.toggle("border-gray-300");
+            });
+        });
+        const categoryMap = {
+            "Pet Care": {
+                Veternariy: [],
+                "Pet Sitter": [],
+            },
+            Tutors: {
+                Education: {
+                    Skills: ["Maths", "Science"],
+                    Level: ["Primary", "Secondary"],
+                },
+                Instruments: ["Guitar", "Violin"],
+                Cooking: ["Indian", "Chinese"],
+            },
+            Trainers: {
+                Fitness: ["Aerobics", "Weight Loss"],
+                Swimming: [],
+                "Pet Training": [],
+            },
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const serviceType = document.getElementById("serviceType");
+            const subCategory = document.getElementById("subCategory");
+            const subSubWrapper = document.getElementById("subSubContainerWrapper");
+
+            // On Service Type Change
+            serviceType.addEventListener("change", () => {
+                const subOptions = categoryMap[serviceType.value] || {};
+                subCategory.innerHTML = `<option hidden value="">Sub Category</option>`;
+                Object.keys(subOptions).forEach((opt) => {
+                    subCategory.innerHTML += `<option value="${opt}">${opt}</option>`;
+                });
+
+                subCategory.classList.remove("hidden");
+                subSubWrapper.classList.add("hidden");
+                subSubWrapper.innerHTML = "";
+            });
+
+            // ✅ On Sub Category Change — THIS IS WHERE SUBSUBS ARE HANDLED
+            subCategory.addEventListener("change", () => {
+                const selectedService = serviceType.value;
+                const selectedSub = subCategory.value;
+                const subSubData = categoryMap[selectedService][selectedSub];
+
+                subSubWrapper.innerHTML = "";
+
+                // No sub-sub data = hide
+                if (!subSubData || Object.keys(subSubData).length === 0) {
+                    subSubWrapper.classList.add("hidden");
+                    return;
+                }
+
+                let columnCount = 1;
+
+                if (Array.isArray(subSubData)) {
+                    // One select
+                    const select = createSelect(subSubData, "Select Option");
+                    subSubWrapper.appendChild(select);
+                } else if (typeof subSubData === "object") {
+                    // Multiple selects (Education case)
+                    columnCount = Object.keys(subSubData).length;
+                    Object.entries(subSubData).forEach(([label, options]) => {
+                        const select = createSelect(options, `Select ${label}`);
+                        subSubWrapper.appendChild(select);
+                    });
+                }
+
+                // Set correct columns
+                subSubWrapper.classList.remove("grid-cols-1", "grid-cols-2");
+                subSubWrapper.classList.add(`grid-cols-${columnCount}`);
+                subSubWrapper.classList.remove("hidden");
+            });
+
+            // Utility: Create a styled select
+            function createSelect(options, placeholder) {
+                const select = document.createElement("select");
+                select.className =
+                    "w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl";
+                select.innerHTML = `<option hidden value="">${placeholder}</option>`;
+                options.forEach((opt) => {
+                    select.innerHTML += `<option value="${opt}">${opt}</option>`;
+                });
+                return select;
+            }
+        });
+    </script>
+</html>
