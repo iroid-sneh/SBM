@@ -29,6 +29,37 @@ class serviceProviderServices {
             "adminPanels/serviceProvider&Maintenance/bussinessDetails"
         );
     }
+
+    /**
+     * @description: Service Provider Sign up [bankdetails] page For Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async bankdetailsPage(req, res) {
+        return res.render(
+            "adminPanels/serviceProvider&Maintenance/bankDetails"
+        );
+    }
+
+    /**
+     * @description: Service Provider Sign up [choosePlan] page For Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async choosePlanPage(req, res) {
+        return res.render("adminPanels/serviceProvider&Maintenance/choosePlan");
+    }
+
+    /**
+     * @description: Service Provider Sign up [reviewDetails] page For Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async reviewDetailsPage(req, res) {
+        return res.render(
+            "adminPanels/serviceProvider&Maintenance/reviewDetails"
+        );
+    }
 }
 
 export default serviceProviderServices;

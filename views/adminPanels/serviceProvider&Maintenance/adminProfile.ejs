@@ -287,7 +287,10 @@
             </div>
 
             <div class="absolute bottom-8 left-1/3 transform -translate-x-[-640px] font-[600]">
-                <button onclick="" class="text-xl mr-8 font-medium text-black hover:underline">
+                <button
+                    onclick="window.location.href=`<%= process.env.APP_ADMIN_URL %>/login`"
+                    class="text-xl mr-8 font-medium text-black hover:underline"
+                >
                     &lt; Back
                 </button>
 

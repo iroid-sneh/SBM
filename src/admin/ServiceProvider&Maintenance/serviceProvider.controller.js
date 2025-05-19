@@ -33,6 +33,36 @@ class serviceProviderController {
         );
         return;
     }
+
+    /**
+     * @description: Service Provider Admin Panel Signup Page Step 3
+     * @param {*} req
+     * @param {*} res
+     */
+    static async bankdetailsPage(req, res) {
+        const data = await serviceProviderServices.bankdetailsPage(req, res);
+        return;
+    }
+
+    /**
+     * @description: Service Provider Admin Panel Signup Page Step 4
+     * @param {*} req
+     * @param {*} res
+     */
+    static async choosePlanPage(req, res) {
+        const data = await serviceProviderServices.choosePlanPage(req, res);
+        return;
+    }
+
+    /**
+     * @description: Service Provider Admin Panel Signup Page Step 5
+     * @param {*} req
+     * @param {*} res
+     */
+    static async reviewDetailsPage(req, res) {
+        const data = await serviceProviderServices.reviewDetailsPage(req, res);
+        return;
+    }
 }
 
 export default serviceProviderController;

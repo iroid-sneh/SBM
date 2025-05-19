@@ -30,6 +30,10 @@
                 animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
             }
         </style>
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     </head>
 
     <body class="bg-white font-sans min-h-100vh">
@@ -126,12 +130,40 @@
                         />
 
                         <!-- CR Number -->
-                        <div class="items-center grid grid-cols-2 gap-4 rounded-[10px]">
+                        <div
+                            class="items-center grid grid-cols-[8fr_0.1fr_8fr_0.1fr] gap-1 rounded-[10px]"
+                        >
                             <input
                                 type="text"
                                 placeholder="CR Number"
                                 class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
                             />
+                            <svg
+                                id="help-icon"
+                                data-tooltip-target="cr-tooltip"
+                                data-tooltip-placement="top"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M8 0C6.41775 0 4.87103 0.469192 3.55544 1.34824C2.23985 2.22729 1.21447 3.47672 0.608967 4.93853C0.00346626 6.40034 -0.15496 8.00887 0.153721 9.56072C0.462403 11.1126 1.22433 12.538 2.34315 13.6569C3.46197 14.7757 4.88743 15.5376 6.43928 15.8463C7.99113 16.155 9.59966 15.9965 11.0615 15.391C12.5233 14.7855 13.7727 13.7602 14.6518 12.4446C15.5308 11.129 16 9.58225 16 8C16 5.87827 15.1571 3.84344 13.6569 2.34315C12.1566 0.842855 10.1217 0 8 0ZM7.89107 13.263C7.70995 13.263 7.5329 13.2093 7.38231 13.1086C7.23171 13.008 7.11434 12.865 7.04503 12.6977C6.97572 12.5303 6.95758 12.3462 6.99292 12.1686C7.02825 11.9909 7.11547 11.8278 7.24354 11.6997C7.37161 11.5716 7.53478 11.4844 7.71241 11.4491C7.89005 11.4137 8.07418 11.4319 8.24151 11.5012C8.40884 11.5705 8.55186 11.6879 8.65248 11.8385C8.7531 11.9891 8.80681 12.1661 8.80681 12.3472C8.80636 12.59 8.70974 12.8226 8.5381 12.9943C8.36646 13.1659 8.1338 13.2625 7.89107 13.263ZM8.89192 8.81702C8.89192 8.81702 8.8017 8.84936 8.8017 8.90213V9.62893C8.8017 9.87068 8.70567 10.1025 8.53473 10.2735C8.3638 10.4444 8.13196 10.5404 7.89021 10.5404C7.64847 10.5404 7.41663 10.4444 7.24569 10.2735C7.07476 10.1025 6.97873 9.87068 6.97873 9.62893V8.90213C6.98273 8.49886 7.11316 8.107 7.35165 7.78179C7.59014 7.45657 7.92467 7.21439 8.30809 7.08936C8.57248 7.00113 8.80131 6.82985 8.96049 6.60105C9.11967 6.37225 9.20069 6.09815 9.19149 5.81957C9.17382 5.48274 9.02876 5.16522 8.78572 4.93134C8.54268 4.69746 8.21982 4.56472 7.88256 4.56C7.63973 4.56106 7.40213 4.63063 7.19708 4.76071C6.99202 4.89079 6.82784 5.07609 6.72341 5.29532C6.67144 5.40317 6.59873 5.49973 6.50945 5.57948C6.42016 5.65924 6.31604 5.72062 6.20303 5.76014C5.97479 5.83994 5.7242 5.82581 5.50639 5.72085C5.28857 5.61589 5.12137 5.42871 5.04157 5.20047C4.96176 4.97223 4.9759 4.72164 5.08085 4.50383C5.33215 3.9771 5.72689 3.53193 6.21976 3.2194C6.71263 2.90688 7.28364 2.73969 7.86724 2.73702H7.88596C8.69671 2.74172 9.47434 3.05929 10.0566 3.62348C10.6389 4.18767 10.9808 4.9549 11.0111 5.76511C11.0336 6.43375 10.8398 7.09182 10.4582 7.6414C10.0767 8.19099 9.52797 8.60271 8.89362 8.81532L8.89192 8.81702Z"
+                                    fill="#999999"
+                                />
+                            </svg>
+                            <!-- Tooltip -->
+                            <div
+                                id="cr-tooltip"
+                                role="tooltip"
+                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
+                            >
+                                The Company Registration, Number is a numerical combination used to
+                                identify a company and validate its registration.
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+
                             <select
                                 name="role"
                                 id="roleSelect"
@@ -143,10 +175,37 @@
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
+                            <svg
+                                id="help-icon"
+                                data-tooltip-target="branch-tooltip"
+                                data-tooltip-placement="top"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M8 0C6.41775 0 4.87103 0.469192 3.55544 1.34824C2.23985 2.22729 1.21447 3.47672 0.608967 4.93853C0.00346626 6.40034 -0.15496 8.00887 0.153721 9.56072C0.462403 11.1126 1.22433 12.538 2.34315 13.6569C3.46197 14.7757 4.88743 15.5376 6.43928 15.8463C7.99113 16.155 9.59966 15.9965 11.0615 15.391C12.5233 14.7855 13.7727 13.7602 14.6518 12.4446C15.5308 11.129 16 9.58225 16 8C16 5.87827 15.1571 3.84344 13.6569 2.34315C12.1566 0.842855 10.1217 0 8 0ZM7.89107 13.263C7.70995 13.263 7.5329 13.2093 7.38231 13.1086C7.23171 13.008 7.11434 12.865 7.04503 12.6977C6.97572 12.5303 6.95758 12.3462 6.99292 12.1686C7.02825 11.9909 7.11547 11.8278 7.24354 11.6997C7.37161 11.5716 7.53478 11.4844 7.71241 11.4491C7.89005 11.4137 8.07418 11.4319 8.24151 11.5012C8.40884 11.5705 8.55186 11.6879 8.65248 11.8385C8.7531 11.9891 8.80681 12.1661 8.80681 12.3472C8.80636 12.59 8.70974 12.8226 8.5381 12.9943C8.36646 13.1659 8.1338 13.2625 7.89107 13.263ZM8.89192 8.81702C8.89192 8.81702 8.8017 8.84936 8.8017 8.90213V9.62893C8.8017 9.87068 8.70567 10.1025 8.53473 10.2735C8.3638 10.4444 8.13196 10.5404 7.89021 10.5404C7.64847 10.5404 7.41663 10.4444 7.24569 10.2735C7.07476 10.1025 6.97873 9.87068 6.97873 9.62893V8.90213C6.98273 8.49886 7.11316 8.107 7.35165 7.78179C7.59014 7.45657 7.92467 7.21439 8.30809 7.08936C8.57248 7.00113 8.80131 6.82985 8.96049 6.60105C9.11967 6.37225 9.20069 6.09815 9.19149 5.81957C9.17382 5.48274 9.02876 5.16522 8.78572 4.93134C8.54268 4.69746 8.21982 4.56472 7.88256 4.56C7.63973 4.56106 7.40213 4.63063 7.19708 4.76071C6.99202 4.89079 6.82784 5.07609 6.72341 5.29532C6.67144 5.40317 6.59873 5.49973 6.50945 5.57948C6.42016 5.65924 6.31604 5.72062 6.20303 5.76014C5.97479 5.83994 5.7242 5.82581 5.50639 5.72085C5.28857 5.61589 5.12137 5.42871 5.04157 5.20047C4.96176 4.97223 4.9759 4.72164 5.08085 4.50383C5.33215 3.9771 5.72689 3.53193 6.21976 3.2194C6.71263 2.90688 7.28364 2.73969 7.86724 2.73702H7.88596C8.69671 2.74172 9.47434 3.05929 10.0566 3.62348C10.6389 4.18767 10.9808 4.9549 11.0111 5.76511C11.0336 6.43375 10.8398 7.09182 10.4582 7.6414C10.0767 8.19099 9.52797 8.60271 8.89362 8.81532L8.89192 8.81702Z"
+                                    fill="#999999"
+                                />
+                            </svg>
+                            <!-- Tooltip -->
+                            <div
+                                id="branch-tooltip"
+                                role="tooltip"
+                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
+                            >
+                                The Branch is a location where the company operates and conducts its
+                                business. How many branches do u have?
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                         </div>
 
                         <!-- Styled Native Service Type Select -->
-                        <div class="items-center grid grid-cols-2 gap-4 rounded-[10px]">
+                        <div
+                            class="items-center grid grid-cols-[8fr_0.5fr_8fr_0.5fr] gap-1 rounded-[10px]"
+                        >
                             <select
                                 name="ServiceType"
                                 id="serviceType"
@@ -159,6 +218,30 @@
                                 <option value="Tutors">Tutors</option>
                                 <option value="Trainers">Trainers</option>
                             </select>
+                            <svg
+                                id="help-icon"
+                                data-tooltip-target="service-type-tooltip"
+                                data-tooltip-placement="top"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M8 0C6.41775 0 4.87103 0.469192 3.55544 1.34824C2.23985 2.22729 1.21447 3.47672 0.608967 4.93853C0.00346626 6.40034 -0.15496 8.00887 0.153721 9.56072C0.462403 11.1126 1.22433 12.538 2.34315 13.6569C3.46197 14.7757 4.88743 15.5376 6.43928 15.8463C7.99113 16.155 9.59966 15.9965 11.0615 15.391C12.5233 14.7855 13.7727 13.7602 14.6518 12.4446C15.5308 11.129 16 9.58225 16 8C16 5.87827 15.1571 3.84344 13.6569 2.34315C12.1566 0.842855 10.1217 0 8 0ZM7.89107 13.263C7.70995 13.263 7.5329 13.2093 7.38231 13.1086C7.23171 13.008 7.11434 12.865 7.04503 12.6977C6.97572 12.5303 6.95758 12.3462 6.99292 12.1686C7.02825 11.9909 7.11547 11.8278 7.24354 11.6997C7.37161 11.5716 7.53478 11.4844 7.71241 11.4491C7.89005 11.4137 8.07418 11.4319 8.24151 11.5012C8.40884 11.5705 8.55186 11.6879 8.65248 11.8385C8.7531 11.9891 8.80681 12.1661 8.80681 12.3472C8.80636 12.59 8.70974 12.8226 8.5381 12.9943C8.36646 13.1659 8.1338 13.2625 7.89107 13.263ZM8.89192 8.81702C8.89192 8.81702 8.8017 8.84936 8.8017 8.90213V9.62893C8.8017 9.87068 8.70567 10.1025 8.53473 10.2735C8.3638 10.4444 8.13196 10.5404 7.89021 10.5404C7.64847 10.5404 7.41663 10.4444 7.24569 10.2735C7.07476 10.1025 6.97873 9.87068 6.97873 9.62893V8.90213C6.98273 8.49886 7.11316 8.107 7.35165 7.78179C7.59014 7.45657 7.92467 7.21439 8.30809 7.08936C8.57248 7.00113 8.80131 6.82985 8.96049 6.60105C9.11967 6.37225 9.20069 6.09815 9.19149 5.81957C9.17382 5.48274 9.02876 5.16522 8.78572 4.93134C8.54268 4.69746 8.21982 4.56472 7.88256 4.56C7.63973 4.56106 7.40213 4.63063 7.19708 4.76071C6.99202 4.89079 6.82784 5.07609 6.72341 5.29532C6.67144 5.40317 6.59873 5.49973 6.50945 5.57948C6.42016 5.65924 6.31604 5.72062 6.20303 5.76014C5.97479 5.83994 5.7242 5.82581 5.50639 5.72085C5.28857 5.61589 5.12137 5.42871 5.04157 5.20047C4.96176 4.97223 4.9759 4.72164 5.08085 4.50383C5.33215 3.9771 5.72689 3.53193 6.21976 3.2194C6.71263 2.90688 7.28364 2.73969 7.86724 2.73702H7.88596C8.69671 2.74172 9.47434 3.05929 10.0566 3.62348C10.6389 4.18767 10.9808 4.9549 11.0111 5.76511C11.0336 6.43375 10.8398 7.09182 10.4582 7.6414C10.0767 8.19099 9.52797 8.60271 8.89362 8.81532L8.89192 8.81702Z"
+                                    fill="#999999"
+                                />
+                            </svg>
+                            <!-- Tooltip -->
+                            <div
+                                id="service-type-tooltip"
+                                role="tooltip"
+                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
+                            >
+                                Which type of service do you provide?
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                             <select
                                 name="role"
                                 id="roleSelect"
@@ -238,7 +321,7 @@
                         />
 
                         <!-- VAT Declaration and VAT Number -->
-                        <div class="grid grid-cols-2 gap-4 items-start">
+                        <div class="grid grid-cols-[9fr_10fr_1fr] gap-4 items-start">
                             <!-- Checkbox and Label -->
                             <label
                                 class="flex items-start gap-2 text-sm text-gray-600 leading-snug"
@@ -256,6 +339,32 @@
                                 placeholder="VAT Number"
                                 class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
                             />
+                            <svg
+                                id="help-icon"
+                                data-tooltip-target="vat-num-tooltip"
+                                data-tooltip-placement="left"
+                                class="mt-3"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M8 0C6.41775 0 4.87103 0.469192 3.55544 1.34824C2.23985 2.22729 1.21447 3.47672 0.608967 4.93853C0.00346626 6.40034 -0.15496 8.00887 0.153721 9.56072C0.462403 11.1126 1.22433 12.538 2.34315 13.6569C3.46197 14.7757 4.88743 15.5376 6.43928 15.8463C7.99113 16.155 9.59966 15.9965 11.0615 15.391C12.5233 14.7855 13.7727 13.7602 14.6518 12.4446C15.5308 11.129 16 9.58225 16 8C16 5.87827 15.1571 3.84344 13.6569 2.34315C12.1566 0.842855 10.1217 0 8 0ZM7.89107 13.263C7.70995 13.263 7.5329 13.2093 7.38231 13.1086C7.23171 13.008 7.11434 12.865 7.04503 12.6977C6.97572 12.5303 6.95758 12.3462 6.99292 12.1686C7.02825 11.9909 7.11547 11.8278 7.24354 11.6997C7.37161 11.5716 7.53478 11.4844 7.71241 11.4491C7.89005 11.4137 8.07418 11.4319 8.24151 11.5012C8.40884 11.5705 8.55186 11.6879 8.65248 11.8385C8.7531 11.9891 8.80681 12.1661 8.80681 12.3472C8.80636 12.59 8.70974 12.8226 8.5381 12.9943C8.36646 13.1659 8.1338 13.2625 7.89107 13.263ZM8.89192 8.81702C8.89192 8.81702 8.8017 8.84936 8.8017 8.90213V9.62893C8.8017 9.87068 8.70567 10.1025 8.53473 10.2735C8.3638 10.4444 8.13196 10.5404 7.89021 10.5404C7.64847 10.5404 7.41663 10.4444 7.24569 10.2735C7.07476 10.1025 6.97873 9.87068 6.97873 9.62893V8.90213C6.98273 8.49886 7.11316 8.107 7.35165 7.78179C7.59014 7.45657 7.92467 7.21439 8.30809 7.08936C8.57248 7.00113 8.80131 6.82985 8.96049 6.60105C9.11967 6.37225 9.20069 6.09815 9.19149 5.81957C9.17382 5.48274 9.02876 5.16522 8.78572 4.93134C8.54268 4.69746 8.21982 4.56472 7.88256 4.56C7.63973 4.56106 7.40213 4.63063 7.19708 4.76071C6.99202 4.89079 6.82784 5.07609 6.72341 5.29532C6.67144 5.40317 6.59873 5.49973 6.50945 5.57948C6.42016 5.65924 6.31604 5.72062 6.20303 5.76014C5.97479 5.83994 5.7242 5.82581 5.50639 5.72085C5.28857 5.61589 5.12137 5.42871 5.04157 5.20047C4.96176 4.97223 4.9759 4.72164 5.08085 4.50383C5.33215 3.9771 5.72689 3.53193 6.21976 3.2194C6.71263 2.90688 7.28364 2.73969 7.86724 2.73702H7.88596C8.69671 2.74172 9.47434 3.05929 10.0566 3.62348C10.6389 4.18767 10.9808 4.9549 11.0111 5.76511C11.0336 6.43375 10.8398 7.09182 10.4582 7.6414C10.0767 8.19099 9.52797 8.60271 8.89362 8.81532L8.89192 8.81702Z"
+                                    fill="#999999"
+                                />
+                            </svg>
+                            <!-- Tooltip -->
+                            <div
+                                id="vat-num-tooltip"
+                                role="tooltip"
+                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
+                            >
+                                Value Added Tax (VAT). A tax on the value added to goods and
+                                services.
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -291,16 +400,20 @@
                         <div class="flex justify-between gap-4 mb-6">
                             <!-- Open Time -->
                             <div class="relative w-40">
+                                <!-- Clickable label -->
                                 <label
+                                    onclick="document.getElementById('open1').showPicker()"
                                     for="open1"
-                                    class="absolute left-3 top-2 text-sm text-gray-500 bg-white px-1 z-10 pointer-events-none"
+                                    class="z-10 absolute inset-0 flex items-center justify-center text-sm text-gray-500 bg-white rounded-xl shadow-xl cursor-pointer"
                                 >
                                     Open Time
                                 </label>
+
+                                <!-- Time input -->
                                 <input
                                     id="open1"
                                     type="time"
-                                    class="peer w-full px-4 pt-6 pb-2 bg-white rounded-xl text-gray-700 text-sm border focus:outline-none shadow-xl"
+                                    class="w-full px-4 pt-6 pb-2 bg-white rounded-xl text-gray-700 text-sm border focus:outline-none shadow-xl cursor-pointer"
                                 />
                             </div>
 
@@ -312,8 +425,9 @@
                             <!-- Close Time -->
                             <div class="relative w-40">
                                 <label
+                                    onclick="document.getElementById('close1').showPicker()"
                                     for="close1"
-                                    class="absolute left-3 top-2 text-sm text-gray-500 bg-white px-1 z-10 pointer-events-none"
+                                    class="z-10 absolute inset-0 flex items-center justify-center text-sm text-gray-500 bg-white rounded-xl shadow-xl cursor-pointer"
                                 >
                                     Close Time
                                 </label>
@@ -327,8 +441,9 @@
                             <!-- Open Time 2 -->
                             <div class="relative w-40">
                                 <label
+                                    onclick="document.getElementById('open2').showPicker()"
                                     for="open2"
-                                    class="absolute left-3 top-2 text-sm text-gray-500 bg-white px-1 z-10 pointer-events-none"
+                                    class="z-10 absolute inset-0 flex items-center justify-center text-sm text-gray-500 bg-white rounded-xl shadow-xl cursor-pointer"
                                 >
                                     Open Time
                                 </label>
@@ -347,8 +462,9 @@
                             <!-- Close Time 2 -->
                             <div class="relative w-40">
                                 <label
+                                    onclick="document.getElementById('close2').showPicker()"
                                     for="close2"
-                                    class="absolute left-3 top-2 text-sm text-gray-500 bg-white px-1 z-10 pointer-events-none"
+                                    class="z-10 absolute inset-0 flex items-center justify-center text-sm text-gray-500 bg-white rounded-xl shadow-xl cursor-pointer"
                                 >
                                     Close Time
                                 </label>
@@ -370,49 +486,49 @@
                             <div class="flex flex-wrap gap-1" id="workingDays">
                                 <button
                                     type="button"
-                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-400 text-sm"
                                     data-day="Sun"
                                 >
                                     Sun
                                 </button>
                                 <button
                                     type="button"
-                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-400 text-sm"
                                     data-day="Mon"
                                 >
                                     Mon
                                 </button>
                                 <button
                                     type="button"
-                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-400 text-sm"
                                     data-day="Tue"
                                 >
                                     Tue
                                 </button>
                                 <button
                                     type="button"
-                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-400 text-sm"
                                     data-day="Wed"
                                 >
                                     Wed
                                 </button>
                                 <button
                                     type="button"
-                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-400 text-sm"
                                     data-day="Thu"
                                 >
                                     Thu
                                 </button>
                                 <button
                                     type="button"
-                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-400 text-sm"
                                     data-day="Fri"
                                 >
                                     Fri
                                 </button>
                                 <button
                                     type="button"
-                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-50 text-sm"
+                                    class="day-btn px-6 py-4 bg-white border rounded-xl shadow-xl hover:bg-gray-400 text-sm"
                                     data-day="Sat"
                                 >
                                     Sat
@@ -457,21 +573,23 @@
                 <!-- Divider 2 -->
                 <div class="w-px bg-gray-300 mx-6"></div>
 
-                <!-- Map Section -->
                 <div
+                    id="map"
                     class="w-[370px] h-64 rounded-[10px] border shadow overflow-hidden flex items-bottom justify-bottom transform -translate-y-[-100px]"
-                >
-                    <!-- TEMP Map Note -->
-                    <div class="text-white bg-black text-sm px-4 py-3">
-                        Google Maps Platform rejected your request. The provided API key is invalid.
-                    </div>
-                </div>
+                ></div>
             </div>
         </div>
 
         <!-- Bottom Decorative Image -->
-        <div class="fixed bottom-0 left-0 w-full">
-            <img src="../Icons/images/CurveBg.svg" alt="Footer Decoration" />
+        <div class="fixed bottom-0 left-0 w-full pointer-events-none">
+            <!-- The background image doesn't block clicks -->
+            <img
+                src="../Icons/images/CurveBg.svg"
+                alt="Footer Decoration"
+                class="pointer-events-none"
+            />
+
+            <!-- Step Text -->
             <div class="absolute bottom-8 left-1/3 transform -translate-x-[490px] font-[600]">
                 <h2 class="text-gray-800 text-4xl">
                     Step 2
@@ -479,14 +597,20 @@
                 </h2>
             </div>
 
-            <div class="absolute bottom-8 left-1/3 transform -translate-x-[-640px] font-[600]">
-                <button onclick="" class="text-xl mr-8 font-medium text-black hover:underline">
+            <!-- Buttons: Re-enable clicks here -->
+            <div
+                class="absolute bottom-8 left-1/3 transform -translate-x-[-640px] font-[600] pointer-events-auto"
+            >
+                <button
+                    onclick="window.location.href=`<%= process.env.APP_ADMIN_URL %>/adminprofile`"
+                    class="text-xl mr-8 font-medium text-black hover:underline"
+                >
                     &lt; Back
                 </button>
 
                 <button
                     type="submit"
-                    onclick="showOTPModal()"
+                    onclick="window.location.href=`<%= process.env.APP_ADMIN_URL %>/bankdetails`"
                     class="bg-[#163f75] text-white text-m rounded-[10px] w-[350px] py-3 hover:bg-[#10294f] transition"
                 >
                     Save & Continue
@@ -495,14 +619,67 @@
         </div>
     </body>
     <script>
+        const map = L.map("map").setView([21.207988848466304, 72.835750579834], 13); // Example: Surat
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        let currentMarker = null;
+
+        // Listen for clicks on the map
+        map.on("click", function (e) {
+            const { lat, lng } = e.latlng;
+
+            // Remove the previous marker if it exists
+            if (currentMarker) {
+                map.removeLayer(currentMarker);
+            }
+
+            // Add a new marker
+            currentMarker = L.marker([lat, lng])
+                .addTo(map)
+                .bindPopup("Selected Location")
+                .openPopup();
+
+            console.log("lat: ", lat, "long: ", lng); // For debugging
+
+            // ✅ Send to backend via AJAX (example below)
+            // saveLocationToDB(lat, lng);
+            // console.log("lat: ", lat, "lng: ", lng);
+        });
+
+        // function saveLocationToDB(lat, lng) {
+        //     fetch("/save-location", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify({ lat, lng }),
+        //     })
+        //         .then((res) => res.json())
+        //         .then((data) => {
+        //             console.log("Location saved:", data);
+        //             alert("Location saved successfully!");
+        //         })
+        //         .catch((err) => {
+        //             console.error("Save error:", err);
+        //             alert("Failed to save location.");
+        //         });
+        // }
+
         // Toggle class when clicked
         document.querySelectorAll(".day-btn").forEach((btn) => {
             btn.addEventListener("click", () => {
                 btn.classList.toggle("bg-[#54B7C5]");
                 btn.classList.toggle("text-black");
+                btn.classList.toggle("hover:bg-[#54b7c5]");
                 btn.classList.toggle("border-gray-300");
             });
         });
+
         const categoryMap = {
             "Pet Care": {
                 Veternariy: [],
