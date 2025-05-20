@@ -6,7 +6,11 @@ class dashboardServices {
      */
     static async dashboardPage(req, res) {
         return res.render(
-            "adminPanels/serviceProvider&Maintenance/dashboard/dashboard"
+            "adminPanels/serviceProvider&Maintenance/dashboard/dashboard",
+            {
+                currentPage: "dashboard",
+                layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
+            }
         );
     }
 }

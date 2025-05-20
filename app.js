@@ -10,6 +10,7 @@ import cors from "cors";
 import routes from "./routes/index";
 import MongoStore from "connect-mongo";
 // import { mongoConnection } from "./models/connection";
+import expressEjsLayouts from "express-ejs-layouts";
 
 const app = express();
 const port = process.env.PORT || 2002;
@@ -43,14 +44,11 @@ app.use(passport.session());
 
 app.use(cors());
 
+app.use(expressEjsLayouts);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-// app.get("/", (req, res) => {
-//     return res.render("errors/500");
-// });
 
 app.use(flash());
 app.use(function (req, res, next) {
@@ -60,7 +58,6 @@ app.use(function (req, res, next) {
 });
 
 app.use("/", routes);
-// app.use("/api/documentation", swagger);
 
 const isSecure = process.env.IS_SECURE === "true";
 

@@ -1,12 +1,481 @@
-<%- include("../layouts/header.ejs", {currentPage: "dashboard"}) %>
+<!-- Your dashboard content here -->
+<div class="bg-[#f7f6f5] rounded-[100px] flex-1">
+    <!-- Heading -->
+    <div class="flex p-10 ml-10 items-center space-x-4">
+        <h3 class="text-gray-600 text-lg">Dashboard</h3>
+        <div class="w-px h-7 bg-gray-300"></div>
+        <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <g>
+                <path
+                    d="M6.03125 12.3173L8.52553 9.07549L11.3707 11.3104L13.8116 8.16016"
+                    stroke="#163F75"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+                <ellipse
+                    cx="16.6565"
+                    cy="3.50027"
+                    rx="1.60183"
+                    ry="1.60183"
+                    stroke="#163F75"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+                <path
+                    d="M12.4345 2.60156H6.3781C3.86856 2.60156 2.3125 4.37883 2.3125 6.88837V13.6237C2.3125 16.1332 3.83805 17.9029 6.3781 17.9029H13.5482C16.0577 17.9029 17.6138 16.1332 17.6138 13.6237V7.75793"
+                    stroke="#163F75"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </g>
+        </svg>
+    </div>
 
-<body class="flex min-h-screen">
-    <!-- Main Content Area -->
-    <main class="ml-64 mt-12">
+    <!-- Cards Row -->
+    <div class="w-full flex flex-row-3">
+        <div class="ml-16 space-y-4">
+            <!-- Card 1: Total Orders -->
+            <div
+                class="bg-white w-[300px] h-[110px] rounded-[20px] p-4 flex flex-col-2 justify-center items-center space-x-2"
+            >
+                <div>
+                    <svg
+                        width="64"
+                        height="64"
+                        viewBox="0 0 64 64"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <rect width="64" height="64" rx="32" fill="#F2994A" fill-opacity="0.1" />
+                        <g opacity="0.8">
+                            <path
+                                d="M32.4609 28.1016H39.0234"
+                                stroke="#F39C12"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M24.9766 28.1016L25.9141 29.0391L28.7266 26.2266"
+                                stroke="#F39C12"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M32.4609 36.8516H39.0234"
+                                stroke="#F39C12"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M24.9766 36.8516L25.9141 37.7891L28.7266 34.9766"
+                                stroke="#F39C12"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M28.25 44.5H35.75C42 44.5 44.5 42 44.5 35.75V28.25C44.5 22 42 19.5 35.75 19.5H28.25C22 19.5 19.5 22 19.5 28.25V35.75C19.5 42 22 44.5 28.25 44.5Z"
+                                stroke="#F39C12"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </g>
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-[22px] font-semibold text-[#000]">25</div>
+                    <div class="text-sm text-gray-400">Total Orders</div>
+                </div>
+            </div>
+
+            <!-- Card 2: Compeleted Orders -->
+            <div
+                class="bg-white w-[300px] h-[110px] rounded-[20px] p-4 flex flex-col-2 justify-center items-center space-x-2"
+            >
+                <div>
+                    <svg
+                        width="64"
+                        height="64"
+                        viewBox="0 0 64 64"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <rect width="64" height="64" rx="32" fill="#00A908" fill-opacity="0.1" />
+                        <path
+                            d="M28.25 44.5H35.75C42 44.5 44.5 42 44.5 35.75V28.25C44.5 22 42 19.5 35.75 19.5H28.25C22 19.5 19.5 22 19.5 28.25V35.75C19.5 42 22 44.5 28.25 44.5Z"
+                            stroke="#00A908"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M26.6875 31.9984L30.225 35.5359L37.3125 28.4609"
+                            stroke="#00A908"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-[22px] font-semibold text-[#000]">20</div>
+                    <div class="text-sm text-gray-400">Completed Orders</div>
+                </div>
+            </div>
+        </div>
+        <div class="ml-16 space-y-4">
+            <!-- Card 3: Pending Orders -->
+            <div
+                class="bg-white w-[300px] h-[110px] rounded-[20px] p-4 flex flex-col-2 justify-center items-center space-x-2"
+            >
+                <div>
+                    <svg
+                        width="64"
+                        height="64"
+                        viewBox="0 0 64 64"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <rect width="64" height="64" rx="32" fill="#680096" fill-opacity="0.1" />
+                        <path
+                            d="M28.25 44.5H35.75C42 44.5 44.5 42 44.5 35.75V28.25C44.5 22 42 19.5 35.75 19.5H28.25C22 19.5 19.5 22 19.5 28.25V35.75C19.5 42 22 44.5 28.25 44.5Z"
+                            stroke="#680096"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M36.9931 32H37.0044"
+                            stroke="#680096"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M31.9931 32H32.0044"
+                            stroke="#680096"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M26.9931 32H27.0044"
+                            stroke="#680096"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-[22px] font-semibold text-[#000]">05</div>
+                    <div class="text-sm text-gray-400">Pending Orders</div>
+                </div>
+            </div>
+
+            <!-- Card 4: Total Payment -->
+            <div
+                class="bg-white w-[300px] h-[110px] rounded-[20px] p-4 flex flex-col-2 justify-center items-center space-x-2"
+            >
+                <div>
+                    <svg
+                        width="64"
+                        height="64"
+                        viewBox="0 0 64 64"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <rect width="64" height="64" rx="32" fill="#3498DB" fill-opacity="0.1" />
+                        <path
+                            d="M28.25 40.75C28.25 41.6875 27.9875 42.575 27.525 43.325C26.6625 44.775 25.075 45.75 23.25 45.75C21.425 45.75 19.8375 44.775 18.975 43.325C18.5125 42.575 18.25 41.6875 18.25 40.75C18.25 37.9875 20.4875 35.75 23.25 35.75C26.0125 35.75 28.25 37.9875 28.25 40.75Z"
+                            stroke="#3498DB"
+                            stroke-width="2"
+                            stroke-miterlimit="10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M21.3047 40.7484L22.5422 41.9859L25.2047 39.5234"
+                            stroke="#3498DB"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M39.1922 25.8125C38.8922 25.7625 38.5797 25.75 38.2547 25.75H25.7547C25.4047 25.75 25.0672 25.775 24.7422 25.825C24.9172 25.475 25.1672 25.15 25.4672 24.85L29.5297 20.775C31.2422 19.075 34.0172 19.075 35.7297 20.775L37.9172 22.9874C38.7172 23.7749 39.1422 24.775 39.1922 25.8125Z"
+                            stroke="#3498DB"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M44.5 32V38.25C44.5 42 42 44.5 38.25 44.5H26.5375C26.925 44.175 27.2625 43.775 27.525 43.325C27.9875 42.575 28.25 41.6875 28.25 40.75C28.25 37.9875 26.0125 35.75 23.25 35.75C21.75 35.75 20.4125 36.4125 19.5 37.45V32C19.5 28.6 21.55 26.225 24.7375 25.825C25.0625 25.775 25.4 25.75 25.75 25.75H38.25C38.575 25.75 38.8875 25.7625 39.1875 25.8125C42.4125 26.1875 44.5 28.575 44.5 32Z"
+                            stroke="#3498DB"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M44.5 32.625H40.75C39.375 32.625 38.25 33.75 38.25 35.125C38.25 36.5 39.375 37.625 40.75 37.625H44.5"
+                            stroke="#3498DB"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-[22px] font-semibold text-[#000]">BHD 587</div>
+                    <div class="text-sm text-gray-400">Total Payment</div>
+                </div>
+            </div>
+        </div>
+        <!-- Overall Rating Card -->
         <div
-            class="min-h-[850px] w-[1450px] bg-[#F7F6F5] rounded-l-[80px] rounded-r-[80px] p-8 shadow-md flex flex-col"
-        ></div>
-    </main>
-</body>
+            class="bg-white flex items-center justify-center w-[600px] h-[235px] ml-[70px] rounded-[20px]"
+        >
+            <div class="flex items-center space-x-6">
+                <!-- Circular Progress -->
+                <div class="relative w-[120px] h-[120px] flex items-center justify-center">
+                    <!-- Background circle with conic progress -->
+                    <div
+                        class="absolute inset-0 rounded-full"
+                        style="background: conic-gradient(#2c99ad calc(4.5 / 5 * 100%), #e5e7eb 0)"
+                    ></div>
 
-<%- include("../layouts/footer.ejs") %>
+                    <!-- Masked circle for smooth rounded edges (simulate border gap) -->
+                    <div class="absolute w-[116px] h-[116px] bg-white rounded-full"></div>
+
+                    <!-- Inner circle with score -->
+                    <div
+                        class="relative w-[90px] h-[90px] bg-[#2C99AD]/10 rounded-full flex items-center justify-center"
+                    >
+                        <span class="text-[#007A8E] text-2xl font-semibold">4.5</span>
+                    </div>
+                </div>
+
+                <!-- Rating Text & Stars -->
+                <div class="text-left">
+                    <div class="text-lg text-gray-600">
+                        Overall Rating
+                        <span class="font-bold text-black">(140+)</span>
+                    </div>
+
+                    <!-- Star Rating -->
+                    <div
+                        class="flex items-center mt-1 space-x-1 rtl:space-x-reverse text-yellow-400"
+                    >
+                        <!-- Full Stars -->
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                            <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.035 3.185a1 1 0 00.95.69h3.356c.969 0 1.371 1.24.588 1.81l-2.716 1.97a1 1 0 00-.364 1.118l1.036 3.185c.3.921-.755 1.688-1.54 1.118l-2.716-1.97a1 1 0 00-1.175 0l-2.716 1.97c-.785.57-1.84-.197-1.54-1.118l1.036-3.185a1 1 0 00-.364-1.118L2.98 8.612c-.783-.57-.38-1.81.588-1.81h3.356a1 1 0 00.95-.69l1.035-3.185z"
+                            />
+                        </svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                            <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.035 3.185a1 1 0 00.95.69h3.356c.969 0 1.371 1.24.588 1.81l-2.716 1.97a1 1 0 00-.364 1.118l1.036 3.185c.3.921-.755 1.688-1.54 1.118l-2.716-1.97a1 1 0 00-1.175 0l-2.716 1.97c-.785.57-1.84-.197-1.54-1.118l1.036-3.185a1 1 0 00-.364-1.118L2.98 8.612c-.783-.57-.38-1.81.588-1.81h3.356a1 1 0 00.95-.69l1.035-3.185z"
+                            />
+                        </svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                            <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.035 3.185a1 1 0 00.95.69h3.356c.969 0 1.371 1.24.588 1.81l-2.716 1.97a1 1 0 00-.364 1.118l1.036 3.185c.3.921-.755 1.688-1.54 1.118l-2.716-1.97a1 1 0 00-1.175 0l-2.716 1.97c-.785.57-1.84-.197-1.54-1.118l1.036-3.185a1 1 0 00-.364-1.118L2.98 8.612c-.783-.57-.38-1.81.588-1.81h3.356a1 1 0 00.95-.69l1.035-3.185z"
+                            />
+                        </svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                            <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.035 3.185a1 1 0 00.95.69h3.356c.969 0 1.371 1.24.588 1.81l-2.716 1.97a1 1 0 00-.364 1.118l1.036 3.185c.3.921-.755 1.688-1.54 1.118l-2.716-1.97a1 1 0 00-1.175 0l-2.716 1.97c-.785.57-1.84-.197-1.54-1.118l1.036-3.185a1 1 0 00-.364-1.118L2.98 8.612c-.783-.57-.38-1.81.588-1.81h3.356a1 1 0 00.95-.69l1.035-3.185z"
+                            />
+                        </svg>
+                        <!-- Half Star -->
+                        <svg
+                            class="w-4 h-4 text-yellow-400"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <defs>
+                                <linearGradient id="half">
+                                    <stop offset="50%" stop-color="currentColor" />
+                                    <stop offset="50%" stop-color="transparent" stop-opacity="1" />
+                                </linearGradient>
+                            </defs>
+                            <path
+                                fill="url(#half)"
+                                d="M12 .587l3.668 7.568 8.332 1.151-6.001 5.878L19.334 24 12 19.771 4.666 24l1.335-8.816-6.001-5.878 8.332-1.151z"
+                            />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lead Sales and Total Income  -->
+    <div class="w-full h-[400px] flex flex-row-2 mt-4">
+        <div class="w-2/3 bg-white rounded-3xl ml-16 p-6">
+            <!-- Title and Filters -->
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-xl font-semibold text-gray-800">Lead Sales</h2>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex space-x-3 mb-1 border-b border-gray-200 pb-1">
+                <button class="bg-gray-800 text-white text-sm px-3 py-1 rounded-lg">
+                    All Time
+                </button>
+                <button class="text-gray-400 text-sm hover:text-black">This Year</button>
+                <button class="text-gray-400 text-sm hover:text-black">This Week</button>
+                <button class="text-gray-400 text-sm hover:text-black">Today</button>
+            </div>
+
+            <!-- Bar Chart -->
+            <canvas id="leadSalesChart" class="mt-2"></canvas>
+        </div>
+
+        <div class="w-1/3 grid grid-col-2 ml-8 space-y-2">
+            <!-- Total Income Card -->
+            <div class="w-[400px] bg-white rounded-3xl p-6 shadow-sm relative">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Total Income</h2>
+                <hr class="border-gray-200 mb-4" />
+                <p class="text-sm text-gray-400 mb-2">Total Amount:</p>
+                <div class="flex items-center space-x-1">
+                    <svg
+                        class="w-9 h-9 text-gray-800 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="#163f75"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M12 14a3 3 0 0 1 3-3h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-4a3 3 0 0 1-3-3Zm3-1a1 1 0 1 0 0 2h4v-2h-4Z"
+                            clip-rule="evenodd"
+                        />
+                        <path
+                            fill-rule="evenodd"
+                            d="M12.293 3.293a1 1 0 0 1 1.414 0L16.414 6h-2.828l-1.293-1.293a1 1 0 0 1 0-1.414ZM12.414 6 9.707 3.293a1 1 0 0 0-1.414 0L5.586 6h6.828ZM4.586 7l-.056.055A2 2 0 0 0 3 9v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2h-4a5 5 0 0 1 0-10h4a2 2 0 0 0-1.53-1.945L17.414 7H4.586Z"
+                            clip-rule="evenodd"
+                        />
+                    </svg>
+
+                    <span class="text-3xl font-bold text-black">2,480.580 BHD</span>
+                </div>
+                <a href="#" class="text-[#2573C2] text-xs underline mt-3 inline-block">
+                    Transactions History
+                </a>
+            </div>
+            <!-- Pending Amount Balance Card -->
+            <div class="w-[400px] bg-white rounded-3xl p-6 shadow-sm relative">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Pending Amount Balance</h2>
+                <hr class="border-gray-200 mb-4" />
+                <p class="text-sm text-gray-400 mb-2">Total Amount:</p>
+                <div class="flex items-center space-x-1">
+                    <svg
+                        class="w-9 h-9 text-gray-800 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke="#163F75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z"
+                        />
+                    </svg>
+
+                    <span class="text-3xl font-bold text-black">660.550 BHD</span>
+                </div>
+                <a href="#" class="text-[#2573C2] text-xs underline mt-3 inline-block">
+                    Transactions History
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById("leadSalesChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            datasets: [
+                {
+                    label: "Sales",
+                    data: [420, 450, 550, 390, 580, 500],
+                    backgroundColor: function (context) {
+                        const chart = context.chart;
+                        const { ctx, chartArea } = chart;
+
+                        if (!chartArea) return;
+
+                        const gradient = ctx.createLinearGradient(
+                            0,
+                            chartArea.bottom,
+                            0,
+                            chartArea.top
+                        );
+                        gradient.addColorStop(0, "#3B82F6"); // Blue bottom
+                        gradient.addColorStop(1, "#93C5FD"); // Light Blue top
+
+                        return gradient;
+                    },
+                    borderRadius: 8,
+                    barThickness: 65,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    ticks: {
+                        callback: function (value) {
+                            return "$ " + value;
+                        },
+                        color: "#9CA3AF", // light gray
+                    },
+                    grid: {
+                        color: "#E5E7EB", // gray-200
+                    },
+                },
+                x: {
+                    grid: {
+                        display: false,
+                    },
+                    ticks: {
+                        color: "#6B7280", // gray-500
+                    },
+                },
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                },
+            },
+        },
+    });
+</script>

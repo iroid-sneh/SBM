@@ -765,5 +765,37 @@
                 return select;
             }
         });
+
+        const imageUpload = document.getElementById("imageUpload");
+        const profilePlaceholder = document.getElementById("profilePlaceholder");
+
+        imageUpload.addEventListener("change", function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    profilePlaceholder.innerHTML = `
+          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
+        `;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        // For Edit Modal
+        const imageUploadEdit = document.getElementById("imageUpload-edit");
+        const profilePlaceholderEdit = document.getElementById("profilePlaceholder-edit");
+
+        imageUploadEdit.addEventListener("change", function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    profilePlaceholderEdit.innerHTML = `
+          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
+        `;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
 </html>
