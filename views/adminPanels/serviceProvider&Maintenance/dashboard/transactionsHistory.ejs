@@ -1,0 +1,279 @@
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<div class="bg-[#f7f6f5] rounded-[100px] flex-1 justify-center items-center">
+    <!-- Breadcrumb -->
+    <div class="flex p-10 ml-10 items-center space-x-4">
+        <h3 class="text-gray-600 text-lg">Dashboard</h3>
+        <div class="w-px h-7 bg-gray-300"></div>
+        <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M6.031 12.317l2.495-3.242 2.845 2.235 2.441-3.15"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <ellipse
+                cx="16.657"
+                cy="3.5"
+                rx="1.602"
+                ry="1.602"
+                stroke="#163F75"
+                stroke-width="1.5"
+            />
+            <path
+                d="M12.435 2.602H6.378C3.869 2.602 2.313 4.379 2.313 6.888v6.736c0 2.51 1.526 4.28 4.065 4.28h7.17c2.51 0 4.066-1.77 4.066-4.28V7.758"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        <svg width="24" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M5.668 3.335L10.335 8 5.668 12.668M13.668 3.335L18.335 8 13.668 12.668"
+                stroke="black"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        <h3 class="text-[#163F75] text-lg">Transaction History</h3>
+        <div>
+            <button
+                class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                onclick="window.location.href=`<%= process.env.APP_URL_ADMIN %>/spadmin/dashboard`"
+            >
+                Back
+            </button>
+        </div>
+    </div>
+
+    <!-- Card -->
+    <div class="w-[1400px] bg-white rounded-2xl p-4 mx-auto">
+        <!-- Filter -->
+        <div class="flex justify-end gap-4 items-end pr-4 mt-4 items-center">
+            <button
+                class="flex items-center gap-1 text-sm text-[#54B7C5] hover:underline font-medium mt-6"
+            >
+                <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M12.4068 4.23333C11.6818 4.01667 10.8818 3.875 9.99844 3.875C6.00677 3.875 2.77344 7.10833 2.77344 11.1C2.77344 15.1 6.00677 18.3333 9.99844 18.3333C13.9901 18.3333 17.2234 15.1 17.2234 11.1083C17.2234 9.625 16.7734 8.24167 16.0068 7.09167"
+                        stroke="#54B7C5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M13.4396 4.43464L11.0312 1.66797"
+                        stroke="#54B7C5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M13.4411 4.43359L10.6328 6.48359"
+                        stroke="#54B7C5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+                Reset
+            </button>
+
+            <div class="relative">
+                <label class="block text-sm font-medium text-gray-700 mb-1">From</label>
+                <div class="relative">
+                    <div
+                        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                    >
+                        <svg
+                            class="w-4 h-4 text-gray-500"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                            />
+                        </svg>
+                    </div>
+                    <input
+                        datepicker
+                        datepicker-orientation="bottom"
+                        datepicker-format="dd-mm-yyyy"
+                        type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                        placeholder="Select date"
+                    />
+                </div>
+            </div>
+
+            <div class="flex items-end">
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">To</label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                        >
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                />
+                            </svg>
+                        </div>
+                        <input
+                            datepicker
+                            datepicker-orientation="bottom"
+                            datepicker-format="dd-mm-yyyy"
+                            type="text"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                            placeholder="Select date"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="mt-6 overflow-x-auto">
+            <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+                <thead class="bg-[#f4f4f4] text-gray-600 text-sm">
+                    <tr>
+                        <th class="text-left py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            Transaction Time
+                        </th>
+                        <th class="text-left py-3 px-4">Invoice</th>
+                        <th class="text-left py-3 px-4">Name</th>
+                        <th class="text-left py-3 px-4">Address</th>
+                        <th class="text-left py-3 px-4">Price</th>
+                        <th class="text-left py-3 px-4 last:rounded-r-2xl">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-sm">
+                    <!-- Example Row 1 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            16:05:10 01.01.24
+                        </td>
+                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
+                            <a
+                                href="#"
+                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
+                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
+                            >
+                                203456
+                            </a>
+                        </td>
+                        <td class="py-3 px-4">Sandra Pugh</td>
+                        <td class="py-3 px-4">
+                            Flat 312, Marassi Residence Bld, 2122 Street, Diyar
+                        </td>
+                        <td class="py-3 px-4">BHD25.000</td>
+                        <td class="py-3 px-4 text-green-600 font-medium last:rounded-r-2xl">
+                            Paid
+                        </td>
+                    </tr>
+                    <!-- Example Row 2 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            15:10:02 01.01.24
+                        </td>
+                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
+                            <a
+                                href="#"
+                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
+                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
+                            >
+                                203456
+                            </a>
+                        </td>
+                        <td class="py-3 px-4">Ahmed Rami</td>
+                        <td class="py-3 px-4">Villa 20, AlNaseem, Rose Street, Diyar</td>
+                        <td class="py-3 px-4">BHD18.000</td>
+                        <td class="py-3 px-4 text-gray-400 last:rounded-r-2xl">Canceled</td>
+                    </tr>
+                    <!-- Example Row 3 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            13:49:06 01.01.24
+                        </td>
+                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
+                            <a
+                                href="#"
+                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
+                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
+                            >
+                                203456
+                            </a>
+                        </td>
+                        <td class="py-3 px-4">Hussam Arab</td>
+                        <td class="py-3 px-4">Villa 289, AlNaseem, Rose Street, Diyar</td>
+                        <td class="py-3 px-4">BHD31.000</td>
+                        <td class="py-3 px-4 text-green-600 font-medium last:rounded-r-2xl">
+                            Paid
+                        </td>
+                    </tr>
+                    <!-- Example Row 4 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            12:25:11 01.01.24
+                        </td>
+                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
+                            <a
+                                href="#"
+                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
+                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
+                            >
+                                203456
+                            </a>
+                        </td>
+                        <td class="py-3 px-4">Simon Rubby</td>
+                        <td class="py-3 px-4">Flat 401, Marassi Terraces, 82 Street, Diyar</td>
+                        <td class="py-3 px-4">BHD10.000</td>
+                        <td class="py-3 px-4 text-red-500 font-medium last:rounded-r-2xl">
+                            Pending
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-4 px-4 text-sm text-gray-500">
+                <span>Showing 1 of 28</span>
+                <div class="flex gap-2">
+                    <button class="text-gray-500">&lt;</button>
+                    <button class="font-bold text-black">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                    <button class="text-gray-500">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+<script src="https://unpkg.com/flowbite/dist/flowbite.turbo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite-datepicker@1.3.1/dist/datepicker.min.js"></script>

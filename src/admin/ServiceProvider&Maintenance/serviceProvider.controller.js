@@ -63,6 +63,16 @@ class serviceProviderController {
         const data = await serviceProviderServices.reviewDetailsPage(req, res);
         return;
     }
+
+    /**
+     * @description: Service Provider Admin Panel Signup Page Step 5
+     * @param {*} req
+     * @param {*} res
+     */
+    static async notificationsPage(req, res) {
+        const data = await serviceProviderServices.notificationsPage(req, res);
+        return;
+    }
 }
 
 export default serviceProviderController;

@@ -5,4 +5,9 @@ const router = express.Router();
 
 router.get("/", asyncWrap(dashboardController.dashboardPage));
 
+router.get(
+    "/transactionshistory",
+    asyncWrap(dashboardController.transactionsHistoryPage)
+);
+
 export default router;

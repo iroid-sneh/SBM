@@ -47,6 +47,7 @@ app.use(cors());
 app.use(expressEjsLayouts);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.set("layout", false);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -56,6 +57,7 @@ app.use(function (req, res, next) {
     res.locals.error = req.flash("error");
     next();
 });
+
 
 app.use("/", routes);
 

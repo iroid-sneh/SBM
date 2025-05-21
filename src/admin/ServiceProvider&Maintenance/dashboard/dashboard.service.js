@@ -13,6 +13,21 @@ class dashboardServices {
             }
         );
     }
+
+    /**
+     * @description: TransactionsHistory Page
+     * @param {*} req
+     * @param {*} res
+     */
+    static async transactionsHistoryPage(req, res) {
+        return res.render(
+            "adminPanels/serviceProvider&Maintenance/dashboard/transactionsHistory",
+            {
+                currentPage: "dashboard",
+                layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
+            }
+        );
+    }
 }
 
 export default dashboardServices;

@@ -1,0 +1,456 @@
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<div class="bg-[#f7f6f5] rounded-[100px] flex-1 justify-center items-center">
+    <!-- Breadcrumb -->
+    <div class="flex p-10 ml-10 items-center space-x-4">
+        <h3 class="text-gray-600 text-lg">Requests</h3>
+        <div class="w-px h-7 bg-gray-300"></div>
+        <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M8.25 5.92188H11.75"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M4.25 5.92188L4.75 6.42188L6.25 4.92188"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M8.25 10.5859H11.75"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M4.25 10.5859L4.75 11.0859L6.25 9.58594"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M6.0026 14.6654H10.0026C13.3359 14.6654 14.6693 13.332 14.6693 9.9987V5.9987C14.6693 2.66536 13.3359 1.33203 10.0026 1.33203H6.0026C2.66927 1.33203 1.33594 2.66536 1.33594 5.9987V9.9987C1.33594 13.332 2.66927 14.6654 6.0026 14.6654Z"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+    </div>
+
+    <!-- Card -->
+    <div class="w-[1400px] bg-white rounded-2xl p-4 mx-auto">
+        <!-- Filter -->
+        <div class="flex justify-between gap-4 items-start pr-4 mt-4 items-center align-center">
+            <!-- Category Slide Switcher - takes first column -->
+            <div id="transactionStatusSwitcher" class="flex space-x-6 border-gray-200">
+                <button
+                    class="status-btn text-m font-semibold text-[black] border-b-2 border-[#54B7C5] pb-2"
+                    onclick="switchTransactionTab('all')"
+                >
+                    All Requests
+                </button>
+                <button
+                    class="status-btn text-m font-semibold text-gray-500 hover:text-gray-700 pb-2"
+                    onclick="switchTransactionTab('paid')"
+                >
+                    In Process
+                </button>
+                <button
+                    class="status-btn text-m font-semibold text-gray-500 hover:text-gray-700 pb-2"
+                    onclick="switchTransactionTab('unpaid')"
+                >
+                    Pending
+                </button>
+                <button
+                    class="status-btn text-m font-semibold text-gray-500 hover:text-gray-700 pb-2"
+                    onclick="switchTransactionTab('unpaid')"
+                >
+                    Completed
+                </button>
+                <button
+                    class="status-btn text-m font-semibold text-gray-500 hover:text-gray-700 pb-2"
+                    onclick="switchTransactionTab('declined')"
+                >
+                    Canceled
+                </button>
+            </div>
+            <div class="flex justify-end gap-4 items-end pr-4 items-center">
+                <button
+                    class="flex items-center gap-1 text-sm text-[#54B7C5] hover:underline font-medium mt-6"
+                >
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M12.4068 4.23333C11.6818 4.01667 10.8818 3.875 9.99844 3.875C6.00677 3.875 2.77344 7.10833 2.77344 11.1C2.77344 15.1 6.00677 18.3333 9.99844 18.3333C13.9901 18.3333 17.2234 15.1 17.2234 11.1083C17.2234 9.625 16.7734 8.24167 16.0068 7.09167"
+                            stroke="#54B7C5"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M13.4396 4.43464L11.0312 1.66797"
+                            stroke="#54B7C5"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M13.4411 4.43359L10.6328 6.48359"
+                            stroke="#54B7C5"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                    Reset
+                </button>
+
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">From</label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                        >
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                />
+                            </svg>
+                        </div>
+                        <input
+                            datepicker
+                            datepicker-orientation="bottom"
+                            datepicker-format="dd-mm-yyyy"
+                            type="text"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                            placeholder="Select date"
+                        />
+                    </div>
+                </div>
+
+                <div class="flex items-end">
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">To</label>
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                            >
+                                <svg
+                                    class="w-4 h-4 text-gray-500"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                datepicker
+                                datepicker-orientation="bottom"
+                                datepicker-format="dd-mm-yyyy"
+                                type="text"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                placeholder="Select date"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="mt-6 overflow-x-auto">
+            <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+                <thead class="bg-[#f4f4f4] text-gray-600 text-sm">
+                    <tr>
+                        <th class="text-left py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            Call Time
+                        </th>
+                        <th class="text-left py-3 px-4">Invoice</th>
+                        <th class="text-left py-3 px-4">Name</th>
+                        <th class="text-left py-3 px-4">Address</th>
+                        <th class="text-left py-3 px-4">Amount</th>
+                        <th class="text-left py-3 px-4">Status</th>
+                        <th class="text-left py-3 px-4">Time Taken</th>
+                        <th class="text-left py-3 px-4 last:rounded-r-2xl">Notes</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-sm">
+                    <!-- Example Row 1 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            16:05:10 01.01.24
+                        </td>
+                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
+                            <a
+                                href="#"
+                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
+                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
+                            >
+                                203456
+                            </a>
+                        </td>
+                        <td class="py-3 px-4">Sandra Pugh</td>
+                        <td class="py-3 px-4">
+                            Flat 312, Marassi Residence Bld, 2122 Street, Diyar
+                        </td>
+                        <td class="py-3 px-4">BHD25.000</td>
+                        <td class="py-3 px-4 text-orange-600 font-semibold">In Process</td>
+                        <td class="py-3 px-4">01:50:28</td>
+                        <td class="py-3 px-4 font-medium last:rounded-r-2xl"></td>
+                    </tr>
+                    <!-- Example Row 2 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            15:10:02 01.01.24
+                        </td>
+                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
+                            <a
+                                href="#"
+                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
+                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
+                            >
+                                203456
+                            </a>
+                        </td>
+                        <td class="py-3 px-4">Ahmed Rami</td>
+                        <td class="py-3 px-4">Villa 20, AlNaseem, Rose Street, Diyar</td>
+                        <td class="py-3 px-4">BHD18.000</td>
+                        <td class="py-3 px-4 text-gray-600 font-semibold">Canceled</td>
+                        <td class="py-3 px-4">01:50:28</td>
+                        <td class="py-3 px-4 font-medium last:rounded-r-2xl">
+                            Canceled From Customer
+                        </td>
+                    </tr>
+                    <!-- Example Row 3 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            13:49:06 01.01.24
+                        </td>
+                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
+                            <a
+                                href="#"
+                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
+                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
+                            >
+                                203456
+                            </a>
+                        </td>
+                        <td class="py-3 px-4">Hussam Arab</td>
+                        <td class="py-3 px-4">Villa 289, AlNaseem, Rose Street, Diyar</td>
+                        <td class="py-3 px-4">BHD31.000</td>
+                        <td class="py-3 px-4 text-green-500 font-semibold">Completed</td>
+                        <td class="py-3 px-4">01:50:28</td>
+                        <td class="py-3 px-4 font-medium last:rounded-r-2xl"></td>
+                    </tr>
+                    <!-- Example Row 4 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            12:25:11 01.01.24
+                        </td>
+                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
+                            <a
+                                href="#"
+                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
+                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
+                            >
+                                203456
+                            </a>
+                        </td>
+                        <td class="py-3 px-4">Simon Rubby</td>
+                        <td class="py-3 px-4">Flat 401, Marassi Terraces, 82 Street, Diyar</td>
+                        <td class="py-3 px-4">BHD10.000</td>
+                        <td class="py-3 px-4 text-red-600 font-semibold">Pending</td>
+                        <td class="py-3 px-4">01:50:28</td>
+                        <td class="py-3 px-4 font-medium last:rounded-r-2xl">
+                            Waiting to reschedule the order
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-4 px-4 text-sm text-gray-500">
+                <span>Showing 1 of 28</span>
+                <div class="flex gap-2">
+                    <button class="text-gray-500">&lt;</button>
+                    <button class="font-bold text-black">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                    <button class="text-gray-500">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Invoice Modal -->
+<div
+    id="invoice-modal"
+    tabindex="-1"
+    class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-10 flex items-center justify-center backdrop-blur-sm"
+>
+    <div
+        class="bg-white rounded-2xl shadow-xl w-full max-w-xl mx-4 md:mx-auto px-6 py-6 border border-gray-200"
+    >
+        <!-- Modal Title & Close -->
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold mx-auto text-center w-full">Order Details</h2>
+            <button
+                data-modal-hide="invoice-modal"
+                class="text-red-500 hover:text-red-600 font-medium text-sm absolute right-6 top-6"
+            >
+                Close ✕
+            </button>
+        </div>
+
+        <!-- Address + Invoice Number -->
+        <div class="mb-2 text-sm text-gray-700">
+            <div class="font-medium">V-100, AlNaseem</div>
+            <div class="text-gray-500">Avenue 69, Marassi, Diyar</div>
+        </div>
+        <div class="text-right text-sm text-gray-500 font-medium mb-3">Invoice #302</div>
+
+        <!-- Items Table with spacing and center alignment -->
+        <div class="overflow-x-auto flex justify-center my-4">
+            <table
+                class="table-fixed text-sm text-center border border-gray-300 rounded-xl w-full max-w-lg"
+            >
+                <thead class="bg-[#4dc0b5] text-white">
+                    <tr>
+                        <th class="px-4 py-2 border border-white rounded-l-md">Items</th>
+                        <th class="px-4 py-2 border-r border-white">Size</th>
+                        <th class="px-4 py-2 border-r border-white">Qty</th>
+                        <th class="px-4 py-2 border border-white rounded-r-md">Price</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    <tr class="border-b border-gray-200">
+                        <!-- No left border -->
+                        <td class="py-4 border-r">Living Room</td>
+
+                        <!-- Middle columns with right border only -->
+                        <td class="py-4 border-r border-gray-200">Under 3 × 5 ft</td>
+                        <td class="py-4 border-r border-gray-200">02</td>
+
+                        <!-- No right border -->
+                        <td class="py-4">44.000</td>
+                    </tr>
+
+                    <tr class="border-b border-gray-200">
+                        <td class="py-4 border">Dining Room</td>
+                        <td class="py-4 border-r border-gray-200">Under 3 × 5 ft</td>
+                        <td class="py-4 border-r border-gray-200">01</td>
+                        <td class="py-4">22.000</td>
+                    </tr>
+
+                    <tr class="border-b border-gray-200">
+                        <td class="py-4 border">Kitchen</td>
+                        <td class="py-4 border-r border-gray-200">Under 3 × 5 ft</td>
+                        <td class="py-4 border-r border-gray-200">02</td>
+                        <td class="py-4">44.000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer Invoice Info -->
+        <div class="grid grid-cols-2 gap-4 mt-6 text-sm">
+            <div>
+                <p class="text-gray-500">Start Date/Time</p>
+                <p class="font-semibold text-black">25-05-2024 10:00 AM</p>
+            </div>
+            <div class="text-right space-y-1">
+                <p>
+                    <span class="text-gray-500">Delivery Fee</span>
+                    <span class="ml-4">00</span>
+                </p>
+                <p>
+                    <span class="text-gray-500">Tax</span>
+                    <span class="ml-10">13.200</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Total Row aligned to right -->
+        <div class="flex justify-end mt-5">
+            <div
+                class="bg-[#4dc0b5] text-white rounded-full py-2 px-4 flex justify-between items-center font-semibold text-base w-64"
+            >
+                <span>Total Price</span>
+                <span>145.200</span>
+            </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="mt-6 text-center">
+            <button
+                class="w-[350px] py-2 rounded-lg bg-[#163f75] text-white font-medium text-base hover:bg-blue-800"
+            >
+                Complete
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+<script src="https://unpkg.com/flowbite/dist/flowbite.turbo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite-datepicker@1.3.1/dist/datepicker.min.js"></script>
+<script>
+    function switchTransactionTab(tab) {
+        // Remove active styles from all buttons
+        document.querySelectorAll(".status-btn").forEach((btn) => {
+            btn.classList.remove("text-[black]", "border-b-2", "border-[#54B7C5]");
+            btn.classList.add("text-gray-500");
+        });
+
+        // Add active styles to clicked button
+        const activeBtn = event.currentTarget;
+        activeBtn.classList.add("text-[black]", "border-b-2", "border-[#54B7C5]");
+        activeBtn.classList.remove("text-gray-500");
+    }
+    document
+        .querySelector('[data-modal-hide="invoice-modal"]')
+        .addEventListener("click", function () {
+            document.getElementById("invoice-modal").classList.add("hidden");
+        });
+    document.getElementById("invoice-modal").addEventListener("click", function (e) {
+        if (e.target === this) {
+            this.classList.add("hidden");
+        }
+    });
+</script>

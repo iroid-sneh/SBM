@@ -1,0 +1,243 @@
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<div class="bg-[#f7f6f5] rounded-[100px] flex-1 justify-center items-center">
+    <!-- Breadcrumb -->
+    <div class="flex p-10 ml-10 items-center space-x-4">
+        <h3 class="text-gray-600 text-lg">Notification</h3>
+        <div class="w-px h-7 bg-gray-300"></div>
+        <svg
+            width="16"
+            height="17"
+            viewBox="0 0 16 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M7.97312 1.08203C6.39932 1.08203 4.81067 1.80413 3.80669 3.03181L3.80666 3.03179L3.80224 3.03731C3.1149 3.89415 2.78188 4.79475 2.78188 6.0789V6.36292C2.78188 6.71886 2.73804 6.95518 2.66527 7.14536C2.59261 7.33525 2.47367 7.52489 2.26076 7.76597L2.25969 7.76719C1.72216 8.37854 1.58594 9.12762 1.58594 9.80271C1.58594 10.5547 1.83587 11.2831 2.3414 11.8751L2.35189 11.8873L2.3629 11.8992C2.98795 12.5702 3.86439 12.9984 4.7711 13.0764C5.84971 13.199 6.92291 13.2445 8.00294 13.2445C9.09807 13.2445 10.1721 13.167 11.2239 13.0774C12.1339 13.0018 13.0147 12.5729 13.6426 11.8995L13.6538 11.8875L13.6645 11.8751C14.1704 11.2827 14.4193 10.5541 14.4193 9.80271C14.4193 9.12997 14.2847 8.38215 13.749 7.7711C13.5406 7.52726 13.4197 7.33505 13.3446 7.14181C13.2699 6.9495 13.224 6.71316 13.224 6.36292V6.0789C13.224 4.83616 12.9272 3.96858 12.2709 3.12299C11.2786 1.83623 9.63699 1.08203 8.03275 1.08203H7.97312ZM12.6126 8.75025L13.1823 8.26242L12.6195 8.75816C12.8186 8.98427 12.9193 9.31011 12.9193 9.80271C12.9193 10.2114 12.7888 10.5848 12.5343 10.8886C12.1587 11.285 11.6288 11.5388 11.099 11.5826L11.0971 11.5827C10.0539 11.6717 9.0318 11.7445 8.00294 11.7445C6.9611 11.7445 5.94287 11.7004 4.93012 11.5849L4.9185 11.5835L4.90684 11.5826C4.37617 11.5387 3.84643 11.2848 3.47176 10.8888C3.21679 10.5845 3.08594 10.2109 3.08594 9.80271C3.08594 9.31121 3.18677 8.98477 3.38572 8.75818C3.67476 8.43077 3.91007 8.08949 4.06621 7.68142C4.22237 7.27334 4.28188 6.84427 4.28188 6.36292V6.0789C4.28188 5.12198 4.50735 4.55643 4.97006 3.9787C5.67836 3.11441 6.83288 2.58203 7.97312 2.58203H8.03275C9.20165 2.58203 10.3928 3.14348 11.0835 4.03965L11.0852 4.04183C11.5202 4.60186 11.724 5.1387 11.724 6.0789V6.36292C11.724 6.84997 11.7887 7.27902 11.9464 7.68496C12.1034 8.08906 12.3358 8.42704 12.6126 8.75025ZM9.34206 13.3173C9.00879 13.2468 6.978 13.2468 6.64472 13.3173C6.35982 13.3831 6.05172 13.5369 6.05172 13.8726C6.06828 14.1922 6.25579 14.4755 6.51552 14.6548C6.85078 14.9174 7.24502 15.0832 7.6578 15.143C7.87778 15.1732 8.10173 15.1725 8.32965 15.143C8.74177 15.0832 9.136 14.9174 9.47193 14.6555C9.731 14.4755 9.9185 14.1922 9.93507 13.8726C9.93507 13.5369 9.62697 13.3831 9.34206 13.3173Z"
+                fill="#163F75"
+            />
+        </svg>
+    </div>
+
+    <!-- Card -->
+    <div class="w-[1400px] bg-white rounded-2xl p-4 mx-auto">
+        <!-- Filter -->
+        <div class="flex justify-end gap-4 items-end pr-4 mt-4 items-center">
+            <button
+                class="flex items-center gap-1 text-sm text-[#54B7C5] hover:underline font-medium mt-6"
+            >
+                <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M12.4068 4.23333C11.6818 4.01667 10.8818 3.875 9.99844 3.875C6.00677 3.875 2.77344 7.10833 2.77344 11.1C2.77344 15.1 6.00677 18.3333 9.99844 18.3333C13.9901 18.3333 17.2234 15.1 17.2234 11.1083C17.2234 9.625 16.7734 8.24167 16.0068 7.09167"
+                        stroke="#54B7C5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M13.4396 4.43464L11.0312 1.66797"
+                        stroke="#54B7C5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M13.4411 4.43359L10.6328 6.48359"
+                        stroke="#54B7C5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+
+                Reset
+            </button>
+
+            <div class="relative">
+                <label class="block text-sm font-medium text-gray-700 mb-1">From</label>
+                <div class="relative">
+                    <div
+                        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                    >
+                        <svg
+                            class="w-4 h-4 text-gray-500"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                            />
+                        </svg>
+                    </div>
+                    <input
+                        datepicker
+                        datepicker-orientation="bottom"
+                        datepicker-format="dd-mm-yyyy"
+                        type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                        placeholder="Select date"
+                    />
+                </div>
+            </div>
+
+            <div class="flex items-end">
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">To</label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                        >
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                />
+                            </svg>
+                        </div>
+                        <input
+                            datepicker
+                            datepicker-orientation="bottom"
+                            datepicker-format="dd-mm-yyyy"
+                            type="text"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                            placeholder="Select date"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="mt-6 overflow-x-auto">
+            <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+                <thead class="bg-[#f4f4f4] text-gray-600 text-sm">
+                    <tr>
+                        <th class="text-left py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            Date/Time
+                        </th>
+                        <th class="text-left py-3 px-4">Category</th>
+                        <th class="text-left py-3 px-4">Description</th>
+                        <th class="text-left py-3 px-4 last:rounded-r-2xl">View</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-sm">
+                    <!-- Example Row 1 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            16:05:10 01.01.24
+                        </td>
+                        <td class="py-3 px-4 text-[#163F75] font-semibold">Alert</td>
+                        <td class="py-3 px-4">
+                            Valued Residents, Please note that we will be experiencing electricity
+                            downtime on the 30th of May 2021 from...
+                        </td>
+                        <td class="py-3 px-4 text-green-600 font-medium last:rounded-r-2xl">
+                            <!-- View -->
+                            <button
+                                data-modal-target=""
+                                data-modal-toggle=""
+                                class="text-blue-600 hover:text-blue-800 p-2 rounded-full hover:bg-blue-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="#54B7C5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                    />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Example Row 2 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            15:10:02 01.01.24
+                        </td>
+                        <td class="py-3 px-4 text-[#163F75] font-semibold">Alert</td>
+                        <td class="py-3 px-4">
+                            Our system will be undergoing maintenance for the next two days.
+                        </td>
+                        <td class="py-3 px-4 text-gray-400 last:rounded-r-2xl">
+                            <!-- View -->
+                            <button
+                                data-modal-target=""
+                                data-modal-toggle=""
+                                class="text-blue-600 hover:text-blue-800 p-2 rounded-full hover:bg-blue-100"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="#54B7C5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                    />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-4 px-4 text-sm text-gray-500">
+                <span>Showing 1 of 28</span>
+                <div class="flex gap-2">
+                    <button class="text-gray-500">&lt;</button>
+                    <button class="font-bold text-black">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                    <button class="text-gray-500">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+<script src="https://unpkg.com/flowbite/dist/flowbite.turbo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite-datepicker@1.3.1/dist/datepicker.min.js"></script>

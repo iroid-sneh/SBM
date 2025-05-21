@@ -5,7 +5,9 @@ class serviceProviderServices {
      * @param {*} res
      */
     static async loginPage(req, res) {
-        return res.render("adminPanels/serviceProvider&Maintenance/login");
+        return res.render("adminPanels/serviceProvider&Maintenance/login", {
+            layout: false,
+        });
     }
 
     /**
@@ -15,7 +17,10 @@ class serviceProviderServices {
      */
     static async adminprofilePage(req, res) {
         return res.render(
-            "adminPanels/serviceProvider&Maintenance/adminProfile"
+            "adminPanels/serviceProvider&Maintenance/adminProfile",
+            {
+                layout: false,
+            }
         );
     }
 
@@ -26,7 +31,10 @@ class serviceProviderServices {
      */
     static async bussinessdetailsPage(req, res) {
         return res.render(
-            "adminPanels/serviceProvider&Maintenance/bussinessDetails"
+            "adminPanels/serviceProvider&Maintenance/bussinessDetails",
+            {
+                layout: false,
+            }
         );
     }
 
@@ -37,7 +45,10 @@ class serviceProviderServices {
      */
     static async bankdetailsPage(req, res) {
         return res.render(
-            "adminPanels/serviceProvider&Maintenance/bankDetails"
+            "adminPanels/serviceProvider&Maintenance/bankDetails",
+            {
+                layout: false,
+            }
         );
     }
 
@@ -47,7 +58,12 @@ class serviceProviderServices {
      * @param {*} res
      */
     static async choosePlanPage(req, res) {
-        return res.render("adminPanels/serviceProvider&Maintenance/choosePlan");
+        return res.render(
+            "adminPanels/serviceProvider&Maintenance/choosePlan",
+            {
+                layout: false,
+            }
+        );
     }
 
     /**
@@ -57,7 +73,25 @@ class serviceProviderServices {
      */
     static async reviewDetailsPage(req, res) {
         return res.render(
-            "adminPanels/serviceProvider&Maintenance/reviewDetails"
+            "adminPanels/serviceProvider&Maintenance/reviewDetails",
+            {
+                layout: false,
+            }
+        );
+    }
+
+    /**
+     * @description: notificationsPage
+     * @param {*} req
+     * @param {*} res
+     */
+    static async notificationsPage(req, res) {
+        return res.render(
+            "adminPanels/serviceProvider&Maintenance/notifications",
+            {
+                currentPage: null,
+                layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
+            }
         );
     }
 }
