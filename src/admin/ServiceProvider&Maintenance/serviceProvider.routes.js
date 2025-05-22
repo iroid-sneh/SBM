@@ -6,6 +6,9 @@ import requestsRoutes from "./requests/requests.routes";
 import feedbackRoutes from "./feedback/feedback.routes";
 import productsRoutes from "./products/products.routes";
 import calendarRoutes from "./calendar/calendar.routes";
+import invoicesRoutes from "./invoices/invoices.routes";
+import settingsRoutes from "./settings/settings.routes";
+import faqsRoutes from "./FAQs/FAQs.routes";
 const router = express.Router();
 
 router.get("/login", asyncWrap(serviceProviderController.loginPage));
@@ -46,5 +49,11 @@ router.use("/spadmin/feedback", feedbackRoutes);
 router.use("/spadmin/products", productsRoutes);
 
 router.use("/spadmin/calendar", calendarRoutes);
+
+router.use("/spadmin/invoices", invoicesRoutes);
+
+router.use("/spadmin/settings", settingsRoutes);
+
+router.use("/spadmin/FAQs", faqsRoutes);
 
 export default router;
