@@ -214,6 +214,9 @@
                                 required
                             >
                                 <option value="" hidden>Service Type</option>
+                                <option value="Laundry">Laundry</option>
+                                <option value="Cleaning">Cleaning</option>
+                                <option value="Beauty & Spa">Beauty & Spa</option>
                                 <option value="Pet Care">Pet Care</option>
                                 <option value="Tutors">Tutors</option>
                                 <option value="Trainers">Trainers</option>
@@ -680,89 +683,214 @@
             });
         });
 
+        // Service Type and Sub Category Logic
+        // Education -> Skills -> ["Maths", "Science", "Geography", "English"]
+        // Education -> Level -> ["Primary", "Middle","Secondary", "University"]
+        // Instruments -> Skills -> ["Guitar", "Violin", "Piano", "Arbic Oud"]
+        // Cooking -> Skills -> ["Indian", "Chinese", "Italian", "Mexican"]
+
+        // Trainer -> Fitness -> ["Aerobics", "Weight Loss", "Strength"]
+
         const categoryMap = {
+            Laundry: {},
+            Cleaning: {
+                "House Cleaning": [],
+                "Deep Cleaning": [],
+                "Car Care": [],
+            },
+            "Beauty & Spa": {
+                Salon: [],
+                Barber: [],
+                Spa: [],
+            },
             "Pet Care": {
+                "Pet Grooming": [],
                 Veternariy: [],
                 "Pet Sitter": [],
             },
             Tutors: {
                 Education: {
-                    Skills: ["Maths", "Science"],
-                    Level: ["Primary", "Secondary"],
+                    Skills: ["Maths", "Science", "Geography", "English"],
+                    Level: ["Primary", "Middle", "Secondary", "University"],
                 },
-                Instruments: ["Guitar", "Violin"],
-                Cooking: ["Indian", "Chinese"],
+                Instruments: {
+                    Skills: ["Guitar", "Violin", "Piano", "Arbic Oud"],
+                },
+                Cooking: {
+                    Skills: ["Indian", "Chinese", "Italian", "Mexican"],
+                },
             },
             Trainers: {
-                Fitness: ["Aerobics", "Weight Loss"],
+                Fitness: ["Aerobics", "Weight Loss", "Strength"],
                 Swimming: [],
                 "Pet Training": [],
             },
         };
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const serviceType = document.getElementById("serviceType");
-            const subCategory = document.getElementById("subCategory");
-            const subSubWrapper = document.getElementById("subSubContainerWrapper");
+        const serviceTypeSelect = document.getElementById("serviceType");
+        const subCategorySelect = document.getElementById("subCategory");
+        const subSubContainer = document.getElementById("subSubContainerWrapper");
 
-            // On Service Type Change
-            serviceType.addEventListener("change", () => {
-                const subOptions = categoryMap[serviceType.value] || {};
-                subCategory.innerHTML = `<option hidden value="">Sub Category</option>`;
-                Object.keys(subOptions).forEach((opt) => {
-                    subCategory.innerHTML += `<option value="${opt}">${opt}</option>`;
-                });
+        serviceTypeSelect.addEventListener("change", function () {
+            const selectedType = this.value;
+            const subCategories = categoryMap[selectedType] || {};
 
-                subCategory.classList.remove("hidden");
-                subSubWrapper.classList.add("hidden");
-                subSubWrapper.innerHTML = "";
-            });
+            // Clear and show SubCategory dropdown
+            subCategorySelect.innerHTML = `<option value="" hidden>Sub Category</option>`;
+            subSubContainer.classList.add("hidden");
+            subSubContainer.innerHTML = "";
 
-            // ✅ On Sub Category Change — THIS IS WHERE SUBSUBS ARE HANDLED
-            subCategory.addEventListener("change", () => {
-                const selectedService = serviceType.value;
-                const selectedSub = subCategory.value;
-                const subSubData = categoryMap[selectedService][selectedSub];
+            // ✅ Check if subcategories exist (non-empty object)
+            if (
+                typeof subCategories === "object" &&
+                !Array.isArray(subCategories) &&
+                Object.keys(subCategories).length > 0
+            ) {
+                subCategorySelect.classList.remove("hidden");
 
-                subSubWrapper.innerHTML = "";
-
-                // No sub-sub data = hide
-                if (!subSubData || Object.keys(subSubData).length === 0) {
-                    subSubWrapper.classList.add("hidden");
-                    return;
+                for (const sub in subCategories) {
+                    const option = document.createElement("option");
+                    option.value = sub;
+                    option.textContent = sub;
+                    subCategorySelect.appendChild(option);
                 }
+            } else {
+                // ✅ Hide subcategory if there are no entries (e.g., Laundry)
+                subCategorySelect.classList.add("hidden");
+            }
+        });
 
-                let columnCount = 1;
+        subCategorySelect.addEventListener("change", function () {
+            const selectedType = serviceTypeSelect.value;
+            const selectedSub = this.value;
+            const subCategoryData = categoryMap[selectedType]?.[selectedSub];
 
-                if (Array.isArray(subSubData)) {
-                    // One select
-                    const select = createSelect(subSubData, "Select Option");
-                    subSubWrapper.appendChild(select);
-                } else if (typeof subSubData === "object") {
-                    // Multiple selects (Education case)
-                    columnCount = Object.keys(subSubData).length;
-                    Object.entries(subSubData).forEach(([label, options]) => {
-                        const select = createSelect(options, `Select ${label}`);
-                        subSubWrapper.appendChild(select);
+            subSubContainer.innerHTML = "";
+            subSubContainer.classList.remove("hidden");
+
+            // Case 1: If subCategoryData is an object (deep-level, like Tutors)
+            if (typeof subCategoryData === "object" && !Array.isArray(subCategoryData)) {
+                for (const group in subCategoryData) {
+                    const wrapper = document.createElement("div");
+                    wrapper.classList.add("relative", "w-full", "mb-4");
+
+                    // Create dropdown toggle button
+                    const toggleBtn = document.createElement("button");
+                    toggleBtn.type = "button";
+                    toggleBtn.className =
+                        "w-full text-left px-4 py-3 bg-white border rounded-xl shadow-md text-sm text-gray-700 flex justify-between items-center";
+
+                    const selectedLabel = document.createElement("span");
+                    selectedLabel.textContent = `Select ${group}`;
+
+                    const arrowIcon = document.createElement("svg");
+                    arrowIcon.className = "w-4 h-4 ml-2";
+                    arrowIcon.setAttribute("fill", "none");
+                    arrowIcon.setAttribute("stroke", "currentColor");
+                    arrowIcon.setAttribute("stroke-width", "2");
+                    arrowIcon.setAttribute("viewBox", "0 0 24 24");
+                    arrowIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />`;
+
+                    toggleBtn.appendChild(selectedLabel);
+                    toggleBtn.appendChild(arrowIcon);
+
+                    // Dropdown container
+                    const dropdown = document.createElement("div");
+                    dropdown.className =
+                        "absolute top-full left-0 w-full bg-white border border-gray-200 mt-1 rounded-xl shadow-md p-4 space-y-2 hidden z-10";
+
+                    // Create checkbox items
+                    subCategoryData[group].forEach((item) => {
+                        const label = document.createElement("label");
+                        label.className = "flex items-center space-x-2 text-sm text-gray-600";
+
+                        const checkbox = document.createElement("input");
+                        checkbox.type = "checkbox";
+                        checkbox.name = `${selectedSub}_${group}[]`;
+                        checkbox.value = item;
+                        checkbox.className = "accent-blue-600";
+
+                        const span = document.createElement("span");
+                        span.textContent = item;
+
+                        // Update selected label on checkbox toggle
+                        checkbox.addEventListener("change", () => {
+                            const allChecked = dropdown.querySelectorAll(
+                                "input[type=checkbox]:checked"
+                            );
+                            if (allChecked.length === 0) {
+                                selectedLabel.textContent = `Select ${group}`;
+                            } else {
+                                const names = Array.from(allChecked).map((cb) => cb.value);
+                                selectedLabel.textContent = names.join(", ");
+                            }
+                        });
+
+                        label.appendChild(checkbox);
+                        label.appendChild(span);
+                        dropdown.appendChild(label);
                     });
+
+                    // Toggle dropdown on click
+                    toggleBtn.addEventListener("click", function (e) {
+                        e.stopPropagation();
+                        dropdown.classList.toggle("hidden");
+                    });
+
+                    // Close dropdown when clicking outside
+                    document.addEventListener("click", function (e) {
+                        if (!wrapper.contains(e.target)) {
+                            dropdown.classList.add("hidden");
+                        }
+                    });
+
+                    // Append to wrapper
+                    wrapper.appendChild(toggleBtn);
+                    wrapper.appendChild(dropdown);
+                    subSubContainer.appendChild(wrapper);
                 }
+            }
 
-                // Set correct columns
-                subSubWrapper.classList.remove("grid-cols-1", "grid-cols-2");
-                subSubWrapper.classList.add(`grid-cols-${columnCount}`);
-                subSubWrapper.classList.remove("hidden");
-            });
+            // Case 2: If subCategoryData is a flat array (like Trainers > Fitness)
+            else if (Array.isArray(subCategoryData)) {
+                const groupBox = document.createElement("div");
+                groupBox.classList.add("border", "rounded-xl", "p-4", "shadow", "bg-white");
 
-            // Utility: Create a styled select
-            function createSelect(options, placeholder) {
-                const select = document.createElement("select");
-                select.className =
-                    "w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl";
-                select.innerHTML = `<option hidden value="">${placeholder}</option>`;
-                options.forEach((opt) => {
-                    select.innerHTML += `<option value="${opt}">${opt}</option>`;
+                const title = document.createElement("h4");
+                title.textContent = selectedSub;
+                title.classList.add("text-sm", "font-semibold", "mb-2", "text-gray-700");
+                groupBox.appendChild(title);
+
+                subCategoryData.forEach((item) => {
+                    const label = document.createElement("label");
+                    label.classList.add(
+                        "flex",
+                        "items-center",
+                        "space-x-2",
+                        "text-sm",
+                        "text-gray-600"
+                    );
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.name = `${selectedSub}[]`;
+                    checkbox.value = item;
+                    checkbox.classList.add("accent-blue-600");
+
+                    const span = document.createElement("span");
+                    span.textContent = item;
+
+                    label.appendChild(checkbox);
+                    label.appendChild(span);
+                    groupBox.appendChild(label);
                 });
-                return select;
+
+                subSubContainer.appendChild(groupBox);
+            }
+
+            // If empty (like "Swimming"), just show nothing
+            if (subCategoryData?.length === 0 || Object.keys(subCategoryData || {}).length === 0) {
+                subSubContainer.classList.add("hidden");
             }
         });
 
