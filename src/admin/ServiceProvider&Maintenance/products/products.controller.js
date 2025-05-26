@@ -10,6 +10,16 @@ class productsController {
         const data = await productsServices.productsPage(req, res);
         return;
     }
+
+    /**
+     * @description: addServicePage for admin
+     * @param {*} req
+     * @param {*} res
+     */
+    static async addServicePage(req, res) {
+        const data = await productsServices.addServicePage(req, res);
+        return;
+    }
 }
 
 export default productsController;

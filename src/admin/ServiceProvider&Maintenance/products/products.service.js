@@ -59,6 +59,21 @@ class productsServices {
                 break;
         }
     }
+
+    /**
+     * @description: addServicePage for Admin
+     * @param {*} req
+     * @param {*} res
+     */
+    static async addServicePage(req, res) {
+        return res.render(
+            "adminPanels/serviceProvider&Maintenance/products/Service-ServiceProvider/addService",
+            {
+                currentPage: "products",
+                layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
+            }
+        );
+    }
 }
 
 export default productsServices;

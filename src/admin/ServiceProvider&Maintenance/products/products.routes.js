@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.get("/", asyncWrap(productsController.productsPage));
 
+router.get("/addService", asyncWrap(productsController.addServicePage));
+
 export default router;
