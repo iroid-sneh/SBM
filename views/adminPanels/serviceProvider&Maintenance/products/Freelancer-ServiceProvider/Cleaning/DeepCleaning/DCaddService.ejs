@@ -86,6 +86,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                 </div>
+                <!-- Hidden actual select -->
                 <select
                     id="category"
                     class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
@@ -123,7 +124,7 @@
         <div class="w-px bg-gray-200 mx-4"></div>
 
         <!-- Right Panel -->
-        <div id="priceSection" class="flex-1 hidden">
+        <div id="priceSection" class="flex-1 hidden overflow-x-auto">
             <p class="text-md text-gray-900 font-medium mb-2">Enter Price</p>
 
             <div class="bg-white rounded-2xl shadow-xl p-4 w-full max-w-2xl mt-3">
@@ -140,12 +141,25 @@
                     </tbody>
                 </table>
             </div>
-            <button>Save</button>
+            <button
+                onclick="window.location.href='/spadmin/products'"
+                id="saveButton"
+                class="shadow-xl p-3 w-full mt-3 max-w-2xl rounded-md bg-[#163F75] hover:bg-[#163F75]/90 text-white"
+            >
+                Save
+            </button>
         </div>
     </div>
 </div>
 
 <script>
+    function handleCategoryChange() {
+        const select = document.getElementById("category");
+        const display = document.getElementById("selectedCategory");
+        const selectedText = select.options[select.selectedIndex].text;
+        display.textContent = selectedText;
+    }
+
     const categorySelect = document.getElementById("category");
     const addItemInput = document.getElementById("addItemInput");
     const addItemButton = document.getElementById("addItemBtn");
@@ -180,10 +194,10 @@
         row.innerHTML = `
         <td class="py-4 px-3 text-gray-500">${item}</td>
         <td class="py-4 px-3">
-            <input type="text" placeholder="0.000" class="w-[100px] border border-red-400 text-center text-gray-500 rounded-xl py-1" />
+            <input type="number" placeholder="0.000" class="w-[100px] border border-red-400 text-center text-gray-500 rounded-xl py-1" />
         </td>
         <td class="py-4 px-3">
-            <input type="text" placeholder="0.000" class="w-[100px] border border-[#54B7C5] text-center font-semibold text-gray-800 rounded-xl py-1" />
+            <input type="number" placeholder="0.000" class="w-[100px] border border-[#54B7C5] text-center font-semibold text-gray-800 rounded-xl py-1" />
         </td>
     `;
         priceTableBody.appendChild(row);

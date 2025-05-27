@@ -58,7 +58,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-
 app.use("/", routes);
 
 const isSecure = process.env.IS_SECURE === "true";
@@ -90,9 +89,9 @@ if (isSecure) {
     });
 } else {
     var http = require("http").Server(app);
-    http.listen(port, () => {
+    http.listen(port, "0.0.0.0", () => {
         console.log(
-            `Listening on port: ${process.env.BASE_URL}:${process.env.PORT}`
+            `Listening on port: ${process.env.APP_URL}:${process.env.PORT}`
         );
     });
 }

@@ -60,7 +60,9 @@
                 >
                     <p class="text-gray-700 font-medium">
                         Per Hour Price:
-                        <span class="text-black font-semibold">BHD 10.000</span>
+                        <span id="displayHourlyPrice" class="text-black font-semibold">
+                            BHD 0.000
+                        </span>
                     </p>
                     <button data-modal-target="yourOfferModal" data-modal-toggle="yourOfferModal">
                         <!-- Pencil SVG -->
@@ -123,7 +125,7 @@
                         <div class="flex justify-between items-center mt-1">
                             <p class="text-gray-600">
                                 <span class="font-semibold text-gray-800">Experience:</span>
-                                5 Years
+                                <span id="displayExperience">0 Years</span>
                             </p>
                             <button
                                 data-modal-target="experienceModal"
@@ -260,7 +262,7 @@
                         <!-- Input Field -->
                         <input
                             type="text"
-                            id="hourlyPrice"
+                            id="inputHourlyPrice"
                             placeholder="Per Hour Price (Ex - BHD 5.00)"
                             class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 shadow-xl placeholder-gray-500 text-sm text-gray-700 bg-white focus:outline-none"
                         />
@@ -271,6 +273,8 @@
             <!-- Modal Footer -->
             <div class="flex justify-center mb-8 border-gray-200">
                 <button
+                    id="saveHourlyBtn"
+                    type="button"
                     data-modal-hide="yourOfferModal"
                     class="bg-[#163F75] hover:bg-[#4BB3C2] w-[360px] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
                 >
@@ -281,7 +285,7 @@
     </div>
 </div>
 
-<!-- Your Offer Modal -->
+<!-- Your Experince Modal -->
 <div
     id="experienceModal"
     tabindex="-1"
@@ -317,7 +321,7 @@
                         <!-- Input Field -->
                         <input
                             type="text"
-                            id="hourlyPrice"
+                            id="inputExperience"
                             placeholder="Experience"
                             class="w-full pl-4 pr-4 py-3 rounded-xl border border-gray-200 shadow-xl placeholder-gray-500 text-sm text-gray-700 bg-white focus:outline-none"
                         />
@@ -328,6 +332,8 @@
             <!-- Modal Footer -->
             <div class="flex justify-center mb-8 border-gray-200">
                 <button
+                    id="saveExperienceBtn"
+                    type="button"
                     data-modal-hide="experienceModal"
                     class="bg-[#163F75] hover:bg-[#4BB3C2] w-[360px] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
                 >
@@ -337,3 +343,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Save Hourly Price
+        document.getElementById("saveHourlyBtn")?.addEventListener("click", function () {
+            const hourlyInput = document.getElementById("inputHourlyPrice").value.trim();
+            const value = "BHD" + hourlyInput + ".000" || "BHD 0.000";
+            document.getElementById("displayHourlyPrice").textContent = value;
+        });
+
+        // Save Experience
+        document.getElementById("saveExperienceBtn")?.addEventListener("click", function () {
+            const experienceInput = document.getElementById("inputExperience").value.trim();
+            const value = experienceInput ? `${experienceInput} Years` : "0 Years";
+            document.getElementById("displayExperience").textContent = value;
+        });
+    });
+</script>
