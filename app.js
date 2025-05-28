@@ -9,12 +9,13 @@ import flash from "connect-flash";
 import cors from "cors";
 import routes from "./routes/index";
 import MongoStore from "connect-mongo";
-// import { mongoConnection } from "./models/connection";
+import { mongoConnection } from "./models/connection";
 import expressEjsLayouts from "express-ejs-layouts";
+import "./seeder/index";
 
 const app = express();
 const port = process.env.PORT || 2002;
-// mongoConnection();
+mongoConnection();
 
 app.use(express.static(path.join(__dirname, "public")));
 

@@ -173,7 +173,7 @@
     </div>
 </div>
 
-<!-- Your Offer Modal -->
+<!-- Your Offer/Price Per Hour Modal -->
 <div
     id="yourOfferModal"
     tabindex="-1"
@@ -261,7 +261,7 @@
 
                         <!-- Input Field -->
                         <input
-                            type="text"
+                            type="number"
                             id="inputHourlyPrice"
                             placeholder="Per Hour Price (Ex - BHD 5.00)"
                             class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 shadow-xl placeholder-gray-500 text-sm text-gray-700 bg-white focus:outline-none"
@@ -320,7 +320,7 @@
                     <div class="relative w-full">
                         <!-- Input Field -->
                         <input
-                            type="text"
+                            type="number"
                             id="inputExperience"
                             placeholder="Experience"
                             class="w-full pl-4 pr-4 py-3 rounded-xl border border-gray-200 shadow-xl placeholder-gray-500 text-sm text-gray-700 bg-white focus:outline-none"
@@ -349,7 +349,7 @@
         // Save Hourly Price
         document.getElementById("saveHourlyBtn")?.addEventListener("click", function () {
             const hourlyInput = document.getElementById("inputHourlyPrice").value.trim();
-            const value = "BHD" + hourlyInput + ".000" || "BHD 0.000";
+            const value = "BHD " + hourlyInput + ".000" || "BHD 0.000";
             document.getElementById("displayHourlyPrice").textContent = value;
         });
 

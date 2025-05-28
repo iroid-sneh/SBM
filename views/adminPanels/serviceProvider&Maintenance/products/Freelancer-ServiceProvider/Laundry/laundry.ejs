@@ -1,0 +1,740 @@
+<div class="bg-[#f7f6f5] rounded-[100px] flex-1 justify-center items-center">
+    <!-- Breadcrumb -->
+    <div class="flex p-10 ml-10 items-center space-x-4">
+        <h3 class="text-gray-600 text-lg">Products</h3>
+        <div class="w-px h-7 bg-gray-300"></div>
+        <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M2 4.33333C2 2.58319 2.01874 2 4.33333 2C6.64793 2 6.66667 2.58319 6.66667 4.33333C6.66667 6.08348 6.67405 6.66667 4.33333 6.66667C1.99262 6.66667 2 6.08348 2 4.33333Z"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.33203 4.33333C9.33203 2.58319 9.35077 2 11.6654 2C13.98 2 13.9987 2.58319 13.9987 4.33333C13.9987 6.08348 14.0061 6.66667 11.6654 6.66667C9.32465 6.66667 9.33203 6.08348 9.33203 4.33333Z"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M2 11.6654C2 9.91522 2.01874 9.33203 4.33333 9.33203C6.64793 9.33203 6.66667 9.91522 6.66667 11.6654C6.66667 13.4155 6.67405 13.9987 4.33333 13.9987C1.99262 13.9987 2 13.4155 2 11.6654Z"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.33203 11.6654C9.33203 9.91522 9.35077 9.33203 11.6654 9.33203C13.98 9.33203 13.9987 9.91522 13.9987 11.6654C13.9987 13.4155 14.0061 13.9987 11.6654 13.9987C9.32465 13.9987 9.33203 13.4155 9.33203 11.6654Z"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+    </div>
+
+    <!-- Card -->
+    <div class="w-[1400px] h-[640px] bg-white rounded-2xl p-4 mx-auto">
+        <!-- Main Container -->
+
+        <!-- Top Offer Box -->
+        <div
+            class="bg-blue-50 px-6 py-4 rounded-xl flex items-center justify-between max-w-[1367px] w-full mx-auto"
+        >
+            <div class="flex items-center space-x-8">
+                <p class="text-gray-700 font-medium">
+                    Minimum Order Value:
+                    <span id="displayMinOrder" class="text-black font-semibold">BHD 0.000</span>
+                </p>
+                <div class="w-px h-7 bg-gray-300"></div>
+                <p class="text-gray-700 font-medium">
+                    Delivery Charges:
+                    <span id="displayDelivery" class="text-black font-semibold">N/A</span>
+                </p>
+                <div class="w-px h-7 bg-gray-300"></div>
+                <p class="text-gray-700 font-medium">
+                    Discount:
+                    <span id="displayDiscount" class="text-black font-semibold">N/A</span>
+                </p>
+            </div>
+            <!-- Pencil Button -->
+            <button data-modal-target="yourOfferModal" data-modal-toggle="yourOfferModal">
+                <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <circle cx="16" cy="16" r="16" fill="#2C99AD" />
+                    <path
+                        d="M17.457 23.0346H23.5009"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16.65 9.16233C17.2964 8.38982 18.4583 8.27655 19.2469 8.90978C19.2905 8.94413 20.6912 10.0323 20.6912 10.0323C21.5575 10.556 21.8266 11.6693 21.2912 12.5188C21.2627 12.5643 13.3433 22.4704 13.3433 22.4704C13.0798 22.7991 12.6799 22.9931 12.2524 22.9978L9.21961 23.0358L8.53628 20.1436C8.44055 19.7369 8.53628 19.3098 8.79975 18.9811L16.65 9.16233Z"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M15.1836 11L19.7271 14.4893"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Middle Section -->
+        <% if (!items) { %>
+        <div class="flex flex-col items-center justify-center mt-40 px-4">
+            <h2 class="text-2xl font-semibold text-gray-800">What Do You Serve?</h2>
+            <p class="text-sm text-gray-400 mt-2">You have not added any service yet.</p>
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/spadmin/products/addService'"
+                class="mt-6 bg-[#163F75] text-white text-sm font-medium px-6 py-3 rounded-md hover:bg-[#163F75]/90 transition"
+            >
+                + Add Service
+            </button>
+        </div>
+        <% } else { %>
+
+        <div class="w-full bg-[#F7F6F5] px-6 py-4 rounded-2xl mt-4">
+            <div class="flex items-center justify-between bg-[#f8f7f7] px-4 py-3 rounded-t-xl">
+                <!-- Left side: Item count -->
+                <div class="text-sm text-gray-800 font-medium">
+                    Total Laundry Items:
+                    <span class="text-black font-bold">11</span>
+                </div>
+
+                <!-- Right side: Actions -->
+                <div class="flex items-center gap-3">
+                    <button
+                        class="text-sm font-semibold text-[#163F75] hover:underline transition"
+                        onclick="clearFiltration()"
+                    >
+                        Clear Filtration
+                    </button>
+
+                    <button
+                        class="text-sm font-semibold text-[#163F75] border border-[#163F75] px-4 py-2.5 rounded-xl hover:bg-[#163F75]/10 transition"
+                        onclick="viewSelectedItems()"
+                    >
+                        View Selected
+                    </button>
+
+                    <button
+                        class="text-white text-sm font-semibold bg-red-600 hover:bg-red-700 px-4 py-2.5 rounded-xl transition"
+                        onclick="deleteSelectedItems()"
+                    >
+                        Delete
+                    </button>
+
+                    <button
+                        onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/spadmin/products/addService'"
+                        class="bg-[#163F75] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#163F75]/90 transition"
+                    >
+                        + Add Service/Item
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-2xl">
+                <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+                    <thead class="bg-[#54B7C5] text-white rounded-2xl">
+                        <tr>
+                            <th class="text-left py-3 px-5 first:rounded-l-2xl last:rounded-r-2xl">
+                                Sr No.
+                            </th>
+                            <th class="text-left py-3 px-5">Item Type</th>
+                            <th class="text-left py-3 px-5">Category</th>
+                            <th class="text-left py-3 px-5">Ironing</th>
+                            <th class="text-left py-3 px-5">Dry Clean</th>
+                            <th class="text-left py-3 px-5">Wash & Iron</th>
+                            <th class="text-left py-3 px-5">Wash</th>
+                            <th class="text-left py-3 px-5 last:rounded-r-2xl">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 text-sm">
+                        <tr class="hover:bg-gray-50 rounded-2xl">
+                            <td class="py-3 px-5 first:rounded-l-2xl last:rounded-r-2xl">
+                                <%= items.SrNo %>
+                            </td>
+                            <td class="py-4 px-5">
+                                <div class="flex items-center gap-3">
+                                    <img
+                                        src="http://192.168.1.82:3003/images/cloths/men/Hoodie.png"
+                                        alt="<%= items.ItemType %>"
+                                        class="h-10 w-10 object-contain rounded-md"
+                                    />
+                                    <span class="font-semibold text-[#163F75]">
+                                        <%= items.ItemType %>
+                                    </span>
+                                </div>
+                            </td>
+
+                            <td class="py-3 px-5 font-semibold text-[#163F75]">
+                                <%= items.Category %>
+                            </td>
+                            <td class="py-3 px-5">
+                                <% if (items.Under3x5ftOriginalPrice) { %>
+                                <div class="text-red-500 line-through text-sm">
+                                    <%= items.Under3x5ftOriginalPrice %>
+                                </div>
+                                <% } %>
+                                <div class="text-gray-900"><%= items.Under3x5ft %></div>
+                                <div class="text-yellow-600"><%= items.Under3x5ft %></div>
+                            </td>
+                            <td class="py-3 px-5">
+                                <% if (items.under4x6ftOriginalPrice) { %>
+                                <div class="text-red-500 line-through text-sm">
+                                    <%= items.under4x6ftOriginalPrice %>
+                                </div>
+                                <% } %>
+                                <div class="text-gray-900"><%= items.under4x6ft %></div>
+                                <div class="text-yellow-600"><%= items.under4x6ft %></div>
+                            </td>
+                            <td class="py-3 px-5">
+                                <% if (items.over6x8ftOriginalPrice) { %>
+                                <div class="text-red-500 line-through text-sm">
+                                    <%= items.over6x8ftOriginalPrice %>
+                                </div>
+                                <% } %>
+                                <div class="text-gray-900"><%= items.over6x8ft %></div>
+                                <div class="text-yellow-600"><%= items.over6x8ft %></div>
+                            </td>
+                            <td class="py-3 px-5">
+                                <!-- Wash -->
+                                -
+                            </td>
+                            <td class="py-3 px-5 flex items-center gap-2 last:rounded-r-2xl">
+                                <!-- Edit -->
+                                <button
+                                    data-modal-target=""
+                                    data-modal-toggle=""
+                                    class="p-1.5 rounded-full hover:bg-blue-100 transition"
+                                >
+                                    <svg
+                                        width="30"
+                                        height="30"
+                                        viewBox="0 0 30 30"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <rect
+                                            x="0.5"
+                                            y="0.5"
+                                            width="29"
+                                            height="29"
+                                            rx="8.5"
+                                            stroke="#F2F2F2"
+                                        />
+                                        <path
+                                            d="M22.2051 15.0073C21.9928 15.0073 21.7893 15.0916 21.6392 15.2417C21.4891 15.3918 21.4048 15.5953 21.4048 15.8076V20.6092C21.4048 20.8214 21.3205 21.025 21.1704 21.1751C21.0204 21.3252 20.8168 21.4095 20.6046 21.4095H9.4008C9.18856 21.4095 8.98501 21.3252 8.83493 21.1751C8.68485 21.025 8.60054 20.8214 8.60054 20.6092V9.40544C8.60054 9.1932 8.68485 8.98965 8.83493 8.83957C8.98501 8.68949 9.18856 8.60518 9.4008 8.60518H14.2024C14.4147 8.60518 14.6182 8.52086 14.7683 8.37078C14.9184 8.2207 15.0027 8.01715 15.0027 7.80491C15.0027 7.59266 14.9184 7.38911 14.7683 7.23903C14.6182 7.08895 14.4147 7.00464 14.2024 7.00464H9.4008C8.76407 7.00464 8.15342 7.25758 7.70318 7.70782C7.25294 8.15806 7 8.76871 7 9.40544V20.6092C7 21.2459 7.25294 21.8566 7.70318 22.3068C8.15342 22.7571 8.76407 23.01 9.4008 23.01H20.6046C21.2413 23.01 21.8519 22.7571 22.3022 22.3068C22.7524 21.8566 23.0054 21.2459 23.0054 20.6092V15.8076C23.0054 15.5953 22.921 15.3918 22.771 15.2417C22.6209 15.0916 22.4173 15.0073 22.2051 15.0073ZM10.2011 15.6155V19.0087C10.2011 19.2209 10.2854 19.4245 10.4355 19.5745C10.5855 19.7246 10.7891 19.8089 11.0013 19.8089H14.3945C14.4998 19.8095 14.6042 19.7894 14.7017 19.7495C14.7992 19.7097 14.8879 19.651 14.9627 19.5768L20.5005 14.031L22.7733 11.8062C22.8483 11.7319 22.9078 11.6433 22.9485 11.5458C22.9891 11.4483 23.01 11.3437 23.01 11.2381C23.01 11.1324 22.9891 11.0278 22.9485 10.9303C22.9078 10.8328 22.8483 10.7443 22.7733 10.6699L19.3801 7.23672C19.3057 7.16171 19.2172 7.10217 19.1197 7.06155C19.0222 7.02092 18.9176 7 18.812 7C18.7063 7 18.6017 7.02092 18.5042 7.06155C18.4067 7.10217 18.3182 7.16171 18.2438 7.23672L15.987 9.50148L10.4331 15.0473C10.359 15.1221 10.3003 15.2108 10.2605 15.3083C10.2206 15.4058 10.2005 15.5102 10.2011 15.6155ZM18.812 8.93329L21.0767 11.198L19.9403 12.3344L17.6756 10.0697L18.812 8.93329ZM11.8016 15.9436L16.5472 11.198L18.812 13.4628L14.0664 18.2084H11.8016V15.9436Z"
+                                            fill="#54B7C5"
+                                        />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <% } %>
+
+        <!-- Your Offer Modal -->
+        <div
+            id="yourOfferModal"
+            class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full hidden"
+            aria-hidden="true"
+        >
+            <div
+                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-5 z-50"
+            >
+                <div class="bg-[#F6F9FC] rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden">
+                    <!-- Modal Header -->
+                    <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-800 text-center w-full">
+                            Your Offer
+                        </h3>
+                        <button
+                            class="text-red-500 hover:text-red-700 text-sm font-medium"
+                            data-modal-hide="yourOfferModal"
+                        >
+                            Close
+                        </button>
+                    </div>
+
+                    <!-- Modal Content -->
+                    <div
+                        class="px-6 pb-6 mt-6 max-w-xl mx-auto flex flex-col justify-center items-center space-y-2"
+                    >
+                        <!-- Minimum Order Value -->
+                        <div class="w-full justify-center">
+                            <label class="block text-sm text-gray-700 mb-2">
+                                Minimum Order Value for Your Service
+                            </label>
+                            <div class="relative w-full">
+                                <div
+                                    class="absolute inset-y-0 left-3 flex items-center pointer-events-none"
+                                >
+                                    <!-- SVG -->
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="text-gray-400"
+                                    >
+                                        <path
+                                            d="M19.3009 7.91949V13.0695C19.3009 16.1495 17.5409 17.4695 14.9009 17.4695H6.11093C5.66093 17.4695 5.23093 17.4295 4.83093 17.3395C4.58093 17.2995 4.34094 17.2295 4.12094 17.1495C2.62094 16.5895 1.71094 15.2895 1.71094 13.0695V7.91949C1.71094 4.83949 3.47093 3.51953 6.11093 3.51953H14.9009C17.1409 3.51953 18.7509 4.46953 19.1809 6.63953C19.2509 7.03953 19.3009 7.44949 19.3009 7.91949Z"
+                                            stroke="black"
+                                            stroke-width="1.5"
+                                            stroke-miterlimit="10"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M22.302 10.9206V16.0706C22.302 19.1506 20.542 20.4706 17.902 20.4706H9.11203C8.37203 20.4706 7.70204 20.3706 7.12204 20.1506C5.93204 19.7106 5.12203 18.8006 4.83203 17.3406C5.23203 17.4306 5.66203 17.4706 6.11203 17.4706H14.902C17.542 17.4706 19.302 16.1506 19.302 13.0706V7.92059C19.302 7.45059 19.262 7.03062 19.182 6.64062C21.082 7.04063 22.302 8.38059 22.302 10.9206Z"
+                                            stroke="black"
+                                            stroke-width="1.5"
+                                            stroke-miterlimit="10"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M10.4994 13.1394C11.9574 13.1394 13.1394 11.9574 13.1394 10.4994C13.1394 9.04136 11.9574 7.85938 10.4994 7.85938C9.04136 7.85938 7.85938 9.04136 7.85938 10.4994C7.85938 11.9574 9.04136 13.1394 10.4994 13.1394Z"
+                                            stroke="black"
+                                            stroke-width="1.5"
+                                            stroke-miterlimit="10"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M4.78125 8.30078V12.7008"
+                                            stroke="black"
+                                            stroke-width="1.5"
+                                            stroke-miterlimit="10"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M16.2227 8.30078V12.7008"
+                                            stroke="black"
+                                            stroke-width="1.5"
+                                            stroke-miterlimit="10"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                </div>
+                                <input
+                                    id="inputMinOrder"
+                                    type="text"
+                                    placeholder="Minimum Order Value (Ex - BHD 5.00)"
+                                    class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 shadow-md placeholder-gray-500 text-sm text-gray-700 bg-white focus:outline-none"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Delivery Charges -->
+                        <div class="w-full space-y-4">
+                            <label class="block text-sm text-gray-700 font-medium">
+                                Delivery Charges
+                            </label>
+                            <div
+                                class="bg-white rounded-xl shadow-md px-4 py-3 flex justify-between items-center"
+                            >
+                                <label class="flex items-center gap-2">
+                                    <input
+                                        id="deliveryFree"
+                                        type="radio"
+                                        name="deliveryCharge"
+                                        value="free"
+                                        class="accent-[#163F75] scale-110"
+                                        checked
+                                    />
+                                    <span class="text-sm font-medium text-gray-700">Free</span>
+                                </label>
+                                <label class="flex items-center gap-2">
+                                    <input
+                                        id="deliveryChargeable"
+                                        type="radio"
+                                        name="deliveryCharge"
+                                        value="chargeable"
+                                        class="accent-[#163F75] scale-110"
+                                    />
+                                    <span class="text-sm font-medium text-gray-700">
+                                        Chargeable
+                                    </span>
+                                </label>
+                                <label class="flex items-center gap-2">
+                                    <input
+                                        id="deliveryMinimum"
+                                        type="radio"
+                                        name="deliveryCharge"
+                                        value="minimum"
+                                        class="accent-[#163F75] scale-110"
+                                    />
+                                    <span class="text-sm font-medium text-gray-700">
+                                        Minimum Order for Free Delivery
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="space-y-4">
+                                <!-- Delivery Fee Input -->
+                                <div id="deliveryFeeInput" class="relative hidden">
+                                    <div
+                                        class="absolute inset-y-0 left-3 flex items-center pointer-events-none"
+                                    >
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M15 2V12C15 13.1 14.1 14 13 14H2V6C2 3.79 3.79 2 6 2H15Z"
+                                                stroke="black"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M22 14V17C22 18.66 20.66 20 19 20H18C18 18.9 17.1 18 16 18C14.9 18 14 18.9 14 20H10C10 18.9 9.1 18 8 18C6.9 18 6 18.9 6 20H5C3.34 20 2 18.66 2 17V14H13C14.1 14 15 13.1 15 12V5H16.84C17.56 5 18.22 5.39001 18.58 6.01001L20.29 9H19C18.45 9 18 9.45 18 10V13C18 13.55 18.45 14 19 14H22Z"
+                                                stroke="black"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M8 22C9.10457 22 10 21.1046 10 20C10 18.8954 9.10457 18 8 18C6.89543 18 6 18.8954 6 20C6 21.1046 6.89543 22 8 22Z"
+                                                stroke="black"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M16 22C17.1046 22 18 21.1046 18 20C18 18.8954 17.1046 18 16 18C14.8954 18 14 18.8954 14 20C14 21.1046 14.8954 22 16 22Z"
+                                                stroke="black"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M22 12V14H19C18.45 14 18 13.55 18 13V10C18 9.45 18.45 9 19 9H20.29L22 12Z"
+                                                stroke="black"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="Delivery Fee (Ex - 1.00 BHD)"
+                                        class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 shadow-md placeholder-gray-500 text-sm text-gray-700 bg-white focus:outline-none"
+                                    />
+                                </div>
+
+                                <!-- Minimum Order for Free Delivery Input -->
+                                <div id="minOrderFreeInput" class="relative hidden">
+                                    <div
+                                        class="absolute inset-y-0 left-3 flex items-center pointer-events-none"
+                                    >
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M7.5 7.66952V6.69952C7.5 4.44952 9.31 2.23952 11.56 2.02952C14.24 1.76952 16.5 3.87952 16.5 6.50952V7.88952"
+                                                stroke="black"
+                                                stroke-width="1.5"
+                                                stroke-miterlimit="10"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M9.0008 22H15.0008C19.0208 22 19.7408 20.39 19.9508 18.43L20.7008 12.43C20.9708 9.99 20.2708 8 16.0008 8H8.0008C3.7308 8 3.0308 9.99 3.3008 12.43L4.0508 18.43C4.2608 20.39 4.9808 22 9.0008 22Z"
+                                                stroke="black"
+                                                stroke-width="1.5"
+                                                stroke-miterlimit="10"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M15.4945 12H15.5035"
+                                                stroke="black"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                            <path
+                                                d="M8.49451 12H8.50349"
+                                                stroke="black"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="Minimum Order for Free Delivery (Ex - 10.00 BHD)"
+                                        class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 shadow-md placeholder-gray-500 text-sm text-gray-700 bg-white focus:outline-none"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Discount Section -->
+                        <div class="w-full space-y-4">
+                            <label class="block text-sm text-gray-700 font-medium">
+                                Discount Value (Optional)
+                            </label>
+                            <div
+                                class="bg-white rounded-xl shadow-md px-4 py-3 flex justify-between items-center"
+                            >
+                                <label class="flex items-center gap-2">
+                                    <input
+                                        id="discountAll"
+                                        type="radio"
+                                        name="discountOption"
+                                        value="all"
+                                        class="accent-[#163F75] scale-110"
+                                        checked
+                                    />
+                                    <span class="text-sm font-medium text-gray-700">
+                                        On All Services
+                                    </span>
+                                </label>
+                                <label class="flex items-center gap-2">
+                                    <input
+                                        id="discountSelective"
+                                        type="radio"
+                                        name="discountOption"
+                                        value="selective"
+                                        class="accent-[#163F75] scale-110"
+                                    />
+                                    <span class="text-sm font-medium text-gray-700">
+                                        On Selective Services
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="relative">
+                                <div
+                                    class="absolute inset-y-0 left-3 flex items-center pointer-events-none"
+                                >
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M4.79476 7.05613C4.79476 5.80713 5.80676 4.79513 7.05576 4.79413H8.08476C8.68176 4.79413 9.25376 4.55713 9.67776 4.13713L10.3968 3.41713C11.2778 2.53113 12.7098 2.52713 13.5958 3.40813L13.5968 3.40913L13.6058 3.41713L14.3258 4.13713C14.7498 4.55813 15.3218 4.79413 15.9188 4.79413H16.9468C18.1958 4.79413 19.2088 5.80613 19.2088 7.05613V8.08313C19.2088 8.68013 19.4448 9.25313 19.8658 9.67713L20.5858 10.3971C21.4718 11.2781 21.4768 12.7101 20.5958 13.5961L20.5948 13.5971L20.5858 13.6061L19.8658 14.3261C19.4448 14.7491 19.2088 15.3211 19.2088 15.9181V16.9471C19.2088 18.1961 18.1968 19.2081 16.9478 19.2081H16.9468H15.9168C15.3198 19.2081 14.7468 19.4451 14.3238 19.8661L13.6038 20.5851C12.7238 21.4711 11.2928 21.4761 10.4068 20.5971C10.4058 20.5961 10.4048 20.5951 10.4038 20.5941L10.3948 20.5851L9.67576 19.8661C9.25276 19.4451 8.67976 19.2091 8.08276 19.2081H7.05576C5.80676 19.2081 4.79476 18.1961 4.79476 16.9471V15.9161C4.79476 15.3191 4.55776 14.7471 4.13676 14.3241L3.41776 13.6041C2.53176 12.7241 2.52676 11.2931 3.40676 10.4071C3.40676 10.4061 3.40776 10.4051 3.40876 10.4041L3.41776 10.3951L4.13676 9.67513C4.55776 9.25113 4.79476 8.67913 4.79476 8.08113V7.05613"
+                                            stroke="black"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M9.42969 14.5736L14.5697 9.43359"
+                                            stroke="black"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M14.4955 14.5H14.5045"
+                                            stroke="black"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M9.4955 9.5H9.5045"
+                                            stroke="black"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                </div>
+                                <input
+                                    id="inputDiscount"
+                                    type="text"
+                                    placeholder="Discount Percentage"
+                                    class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 shadow-md placeholder-gray-500 text-sm text-gray-700 bg-white focus:outline-none"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Save Button -->
+                        <div class="w-full pt-4">
+                            <button
+                                id="saveOfferBtn"
+                                type="button"
+                                class="bg-[#163F75] hover:bg-[#163F75]/80 w-full text-white py-3 rounded-lg font-medium text-base shadow transition"
+                                data-modal-hide="yourOfferModal"
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.querySelectorAll('input[name="deliveryCharge"]').forEach((radio) => {
+                // Initial check to show relevant input on modal open
+                function updateDeliveryInputs() {
+                    const deliveryFee = document.getElementById("deliveryFeeInput");
+                    const minOrder = document.getElementById("minOrderFreeInput");
+                    const selected = document.querySelector(
+                        'input[name="deliveryCharge"]:checked'
+                    ).value;
+
+                    deliveryFee.classList.add("hidden");
+                    minOrder.classList.add("hidden");
+
+                    if (selected === "chargeable") {
+                        deliveryFee.classList.remove("hidden");
+                    } else if (selected === "minimum") {
+                        deliveryFee.classList.remove("hidden");
+                        minOrder.classList.remove("hidden");
+                    }
+                }
+                updateDeliveryInputs();
+
+                radio.addEventListener("change", function () {
+                    const deliveryFee = document.getElementById("deliveryFeeInput");
+                    const minOrder = document.getElementById("minOrderFreeInput");
+
+                    if (this.value === "free") {
+                        deliveryFee.classList.add("hidden");
+                        minOrder.classList.add("hidden");
+                    } else if (this.value === "chargeable") {
+                        deliveryFee.classList.remove("hidden");
+                        minOrder.classList.add("hidden");
+                    } else if (this.value === "minimum") {
+                        deliveryFee.classList.remove("hidden");
+                        minOrder.classList.remove("hidden");
+                    }
+                    updateDeliveryInputs();
+                });
+            }); // Ensure inputs are toggled correctly based on selected deliveryCharge
+            function updateDeliveryInputs() {
+                const deliveryFee = document.getElementById("deliveryFeeInput");
+                const minOrder = document.getElementById("minOrderFreeInput");
+                const selected = document.querySelector(
+                    'input[name="deliveryCharge"]:checked'
+                ).value;
+
+                deliveryFee.classList.add("hidden");
+                minOrder.classList.add("hidden");
+
+                if (selected === "chargeable") {
+                    deliveryFee.classList.remove("hidden");
+                } else if (selected === "minimum") {
+                    deliveryFee.classList.remove("hidden");
+                    minOrder.classList.remove("hidden");
+                }
+            }
+
+            // Attach change event to deliveryCharge radios
+            document.querySelectorAll('input[name="deliveryCharge"]').forEach((radio) => {
+                radio.addEventListener("change", updateDeliveryInputs);
+            });
+
+            // Initial call
+            updateDeliveryInputs();
+
+            // Handle Save button click
+            document.addEventListener("DOMContentLoaded", function () {
+                // Save Button Logic
+                const saveBtn = document.querySelector("#saveOfferBtn");
+                if (saveBtn) {
+                    saveBtn.addEventListener("click", function () {
+                        // Minimum Order Value
+                        const minOrderValue = document.getElementById("inputMinOrder").value.trim();
+                        document.getElementById("displayMinOrder").textContent =
+                            "BHD " + minOrderValue + ".000" || "BHD 0.000";
+
+                        // Delivery Charges
+                        const deliveryChoice = document.querySelector(
+                            'input[name="deliveryCharge"]:checked'
+                        )?.value;
+                        let deliveryText = "N/A";
+
+                        if (deliveryChoice === "free") {
+                            deliveryText = "Free";
+                        } else if (deliveryChoice === "chargeable") {
+                            const feeInput = document.querySelector("#deliveryFeeInput input");
+                            deliveryText =
+                                "BHD " + feeInput?.value?.trim() + ".000 Charges" || "Chargeable";
+                        } else if (deliveryChoice === "minimum") {
+                            const feeInput = document.querySelector("#deliveryFeeInput input");
+                            const minInput = document.querySelector("#minOrderFreeInput input");
+                            deliveryText =
+                                "BHD " +
+                                feeInput?.value?.trim() +
+                                ".000 | " +
+                                "Min Order: " +
+                                ("BHD " + minInput?.value?.trim() + ".000 For Free Delivery" ||
+                                    "N/A");
+                        }
+
+                        document.getElementById("displayDelivery").textContent = deliveryText;
+
+                        // Discount
+                        const discountValue = document.getElementById("inputDiscount").value.trim();
+                        const discountType = document.querySelector(
+                            'input[name="discountOption"]:checked'
+                        )?.value;
+                        let discountText = discountValue ? `${discountValue}%` : "0%";
+                        discountText +=
+                            discountType === "all" ? " On All Services" : " On Selective Services";
+
+                        document.getElementById("displayDiscount").textContent = discountText;
+                    });
+                }
+            });
+        </script>
+    </div>
+</div>

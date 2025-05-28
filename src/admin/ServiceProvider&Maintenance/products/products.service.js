@@ -1,3 +1,6 @@
+import Cloths from "../../../../models/cloths";
+import { baseUrl } from "../../../common/constants/constant";
+
 class productsServices {
     /**
      * @description: productsPage for Admin
@@ -8,9 +11,9 @@ class productsServices {
         // Example User Selection Data
         const user = {
             prefrence: "Service", //  Service , Maintenance
-            category: "Freelancer", //  Service Provider, Freelancer
-            serviceType: "Tutors", // Laundry, Cleaning, Tutors , Beauty&Spa, PetCare, Trainers.
-            subType: "Education", // Education, Instruments, Cooking. (sub types of the Tutors).
+            category: "Service Provider", //  Service Provider, Freelancer
+            serviceType: "Laundry", // Laundry, Cleaning, Tutors , Beauty&Spa, PetCare, Trainers.
+            subType: "", // Education, Instruments, Cooking. (sub types of the Tutors).
         };
 
         const { prefrence, category, serviceType, subType } = user;
@@ -27,9 +30,9 @@ class productsServices {
 
                 case "Cleaning":
                     switch (subType) {
-                        case "House Cleaning":
+                        case "House Keeping":
                             pathView =
-                                "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Cleaning/HouseCleaning/houseCleaning";
+                                "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Cleaning/HouseKeeping/houseKeeping";
                             break;
                         case "Deep Cleaning":
                             pathView =
@@ -116,18 +119,21 @@ class productsServices {
                     currentPage: "products",
                     layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
                     user,
-                    // items: {
-                    //     SrNo: "01",
-                    //     Category: "Living Room",
-                    //     Under3x5ftOriginalPrice: "30.000",
-                    //     Under3x5ft: "22.000",
-                    //     under4x6ftOriginalPrice: "40.000",
-                    //     under4x6ft: "33.000",
-                    //     over6x8ftOriginalPrice: "60.000",
-                    //     over6x8ft: "50.000",
-                    //     TaxAmount: "10%",
-                    // },
-                    items: null,
+                    items: {
+                        SrNo: "01",
+                        ItemType: "Hoodie",
+                        Category: "Men",
+                        Under3x5ftOriginalPrice: "30.000",
+                        Under3x5ft: "22.000",
+                        Under3x5ft: "22.000",
+                        under4x6ftOriginalPrice: "40.000",
+                        under4x6ft: "33.000",
+                        under4x6ft: "33.000",
+                        over6x8ftOriginalPrice: "60.000",
+                        over6x8ft: "50.000",
+                        over6x8ft: "50.000",
+                    },
+                    // items: null,
                 });
             } else {
                 return res.render(
@@ -177,8 +183,8 @@ class productsServices {
         const user = {
             preference: "Service",
             category: "Service Provider",
-            serviceType: "Cleaning",
-            subType: "House Cleaning",
+            serviceType: "Laundry",
+            subType: "",
         };
 
         const { preference, category, serviceType, subType } = user;
@@ -189,7 +195,7 @@ class productsServices {
             switch (serviceType) {
                 case "Laundry":
                     viewPath =
-                        "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/laundry";
+                        "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Laundry/laundryAddService";
                     break;
 
                 case "Cleaning":
@@ -269,6 +275,30 @@ class productsServices {
                     user,
                 }
             );
+        }
+    }
+
+    /**
+     * @description: getClothsList For Admin service
+     * @param {*} req
+     * @param {*} res
+     */
+    static async getClothsList(req, res) {
+        try {
+            const categories = req.query.categories?.split(",") || [];
+            const filter =
+                categories.length > 0 ? { category: { $in: categories } } : {};
+
+            const cloths = await Cloths.find(filter);
+
+            const result = cloths.map((c) => ({
+                ...c._doc,
+                image: baseUrl(c.image),
+            }));
+
+            res.json(result);
+        } catch (error) {
+            res.status(500).json({ error: "Cloths list fetching failed" });
         }
     }
 }

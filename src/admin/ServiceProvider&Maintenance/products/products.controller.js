@@ -20,6 +20,16 @@ class productsController {
         const data = await productsServices.addServicePage(req, res);
         return;
     }
+
+    /**
+     * @description: getClothsList for admin
+     * @param {*} req
+     * @param {*} res
+     */
+    static async getClothsList(req, res) {
+        const data = await productsServices.getClothsList(req, res);
+        return;
+    }
 }
 
 export default productsController;
