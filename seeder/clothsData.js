@@ -249,12 +249,12 @@ module.exports = [
     },
     {
         name: "Dara'a/Galabya - 1 piece",
-        image: "/images/cloths/women/Dara'a/Galabya - 1 piece.png",
+        image: "/images/cloths/women/Galabya - 1 piece.png",
         category: "Women",
     },
     {
         name: "Dara'a/Galabya - 2 pieces",
-        image: "/images/cloths/women/Dara'a/Galabya - 2 pieces.png",
+        image: "/images/cloths/women/Galabya - 2 pieces.png",
         category: "Women",
     },
     {

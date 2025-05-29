@@ -125,11 +125,10 @@
         <% } else { %>
 
         <div class="w-full bg-[#F7F6F5] px-6 py-4 rounded-2xl mt-4">
-            <div class="flex items-center justify-between bg-[#f8f7f7] px-4 py-3 rounded-t-xl">
+            <div class="flex items-center justify-between">
                 <!-- Left side: Item count -->
-                <div class="text-sm text-gray-800 font-medium">
-                    Total Laundry Items:
-                    <span class="text-black font-bold">11</span>
+                <div class="flex justify-start mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Total Laundry Items: 11</h2>
                 </div>
 
                 <!-- Right side: Actions -->
@@ -168,9 +167,17 @@
                 <table class="min-w-full border-separate border-spacing-y-2 text-sm">
                     <thead class="bg-[#54B7C5] text-white rounded-2xl">
                         <tr>
-                            <th class="text-left py-3 px-5 first:rounded-l-2xl last:rounded-r-2xl">
-                                Sr No.
-                            </th>
+                            <td
+                                class="px-6 py-4 whitespace-nowrap first:rounded-l-2xl last:rounded-r-2xl text-sm font-medium text-gray-900"
+                            >
+                                <input
+                                    id="checkbox-all"
+                                    aria-describedby="checkbox-1"
+                                    type="checkbox"
+                                    class="w-4 h-4 border-gray-300 rounded bg-gray-200 appearance-none checked:bg-[#54B7C5] focus:ring-[#54B7C5]"
+                                />
+                            </td>
+                            <th class="text-left py-3 px-5">Sr No.</th>
                             <th class="text-left py-3 px-5">Item Type</th>
                             <th class="text-left py-3 px-5">Category</th>
                             <th class="text-left py-3 px-5">Ironing</th>
@@ -182,9 +189,17 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200 text-sm">
                         <tr class="hover:bg-gray-50 rounded-2xl">
-                            <td class="py-3 px-5 first:rounded-l-2xl last:rounded-r-2xl">
-                                <%= items.SrNo %>
+                            <td
+                                class="px-6 py-4 whitespace-nowrap first:rounded-l-2xl last:rounded-r-2xl text-sm font-medium text-gray-900"
+                            >
+                                <input
+                                    id="checkbox-all"
+                                    aria-describedby="checkbox-1"
+                                    type="checkbox"
+                                    class="w-4 h-4 border-gray-300 rounded bg-gray-200 appearance-none checked:bg-[#54B7C5] focus:ring-[#54B7C5]"
+                                />
                             </td>
+                            <td class="py-3 px-5"><%= items.SrNo %></td>
                             <td class="py-4 px-5">
                                 <div class="flex items-center gap-3">
                                     <img

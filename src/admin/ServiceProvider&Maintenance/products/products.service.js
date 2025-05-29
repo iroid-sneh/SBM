@@ -12,8 +12,8 @@ class productsServices {
         const user = {
             prefrence: "Service", //  Service , Maintenance
             category: "Service Provider", //  Service Provider, Freelancer
-            serviceType: "Laundry", // Laundry, Cleaning, Tutors , Beauty&Spa, PetCare, Trainers.
-            subType: "", // Education, Instruments, Cooking. (sub types of the Tutors).
+            serviceType: "Tutors", // Laundry, Cleaning, Tutors , Beauty&Spa, PetCare, Trainers.
+            subType: "Cooking", // Education, Instruments, Cooking. (sub types of the Tutors).
         };
 
         const { prefrence, category, serviceType, subType } = user;
@@ -45,7 +45,7 @@ class productsServices {
                     }
                     break;
 
-                case "Beatuy & Spa":
+                case "Beauty & Spa":
                     switch (subType) {
                         case "Salon":
                             pathView =
@@ -68,9 +68,9 @@ class productsServices {
                             pathView =
                                 "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/PetCare/PetGrooming/petGrooming";
                             break;
-                        case "Veternairy":
+                        case "Veterinary":
                             pathView =
-                                "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/PetCare/Veternairy/veternairy";
+                                "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/PetCare/Veterinary/veterinary";
                             break;
                         case "Pet Sitter":
                             pathView =
@@ -90,8 +90,13 @@ class productsServices {
                                 "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Tutors/Instruments/instruments";
                             break;
                         case "Cooking":
-                            pathView =
-                                "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Tutors/Cooking/cooking";
+                            if (category === "Freelancer") {
+                                pathView =
+                                    "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Tutors/Cooking/freelancerCooking";
+                            } else if (category === "Service Provider") {
+                                pathView =
+                                    "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Tutors/Cooking/serviceProviderCooking";
+                            }
                             break;
                     }
                     break;
@@ -121,56 +126,16 @@ class productsServices {
                     user,
                     items: {
                         SrNo: "01",
-                        ItemType: "Hoodie",
-                        Category: "Men",
+                        Category: "Sedan",
                         Under3x5ftOriginalPrice: "30.000",
-                        Under3x5ft: "22.000",
-                        Under3x5ft: "22.000",
-                        under4x6ftOriginalPrice: "40.000",
                         under4x6ft: "33.000",
-                        under4x6ft: "33.000",
-                        over6x8ftOriginalPrice: "60.000",
-                        over6x8ft: "50.000",
-                        over6x8ft: "50.000",
+                        TaxAmount: "10%",
                     },
                     // items: null,
                 });
             } else {
-                return res.render(
-                    "adminPanels/serviceProvider&Maintenance/products/shared/default",
-                    {
-                        currentPage: "products",
-                        layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
-                        user,
-                    }
-                );
+                return res.redirect("/spadmin/dashboard");
             }
-
-            // Handling Maintenance logic as-is
-            // switch (userType) {
-            //     case "Maintenance-Contractor Based":
-            //         return res.render(
-            //             "adminPanels/serviceProvider&Maintenance/products/Maintenance-ContractorBased/maintenanceContractor",
-            //             {
-            //                 currentPage: "products",
-            //                 layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
-            //                 user,
-            //             }
-            //         );
-
-            //     case "Maintenance-Service Provider":
-            //         return res.render(
-            //             "adminPanels/serviceProvider&Maintenance/products/Maintenance-ServiceProvider/maintenanceServiceProvider",
-            //             {
-            //                 currentPage: "products",
-            //                 layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
-            //                 user,
-            //             }
-            //         );
-
-            //     default:
-            //         return res.redirect("/spadmin/dashboard");
-            // }
         }
     }
 
@@ -183,8 +148,8 @@ class productsServices {
         const user = {
             preference: "Service",
             category: "Service Provider",
-            serviceType: "Laundry",
-            subType: "",
+            serviceType: "Tutors",
+            subType: "Cooking",
         };
 
         const { preference, category, serviceType, subType } = user;
@@ -199,10 +164,7 @@ class productsServices {
                     break;
 
                 case "Cleaning":
-                    if (subType === "House Cleaning")
-                        viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Cleaning/HouseCleaning/HCaddService";
-                    else if (subType === "Deep Cleaning")
+                    if (subType === "Deep Cleaning")
                         viewPath =
                             "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Cleaning/DeepCleaning/DCaddService";
                     else if (subType === "Car Care")
@@ -211,51 +173,27 @@ class productsServices {
                     break;
 
                 case "Tutors":
-                    if (subType === "Education")
+                    if (subType === "Cooking")
                         viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/tutors/education";
-                    else if (subType === "Instruments")
-                        viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/tutors/instruments";
-                    else if (subType === "Cooking")
-                        viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/tutors/cooking";
+                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Tutors/Cooking/SPCookingaddService";
                     break;
 
                 case "Beauty & Spa":
                     if (subType === "Salon")
                         viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/beauty-spa/salon";
+                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Beauty&Spa/Salon/salonAddService";
                     else if (subType === "Barber")
                         viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/beauty-spa/barber";
+                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Beauty&Spa/Barber/barberAddService";
                     else if (subType === "Spa")
                         viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/beauty-spa/spa";
+                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/Beauty&Spa/Spa/spaAddService";
                     break;
 
                 case "Pet Care":
                     if (subType === "Pet Grooming")
                         viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/pet-care/grooming";
-                    else if (subType === "Veternairy")
-                        viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/pet-care/veterinary";
-                    else if (subType === "Pet Sitter")
-                        viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/pet-care/pet-sitter";
-                    break;
-
-                case "Trainers":
-                    if (subType === "Fitness")
-                        viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/trainers/fitness";
-                    else if (subType === "Swimming")
-                        viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/trainers/swimming";
-                    else if (subType === "Pet Training")
-                        viewPath =
-                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/trainers/pet-training";
+                            "adminPanels/serviceProvider&Maintenance/products/Freelancer-ServiceProvider/PetCare/PetGrooming/PGaddService";
                     break;
             }
         }

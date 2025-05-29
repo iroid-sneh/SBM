@@ -93,9 +93,10 @@
                     onchange="handleCategoryChange()"
                 >
                     <option value="" hidden>Select Category</option>
-                    <option value="Living Room">Living Room</option>
-                    <option value="Dining Room">Dining Room</option>
-                    <option value="Kitchen">Kitchen</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Mexican">Mexican</option>
                 </select>
             </div>
 
@@ -104,7 +105,7 @@
                 <input
                     id="addItemInput"
                     type="text"
-                    placeholder="Write Here (Sub Category)"
+                    placeholder="Add Dishes"
                     class="flex-1 px-4 py-3 rounded-l-xl border border-r-0 border-gray-300 text-sm text-gray-700 bg-gray-100"
                     disabled
                 />
@@ -131,9 +132,8 @@
                 <table class="w-full table-auto border-separate border-spacing-y-4">
                     <thead>
                         <tr class="bg-[#54B7C5] text-white rounded">
-                            <th class="py-4 px-3 text-left rounded-l-xl">Selected Size</th>
-                            <th class="py-4 px-3 text-left">Original Price</th>
-                            <th class="py-4 px-3 text-left rounded-r-xl">Discount Price</th>
+                            <th class="py-4 px-3 text-left rounded-l-xl">Selected Dishes</th>
+                            <th class="py-4 px-3 text-left">PDF</th>
                         </tr>
                     </thead>
                     <tbody id="priceTableBody">
@@ -142,7 +142,6 @@
                 </table>
             </div>
             <button
-                onclick="window.location.href='/spadmin/products'"
                 id="saveButton"
                 class="shadow-xl p-3 w-full mt-3 max-w-2xl rounded-md bg-[#163F75] hover:bg-[#163F75]/90 text-white"
             >
@@ -150,9 +149,112 @@
             </button>
         </div>
     </div>
+    <!-- Note Modal For File Upload -->
+    <div
+        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden"
+        id="noteModal"
+    >
+        <!-- Modal Content -->
+        <div class="bg-[#F6F9FC] rounded-2xl shadow-lg w-[90%] max-w-md p-6 text-center relative">
+            <!-- Close Icon -->
+            <button
+                class="absolute top-4 right-4 text-red-400 hover:text-red-600 text-xl font-bold"
+                onclick="document.getElementById('noteModal').classList.add('hidden')"
+                aria-label="Close"
+            >
+                Close &times;
+            </button>
+
+            <!-- Title -->
+            <h2 class="text-xl font-semibold mb-4">Note</h2>
+
+            <!-- Message -->
+            <p class="text-gray-600 mb-6">
+                We assume that the ingredient PDF has already been approved by the admin via email.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-center gap-4">
+                <button
+                    onclick="document.getElementById('noteModal').classList.add('hidden')"
+                    class="border border-[#163F75] text-[#163F75] px-5 py-2 rounded-lg font-medium hover:bg-[#163F75]/10"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    onclick="window.location.href='/spadmin/products'"
+                    class="bg-[#163F75] text-white px-5 py-2 rounded-lg font-medium hover:bg-[#102f59]"
+                >
+                    Upload
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
+<div id="toast-container" class="fixed top-5 right-5 z-[9999] space-y-4"></div>
 
 <script>
+    let itemIndex = 0;
+
+    document.getElementById("saveButton").addEventListener("click", function (e) {
+        const rows = document.querySelectorAll("#priceTableBody tr");
+        let allFilesUploaded = true;
+
+        rows.forEach((row) => {
+            const fileInput = row.querySelector("input[type='file']");
+            if (!fileInput || !fileInput.files.length) {
+                allFilesUploaded = false;
+            }
+        });
+
+        if (!allFilesUploaded) {
+            showToast("Please upload a PDF file for all items before saving.", "error");
+        } else {
+            document.getElementById("noteModal").classList.remove("hidden");
+        }
+    });
+
+    function showToast(message, type = "error") {
+        const icons = {
+            success: {
+                color: "green",
+                svg: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/></svg>`,
+            },
+            error: {
+                color: "red",
+                svg: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/></svg>`,
+            },
+            warning: {
+                color: "orange",
+                svg: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/></svg>`,
+            },
+        };
+
+        const { color, svg } = icons[type] || icons.error;
+        const toast = document.createElement("div");
+
+        toast.className = `flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm border-l-4 border-${color}-500`;
+        toast.innerHTML = `
+        <div class="inline-flex items-center justify-center shrink-0 w-8 h-8 text-${color}-500 bg-${color}-100 rounded-lg mr-3">
+            ${svg}
+        </div>
+        <div class="text-sm font-normal flex-1">${message}</div>
+        <button type="button" class="ml-2 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8" onclick="this.parentElement.remove()">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    `;
+
+        document.getElementById("toast-container").appendChild(toast);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 4000);
+    }
+
     function handleCategoryChange() {
         const select = document.getElementById("category");
         const display = document.getElementById("selectedCategory");
@@ -183,6 +285,33 @@
     categorySelect.addEventListener("change", updateInputState);
     window.addEventListener("load", updateInputState);
 
+    function handleUpload(input, itemIndex) {
+        const button = document.getElementById(`uploadBtn-${itemIndex}`);
+        const file = input.files[0];
+
+        if (file) {
+            button.innerHTML = `
+            Uploaded
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#54B7C5] hover:bg-teal-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                `;
+
+            button.classList.add("text-[#54B7C5]", "border-[#54B7C5]");
+            button.onclick = () => {
+                input.value = ""; // Clear file
+                button.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5-5m0 0l5 5m-5-5v12" />
+            </svg>
+            Upload`;
+                button.classList.remove("text-[#54B7C5]");
+                button.classList.add("text-gray-400");
+                button.onclick = () => document.getElementById(`file-${itemIndex}`).click();
+            };
+        }
+    }
+
     addItemButton.addEventListener("click", () => {
         const item = addItemInput.value.trim();
         if (!item) return;
@@ -192,25 +321,36 @@
         row.setAttribute("data-item", item); // custom attribute to identify row
 
         row.innerHTML = `
-        <td class="py-4 px-3 text-gray-500">${item}</td>
-        <td class="py-4 px-3">
-            <input type="number" placeholder="0.000" class="w-[100px] border border-red-400 text-center text-gray-500 rounded-xl py-1" />
-        </td>
-        <td class="py-4 px-3">
-            <input type="number" placeholder="0.000" class="w-[100px] border border-[#54B7C5] text-center font-semibold text-gray-800 rounded-xl py-1" />
-        </td>
-    `;
+                          <td class="py-4 px-3 text-gray-600 font-medium">${item}</td>
+                          <td class="py-4 px-3">
+                            <div class="relative">
+                              <input type="file" class="hidden" id="file-${itemIndex}" onchange="handleUpload(this, ${itemIndex})" />
+                              <button
+                                onclick="document.getElementById('file-${itemIndex}').click()"
+                                id="uploadBtn-${itemIndex}"
+                                class="flex items-center gap-2 border text-gray-400 border-[#54B7C5] px-4 py-2 rounded-xl font-medium"
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5-5m0 0l5 5m-5-5v12" />
+                                </svg>
+                                Upload
+                              </button>
+                            </div>
+                          </td>
+                        `;
+
         priceTableBody.appendChild(row);
+        itemIndex++;
 
         // Create chip with close button
         const chip = document.createElement("div");
         chip.className =
-            "flex items-center px-4 py-1 m-2 rounded-md bg-[#54B7C5] text-white text-sm";
+            "flex items-center px-4 py-1 m-3 rounded-md bg-[#54B7C5] text-white text-sm";
         chip.setAttribute("data-item", item); // custom attribute to identify chip
         chip.innerHTML = `
         <span>${item}</span>
         <button class="ml-2 text-white font-bold hover:text-red-200">&times;</button>
-    `;
+        `;
 
         // Handle chip remove
         chip.querySelector("button").addEventListener("click", () => {

@@ -164,6 +164,7 @@
                             <thead class="sticky top-0 bg-[#54B7C5] text-white">
                                 <tr class="bg-[#54B7C5] text-white rounded">
                                     <th class="py-4 px-3 text-left rounded-l-xl">Selected Item</th>
+                                    <th class="py-4 px-3 text-left"></th>
                                     <th class="py-4 px-3 text-left">Ironing</th>
                                     <th class="py-4 px-3 text-left">Dry Clean</th>
                                     <th class="py-4 px-3 text-left">Wash & Iron</th>
@@ -322,32 +323,51 @@
         const services = ["Ironing", "Dry Clean", "Wash & Iron", "Wash"];
 
         clothes.forEach((cloth) => {
-            const row = document.createElement("tr");
-
-            // Left Column: Cloth image and name
-            row.innerHTML = `
-            <td class="flex items-center gap-2 px-3 py-2">
-                <img src="${cloth.image}" alt="${cloth.name}" class="w-10 h-10 rounded-md object-cover" />
-                <span class="font-medium text-gray-800">${cloth.name}</span>
-            </td>
-        `;
-
-            // For each service, generate the price input group
-            services.forEach((service) => {
-                const cell = document.createElement("td");
-                cell.className = "space-y-1 py-2";
-
-                cell.innerHTML = `
-                <div class="flex flex-col gap-1">
-                    <input type="number" placeholder="Original Price" class="w-24 px-2 py-1 border border-red-400 rounded text-center text-sm line-through text-red-500">
-                    <input type="number" placeholder="Discount Price" class="w-24 px-2 py-1 border border-teal-400 rounded text-center text-sm text-black">
-                    <input type="number" placeholder="Urgent Price" class="w-24 px-2 py-1 border border-yellow-400 rounded text-center text-sm text-black">
+            // Row 1: Original Price
+            const row1 = document.createElement("tr");
+            row1.innerHTML = `
+            <td rowspan="3" class="align-top px-3 py-2">
+                <div class="flex items-center gap-2">
+                    <img src="${cloth.image}" alt="${cloth.name}" class="w-10 h-10 rounded-md object-cover" />
+                    <span class="font-medium text-gray-800">${cloth.name}</span>
                 </div>
-            `;
-                row.appendChild(cell);
+            </td>
+            <td class="text-sm text-gray-600 font-medium py-1">Original Price</td>
+        `;
+            services.forEach(() => {
+                row1.innerHTML += `
+                <td class="py-1">
+                    <input type="number" placeholder="0.000"
+                        class="w-20 px-2 py-1 border border-red-400 rounded text-center text-sm line-through text-red-500" />
+                </td>`;
             });
 
-            table.appendChild(row);
+            // Row 2: Discount Price
+            const row2 = document.createElement("tr");
+            row2.innerHTML = `<td class="text-sm text-gray-600 font-medium py-1">Discount Price</td>`;
+            services.forEach(() => {
+                row2.innerHTML += `
+                <td class="py-1">
+                    <input type="number" placeholder="0.000"
+                        class="w-20 px-2 py-1 border border-teal-400 rounded text-center text-sm text-black" />
+                </td>`;
+            });
+
+            // Row 3: Urgent Price
+            const row3 = document.createElement("tr");
+            row3.innerHTML = `<td class="text-sm text-gray-600 font-medium py-1">Urgent Price</td>`;
+            services.forEach(() => {
+                row3.innerHTML += `
+                <td class="py-1">
+                    <input type="number" placeholder="0.000"
+                        class="w-20 px-2 py-1 border border-yellow-400 rounded text-center text-sm text-black" />
+                </td>`;
+            });
+
+            // Append all 3 rows
+            table.appendChild(row1);
+            table.appendChild(row2);
+            table.appendChild(row3);
         });
     }
 </script>

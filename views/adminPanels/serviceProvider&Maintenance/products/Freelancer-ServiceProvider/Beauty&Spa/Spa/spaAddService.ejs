@@ -1,3 +1,9 @@
+<style>
+    .custom-radio {
+        accent-color: #5dcad1; /* This is the teal color */
+    }
+</style>
+
 <div class="bg-[#f7f6f5] rounded-[100px] flex-1 justify-center items-center">
     <!-- Breadcrumb -->
     <div class="flex p-10 ml-10 items-center space-x-4">
@@ -69,13 +75,38 @@
         <!-- Left Panel (Form) -->
         <div class="w-[40%] pr-6">
             <p class="text-md text-gray-900 font-medium mb-2">Add Details of your Service</p>
+            <!-- Men / Women Radio -->
+            <div
+                class="bg-white rounded-xl shadow-md mb-4 px-4 py-3 flex justify-between items-center"
+            >
+                <label class="flex items-center gap-2">
+                    <input
+                        id="men"
+                        type="radio"
+                        name="menwomenOption"
+                        value="men"
+                        class="custom-radio scale-120 bg-[#F7F6F5]"
+                    />
+                    <span class="text-sm font-medium text-gray-700">Men</span>
+                </label>
+                <label class="flex items-center gap-2">
+                    <input
+                        id="women"
+                        type="radio"
+                        name="menwomenOption"
+                        value="women"
+                        class="custom-radio scale-120 bg-[#F7F6F5]"
+                    />
+                    <span class="text-sm font-medium text-gray-700">Women</span>
+                </label>
+            </div>
 
             <!-- Custom Styled Select Wrapper -->
             <div class="relative w-full mb-4 h-[48px]">
                 <div
-                    class="flex items-center px-4 py-3 bg-white border border-gray-300 rounded-xl text-sm text-gray-700 shadow-lg"
+                    class="flex items-center px-4 py-3 bg-white border border-gray-300 rounded-xl text-sm text-gray-500 shadow-md"
                 >
-                    <span id="selectedCategory" class="flex-1 text-gray-500">Select Category</span>
+                    <span id="selectedCategory" class="flex-1">Select Category</span>
                     <svg
                         class="w-4 h-4 text-gray-400"
                         fill="none"
@@ -93,29 +124,30 @@
                     onchange="handleCategoryChange()"
                 >
                     <option value="" hidden>Select Category</option>
-                    <option value="Living Room">Living Room</option>
-                    <option value="Dining Room">Dining Room</option>
-                    <option value="Kitchen">Kitchen</option>
+                    <option value="Specials">Specials</option>
+                    <option value="Classics">Classics</option>
+                    <option value="Reflexology">Reflexology</option>
                 </select>
             </div>
 
-            <!-- Add Items with Button -->
-            <div class="flex shadow-lg rounded-xl">
+            <!-- Add Items Input and Button -->
+            <div class="flex items-center shadow-md rounded-xl overflow-hidden">
                 <input
                     id="addItemInput"
                     type="text"
-                    placeholder="Write Here (Sub Category)"
-                    class="flex-1 px-4 py-3 rounded-l-xl border border-r-0 border-gray-300 text-sm text-gray-700 bg-gray-100"
+                    placeholder="Add Items"
+                    class="flex-1 px-4 py-3 text-sm text-gray-700 bg-gray-100 border border-r-0 border-gray-200"
                     disabled
                 />
                 <button
                     id="addItemBtn"
-                    class="px-5 py-3 bg-[#b6c1d2] text-white text-sm font-semibold rounded-r-xl"
+                    class="px-5 py-3 bg-[#b6c1d2] text-white text-sm font-semibold"
                     disabled
                 >
                     + Add
                 </button>
             </div>
+
             <!-- Items Container -->
             <div id="itemsContainer" class="flex flex-wrap"></div>
         </div>
@@ -131,7 +163,7 @@
                 <table class="w-full table-auto border-separate border-spacing-y-4">
                     <thead>
                         <tr class="bg-[#54B7C5] text-white rounded">
-                            <th class="py-4 px-3 text-left rounded-l-xl">Selected Size</th>
+                            <th class="py-4 px-3 text-left rounded-l-xl">Selected Service</th>
                             <th class="py-4 px-3 text-left">Original Price</th>
                             <th class="py-4 px-3 text-left rounded-r-xl">Discount Price</th>
                         </tr>
@@ -164,6 +196,8 @@
     const addItemInput = document.getElementById("addItemInput");
     const addItemButton = document.getElementById("addItemBtn");
     const priceTableBody = document.getElementById("priceTableBody");
+    const exteriorSerOpti = document.getElementById("men");
+    const interiorSerOpti = document.getElementById("women");
 
     // Enable/disable input based on category
     function updateInputState() {
