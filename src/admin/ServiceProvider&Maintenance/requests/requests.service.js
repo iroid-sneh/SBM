@@ -5,13 +5,33 @@ class requestsServices {
      * @param {*} res
      */
     static async requestsPage(req, res) {
-        return res.render(
-            "adminPanels/serviceProvider&Maintenance/requests/requests",
-            {
-                currentPage: "requests",
-                layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
-            }
-        );
+        // Example User Selection Data
+        const user = {
+            prefrence: "Maintenance", //  Service , Maintenance
+            category: "Service Provider", //  Service Provider, Freelancer
+        };
+
+        const { prefrence, category } = user;
+
+        // const userType = `${prefrence}-${category}`;
+
+        if (prefrence === "Service") {
+            return res.render(
+                "adminPanels/serviceProvider&Maintenance/requests/serviceRequests",
+                {
+                    currentPage: "requests",
+                    layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
+                }
+            );
+        } else if (prefrence === "Maintenance") {
+            return res.render(
+                "adminPanels/serviceProvider&Maintenance/requests/maintenanceRequests",
+                {
+                    currentPage: "requests",
+                    layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
+                }
+            );
+        }
     }
 }
 

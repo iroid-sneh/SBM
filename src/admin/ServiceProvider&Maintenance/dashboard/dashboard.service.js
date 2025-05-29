@@ -10,6 +10,9 @@ class dashboardServices {
             {
                 currentPage: "dashboard",
                 layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
+                // user: {
+                //     prefrence: "Service",
+                // },
             }
         );
     }
