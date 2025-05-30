@@ -1,3 +1,42 @@
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content-box {
+        max-width: 90%;
+        max-height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content-box img,
+    .modal-content-box video {
+        max-width: 70%;
+        max-height: 70%;
+        border-radius: 10px;
+    }
+
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 40px;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+
 <!-- DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
 
@@ -202,20 +241,20 @@
         </div>
 
         <!-- Table -->
-        <div class="mt-6 overflow-x-auto">
+        <div class="mt-6">
             <table class="min-w-full border-separate border-spacing-y-2 text-sm">
                 <thead class="bg-[#f4f4f4] text-gray-600 text-sm">
                     <tr>
                         <th class="text-left py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
                             Call Time
                         </th>
-                        <th class="text-left py-3 px-4">Invoice</th>
                         <th class="text-left py-3 px-4">Name</th>
                         <th class="text-left py-3 px-4">Address</th>
-                        <th class="text-left py-3 px-4">Amount</th>
-                        <th class="text-left py-3 px-4">Status</th>
-                        <th class="text-left py-3 px-4">Time Taken</th>
-                        <th class="text-left py-3 px-4 last:rounded-r-2xl">Notes</th>
+                        <th class="text-left py-3 px-4">Ticket No.</th>
+                        <th class="text-left py-3 px-4">Maintenance</th>
+                        <th class="text-left py-3 px-4">Priority</th>
+                        <th class="text-left py-3 px-4">Service</th>
+                        <th class="text-left py-3 px-4 last:rounded-r-2xl">Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-sm">
@@ -224,45 +263,41 @@
                         <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
                             16:05:10 01.01.24
                         </td>
-                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
-                            <a
-                                href="#"
-                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
-                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
-                            >
-                                203456
-                            </a>
-                        </td>
                         <td class="py-3 px-4">Sandra Pugh</td>
                         <td class="py-3 px-4">
                             Flat 312, Marassi Residence Bld, 2122 Street, Diyar
                         </td>
-                        <td class="py-3 px-4">BHD25.000</td>
-                        <td class="py-3 px-4 text-orange-600 font-semibold">In Process</td>
-                        <td class="py-3 px-4">01:50:28</td>
-                        <td class="py-3 px-4 font-medium last:rounded-r-2xl"></td>
+                        <td class="py-3 px-4">203456</td>
+                        <td class="py-3 px-4">Electrical</td>
+                        <td class="py-3 px-4 text-green-500 font-semibold">Normal</td>
+                        <td class="py-3 px-4 text-[#163F75]">Lighting, Socket & Rewiring, +2</td>
+                        <td class="py-3 px-4 font-medium last:rounded-r-2xl">
+                            <button
+                                data-modal-target="scopeOfWorkModal"
+                                data-modal-toggle="scopeOfWorkModal"
+                                class="bg-[#163F75] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#163F75]/90 transition"
+                            >
+                                Quotation
+                            </button>
+                        </td>
                     </tr>
                     <!-- Example Row 2 -->
                     <tr class="border border-gray-800 hover:bg-gray-300">
                         <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
                             15:10:02 01.01.24
                         </td>
-                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
-                            <a
-                                href="#"
-                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
-                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
-                            >
-                                203456
-                            </a>
-                        </td>
                         <td class="py-3 px-4">Ahmed Rami</td>
                         <td class="py-3 px-4">Villa 20, AlNaseem, Rose Street, Diyar</td>
-                        <td class="py-3 px-4">BHD18.000</td>
-                        <td class="py-3 px-4 text-gray-600 font-semibold">Canceled</td>
-                        <td class="py-3 px-4">01:50:28</td>
+                        <td class="py-3 px-4">203456</td>
+                        <td class="py-3 px-4">Electrical</td>
+                        <td class="py-3 px-4 text-green-500 font-semibold">Normal</td>
+                        <td class="py-3 px-4 text-[#163F75]">Appliance Repair, Air Conditioning</td>
                         <td class="py-3 px-4 font-medium last:rounded-r-2xl">
-                            Canceled From Customer
+                            <button
+                                class="bg-[#F8F8F8] text-orange-500 text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#F8F8F8]/90 transition"
+                            >
+                                Execution
+                            </button>
                         </td>
                     </tr>
                     <!-- Example Row 3 -->
@@ -270,43 +305,60 @@
                         <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
                             13:49:06 01.01.24
                         </td>
-                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
-                            <a
-                                href="#"
-                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
-                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
-                            >
-                                203456
-                            </a>
-                        </td>
                         <td class="py-3 px-4">Hussam Arab</td>
                         <td class="py-3 px-4">Villa 289, AlNaseem, Rose Street, Diyar</td>
-                        <td class="py-3 px-4">BHD31.000</td>
-                        <td class="py-3 px-4 text-green-500 font-semibold">Completed</td>
-                        <td class="py-3 px-4">01:50:28</td>
-                        <td class="py-3 px-4 font-medium last:rounded-r-2xl"></td>
+                        <td class="py-3 px-4">203456</td>
+                        <td class="py-3 px-4">Electrical</td>
+                        <td class="py-3 px-4 text-green-500 font-semibold">Normal</td>
+                        <td class="py-3 px-4 text-[#163F75]">Exhaust Fan, Fuse Board, +1</td>
+                        <td class="py-3 px-4 font-medium last:rounded-r-2xl">
+                            <button
+                                class="bg-[#163F75] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#163F75]/90 transition"
+                            >
+                                Assigned
+                            </button>
+                        </td>
                     </tr>
                     <!-- Example Row 4 -->
                     <tr class="border border-gray-800 hover:bg-gray-300">
                         <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
                             12:25:11 01.01.24
                         </td>
-                        <td class="py-3 px-4 text-[#163F75] underline font-semibold cursor-pointer">
-                            <a
-                                href="#"
-                                onclick="document.getElementById('invoice-modal').classList.remove('hidden')"
-                                class="text-[#54B7C5] underline hover:text-[#3a9ca8]"
+                        <td class="py-3 px-4">Simon Rubby</td>
+                        <td class="py-3 px-4">Flat 401, Marassi Terraces, 82 Street, Diyar</td>
+                        <td class="py-3 px-4">-</td>
+                        <td class="py-3 px-4">Electrical</td>
+                        <td class="py-3 px-4 text-red-600 font-semibold">High</td>
+                        <td class="py-3 px-4 text-[#163F75]">
+                            Smoke Detector, Socket & Rewiring, +2
+                        </td>
+                        <td class="py-3 px-4 font-medium last:rounded-r-2xl">
+                            <button
+                                class="bg-[#F8F8F8] text-[#69B816] text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#F8F8F8]/90 transition"
                             >
-                                203456
-                            </a>
+                                Completed
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Example Row 5 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            12:25:11 01.01.24
                         </td>
                         <td class="py-3 px-4">Simon Rubby</td>
                         <td class="py-3 px-4">Flat 401, Marassi Terraces, 82 Street, Diyar</td>
-                        <td class="py-3 px-4">BHD10.000</td>
-                        <td class="py-3 px-4 text-red-600 font-semibold">Pending</td>
-                        <td class="py-3 px-4">01:50:28</td>
+                        <td class="py-3 px-4">-</td>
+                        <td class="py-3 px-4">Electrical</td>
+                        <td class="py-3 px-4 text-red-600 font-semibold">High</td>
+                        <td class="py-3 px-4 text-[#163F75]">
+                            Smoke Detector, Socket & Rewiring, +2
+                        </td>
                         <td class="py-3 px-4 font-medium last:rounded-r-2xl">
-                            Waiting to reschedule the order
+                            <button
+                                class="bg-[#F8F8F8] text-red-500 text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#F8F8F8]/90 transition"
+                            >
+                                On Hold
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -329,112 +381,248 @@
     </div>
 </div>
 
-<!-- Invoice Modal -->
+<!-- SOW Modal -->
 <div
-    id="invoice-modal"
+    id="scopeOfWorkModal"
     tabindex="-1"
-    class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-10 flex items-center justify-center backdrop-blur-sm"
+    aria-hidden="true"
+    class="fixed inset-0 z-50 hidden w-full h-full overflow-y-auto bg-black bg-opacity-50 flex justify-center items-center"
 >
-    <div
-        class="bg-white rounded-2xl shadow-xl w-full max-w-xl mx-4 md:mx-auto px-6 py-6 border border-gray-200"
-    >
-        <!-- Modal Title & Close -->
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold mx-auto text-center w-full">Order Details</h2>
-            <button
-                data-modal-hide="invoice-modal"
-                class="text-red-500 hover:text-red-600 font-medium text-sm absolute right-6 top-6"
-            >
-                Close ✕
-            </button>
-        </div>
+    <div class="relative w-full max-w-6xl p-4">
+        <div class="bg-[#F6F9FC] rounded-xl shadow-xl p-6">
+            <!-- Header: Ticket No, Title, Close -->
+            <div class="flex items-center justify-between mb-4">
+                <span class="bg-[#163F75] text-white text-s font-medium px-3 py-1 rounded-md">
+                    Ticket No. - 50202
+                </span>
 
-        <!-- Address + Invoice Number -->
-        <div class="mb-2 text-sm text-gray-700">
-            <div class="font-medium">V-100, AlNaseem</div>
-            <div class="text-gray-500">Avenue 69, Marassi, Diyar</div>
-        </div>
-        <div class="text-right text-sm text-gray-500 font-medium mb-3">Invoice #302</div>
+                <h2 class="text-xl font-semibold text-center flex-grow text-gray-800 -ml-16">
+                    Scope of Work
+                </h2>
 
-        <!-- Items Table with spacing and center alignment -->
-        <div class="overflow-x-auto flex justify-center my-4">
-            <table
-                class="table-fixed text-sm text-center border border-gray-300 rounded-xl w-full max-w-lg"
-            >
-                <thead class="bg-[#4dc0b5] text-white">
-                    <tr>
-                        <th class="px-4 py-2 border border-white rounded-l-md">Items</th>
-                        <th class="px-4 py-2 border-r border-white">Size</th>
-                        <th class="px-4 py-2 border-r border-white">Qty</th>
-                        <th class="px-4 py-2 border border-white rounded-r-md">Price</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white">
-                    <tr class="border-b border-gray-200">
-                        <!-- No left border -->
-                        <td class="py-4 border-r">Living Room</td>
-
-                        <!-- Middle columns with right border only -->
-                        <td class="py-4 border-r border-gray-200">Under 3 × 5 ft</td>
-                        <td class="py-4 border-r border-gray-200">02</td>
-
-                        <!-- No right border -->
-                        <td class="py-4">44.000</td>
-                    </tr>
-
-                    <tr class="border-b border-gray-200">
-                        <td class="py-4 border">Dining Room</td>
-                        <td class="py-4 border-r border-gray-200">Under 3 × 5 ft</td>
-                        <td class="py-4 border-r border-gray-200">01</td>
-                        <td class="py-4">22.000</td>
-                    </tr>
-
-                    <tr class="border-b border-gray-200">
-                        <td class="py-4 border">Kitchen</td>
-                        <td class="py-4 border-r border-gray-200">Under 3 × 5 ft</td>
-                        <td class="py-4 border-r border-gray-200">02</td>
-                        <td class="py-4">44.000</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Footer Invoice Info -->
-        <div class="grid grid-cols-2 gap-4 mt-6 text-sm">
-            <div>
-                <p class="text-gray-500">Start Date/Time</p>
-                <p class="font-semibold text-black">25-05-2024 10:00 AM</p>
+                <button
+                    data-modal-hide="scopeOfWorkModal"
+                    class="text-red-600 hover:text-red-800 text-xl font-bold"
+                >
+                    Close &times;
+                </button>
             </div>
-            <div class="text-right space-y-1">
-                <p>
-                    <span class="text-gray-500">Delivery Fee</span>
-                    <span class="ml-4">00</span>
-                </p>
-                <p>
-                    <span class="text-gray-500">Tax</span>
-                    <span class="ml-10">13.200</span>
-                </p>
+
+            <!-- Horizontal Divider -->
+            <hr class="border-t border-gray-300 mb-6" />
+
+            <!-- Vertical Split Layout -->
+            <div class="relative flex flex-col md:flex-row gap-6">
+                <!-- Vertical Divider (centered) -->
+                <div
+                    class="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 transform -translate-x-1/2 hidden md:block"
+                ></div>
+
+                <!-- Left Side -->
+                <div class="md:w-1/2 mx-auto px-6 space-y-4 text-[15px] text-gray-800">
+                    <!-- Address Section -->
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800">
+                            Flat 312, Marassi Residence
+                        </p>
+                        <p class="text-gray-500">Bld, 2122 Street, Diyar</p>
+                    </div>
+                    <hr />
+
+                    <!-- Maintenance and Priority -->
+                    <div class="flex justify-between text-[15px]">
+                        <div>
+                            <p class="text-gray-500">Maintenance:</p>
+                            <p class="font-semibold text-gray-800">Electrical</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">Priority Level:</p>
+                            <p class="font-semibold text-gray-800">Normal</p>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <!-- Service Section -->
+                    <div>
+                        <p class="text-gray-500">Service:</p>
+                        <p class="font-semibold text-gray-800">
+                            Lighting, Socket & Rewiring, Appliance Repair, Exhaust Fan
+                        </p>
+                    </div>
+                    <hr />
+
+                    <!-- Visit Date and Time -->
+                    <div>
+                        <p class="text-gray-500">Labour's Visit Date/Time:</p>
+                        <p class="font-semibold text-gray-800">25-01-2024 &nbsp; 10:00 AM</p>
+                    </div>
+                    <hr />
+
+                    <!-- Media Section -->
+                    <div>
+                        <p class="text-gray-500 mb-2">Photo/Video:</p>
+                        <div class="flex gap-4">
+                            <!-- Image Thumbnail -->
+                            <img
+                                src="http://192.168.1.82:3003/images/icons/quotationimage.jpg"
+                                alt="Photo"
+                                class="w-[230px] h-[140px] rounded-md object-cover border cursor-pointer"
+                                onclick="openMediaModal(this.src, 'image')"
+                            />
+
+                            <!-- Video Thumbnail -->
+                            <video
+                                class="w-[230px] max-h-[140px] rounded-md border object-cover"
+                                onclick="openMediaModal('http://192.168.1.82:3003/images/icons/AdvancedTeam.mp4', 'video')"
+                                controls
+                            >
+                                <source
+                                    src="http://192.168.1.82:3003/images/icons/AdvancedTeam.mp4"
+                                    type="video/mp4"
+                                />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                    <div class="flex justify-center items-center">
+                        <% if (request.status === 'new') { %>
+                        <button
+                            data-modal-target="quotationUploadModal"
+                            data-modal-toggle="quotationUploadModal"
+                            class="bg-[#163F75] text-white px-10 py-2 rounded-md hover:bg-[#163F75]/90 mt-10"
+                        >
+                            Quotation
+                        </button>
+                        <% } else if (request.status === 'rejected') { %>
+                        <div class="flex flex-col text-[15px] mt-4">
+                            <span class="text-gray-500">Reason for Rejection:</span>
+                            <p class="mt-2 font-semibold text-gray-800">
+                                <%= request.rejectionReason %>
+                            </p>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+
+                <!-- Right Side -->
+                <div class="md:w-1/2 flex flex-col gap-4">
+                    <!-- Status Label and Value -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-gray-700 font-medium">Status:</span>
+                        <% if (request.status === 'completed') { %>
+                        <span class="bg-white text-[#69B816] text-m px-7 py-2 rounded-full">
+                            Completed
+                        </span>
+                        <% } else if (request.status === 'rejected') { %>
+                        <span class="bg-white text-gray-500 text-m px-7 py-2 rounded-full">
+                            Resident Rejected
+                        </span>
+                        <% } else if (request.status === 'new') { %>
+                        <span class="bg-white text-[#163F75] text-m px-7 py-2 rounded-full">
+                            New Request
+                        </span>
+                        <% } %>
+                    </div>
+
+                    <!-- SOW Image -->
+                    <img
+                        onclick="openMediaModal(this.src, 'image')"
+                        src="http://192.168.1.82:3003/images/icons/sowpng.png"
+                        alt="Scope of Work"
+                        class="rounded-lg border shadow w-full object-contain cursor-pointer"
+                    />
+                </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- Total Row aligned to right -->
-        <div class="flex justify-end mt-5">
-            <div
-                class="bg-[#4dc0b5] text-white rounded-full py-2 px-4 flex justify-between items-center font-semibold text-base w-64"
-            >
-                <span>Total Price</span>
-                <span>145.200</span>
+<!-- Upload Invoice Quotation Modal -->
+<div
+    id="quotationUploadModal"
+    tabindex="-1"
+    aria-hidden="true"
+    class="fixed inset-0 z-50 hidden w-full h-full overflow-y-auto bg-black bg-opacity-50 flex justify-center items-center"
+>
+    <div class="relative w-full max-w-3xl p-4">
+        <div class="bg-[#F6F9FC] rounded-xl shadow-xl p-6">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold text-center w-full text-gray-800">Quotation</h2>
+                <button
+                    data-modal-hide="quotationUploadModal"
+                    class="absolute right-6 mr-3 text-red-600 hover:text-red-800 text-xl font-bold"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <hr class="border-t border-gray-300 mb-6" />
+
+            <!-- Centered Form Section -->
+            <div class="flex flex-col items-center justify-center gap-6">
+                <!-- Upload Box -->
+                <label
+                    for="emergencyUpload"
+                    class="flex flex-col items-center justify-center cursor-pointer text-gray-500 hover:text-gray-700 border-dashed border-2 border-gray-300 rounded-lg p-8 bg-gray-50 w-80"
+                >
+                    <svg
+                        width="40"
+                        height="40"
+                        fill="none"
+                        viewBox="0 0 20 20"
+                        stroke="black"
+                        stroke-width="1.5"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6.15888 7.48807H5.38138C3.68555 7.48807 2.31055 8.86307 2.31055 10.5589V14.6214C2.31055 16.3164 3.68555 17.6914 5.38138 17.6914H14.6564C16.3522 17.6914 17.7272 16.3164 17.7272 14.6214V10.5506C17.7272 8.85974 16.3564 7.48807 14.6655 7.48807H13.8797"
+                        />
+                        <path
+                            d="M10.0182 1.82521V11.8594"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M7.58984 4.26562L10.019 1.82562L12.449 4.26562"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                    <span class="mt-2 text-sm">Please Upload Here (PDF)</span>
+                    <input
+                        type="file"
+                        id="emergencyUpload"
+                        name="emergencyFile"
+                        accept="application/pdf/png/jpeg/jpg"
+                        class="hidden shadow-xl"
+                    />
+                </label>
+
+                <!-- Amount Input -->
+                <input
+                    type="text"
+                    placeholder="Payable Amount (Ex - 12.00 BHD)"
+                    class="w-80 px-4 py-3 rounded-lg shadow-xl placeholder-gray-500 text-sm text-gray-700 bg-white focus:outline-none"
+                />
+
+                <!-- Submit Button -->
+                <button
+                    class="w-80 bg-[#133C8B] hover:bg-[#0f2f6c] text-white py-3 rounded-lg text-sm font-semibold"
+                >
+                    Send Quotation
+                </button>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- Action Button -->
-        <div class="mt-6 text-center">
-            <button
-                class="w-[350px] py-2 rounded-lg bg-[#163f75] text-white font-medium text-base hover:bg-blue-800"
-            >
-                Complete
-            </button>
-        </div>
+<!-- Media Modal -->
+<div id="mediaModal" class="modal" onclick="closeMediaModal()">
+    <span class="close" onclick="closeMediaModal()">&times;</span>
+    <div id="modalContent" class="modal-content-box">
+        <!-- Dynamic image/video will be inserted here -->
     </div>
 </div>
 
@@ -463,6 +651,38 @@
     document.getElementById("invoice-modal").addEventListener("click", function (e) {
         if (e.target === this) {
             this.classList.add("hidden");
+        }
+    });
+
+    function openMediaModal(src, type) {
+        const modal = document.getElementById("mediaModal");
+        const content = document.getElementById("modalContent");
+
+        if (type === "image") {
+            content.innerHTML = `<img src="${src}" alt="Full Image">`;
+        } else if (type === "video") {
+            content.innerHTML = `
+                <video controls autoplay>
+                    <source src="${src}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
+        }
+
+        modal.style.display = "flex";
+    }
+
+    function closeMediaModal() {
+        const modal = document.getElementById("mediaModal");
+        const content = document.getElementById("modalContent");
+        content.innerHTML = ""; // Clear previous content
+        modal.style.display = "none";
+    }
+
+    // Optional: ESC key to close modal
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            closeMediaModal();
         }
     });
 </script>

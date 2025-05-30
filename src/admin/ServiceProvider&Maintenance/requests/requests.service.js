@@ -29,6 +29,13 @@ class requestsServices {
                 {
                     currentPage: "requests",
                     layout: "adminPanels/serviceProvider&Maintenance/layouts/layout",
+                    request: {
+                        status: "new",
+                        // status: "completed",
+                        // status: "rejected",
+                        // rejectionReason:
+                        //     "Reason for the rejection is that the cost was considered too high.",
+                    },
                 }
             );
         }
