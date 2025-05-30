@@ -1,0 +1,379 @@
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<div class="bg-[#f7f6f5] rounded-[100px] flex-1 justify-center items-center">
+    <!-- Breadcrumb -->
+    <div class="flex p-10 ml-10 items-center space-x-4">
+        <h3 class="text-gray-600 text-lg">Invoices</h3>
+        <div class="w-px h-7 bg-gray-300"></div>
+        <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M4.66667 8C2 8 2 9.19333 2 10.6667V11.3333C2 13.1733 2 14.6667 5.33333 14.6667H10.6667C13.3333 14.6667 14 13.1733 14 11.3333V10.6667C14 9.19333 14 8 11.3333 8C10.6667 8 10.48 8.14 10.1333 8.4L9.45333 9.12C8.66667 9.96 7.33333 9.96 6.54 9.12L5.86667 8.4C5.52 8.14 5.33333 8 4.66667 8Z"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M12.6693 7.9987V3.9987C12.6693 2.52536 12.6693 1.33203 10.0026 1.33203H6.0026C3.33594 1.33203 3.33594 2.52536 3.33594 3.9987V7.9987"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M7.03125 6.15234H9.25125"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M6.47656 4.15234H9.8099"
+                stroke="#163F75"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+    </div>
+
+    <!-- Card -->
+    <div class="w-[1400px] bg-white rounded-2xl p-4 mx-auto">
+        <!-- Filter -->
+        <div class="flex justify-end gap-4 items-end pr-4 align-center">
+            <div class="">
+                <button
+                    data-modal-target="addTechnicianModal"
+                    data-modal-toggle="addTechnicianModal"
+                    class="text-sm font-semibold text-[#163F75] border border-[#163F75] px-4 py-2.5 rounded-xl hover:bg-[#163F75]/10 transition"
+                >
+                    + Add Technician
+                </button>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="mt-6 overflow-x-auto">
+            <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+                <thead class="bg-[#f4f4f4] text-gray-600 text-sm">
+                    <tr>
+                        <th class="text-left py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">
+                            ID
+                        </th>
+                        <th class="text-left py-3 px-4">Technician Name</th>
+                        <th class="text-left py-3 px-4">Status</th>
+                        <th class="text-left py-3 px-4">Career</th>
+                        <th class="text-left py-3 px-4">Phone Number</th>
+                        <th class="text-left py-3 px-4">Email</th>
+                        <th class="text-left py-3 px-4">Branch</th>
+                        <th class="text-left py-3 px-4 last:rounded-r-2xl">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-sm">
+                    <!-- Example Row 1 -->
+                    <tr class="border border-gray-800 hover:bg-gray-300">
+                        <td class="py-3 px-4 first:rounded-l-2xl last:rounded-r-2xl">01</td>
+                        <td class="flex items-center p-4 mr-12 space-x-1 whitespace-nowrap">
+                            <img
+                                class="w-10 h-10 rounded-full"
+                                src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png"
+                                alt="Neil Sims avatar"
+                            />
+                            <div class="text-base font-semibold text-gray-900">Raju Sharma</div>
+                        </td>
+                        <td class="py-3 px-4">
+                            <div class="">
+                                <select
+                                    class="w-[120px] appearance-none bg-[#F8F8F8] font-medium py-2 pl-4 pr-6 rounded-xl cursor-pointer"
+                                >
+                                    <option class="text-green-600 font-semibold" value="available">
+                                        Available
+                                    </option>
+                                    <option class="text-red-600 font-semibold" value="busy">
+                                        Busy
+                                    </option>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="py-3 px-4">Electrical Technician</td>
+                        <td class="py-3 px-4">+97312345678</td>
+                        <td class="py-3 px-4">raju@electricalhub.com</td>
+                        <td class="py-3 px-4">01</td>
+                        <td class="py-3 px-4 flex items-center gap-2 last:rounded-r-2xl">
+                            <!-- Edit -->
+                            <button
+                                data-modal-target=""
+                                data-modal-toggle=""
+                                class="p-1.5 rounded-full hover:bg-blue-100 transition"
+                            >
+                                <svg
+                                    width="30"
+                                    height="30"
+                                    viewBox="0 0 30 30"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <rect
+                                        x="0.5"
+                                        y="0.5"
+                                        width="29"
+                                        height="29"
+                                        rx="8.5"
+                                        stroke="#F2F2F2"
+                                    />
+                                    <path
+                                        d="M22.2051 15.0073C21.9928 15.0073 21.7893 15.0916 21.6392 15.2417C21.4891 15.3918 21.4048 15.5953 21.4048 15.8076V20.6092C21.4048 20.8214 21.3205 21.025 21.1704 21.1751C21.0204 21.3252 20.8168 21.4095 20.6046 21.4095H9.4008C9.18856 21.4095 8.98501 21.3252 8.83493 21.1751C8.68485 21.025 8.60054 20.8214 8.60054 20.6092V9.40544C8.60054 9.1932 8.68485 8.98965 8.83493 8.83957C8.98501 8.68949 9.18856 8.60518 9.4008 8.60518H14.2024C14.4147 8.60518 14.6182 8.52086 14.7683 8.37078C14.9184 8.2207 15.0027 8.01715 15.0027 7.80491C15.0027 7.59266 14.9184 7.38911 14.7683 7.23903C14.6182 7.08895 14.4147 7.00464 14.2024 7.00464H9.4008C8.76407 7.00464 8.15342 7.25758 7.70318 7.70782C7.25294 8.15806 7 8.76871 7 9.40544V20.6092C7 21.2459 7.25294 21.8566 7.70318 22.3068C8.15342 22.7571 8.76407 23.01 9.4008 23.01H20.6046C21.2413 23.01 21.8519 22.7571 22.3022 22.3068C22.7524 21.8566 23.0054 21.2459 23.0054 20.6092V15.8076C23.0054 15.5953 22.921 15.3918 22.771 15.2417C22.6209 15.0916 22.4173 15.0073 22.2051 15.0073ZM10.2011 15.6155V19.0087C10.2011 19.2209 10.2854 19.4245 10.4355 19.5745C10.5855 19.7246 10.7891 19.8089 11.0013 19.8089H14.3945C14.4998 19.8095 14.6042 19.7894 14.7017 19.7495C14.7992 19.7097 14.8879 19.651 14.9627 19.5768L20.5005 14.031L22.7733 11.8062C22.8483 11.7319 22.9078 11.6433 22.9485 11.5458C22.9891 11.4483 23.01 11.3437 23.01 11.2381C23.01 11.1324 22.9891 11.0278 22.9485 10.9303C22.9078 10.8328 22.8483 10.7443 22.7733 10.6699L19.3801 7.23672C19.3057 7.16171 19.2172 7.10217 19.1197 7.06155C19.0222 7.02092 18.9176 7 18.812 7C18.7063 7 18.6017 7.02092 18.5042 7.06155C18.4067 7.10217 18.3182 7.16171 18.2438 7.23672L15.987 9.50148L10.4331 15.0473C10.359 15.1221 10.3003 15.2108 10.2605 15.3083C10.2206 15.4058 10.2005 15.5102 10.2011 15.6155ZM18.812 8.93329L21.0767 11.198L19.9403 12.3344L17.6756 10.0697L18.812 8.93329ZM11.8016 15.9436L16.5472 11.198L18.812 13.4628L14.0664 18.2084H11.8016V15.9436Z"
+                                        fill="#54B7C5"
+                                    />
+                                </svg>
+                            </button>
+                            <!-- Delete -->
+                            <button class="p-2 hover:bg-red-50 rounded-full">
+                                <svg
+                                    class="w-6 h-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="#F26E6E"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
+                                    />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-4 px-4 text-sm text-gray-500">
+                <span>Showing 1 of 28</span>
+                <div class="flex gap-2">
+                    <button class="text-gray-500">&lt;</button>
+                    <button class="font-bold text-black">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                    <button class="text-gray-500">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Technician Modal -->
+<div
+    id="addTechnicianModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 hidden"
+>
+    <div class="bg-[#F6F9FC] rounded-2xl w-full max-w-2xl shadow-2xl">
+        <!-- Header -->
+        <div class="flex justify-between items-center px-6 pt-6">
+            <h3 class="text-xl font-semibold text-center text-gray-800 w-full">Add Technician</h3>
+            <button
+                class="text-red-500 hover:text-red-700 text-md font-medium"
+                data-modal-hide="addTechnicianModal"
+            >
+                Close
+            </button>
+        </div>
+
+        <!-- Photo Upload -->
+        <div class="flex flex-col items-center my-6">
+            <div class="relative w-24 h-24">
+                <div
+                    id="profilePlaceholder"
+                    class="w-24 h-24 rounded-full border-4 border-[#57C1D1] flex items-center justify-center bg-white shadow-md"
+                >
+                    <svg
+                        class="w-10 h-10 text-gray-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M7 17v1a1 1 0 001 1h8a1 1 0 001-1v-1a3 3 0 00-3-3h-4a3 3 0 00-3 3Zm8-9a3 3 0 11-6 0 3 3 0 016 0Z"
+                        />
+                    </svg>
+                </div>
+                <input id="imageUpload" type="file" accept="image/*" class="hidden" />
+                <label
+                    for="imageUpload"
+                    class="absolute bottom-0 right-0 bg-[#57C1D1] text-white p-1.5 rounded-full cursor-pointer shadow-md"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                        />
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                    </svg>
+                </label>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">Technician Photo</p>
+        </div>
+
+        <!-- Form Fields -->
+        <div class="space-y-4 px-6 pb-6 w-full flex flex-col justify-center items-center">
+            <input
+                type="text"
+                placeholder="Full Name"
+                class="w-[90%] max-w-[400px] px-4 py-3 rounded-xl border bg-white shadow-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+            />
+            <input
+                type="text"
+                placeholder="Career"
+                class="w-[90%] max-w-[400px] px-4 py-3 rounded-xl border bg-white shadow-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+            />
+
+            <!-- Phone with Flag -->
+            <div class="w-[90%] max-w-[400px]">
+                <div
+                    class="flex items-center rounded-xl border bg-white shadow-xl px-4 py-3 space-x-3"
+                >
+                    <div class="relative flex items-center space-x-1">
+                        <select
+                            id="loginCountrySelect"
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        >
+                            <option value="bh" selected>Bahrain</option>
+                            <option value="sa">Saudi Arabia</option>
+                            <option value="ae">UAE</option>
+                            <option value="qa">Qatar</option>
+                            <option value="kw">Kuwait</option>
+                            <option value="om">Oman</option>
+                        </select>
+                        <img
+                            id="loginFlagIcon"
+                            src="https://flagcdn.com/w40/bh.png"
+                            class="w-6 h-4 object-cover border rounded"
+                            alt="Flag"
+                        />
+                        <svg
+                            class="w-2.5 h-2.5 text-gray-600 pointer-events-none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 10 6"
+                        >
+                            <path
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="m1 1 4 4 4-4"
+                            />
+                        </svg>
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Contact Number"
+                        class="w-full text-sm focus:outline-none"
+                    />
+                </div>
+            </div>
+
+            <input
+                type="email"
+                placeholder="Email Address"
+                class="w-[90%] max-w-[400px] px-4 py-3 rounded-xl border bg-white shadow-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+            />
+            <input
+                type="text"
+                placeholder="Branch"
+                class="w-[90%] max-w-[400px] px-4 py-3 rounded-xl border bg-white shadow-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+            />
+
+            <!-- Save Button -->
+            <button
+                class="w-[90%] max-w-[400px] mt-2 py-3 text-white bg-[#163F75] hover:bg-[#163F75]/90 rounded-xl font-semibold shadow-md transition"
+            >
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+<script src="https://unpkg.com/flowbite/dist/flowbite.turbo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite-datepicker@1.3.1/dist/datepicker.min.js"></script>
+
+<script>
+    const imageUpload = document.getElementById("imageUpload");
+    const profilePlaceholder = document.getElementById("profilePlaceholder");
+
+    imageUpload.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profilePlaceholder.innerHTML = `
+          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
+        `;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    // For Edit Modal
+    const imageUploadEdit = document.getElementById("imageUpload-edit");
+    const profilePlaceholderEdit = document.getElementById("profilePlaceholder-edit");
+
+    imageUploadEdit.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profilePlaceholderEdit.innerHTML = `
+          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
+        `;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    const flagMap = {
+        bh: "https://flagcdn.com/w40/bh.png",
+        sa: "https://flagcdn.com/w40/sa.png",
+        ae: "https://flagcdn.com/w40/ae.png",
+        qa: "https://flagcdn.com/w40/qa.png",
+        kw: "https://flagcdn.com/w40/kw.png",
+        om: "https://flagcdn.com/w40/om.png",
+    };
+    // For login form
+    document.getElementById("loginCountrySelect").addEventListener("change", function () {
+        document.getElementById("loginFlagIcon").src = flagMap[this.value];
+    });
+</script>

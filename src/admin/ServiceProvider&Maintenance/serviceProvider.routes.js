@@ -9,6 +9,7 @@ import calendarRoutes from "./calendar/calendar.routes";
 import invoicesRoutes from "./invoices/invoices.routes";
 import settingsRoutes from "./settings/settings.routes";
 import faqsRoutes from "./FAQs/FAQs.routes";
+import technicianRoutes from "./technician/technician.routes";
 const router = express.Router();
 
 router.get("/login", asyncWrap(serviceProviderController.loginPage));
@@ -47,6 +48,8 @@ router.use("/spadmin/requests", requestsRoutes);
 router.use("/spadmin/feedback", feedbackRoutes);
 
 router.use("/spadmin/products", productsRoutes);
+
+router.use("/spadmin/technician", technicianRoutes);
 
 router.use("/spadmin/calendar", calendarRoutes);
 
