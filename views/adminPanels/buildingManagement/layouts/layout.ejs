@@ -6,6 +6,22 @@
         <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script>
+        <style>
+            .active-menu-item {
+                background-color: #f7f6f5 !important;
+                color: #163f75;
+                font-weight: 500;
+                width: calc(93% + 16px);
+                border-top-left-radius: 50px;
+                border-bottom-left-radius: 50px;
+                position: relative;
+                z-index: 1;
+                padding-left: 24px;
+            }
+            .active-menu-item:hover {
+                background-color: #54b7c5 !important;
+            }
+        </style>
     </head>
     <body class="bg-gradient-to-b from-[#163F75] to-[#54B7C5] h-screen flex">
         <aside class="w-[290px] h-screen text-white px-4 py-6">
@@ -23,8 +39,8 @@
                 <ul class="space-y-2 text-sm">
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 pl-3 rounded-lg hover:bg-[#54B7C5]/90 relative"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/dashboard"
+                            class="sidebar-link flex items-center p-2 pl-3 rounded-lg hover:bg-[#54B7C5]/90 relative <%= currentPage === 'dashboard' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <!-- White dot indicator on the left -->
                             <span
@@ -71,8 +87,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/users/residentowner"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'users' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -103,8 +119,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/events"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'events' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -127,8 +143,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/reservations"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'reservations' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -176,8 +192,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/security"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'security' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -198,8 +214,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/maintenance"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'maintenance' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -237,8 +253,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'theoffice' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -290,8 +306,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/invoices"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'invoices' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -337,8 +353,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/pushnotification"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'notification' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -367,8 +383,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/feedback"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'feedback' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -423,8 +439,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/settings"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'settings' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -459,8 +475,8 @@
                     </li>
                     <li>
                         <a
-                            href="#"
-                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/faqs"
+                            class="sidebar-link flex items-center p-2 rounded-lg hover:bg-[#54B7C5]/90 hover:text-white <%= currentPage === 'FAQs' ? 'active-menu-item' : 'hover:bg-[#153A70] rounded-xl' %>"
                         >
                             <svg
                                 class="mr-3"
@@ -500,12 +516,45 @@
             </div>
         </aside>
         <div class="flex-1 overflow-y-hidden">
-            <div class="px-6 flex items-center justify-end text-white">
+            <div class="px-4 flex items-center justify-end text-white">
                 <div class="flex items-center gap-8 h-[110px] pr-6">
                     <!-- Support Icon with Badge -->
                     <div class="relative flex flex-col items-center text-white text-sm">
                         <div class="relative">
-                            <!-- Icon -->
+                            <a
+                                class="cursor-pointer"
+                                href="<%= process.env.APP_URL_ADMIN %>/bmadmin/"
+                            >
+                                <!-- Icon -->
+                                <svg
+                                    width="26"
+                                    height="26"
+                                    viewBox="0 0 26 26"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M10.4746 17.7685L10.4729 17.7633C10.3636 17.7299 10.255 17.6945 10.1471 17.657C8.59837 17.1085 7.2394 16.1273 6.23133 14.8299C5.41677 13.781 4.85707 12.5571 4.59638 11.2549C4.33569 9.95267 4.38114 8.60768 4.72913 7.32601C5.07713 6.04435 5.71817 4.86107 6.60167 3.86951C7.48517 2.87795 8.58698 2.10524 9.82019 1.61232C11.0534 1.11939 12.3843 0.919746 13.7078 1.02912C15.0314 1.1385 16.3114 1.55391 17.447 2.24258C18.5825 2.93125 19.5426 3.87435 20.2513 4.99749C20.9601 6.12063 21.3981 7.39309 21.531 8.71449C21.5773 9.18596 21.1881 9.57 20.715 9.57C20.2418 9.57 19.8629 9.18425 19.8063 8.71449C19.6533 7.50209 19.1791 6.3526 18.4328 5.38495C17.6865 4.4173 16.6951 3.66666 15.5614 3.21068C14.4276 2.7547 13.1926 2.60996 11.9841 2.79142C10.7757 2.97289 9.63763 3.47397 8.6878 4.24283C7.73796 5.01169 7.01082 6.02038 6.58162 7.16455C6.15242 8.30871 6.03674 9.54678 6.24656 10.7507C6.45638 11.9545 6.98408 13.0805 7.77505 14.012C8.56602 14.9435 9.59153 15.6467 10.7455 16.0489C11.0365 15.518 11.5056 15.1068 12.07 14.8878C12.6344 14.6687 13.2581 14.6559 13.831 14.8514C14.404 15.0469 14.8897 15.4384 15.2024 15.9568C15.5152 16.4752 15.635 17.0873 15.5408 17.6854C15.4466 18.2835 15.1444 18.8291 14.6874 19.2263C14.2304 19.6234 13.648 19.8466 13.0426 19.8566C12.4372 19.8665 11.8478 19.6625 11.378 19.2805C10.9083 18.8986 10.5883 18.3631 10.4746 17.7685ZM9.11503 19.0972C7.43672 18.4102 5.96904 17.2932 4.85978 15.8586C4.57746 16.2807 4.42707 16.7772 4.42774 17.285V18.1422C4.42774 21.5214 7.6166 25 13 25C18.3833 25 21.5722 21.5214 21.5722 18.1422V17.285C21.5722 16.603 21.3012 15.9488 20.819 15.4666C20.3367 14.9843 19.6826 14.7133 19.0005 14.7133H16.4288C16.7884 15.1936 17.0432 15.7439 17.1767 16.3288C17.3101 16.9138 17.3193 17.5202 17.2036 18.1088C17.0879 18.6975 16.8499 19.2554 16.505 19.7463C16.1602 20.2371 15.7161 20.6502 15.2015 20.9586C14.6869 21.267 14.1133 21.464 13.5178 21.5368C12.9223 21.6095 12.3181 21.5565 11.7444 21.381C11.1707 21.2056 10.6402 20.9116 10.1873 20.5182C9.73436 20.1248 9.36906 19.6407 9.11503 19.0972ZM18.1433 9.57C18.1433 8.003 17.4421 6.59887 16.3363 5.65592C15.7963 5.19859 15.1679 4.85758 14.4901 4.65423C13.8124 4.45087 13.1 4.38954 12.3975 4.47407C11.695 4.5586 11.0175 4.78717 10.4073 5.14549C9.79721 5.50381 9.26756 5.98417 8.85154 6.55653C8.43552 7.12888 8.14207 7.78093 7.98954 8.47187C7.83701 9.16281 7.82869 9.87779 7.9651 10.5721C8.10151 11.2664 8.37971 11.9251 8.7823 12.507C9.18489 13.0889 9.70321 13.5814 10.3049 13.9538C11.0665 13.3346 12.0183 12.9967 13 12.9972C13.9812 12.9957 14.9329 13.3324 15.6951 13.9504C16.4435 13.4903 17.0615 12.8461 17.4901 12.0793C17.9187 11.3124 18.1436 10.4485 18.1433 9.57Z"
+                                        fill="white"
+                                    />
+                                </svg>
+                                <!-- Notification Badge -->
+                                <span
+                                    class="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center"
+                                >
+                                    4
+                                </span>
+                            </a>
+                        </div>
+                        <span class="">Support</span>
+                    </div>
+
+                    <!-- Notification Icon with Badge -->
+                    <div class="relative">
+                        <a
+                            class="cursor-pointer"
+                            href="<%= process.env.APP_URL_ADMIN %>/bmadmin/notification"
+                        >
                             <svg
                                 width="26"
                                 height="26"
@@ -514,41 +563,18 @@
                                 xmlns="http://www.w3.org/2000/svg"
                             >
                                 <path
-                                    d="M10.4746 17.7685L10.4729 17.7633C10.3636 17.7299 10.255 17.6945 10.1471 17.657C8.59837 17.1085 7.2394 16.1273 6.23133 14.8299C5.41677 13.781 4.85707 12.5571 4.59638 11.2549C4.33569 9.95267 4.38114 8.60768 4.72913 7.32601C5.07713 6.04435 5.71817 4.86107 6.60167 3.86951C7.48517 2.87795 8.58698 2.10524 9.82019 1.61232C11.0534 1.11939 12.3843 0.919746 13.7078 1.02912C15.0314 1.1385 16.3114 1.55391 17.447 2.24258C18.5825 2.93125 19.5426 3.87435 20.2513 4.99749C20.9601 6.12063 21.3981 7.39309 21.531 8.71449C21.5773 9.18596 21.1881 9.57 20.715 9.57C20.2418 9.57 19.8629 9.18425 19.8063 8.71449C19.6533 7.50209 19.1791 6.3526 18.4328 5.38495C17.6865 4.4173 16.6951 3.66666 15.5614 3.21068C14.4276 2.7547 13.1926 2.60996 11.9841 2.79142C10.7757 2.97289 9.63763 3.47397 8.6878 4.24283C7.73796 5.01169 7.01082 6.02038 6.58162 7.16455C6.15242 8.30871 6.03674 9.54678 6.24656 10.7507C6.45638 11.9545 6.98408 13.0805 7.77505 14.012C8.56602 14.9435 9.59153 15.6467 10.7455 16.0489C11.0365 15.518 11.5056 15.1068 12.07 14.8878C12.6344 14.6687 13.2581 14.6559 13.831 14.8514C14.404 15.0469 14.8897 15.4384 15.2024 15.9568C15.5152 16.4752 15.635 17.0873 15.5408 17.6854C15.4466 18.2835 15.1444 18.8291 14.6874 19.2263C14.2304 19.6234 13.648 19.8466 13.0426 19.8566C12.4372 19.8665 11.8478 19.6625 11.378 19.2805C10.9083 18.8986 10.5883 18.3631 10.4746 17.7685ZM9.11503 19.0972C7.43672 18.4102 5.96904 17.2932 4.85978 15.8586C4.57746 16.2807 4.42707 16.7772 4.42774 17.285V18.1422C4.42774 21.5214 7.6166 25 13 25C18.3833 25 21.5722 21.5214 21.5722 18.1422V17.285C21.5722 16.603 21.3012 15.9488 20.819 15.4666C20.3367 14.9843 19.6826 14.7133 19.0005 14.7133H16.4288C16.7884 15.1936 17.0432 15.7439 17.1767 16.3288C17.3101 16.9138 17.3193 17.5202 17.2036 18.1088C17.0879 18.6975 16.8499 19.2554 16.505 19.7463C16.1602 20.2371 15.7161 20.6502 15.2015 20.9586C14.6869 21.267 14.1133 21.464 13.5178 21.5368C12.9223 21.6095 12.3181 21.5565 11.7444 21.381C11.1707 21.2056 10.6402 20.9116 10.1873 20.5182C9.73436 20.1248 9.36906 19.6407 9.11503 19.0972ZM18.1433 9.57C18.1433 8.003 17.4421 6.59887 16.3363 5.65592C15.7963 5.19859 15.1679 4.85758 14.4901 4.65423C13.8124 4.45087 13.1 4.38954 12.3975 4.47407C11.695 4.5586 11.0175 4.78717 10.4073 5.14549C9.79721 5.50381 9.26756 5.98417 8.85154 6.55653C8.43552 7.12888 8.14207 7.78093 7.98954 8.47187C7.83701 9.16281 7.82869 9.87779 7.9651 10.5721C8.10151 11.2664 8.37971 11.9251 8.7823 12.507C9.18489 13.0889 9.70321 13.5814 10.3049 13.9538C11.0665 13.3346 12.0183 12.9967 13 12.9972C13.9812 12.9957 14.9329 13.3324 15.6951 13.9504C16.4435 13.4903 17.0615 12.8461 17.4901 12.0793C17.9187 11.3124 18.1436 10.4485 18.1433 9.57Z"
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M20.2661 9.52871C20.2661 10.8893 20.6257 11.6913 21.4171 12.6154C22.0168 13.2962 22.2084 14.1702 22.2084 15.1184C22.2084 16.0654 21.8973 16.9645 21.2739 17.6944C20.4577 18.5695 19.3068 19.1281 18.1321 19.2252C16.4299 19.3704 14.7265 19.4926 13.0006 19.4926C11.2736 19.4926 9.57138 19.4195 7.86915 19.2252C6.69341 19.1281 5.54244 18.5695 4.72739 17.6944C4.10399 16.9645 3.79175 16.0654 3.79175 15.1184C3.79175 14.1702 3.98447 13.2962 4.58311 12.6154C5.39924 11.6913 5.73516 10.8893 5.73516 9.52871V9.06717C5.73516 7.24505 6.18952 6.05358 7.12516 4.8872C8.51623 3.18619 10.746 2.16602 12.9522 2.16602H13.0491C15.3026 2.16602 17.6045 3.23529 18.9719 5.0094C19.8591 6.15178 20.2661 7.29306 20.2661 9.06717V9.52871ZM9.8299 21.7319C9.8299 21.1864 10.3306 20.9365 10.7935 20.8296C11.3351 20.715 14.6351 20.715 15.1767 20.8296C15.6397 20.9365 16.1403 21.1864 16.1403 21.7319C16.1134 22.2513 15.8087 22.7117 15.3877 23.0041C14.8419 23.4297 14.2012 23.6992 13.5315 23.7963C13.1612 23.8443 12.7972 23.8454 12.4398 23.7963C11.769 23.6992 11.1284 23.4297 10.5836 23.003C10.1615 22.7117 9.85681 22.2513 9.8299 21.7319Z"
                                     fill="white"
                                 />
                             </svg>
-                            <!-- Notification Badge -->
                             <span
                                 class="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center"
                             >
-                                4
+                                2
                             </span>
-                        </div>
-                        <span class="">Support</span>
-                    </div>
-
-                    <!-- Notification Icon with Badge -->
-                    <div class="relative">
-                        <svg
-                            width="26"
-                            height="26"
-                            viewBox="0 0 26 26"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                clip-rule="evenodd"
-                                d="M20.2661 9.52871C20.2661 10.8893 20.6257 11.6913 21.4171 12.6154C22.0168 13.2962 22.2084 14.1702 22.2084 15.1184C22.2084 16.0654 21.8973 16.9645 21.2739 17.6944C20.4577 18.5695 19.3068 19.1281 18.1321 19.2252C16.4299 19.3704 14.7265 19.4926 13.0006 19.4926C11.2736 19.4926 9.57138 19.4195 7.86915 19.2252C6.69341 19.1281 5.54244 18.5695 4.72739 17.6944C4.10399 16.9645 3.79175 16.0654 3.79175 15.1184C3.79175 14.1702 3.98447 13.2962 4.58311 12.6154C5.39924 11.6913 5.73516 10.8893 5.73516 9.52871V9.06717C5.73516 7.24505 6.18952 6.05358 7.12516 4.8872C8.51623 3.18619 10.746 2.16602 12.9522 2.16602H13.0491C15.3026 2.16602 17.6045 3.23529 18.9719 5.0094C19.8591 6.15178 20.2661 7.29306 20.2661 9.06717V9.52871ZM9.8299 21.7319C9.8299 21.1864 10.3306 20.9365 10.7935 20.8296C11.3351 20.715 14.6351 20.715 15.1767 20.8296C15.6397 20.9365 16.1403 21.1864 16.1403 21.7319C16.1134 22.2513 15.8087 22.7117 15.3877 23.0041C14.8419 23.4297 14.2012 23.6992 13.5315 23.7963C13.1612 23.8443 12.7972 23.8454 12.4398 23.7963C11.769 23.6992 11.1284 23.4297 10.5836 23.003C10.1615 22.7117 9.85681 22.2513 9.8299 21.7319Z"
-                                fill="white"
-                            />
-                        </svg>
-                        <span
-                            class="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center"
-                        >
-                            2
-                        </span>
+                        </a>
                     </div>
 
                     <!-- User Profile -->
@@ -559,28 +585,11 @@
                 </div>
             </div>
             <div
-                class="bg-white h-[calc(100vh - 110px)] rounded-tl-[40px] p-6 shadow-inner -mt-4"
+                class="bg-[#F7F6F5] h-full rounded-tl-[40px] shadow-inner -mt-4"
                 style="box-shadow: inset 1px 4px 18px rgba(0, 0, 0, 0.6)"
             >
-                <div class="h-full overflow-hidden flex flex-col"><%- body %></div>
+                <%- body %>
             </div>
         </div>
     </body>
-    <script>
-        const sidebarLinks = document.querySelectorAll(".sidebar-link");
-
-        sidebarLinks.forEach((link) => {
-            link.addEventListener("click", function (e) {
-                // Remove active state from all links
-                sidebarLinks.forEach((el) => {
-                    el.classList.remove("bg-white", "text-blue-800");
-                    el.querySelector(".dot")?.classList.add("hidden");
-                });
-
-                // Add active state to the clicked one
-                this.classList.add("bg-white", "text-blue-800");
-                this.querySelector(".dot")?.classList.remove("hidden");
-            });
-        });
-    </script>
 </html>

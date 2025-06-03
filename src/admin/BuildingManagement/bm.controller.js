@@ -72,6 +72,16 @@ class bmController {
     }
 
     /**
+     * @description: notificationPage For Building Managment
+     * @param {*} req
+     * @param {*} res
+     */
+    static async notificationPage(req, res) {
+        const data = await bmServices.notificationPage(req, res);
+        return;
+    }
+
+    /**
      * @description: reviewDetails For Building Managment
      * @param {*} req
      * @param {*} res

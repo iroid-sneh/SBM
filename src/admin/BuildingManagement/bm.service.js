@@ -78,6 +78,18 @@ class bmServices {
     }
 
     /**
+     * @description: notificationPage for Building Management
+     * @param {*} req
+     * @param {*} res
+     */
+    static async notificationPage(req, res) {
+        return res.render("adminPanels/buildingManagement/notification", {
+            currentPage: null,
+            layout: "adminPanels/buildingManagement/layouts/layout",
+        });
+    }
+
+    /**
      * @description: reviewDetailsPage for Building Management
      * @param {*} req
      * @param {*} res

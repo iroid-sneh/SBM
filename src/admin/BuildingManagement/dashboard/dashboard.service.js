@@ -13,6 +13,10 @@ class dashboardService {
                 // user: {
                 //     prefrence: "Service",
                 // },
+                total: 42,
+                completed: 30,
+                underReview: 9,
+                reported: 3,
             }
         );
     }

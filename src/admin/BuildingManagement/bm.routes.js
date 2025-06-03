@@ -2,6 +2,7 @@ import express from "express";
 import asyncWrap from "express-async-wrapper";
 import bmController from "./bm.controller";
 import dashboardRoutes from "./dashboard/dashboard.routes";
+import usersRoutes from "./Users/users.routes";
 const router = express.Router();
 
 router.get("/", asyncWrap(bmController.loginPage));
@@ -21,8 +22,12 @@ router.get(
     asyncWrap(bmController.subscriptionDetailsPage)
 );
 
+router.get("/notification", asyncWrap(bmController.notificationPage));
+
 router.get("/reviewdetails", asyncWrap(bmController.reviewDetailsPage));
 
 router.use("/dashboard", dashboardRoutes);
+
+router.use("/users", usersRoutes);
 
 export default router;
