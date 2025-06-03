@@ -1,0 +1,528 @@
+<html>
+    <head>
+        <style>
+            /* Optional animation */
+            @keyframes shake {
+                0%,
+                100% {
+                    transform: translateX(0);
+                }
+                20%,
+                60% {
+                    transform: translateX(-5px);
+                }
+                40%,
+                80% {
+                    transform: translateX(5px);
+                }
+            }
+            .shake {
+                animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+        </style>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    </head>
+    <body
+        class="bg-cover bg-no-repeat min-h-screen relative overflow-hidden bg-gradient-to-t from-[#163F75]/50 to-[#54B7C5]/50"
+    >
+        <!-- Background image with reduced opacity -->
+        <div
+            class="absolute inset-0 bg-cover bg-no-repeat opacity-20 z-0"
+            style="
+                background-image: url('<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBg.png');
+            "
+        ></div>
+        <!-- Top Curve and Logo -->
+        <div class="relative w-full">
+            <img
+                src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthTop.svg"
+                alt="Top Right Decoration"
+                class="absolute top-0 right-0 w-[834px] pointer-events-none z-10"
+            />
+            <img
+                src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMLogo.png"
+                alt="BM Logo"
+                class="absolute top-3 right-40 w-[280px] z-20"
+            />
+        </div>
+
+        <!-- Main Content -->
+        <div class="mx-auto flex items-start justify-start px-5 relative z-10 top-[60px]">
+            <div class="w-full max-w-7xl mx-auto px-10 py-12 rounded-3xl text-white">
+                <!-- Title and Subtitle -->
+                <div class="mb-10">
+                    <h2 class="text-3xl font-semibold">Review Your Details</h2>
+                    <p class="text-sm text-white/70 mt-2">
+                        Check carefully before you send us all your information.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-10 text-base leading-relaxed">
+                    <!-- Business Details -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-start gap-3 mb-4">
+                            <h3 class="text-xl font-semibold">Business Details</h3>
+                            <button
+                                class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1.5 shadow-sm text-[#163F75] text-sm font-semibold hover:bg-white/90 transition"
+                            >
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M11.4561 17.0365H17.4999"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M10.65 3.16233C11.2964 2.38982 12.4583 2.27655 13.2469 2.90978C13.2905 2.94413 14.6912 4.03232 14.6912 4.03232C15.5575 4.55599 15.8266 5.66925 15.2912 6.51882C15.2627 6.56432 7.34329 16.4704 7.34329 16.4704C7.07981 16.7991 6.67986 16.9931 6.25242 16.9978L3.21961 17.0358L2.53628 14.1436C2.44055 13.7369 2.53628 13.3098 2.79975 12.9811L10.65 3.16233Z"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M9.18408 5L13.7276 8.48927"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                                Edit
+                            </button>
+                        </div>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">
+                                Commercial Name:
+                            </span>
+                            <span class="font-medium">Duserve Facilities Management</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">
+                                Business Landline:
+                            </span>
+                            <span class="font-medium">+973 123456789</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">VAT Number:</span>
+                            <span class="font-medium">200000452900008</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">CR Number:</span>
+                            <span class="font-medium">200700</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Business Email:</span>
+                            <span class="font-medium">duserve_management@hotmail.com</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Working Time:</span>
+                            <br />
+                            <span class="font-medium">09:00 AM TO 01:00 PM</span>
+                            <br />
+                            <span class="font-medium">03:00 PM to 08:00 PM</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Working Day:</span>
+                            <span class="font-medium">Sun, Mon, Tue, Wed, Thu</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">City:</span>
+                            <span class="font-medium">Manama</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">
+                                Business Address:
+                            </span>
+                            <span class="font-medium">
+                                Shop 1, Building 2003, Road 2215, Juffair
+                            </span>
+                        </p>
+                    </div>
+
+                    <!-- Residence & Admin Details -->
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-start gap-3 mb-4">
+                            <h3 class="text-xl font-semibold">Residence Details</h3>
+                            <div>
+                                <button>
+                                    <svg
+                                        class="-scale-x-100"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M12 21.25C17.108 21.25 21.25 17.109 21.25 12C21.25 6.892 17.108 2.75 12 2.75C6.892 2.75 2.75 6.892 2.75 12C2.75 17.109 6.892 21.25 12 21.25Z"
+                                            fill="white"
+                                            stroke="#163F75"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M10.5576 15.4707L14.0436 11.9997L10.5576 8.5287"
+                                            stroke="#163F75"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                </button>
+                                <button>
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M12 21.25C17.108 21.25 21.25 17.109 21.25 12C21.25 6.892 17.108 2.75 12 2.75C6.892 2.75 2.75 6.892 2.75 12C2.75 17.109 6.892 21.25 12 21.25Z"
+                                            fill="white"
+                                            stroke="#163F75"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M10.5576 15.4707L14.0436 11.9997L10.5576 8.5287"
+                                            stroke="#163F75"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                            <button
+                                class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1.5 shadow-sm text-[#163F75] text-sm font-semibold hover:bg-white/90 transition"
+                            >
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M11.4561 17.0365H17.4999"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M10.65 3.16233C11.2964 2.38982 12.4583 2.27655 13.2469 2.90978C13.2905 2.94413 14.6912 4.03232 14.6912 4.03232C15.5575 4.55599 15.8266 5.66925 15.2912 6.51882C15.2627 6.56432 7.34329 16.4704 7.34329 16.4704C7.07981 16.7991 6.67986 16.9931 6.25242 16.9978L3.21961 17.0358L2.53628 14.1436C2.44055 13.7369 2.53628 13.3098 2.79975 12.9811L10.65 3.16233Z"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M9.18408 5L13.7276 8.48927"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                                Edit
+                            </button>
+                        </div>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Residence Type:</span>
+                            <span class="font-medium">Building</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Number of Flat:</span>
+                            <span class="font-medium">560</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Building Name:</span>
+                            <span class="font-medium">2003</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">
+                                Residence Address:
+                            </span>
+                            <span class="font-medium">Building 2003, Road 2215, Juffair</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Assign Manager:</span>
+                            <span class="font-medium">Name of Manager</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">
+                                Select Permission:
+                            </span>
+                            <span class="font-medium">
+                                Dashboard, Events, Reservation, Maintenance, Feedback Box
+                            </span>
+                        </p>
+
+                        <hr class="my-6 border-white/30" />
+
+                        <div class="flex items-center justify-start gap-3 mb-4">
+                            <h3 class="text-xl font-semibold">Admin Profile</h3>
+                            <div>
+                                <button>
+                                    <svg
+                                        class="-scale-x-100"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M12 21.25C17.108 21.25 21.25 17.109 21.25 12C21.25 6.892 17.108 2.75 12 2.75C6.892 2.75 2.75 6.892 2.75 12C2.75 17.109 6.892 21.25 12 21.25Z"
+                                            fill="white"
+                                            stroke="#163F75"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M10.5576 15.4707L14.0436 11.9997L10.5576 8.5287"
+                                            stroke="#163F75"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                </button>
+                                <button>
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M12 21.25C17.108 21.25 21.25 17.109 21.25 12C21.25 6.892 17.108 2.75 12 2.75C6.892 2.75 2.75 6.892 2.75 12C2.75 17.109 6.892 21.25 12 21.25Z"
+                                            fill="white"
+                                            stroke="#163F75"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M10.5576 15.4707L14.0436 11.9997L10.5576 8.5287"
+                                            stroke="#163F75"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                            <button
+                                class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1.5 shadow-sm text-[#163F75] text-sm font-semibold hover:bg-white/90 transition"
+                            >
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M11.4561 17.0365H17.4999"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M10.65 3.16233C11.2964 2.38982 12.4583 2.27655 13.2469 2.90978C13.2905 2.94413 14.6912 4.03232 14.6912 4.03232C15.5575 4.55599 15.8266 5.66925 15.2912 6.51882C15.2627 6.56432 7.34329 16.4704 7.34329 16.4704C7.07981 16.7991 6.67986 16.9931 6.25242 16.9978L3.21961 17.0358L2.53628 14.1436C2.44055 13.7369 2.53628 13.3098 2.79975 12.9811L10.65 3.16233Z"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M9.18408 5L13.7276 8.48927"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                                Edit
+                            </button>
+                        </div>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">First Name:</span>
+                            <span class="font-medium">Marry</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Middle Name:</span>
+                            <span class="font-medium">M.</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Last Name:</span>
+                            <span class="font-medium">Luca</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Your Role:</span>
+                            <span class="font-medium">Admin Manager</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Mobile No.:</span>
+                            <span class="font-medium">+973 123456789</span>
+                        </p>
+                    </div>
+
+                    <!-- Plan & Bank Details -->
+                    <div class="space-y-3">
+                        <div class="mb-4">
+                            <h3 class="text-xl font-semibold">Selected Plan</h3>
+                            <p class="mt-2">Premium</p>
+                        </div>
+
+                        <hr class="my-6 border-white/30" />
+
+                        <div class="flex items-center justify-start gap-3 mb-4">
+                            <h3 class="text-xl font-semibold">Bank Details</h3>
+                            <button
+                                class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-1.5 shadow-sm text-[#163F75] text-sm font-semibold hover:bg-white/90 transition"
+                            >
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M11.4561 17.0365H17.4999"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M10.65 3.16233C11.2964 2.38982 12.4583 2.27655 13.2469 2.90978C13.2905 2.94413 14.6912 4.03232 14.6912 4.03232C15.5575 4.55599 15.8266 5.66925 15.2912 6.51882C15.2627 6.56432 7.34329 16.4704 7.34329 16.4704C7.07981 16.7991 6.67986 16.9931 6.25242 16.9978L3.21961 17.0358L2.53628 14.1436C2.44055 13.7369 2.53628 13.3098 2.79975 12.9811L10.65 3.16233Z"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M9.18408 5L13.7276 8.48927"
+                                        stroke="#163F75"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                                Edit
+                            </button>
+                        </div>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Account Name:</span>
+                            <span class="font-medium">Duserve Management</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Account Number:</span>
+                            <span class="font-medium">00222222222</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">IBAN:</span>
+                            <span class="font-medium">BH85BHOB09300222222222</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">Bank Name:</span>
+                            <span class="font-medium">Ithmaar Bank</span>
+                        </p>
+                        <p>
+                            <span class="text-sm font-normal text-[white]/80">
+                                Billing Address:
+                            </span>
+                            <span class="font-medium">Seef Tower, Seef District 2820, Manama</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="mt-3 flex items-start gap-3">
+                    <input type="checkbox" class="mt-1 scale-110 accent-[#54B7C5]" />
+                    <p class="text-sm text-white/80">
+                        I have read and agree to the following
+                        <a href="#" class="underline text-white font-medium">Terms & Conditions</a>
+                        . In addition, I am the owner or am acting on behalf of the owner as the
+                        authorised signatory of said entity.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Curve and Portal Text -->
+        <div>
+            <img
+                src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBottom.svg"
+                alt="Bottom Left Decoration"
+                class="absolute bottom-0 left-0 w-[1044px] pointer-events-none"
+            />
+            <!-- Bottom Footer: Step + Navigation -->
+            <div
+                class="absolute bottom-8 left-0 w-full flex items-center justify-between px-[280px]"
+            >
+                <!-- Step Text -->
+                <div class="">
+                    <h2 class="text-4xl font-semibold text-gray-800">
+                        Step 6
+                        <span class="text-gray-500 font-normal">out of 6</span>
+                    </h2>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex items-center gap-6">
+                    <button
+                        onclick="window.location.href='<%= process.env.APP_ADMIN_URL %>/bmadmin/subscriptiondetails'"
+                        class="text-base font-medium text-white hover:underline"
+                    >
+                        &lt; Back
+                    </button>
+
+                    <button
+                        type="submit"
+                        onclick="window.location.href='<%= process.env.APP_ADMIN_URL %>/bmadmin/dashboard'"
+                        class="bg-[#54B7C5] hover:bg-[#54B7C5]/80 text-white text-lg font-medium rounded-xl px-[100px] py-3 transition"
+                    >
+                        Save & Continue
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

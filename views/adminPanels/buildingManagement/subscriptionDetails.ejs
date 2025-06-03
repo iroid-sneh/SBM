@@ -1,0 +1,158 @@
+<html>
+    <head>
+        <style>
+            /* Optional animation */
+            @keyframes shake {
+                0%,
+                100% {
+                    transform: translateX(0);
+                }
+                20%,
+                60% {
+                    transform: translateX(-5px);
+                }
+                40%,
+                80% {
+                    transform: translateX(5px);
+                }
+            }
+            .shake {
+                animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+        </style>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    </head>
+    <body
+        class="bg-cover bg-no-repeat min-h-screen relative overflow-hidden bg-gradient-to-t from-[#163F75]/50 to-[#54B7C5]/50"
+    >
+        <!-- Background image with reduced opacity -->
+        <div
+            class="absolute inset-0 bg-cover bg-no-repeat opacity-20 z-0"
+            style="
+                background-image: url('<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBg.png');
+            "
+        ></div>
+        <!-- Top Curve and Logo -->
+        <div class="relative w-full">
+            <img
+                src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthTop.svg"
+                alt="Top Right Decoration"
+                class="absolute top-0 right-0 w-[834px] pointer-events-none z-10"
+            />
+            <img
+                src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMLogo.png"
+                alt="BM Logo"
+                class="absolute top-3 right-40 w-[280px] z-20"
+            />
+        </div>
+
+        <!-- Main Content -->
+        <div class="mx-auto flex items-start justify-between px-[200px] relative z-10 top-[200px]">
+            <!-- Auth Box -->
+            <div class="w-[472px] px-6">
+                <div class="relative w-[320px] bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <!-- Fees Header -->
+                    <div class="absolute top-0 right-0 left-[60%] flex justify-center">
+                        <div
+                            class="relative bg-[#37B9C5] text-white text-lg font-semibold px-6 py-3 rounded-b-lg shadow-md"
+                        >
+                            Fees
+                            <div
+                                class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-white"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <!-- Plan Table -->
+                    <div class="px-6 pt-10 pb-6 bg-white rounded-2xl shadow-sm">
+                        <div class="text-gray-800 font-semibold text-sm mb-4">Choose Your Plan</div>
+                        <div class="border-t border-b divide-y text-sm text-gray-700">
+                            <div class="flex justify-between py-3">
+                                <span>
+                                    One-time fee
+                                    <br />
+                                    <span class="text-xs text-gray-500">(Setup & Training)</span>
+                                </span>
+                                <span class="font-semibold">$200</span>
+                            </div>
+                            <div class="flex justify-between py-3">
+                                <span>
+                                    Subscription License
+                                    <br />
+                                    <span class="text-xs text-gray-500">(Monthly)</span>
+                                </span>
+                                <span class="font-semibold">$20</span>
+                            </div>
+                            <div class="flex justify-between py-3">
+                                <span>
+                                    Commission
+                                    <br />
+                                    <span class="text-xs text-gray-500">
+                                        (Collected from successful transaction)
+                                    </span>
+                                </span>
+                                <span class="font-semibold">15%</span>
+                            </div>
+                        </div>
+                        <!-- Select Button -->
+                        <div class="mt-6 flex justify-center">
+                            <button
+                                class="bg-[#37B9C5] text-white px-8 py-2 rounded-xl font-medium shadow hover:bg-[#2fa8b4] transition"
+                            >
+                                Select
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logo -->
+            <div class="absolute right-[15%] text-center top-1/2 -translate-y-[-40px]">
+                <h2 class="text-6xl text-white">Find out what your property</h2>
+                <h2 class="text-6xl mt-2 text-white">is really worth</h2>
+            </div>
+        </div>
+
+        <!-- Bottom Curve and Portal Text -->
+        <div>
+            <img
+                src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBottom.svg"
+                alt="Bottom Left Decoration"
+                class="absolute bottom-0 left-0 w-[1044px] pointer-events-none"
+            />
+            <!-- Bottom Footer: Step + Navigation -->
+            <div
+                class="absolute bottom-8 left-0 w-full flex items-center justify-between px-[280px]"
+            >
+                <!-- Step Text -->
+                <div class="">
+                    <h2 class="text-4xl font-semibold text-gray-800">
+                        Step 5
+                        <span class="text-gray-500 font-normal">out of 6</span>
+                    </h2>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex items-center gap-6">
+                    <button
+                        onclick="window.location.href='<%= process.env.APP_ADMIN_URL %>/bmadmin/bankdetails'"
+                        class="text-base font-medium text-white hover:underline"
+                    >
+                        &lt; Back
+                    </button>
+
+                    <button
+                        type="submit"
+                        onclick="window.location.href='<%= process.env.APP_ADMIN_URL %>/bmadmin/reviewdetails'"
+                        class="bg-[#54B7C5] hover:bg-[#54B7C5]/80 text-white text-lg font-medium rounded-xl px-[100px] py-3 transition"
+                    >
+                        Save & Continue
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

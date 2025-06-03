@@ -51,6 +51,42 @@ class bmServices {
             layout: false,
         });
     }
+
+    /**
+     * @description: bankDetailsPage for Building Management
+     * @param {*} req
+     * @param {*} res
+     */
+    static async bankDetailsPage(req, res) {
+        return res.render("adminPanels/buildingManagement/bankDetails", {
+            layout: false,
+        });
+    }
+
+    /**
+     * @description: subscriptionDetailsPage for Building Management
+     * @param {*} req
+     * @param {*} res
+     */
+    static async subscriptionDetailsPage(req, res) {
+        return res.render(
+            "adminPanels/buildingManagement/subscriptionDetails",
+            {
+                layout: false,
+            }
+        );
+    }
+
+    /**
+     * @description: reviewDetailsPage for Building Management
+     * @param {*} req
+     * @param {*} res
+     */
+    static async reviewDetailsPage(req, res) {
+        return res.render("adminPanels/buildingManagement/reviewDetails", {
+            layout: false,
+        });
+    }
 }
 
 export default bmServices;

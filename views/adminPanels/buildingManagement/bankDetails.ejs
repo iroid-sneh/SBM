@@ -1,0 +1,179 @@
+<html>
+    <head>
+        <style>
+            /* Optional animation */
+            @keyframes shake {
+                0%,
+                100% {
+                    transform: translateX(0);
+                }
+                20%,
+                60% {
+                    transform: translateX(-5px);
+                }
+                40%,
+                80% {
+                    transform: translateX(5px);
+                }
+            }
+            .shake {
+                animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            }
+        </style>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    </head>
+    <body
+        class="bg-cover bg-no-repeat min-h-screen relative overflow-hidden bg-gradient-to-t from-[#163F75]/50 to-[#54B7C5]/50"
+    >
+        <!-- Background image with reduced opacity -->
+        <div
+            class="absolute inset-0 bg-cover bg-no-repeat opacity-20 z-0"
+            style="
+                background-image: url('<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBg.png');
+            "
+        ></div>
+        <!-- Top Curve and Logo -->
+        <div class="relative w-full">
+            <img
+                src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthTop.svg"
+                alt="Top Right Decoration"
+                class="absolute top-0 right-0 w-[834px] pointer-events-none z-10"
+            />
+            <img
+                src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMLogo.png"
+                alt="BM Logo"
+                class="absolute top-3 right-40 w-[280px] z-20"
+            />
+        </div>
+
+        <!-- Main Content -->
+        <div class="mx-auto flex items-start justify-between px-[200px] relative z-10 top-[220px]">
+            <!-- Auth Box -->
+            <div class="w-[472px] px-6">
+                <div id="auth-container">
+                    <div class="flex justify-center items-center">
+                        <!-- Title -->
+                        <h2
+                            class="text-2xl items-start justify-start text-center text-white mb-[80px]"
+                            id="form-title"
+                        >
+                            Bank Details
+                        </h2>
+                    </div>
+                    <!-- Bank Details Form -->
+                    <form id="login-form" class="space-y-3">
+                        <!-- Account Name -->
+                        <div
+                            class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
+                        >
+                            <input
+                                type="text"
+                                placeholder="Account Name"
+                                class="w-full h-[14px] text-m focus:outline-none"
+                            />
+                        </div>
+                        <!-- Account Number -->
+                        <div
+                            class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
+                        >
+                            <input
+                                type="text"
+                                placeholder="Account Number"
+                                class="w-full h-[14px] text-m focus:outline-none"
+                            />
+                        </div>
+                        <!-- IBAN -->
+                        <div
+                            class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
+                        >
+                            <input
+                                type="text"
+                                placeholder="IBAN"
+                                class="w-full h-[14px] text-m focus:outline-none"
+                            />
+                        </div>
+                        <!-- Bank Name Selection -->
+                        <div class="flex bg-white px-4 py-4 rounded-[10px] border shadow-xl">
+                            <select
+                                name="role"
+                                id="bankNameSelect"
+                                class="w-full h-[21px] text-m text-gray-400 focus:outline-none"
+                                required
+                            >
+                                <option value="" hidden>Bank Name</option>
+                                <option value="Ithmaar Bank">Ithmaar Bank</option>
+                                <option value="Chase">Chase</option>
+                                <option value="JP Morgan Bank">JP Morgan Bank</option>
+                            </select>
+                        </div>
+                        <!-- Billing Address -->
+                        <div
+                            class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
+                        >
+                            <input
+                                type="text"
+                                placeholder="Billing Address"
+                                class="w-full h-[14px] text-m focus:outline-none"
+                            />
+                        </div>
+                        <!-- Checkbox and Label -->
+                        <label class="flex items-start gap-2 text-sm text-white leading-snug">
+                            <input type="checkbox" class="mt-1 scale-110 accent-[#163f75]" />
+                            <p class="text-sm leading-snug">
+                                My Billing and Business address are the same
+                            </p>
+                        </label>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Logo -->
+            <div class="absolute right-[15%] top-1/2 -translate-y-[-40px]">
+                <h2 class="text-5xl text-white">Your bank details are secure</h2>
+                <h2 class="text-5xl mt-2 text-white">and encrypted with us</h2>
+            </div>
+        </div>
+
+        <!-- Bottom Curve and Portal Text -->
+        <div>
+            <img
+                src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBottom.svg"
+                alt="Bottom Left Decoration"
+                class="absolute bottom-0 left-0 w-[1044px] pointer-events-none"
+            />
+            <!-- Bottom Footer: Step + Navigation -->
+            <div
+                class="absolute bottom-8 left-0 w-full flex items-center justify-between px-[280px]"
+            >
+                <!-- Step Text -->
+                <div class="">
+                    <h2 class="text-4xl font-semibold text-gray-800">
+                        Step 4
+                        <span class="text-gray-500 font-normal">out of 6</span>
+                    </h2>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex items-center gap-6">
+                    <button
+                        onclick="window.location.href='<%= process.env.APP_ADMIN_URL %>/bmadmin/residencedetails'"
+                        class="text-base font-medium text-white hover:underline"
+                    >
+                        &lt; Back
+                    </button>
+
+                    <button
+                        type="submit"
+                        onclick="window.location.href='<%= process.env.APP_ADMIN_URL %>/bmadmin/subscriptiondetails'"
+                        class="bg-[#54B7C5] hover:bg-[#54B7C5]/80 text-white text-lg font-medium rounded-xl px-[100px] py-3 transition"
+                    >
+                        Save & Continue
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

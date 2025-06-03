@@ -14,6 +14,15 @@ router.get("/adminprofile", asyncWrap(bmController.adminProfilePage));
 
 router.get("/residencedetails", asyncWrap(bmController.residenceDetailsPage));
 
+router.get("/bankdetails", asyncWrap(bmController.bankDetailsPage));
+
+router.get(
+    "/subscriptiondetails",
+    asyncWrap(bmController.subscriptionDetailsPage)
+);
+
+router.get("/reviewdetails", asyncWrap(bmController.reviewDetailsPage));
+
 router.use("/dashboard", dashboardRoutes);
 
 export default router;
