@@ -7,4 +7,6 @@ router.get("/residentowner", asyncWrap(usersController.residentOwnerPage));
 
 router.get("/security", asyncWrap(usersController.securityPage));
 
+router.get("/technician", asyncWrap(usersController.technicianPage));
+
 export default router;

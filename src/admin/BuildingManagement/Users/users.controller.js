@@ -19,6 +19,16 @@ class usersController {
         const data = await usersServices.securityPage(req, res);
         return;
     }
+
+    /**
+     * @description: technicianPage For the Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async technicianPage(req, res) {
+        const data = await usersServices.technicianPage(req, res);
+        return;
+    }
 }
 
 export default usersController;
