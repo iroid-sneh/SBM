@@ -116,6 +116,42 @@ class maintenanceService {
             }
         );
     }
+
+    /**
+     * @description: executionPage for th maintenance service
+     * @param {*} req
+     * @param {*} res
+     */
+    static async executionPage(req, res) {
+        return res.render(
+            "adminPanels/buildingManagement/maintenance/execution",
+            {
+                currentPage: "maintenance",
+                layout: "adminPanels/buildingManagement/layouts/layout",
+                data: {
+                    status: "Waiting",
+                },
+            }
+        );
+    }
+
+    /**
+     * @description: historyPage for th maintenance service
+     * @param {*} req
+     * @param {*} res
+     */
+    static async historyPage(req, res) {
+        return res.render(
+            "adminPanels/buildingManagement/maintenance/history",
+            {
+                currentPage: "maintenance",
+                layout: "adminPanels/buildingManagement/layouts/layout",
+                data: {
+                    status: "Completed",
+                },
+            }
+        );
+    }
 }
 
 export default maintenanceService;

@@ -1,0 +1,955 @@
+<div
+    class="bg-white rounded-tl-[40px] rounded-br-[90px] p-6 shadow-md flex justify-between items-center"
+>
+    <h1 class="text-2xl font-medium text-gray-500">The Office</h1>
+    <div class="flex items-center gap-4">
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                    class="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                </svg>
+            </div>
+            <input
+                type="text"
+                placeholder="Search"
+                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[#54B7C5] focus:border-[#54B7C5] sm:text-sm"
+            />
+        </div>
+        <!-- Tab Buttons -->
+        <div class="bg-[#F3F2F1] rounded-lg flex items-center mr-4">
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/documents'"
+                id="btn-resident"
+                class="px-4 py-2 rounded-lg text-gray-600 hover:text-black transition-all"
+            >
+                Documents
+            </button>
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/election'"
+                id="btn-resident"
+                class="px-4 py-2 rounded-lg text-white bg-[#54B7C5] transition-all"
+            >
+                Election
+            </button>
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/nomination'"
+                id="btn-resident"
+                class="px-4 py-2 rounded-lg text-gray-600 hover:text-black transition-all"
+            >
+                Nomination
+            </button>
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/ownersassociation'"
+                id="btn-security"
+                class="px-4 py-2 rounded-lg text-gray-600 hover:text-black transition-all"
+            >
+                Owners Association
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Card -->
+<div class="p-8 mx-auto">
+    <!-- Filter -->
+    <div class="flex justify-between gap-4 items-start pr-4 mt-4 items-center align-center">
+        <!-- 🔽 Building/Villa Dropdown -->
+        <div class="relative">
+            <select
+                name="property"
+                id="property"
+                class="appearance-none w-full bg-transparent font-medium text-sm text-black pr-6 pl-2 py-1 rounded focus:outline-none"
+            >
+                <% properties.forEach(function(property) { const selected = (selectedPropertyId ==
+                property.id) ? 'selected' : ''; %>
+                <option class="" value="<%= property.id %>" <%="selected" %>
+                    ><%= property.name %>
+                </option>
+                <% }) %>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                <svg
+                    class="w-4 h-4 text-black"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </div>
+        </div>
+        <div class="flex justify-end items-end">
+            <button
+                data-modal-target="create-election-modal"
+                data-modal-toggle="create-election-modal"
+                class="bg-white text-sm font-semibold text-[#163F75] border border-1 border-gray-300 px-9 py-2.5 rounded-lg hover:bg-gray-300 transition"
+            >
+                + Create Election
+            </button>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="mt-6 overflow-y-auto max-h-[650px]">
+        <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+            <tbody class="divide-y divide-gray-100 text-sm">
+                <!-- Election Row -->
+                <tr class="bg-white border border-gray-800 group" data-id="1">
+                    <td class="py-3 px-4 text-center font-semibold text-lg">
+                        Committee Election
+                        <span class="text-green-600">(Live)</span>
+                    </td>
+                    <td class="py-3 text-center px-4">Start: 15.08.2024 10:00 AM</td>
+                    <td class="py-3 text-center px-4">End: 15.09.2024 10:00 AM</td>
+                    <td class="py-3 text-center px-4"></td>
+                    <td class="py-3 px-4">
+                        <button
+                            onclick="toggleDetails(this)"
+                            class="toggle-details-btn bg-[#163F75] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#163F75]/70 transition"
+                        >
+                            View Details
+                        </button>
+                    </td>
+                    <td class="py-3 text-center px-4">
+                        <button
+                            data-modal-target="invite-vote-modal"
+                            data-modal-toggle="invite-vote-modal"
+                            class="bg-[#54B7C5] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#54B7C5]/70 flex items-center gap-2"
+                        >
+                            <svg
+                                width="15"
+                                height="13"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <svg
+                                    width="15"
+                                    height="13"
+                                    viewBox="0 0 15 13"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M9 6.30176C10.2902 6.30176 11.5427 6.73933 12.5527 7.54199C13.5627 8.34464 14.2711 9.46596 14.5625 10.7227L14.5918 10.8926C14.6046 11.0068 14.6038 11.1221 14.5908 11.2363L14.5615 11.4072C14.5097 11.6318 14.407 11.8408 14.2627 12.0205L14.2637 12.0215C14.1573 12.1572 14.0287 12.2734 13.8838 12.3652L13.7334 12.4492C13.5267 12.5493 13.2999 12.5994 13.0703 12.5986V12.5996H4.92969V12.5986C4.75736 12.5998 4.58668 12.5722 4.4248 12.5156L4.26562 12.4502C4.0586 12.3499 3.87766 12.203 3.73633 12.0215V12.0205C3.6284 11.886 3.54351 11.7351 3.48633 11.5732L3.43848 11.4072C3.38659 11.1821 3.38604 10.9479 3.4375 10.7227L3.49707 10.4883C3.81872 9.32673 4.50048 8.29446 5.44727 7.54199L5.63965 7.39551C6.61422 6.68612 7.79046 6.30176 9 6.30176ZM9.00977 7.45605C8.04799 7.4561 7.11335 7.76376 6.34082 8.33105L6.18848 8.44727C5.38819 9.08909 4.83025 9.98497 4.60742 10.9863V10.9883C4.59547 11.0382 4.5951 11.0906 4.60645 11.1406L4.63184 11.2129L4.67285 11.2773L4.72461 11.3291C4.74382 11.3444 4.7648 11.3575 4.78711 11.3682C4.83148 11.3894 4.88051 11.4007 4.92969 11.4004H13.0703C13.1195 11.4007 13.1685 11.3894 13.2129 11.3682L13.2754 11.3291C13.2943 11.314 13.3119 11.2964 13.3271 11.2773L13.3311 11.2725L13.376 11.21C13.3886 11.1873 13.3982 11.1629 13.4053 11.1377L13.418 11.0615C13.419 11.0364 13.4167 11.0112 13.4121 10.9863L13.3662 10.7998C13.1349 9.93577 12.6519 9.16008 11.9785 8.57129L11.832 8.44727C11.0317 7.80538 10.0357 7.45605 9.00977 7.45605ZM2.5 3.40039C2.65913 3.40039 2.81131 3.46365 2.92383 3.57617C3.03634 3.68869 3.09961 3.84087 3.09961 4V4.90039H4C4.15913 4.90039 4.31131 4.96365 4.42383 5.07617L4.49902 5.16699C4.56434 5.26488 4.59961 5.38059 4.59961 5.5C4.59961 5.61941 4.56434 5.73512 4.49902 5.83301L4.42383 5.92383C4.31131 6.03635 4.15912 6.09961 4 6.09961H3.09961V7C3.09961 7.11941 3.06434 7.23512 2.99902 7.33301L2.92383 7.42383C2.81131 7.53634 2.65912 7.59961 2.5 7.59961C2.38059 7.59961 2.26488 7.56434 2.16699 7.49902L2.07617 7.42383C1.96366 7.31131 1.9004 7.15912 1.90039 7V6.09961H1C0.880589 6.09961 0.764877 6.06434 0.666992 5.99902L0.576172 5.92383C0.463654 5.81131 0.400395 5.65912 0.400391 5.5C0.400391 5.34087 0.463655 5.18869 0.576172 5.07617L0.666992 5.00098C0.76488 4.93565 0.880583 4.90039 1 4.90039H1.90039V4C1.90039 3.84087 1.96365 3.68869 2.07617 3.57617C2.18869 3.46365 2.34087 3.40039 2.5 3.40039ZM8.18555 0.53125C8.61063 0.391014 9.06568 0.362501 9.50684 0.450195C10.0112 0.550517 10.4753 0.797517 10.8389 1.16113L10.9697 1.30273C11.2619 1.64182 11.4621 2.05202 11.5498 2.49316L11.5801 2.68262C11.6269 3.06353 11.589 3.44999 11.4688 3.81445L11.4023 3.99512C11.2302 4.41068 10.9533 4.77326 10.6006 5.04883L10.4443 5.16211C10.0168 5.4477 9.51413 5.5996 9 5.59961C8.31045 5.59961 7.64872 5.32645 7.16113 4.83887C6.67354 4.35128 6.40039 3.68956 6.40039 3C6.40039 2.48586 6.5523 1.98318 6.83789 1.55566L6.95117 1.39941C7.22675 1.04666 7.58931 0.769792 8.00488 0.597656L8.18555 0.53125ZM9 1.59961C8.67502 1.59961 8.36146 1.71276 8.1123 1.91699L8.00977 2.00977C7.74722 2.27232 7.59961 2.6287 7.59961 3C7.59961 3.27677 7.68223 3.54718 7.83594 3.77734C7.98968 4.00743 8.20825 4.18698 8.46387 4.29297L8.56152 4.3291C8.79046 4.40463 9.03585 4.42031 9.27344 4.37305C9.54488 4.31898 9.79452 4.18595 9.99023 3.99023C10.1859 3.79452 10.319 3.54488 10.373 3.27344C10.4203 3.03584 10.4046 2.79047 10.3291 2.56152L10.293 2.46387C10.2002 2.24012 10.0514 2.04481 9.86133 1.89648L9.77734 1.83594C9.54719 1.68224 9.27677 1.59961 9 1.59961Z"
+                                        fill="white"
+                                        stroke="white"
+                                        stroke-width="0.2"
+                                    />
+                                </svg>
+                            </svg>
+                            Invite
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- Expanded Content Row -->
+                <tr class="hidden details-row" data-id="1">
+                    <td
+                        colspan="6"
+                        class="bg-[#D7EAEC] px-6 py-4 border border-gray-300 rounded-b-xl"
+                    >
+                        <hr class="my-4" />
+
+                        <!-- Stat Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <!-- Card 1 -->
+                            <div
+                                class="flex items-center gap-4 bg-[#6A96C7] p-4 rounded-[12px] shadow-md h-[100px]"
+                            >
+                                <div
+                                    class="flex items-center justify-center w-[58px] h-[58px] bg-white/20 rounded-full"
+                                >
+                                    <img
+                                        src="<%= process.env.APP_URL_ADMIN %>/Icons/images/noofcandidatessvg.png"
+                                        alt="Icon"
+                                        class="w-[58px] h-[58px] object-contain"
+                                    />
+                                </div>
+                                <div>
+                                    <p class="text-[26px] font-bold text-white leading-tight">10</p>
+                                    <p class="text-sm font-medium text-white tracking-wide">
+                                        No. of Candidates
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div
+                                class="flex items-center gap-4 bg-[#3367B0] p-4 rounded-[12px] shadow-md h-[100px]"
+                            >
+                                <div
+                                    class="flex items-center justify-center w-[58px] h-[58px] bg-white/20 rounded-full"
+                                >
+                                    <img
+                                        src="<%= process.env.APP_URL_ADMIN %>/Icons/images/totalvotessvg.png"
+                                        alt="Icon"
+                                        class="w-[58px] h-[58px] object-contain"
+                                    />
+                                </div>
+                                <div>
+                                    <p class="text-[26px] font-bold text-white leading-tight">
+                                        2500
+                                    </p>
+                                    <p class="text-sm font-medium text-white tracking-wide">
+                                        Total Votes
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div
+                                class="flex items-center gap-4 bg-[#153E74] p-4 rounded-[12px] shadow-md h-[100px]"
+                            >
+                                <div
+                                    class="flex items-center justify-center w-[58px] h-[58px] bg-white/20 rounded-full"
+                                >
+                                    <img
+                                        src="<%= process.env.APP_URL_ADMIN %>/Icons/images/eligiblevotessvg.png"
+                                        alt="Icon"
+                                        class="w-[58px] h-[58px] object-contain"
+                                    />
+                                </div>
+                                <div>
+                                    <p class="text-[26px] font-bold text-white leading-tight">
+                                        1680
+                                    </p>
+                                    <p class="text-sm font-medium text-white tracking-wide">
+                                        Total of Eligible Votes
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chart -->
+                        <div class="bg-white border rounded-xl p-4 shadow">
+                            <h3 class="text-lg font-semibold text-[#163F75] mb-4">Votes Tally</h3>
+                            <canvas id="votesTallyChart-1" class="w-full max-h-96"></canvas>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Example Row 2 -->
+                <tr class="bg-white border border-gray-800">
+                    <td
+                        class="py-3 px-4 text-center font-semibold text-lg first:rounded-l-lg last:rounded-r-lg"
+                    >
+                        Head of Committee
+                        <span class="text-yellow-600">(Upcoming)</span>
+                    </td>
+                    <td class="py-3 text-center px-4">Start: 01.09.2024 10:00 AM</td>
+                    <td class="py-3 text-center px-4">End: 10.09.2024 10:00 AM</td>
+                    <td class="py-3 text-center px-4 gap-2 flex flex-row align-center mt-3">
+                        <div>
+                            <button>
+                                <svg
+                                    width="15"
+                                    height="17"
+                                    viewBox="0 0 15 17"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M5.635 12.88C5.8485 12.88 6.05325 12.7952 6.20422 12.6442C6.35519 12.4933 6.44 12.2885 6.44 12.075V7.245C6.44 7.0315 6.35519 6.82675 6.20422 6.67578C6.05325 6.52481 5.8485 6.44 5.635 6.44C5.4215 6.44 5.21675 6.52481 5.06578 6.67578C4.91481 6.82675 4.83 7.0315 4.83 7.245V12.075C4.83 12.2885 4.91481 12.4933 5.06578 12.6442C5.21675 12.7952 5.4215 12.88 5.635 12.88ZM13.685 3.22H10.465V2.415C10.465 1.7745 10.2106 1.16024 9.75766 0.707337C9.30476 0.254437 8.6905 0 8.05 0H6.44C5.7995 0 5.18524 0.254437 4.73234 0.707337C4.27944 1.16024 4.025 1.7745 4.025 2.415V3.22H0.805C0.591501 3.22 0.386746 3.30481 0.235779 3.45578C0.0848122 3.60675 0 3.8115 0 4.025C0 4.2385 0.0848122 4.44325 0.235779 4.59422C0.386746 4.74519 0.591501 4.83 0.805 4.83H1.61V13.685C1.61 14.3255 1.86444 14.9398 2.31734 15.3927C2.77024 15.8456 3.3845 16.1 4.025 16.1H10.465C11.1055 16.1 11.7198 15.8456 12.1727 15.3927C12.6256 14.9398 12.88 14.3255 12.88 13.685V4.83H13.685C13.8985 4.83 14.1033 4.74519 14.2542 4.59422C14.4052 4.44325 14.49 4.2385 14.49 4.025C14.49 3.8115 14.4052 3.60675 14.2542 3.45578C14.1033 3.30481 13.8985 3.22 13.685 3.22ZM5.635 2.415C5.635 2.2015 5.71981 1.99675 5.87078 1.84578C6.02175 1.69481 6.2265 1.61 6.44 1.61H8.05C8.2635 1.61 8.46826 1.69481 8.61922 1.84578C8.77019 1.99675 8.855 2.2015 8.855 2.415V3.22H5.635V2.415ZM11.27 13.685C11.27 13.8985 11.1852 14.1033 11.0342 14.2542C10.8833 14.4052 10.6785 14.49 10.465 14.49H4.025C3.8115 14.49 3.60675 14.4052 3.45578 14.2542C3.30481 14.1033 3.22 13.8985 3.22 13.685V4.83H11.27V13.685ZM8.855 12.88C9.0685 12.88 9.27325 12.7952 9.42422 12.6442C9.57519 12.4933 9.66 12.2885 9.66 12.075V7.245C9.66 7.0315 9.57519 6.82675 9.42422 6.67578C9.27325 6.52481 9.0685 6.44 8.855 6.44C8.6415 6.44 8.43675 6.52481 8.28578 6.67578C8.13481 6.82675 8.05 7.0315 8.05 7.245V12.075C8.05 12.2885 8.13481 12.4933 8.28578 12.6442C8.43675 12.7952 8.6415 12.88 8.855 12.88Z"
+                                        fill="#F26E6E"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                        <div>
+                            <button>
+                                <svg
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 16 16"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M15.2051 8.00732C14.9928 8.00732 14.7893 8.09163 14.6392 8.24171C14.4891 8.39179 14.4048 8.59534 14.4048 8.80759V13.6092C14.4048 13.8214 14.3205 14.025 14.1704 14.1751C14.0204 14.3252 13.8168 14.4095 13.6046 14.4095H2.4008C2.18856 14.4095 1.98501 14.3252 1.83493 14.1751C1.68485 14.025 1.60054 13.8214 1.60054 13.6092V2.40544C1.60054 2.1932 1.68485 1.98965 1.83493 1.83957C1.98501 1.68949 2.18856 1.60518 2.4008 1.60518H7.20241C7.41466 1.60518 7.61821 1.52086 7.76829 1.37078C7.91837 1.2207 8.00268 1.01715 8.00268 0.804908C8.00268 0.592664 7.91837 0.389113 7.76829 0.239033C7.61821 0.0889539 7.41466 0.00464023 7.20241 0.00464023H2.4008C1.76407 0.00464023 1.15342 0.257581 0.703179 0.70782C0.252941 1.15806 0 1.76871 0 2.40544V13.6092C0 14.2459 0.252941 14.8566 0.703179 15.3068C1.15342 15.7571 1.76407 16.01 2.4008 16.01H13.6046C14.2413 16.01 14.8519 15.7571 15.3022 15.3068C15.7524 14.8566 16.0054 14.2459 16.0054 13.6092V8.80759C16.0054 8.59534 15.921 8.39179 15.771 8.24171C15.6209 8.09163 15.4173 8.00732 15.2051 8.00732ZM3.20107 8.61552V12.0087C3.20107 12.2209 3.28539 12.4245 3.43547 12.5745C3.58554 12.7246 3.7891 12.8089 4.00134 12.8089H7.39448C7.4998 12.8095 7.6042 12.7894 7.7017 12.7495C7.79921 12.7097 7.88789 12.651 7.96267 12.5768L13.5005 7.03099L15.7733 4.80625C15.8483 4.73185 15.9078 4.64334 15.9485 4.54582C15.9891 4.4483 16.01 4.3437 16.01 4.23806C16.01 4.13241 15.9891 4.02781 15.9485 3.93029C15.9078 3.83277 15.8483 3.74426 15.7733 3.66987L12.3801 0.236718C12.3057 0.16171 12.2172 0.102175 12.1197 0.0615461C12.0222 0.0209176 11.9176 0 11.812 0C11.7063 0 11.6017 0.0209176 11.5042 0.0615461C11.4067 0.102175 11.3182 0.16171 11.2438 0.236718L8.98701 2.50148L3.43315 8.04733C3.35898 8.12211 3.3003 8.21079 3.26047 8.3083C3.22065 8.4058 3.20046 8.5102 3.20107 8.61552ZM11.812 1.93329L14.0767 4.19804L12.9403 5.33442L10.6756 3.06967L11.812 1.93329ZM4.80161 8.94363L9.5472 4.19804L11.812 6.4628L7.06637 11.2084H4.80161V8.94363Z"
+                                        fill="#54B7C5"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <button
+                            data-modal-target="upload-document-modal"
+                            data-modal-toggle="upload-document-modal"
+                            class="bg-[#163F75] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#163F75]/70 transition"
+                        >
+                            View Details
+                        </button>
+                    </td>
+                    <td class="py-3 text-center px-4 last:rounded-r-lg">
+                        <button
+                            class="bg-[#54B7C5] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#54B7C5]/70 transition flex flex-row gap-2 items-center"
+                        >
+                            <svg
+                                width="15"
+                                height="13"
+                                viewBox="0 0 15 13"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M9 6.30176C10.2902 6.30176 11.5427 6.73933 12.5527 7.54199C13.5627 8.34464 14.2711 9.46596 14.5625 10.7227L14.5918 10.8926C14.6046 11.0068 14.6038 11.1221 14.5908 11.2363L14.5615 11.4072C14.5097 11.6318 14.407 11.8408 14.2627 12.0205L14.2637 12.0215C14.1573 12.1572 14.0287 12.2734 13.8838 12.3652L13.7334 12.4492C13.5267 12.5493 13.2999 12.5994 13.0703 12.5986V12.5996H4.92969V12.5986C4.75736 12.5998 4.58668 12.5722 4.4248 12.5156L4.26562 12.4502C4.0586 12.3499 3.87766 12.203 3.73633 12.0215V12.0205C3.6284 11.886 3.54351 11.7351 3.48633 11.5732L3.43848 11.4072C3.38659 11.1821 3.38604 10.9479 3.4375 10.7227L3.49707 10.4883C3.81872 9.32673 4.50048 8.29446 5.44727 7.54199L5.63965 7.39551C6.61422 6.68612 7.79046 6.30176 9 6.30176ZM9.00977 7.45605C8.04799 7.4561 7.11335 7.76376 6.34082 8.33105L6.18848 8.44727C5.38819 9.08909 4.83025 9.98497 4.60742 10.9863V10.9883C4.59547 11.0382 4.5951 11.0906 4.60645 11.1406L4.63184 11.2129L4.67285 11.2773L4.72461 11.3291C4.74382 11.3444 4.7648 11.3575 4.78711 11.3682C4.83148 11.3894 4.88051 11.4007 4.92969 11.4004H13.0703C13.1195 11.4007 13.1685 11.3894 13.2129 11.3682L13.2754 11.3291C13.2943 11.314 13.3119 11.2964 13.3271 11.2773L13.3311 11.2725L13.376 11.21C13.3886 11.1873 13.3982 11.1629 13.4053 11.1377L13.418 11.0615C13.419 11.0364 13.4167 11.0112 13.4121 10.9863L13.3662 10.7998C13.1349 9.93577 12.6519 9.16008 11.9785 8.57129L11.832 8.44727C11.0317 7.80538 10.0357 7.45605 9.00977 7.45605ZM2.5 3.40039C2.65913 3.40039 2.81131 3.46365 2.92383 3.57617C3.03634 3.68869 3.09961 3.84087 3.09961 4V4.90039H4C4.15913 4.90039 4.31131 4.96365 4.42383 5.07617L4.49902 5.16699C4.56434 5.26488 4.59961 5.38059 4.59961 5.5C4.59961 5.61941 4.56434 5.73512 4.49902 5.83301L4.42383 5.92383C4.31131 6.03635 4.15912 6.09961 4 6.09961H3.09961V7C3.09961 7.11941 3.06434 7.23512 2.99902 7.33301L2.92383 7.42383C2.81131 7.53634 2.65912 7.59961 2.5 7.59961C2.38059 7.59961 2.26488 7.56434 2.16699 7.49902L2.07617 7.42383C1.96366 7.31131 1.9004 7.15912 1.90039 7V6.09961H1C0.880589 6.09961 0.764877 6.06434 0.666992 5.99902L0.576172 5.92383C0.463654 5.81131 0.400395 5.65912 0.400391 5.5C0.400391 5.34087 0.463655 5.18869 0.576172 5.07617L0.666992 5.00098C0.76488 4.93565 0.880583 4.90039 1 4.90039H1.90039V4C1.90039 3.84087 1.96365 3.68869 2.07617 3.57617C2.18869 3.46365 2.34087 3.40039 2.5 3.40039ZM8.18555 0.53125C8.61063 0.391014 9.06568 0.362501 9.50684 0.450195C10.0112 0.550517 10.4753 0.797517 10.8389 1.16113L10.9697 1.30273C11.2619 1.64182 11.4621 2.05202 11.5498 2.49316L11.5801 2.68262C11.6269 3.06353 11.589 3.44999 11.4688 3.81445L11.4023 3.99512C11.2302 4.41068 10.9533 4.77326 10.6006 5.04883L10.4443 5.16211C10.0168 5.4477 9.51413 5.5996 9 5.59961C8.31045 5.59961 7.64872 5.32645 7.16113 4.83887C6.67354 4.35128 6.40039 3.68956 6.40039 3C6.40039 2.48586 6.5523 1.98318 6.83789 1.55566L6.95117 1.39941C7.22675 1.04666 7.58931 0.769792 8.00488 0.597656L8.18555 0.53125ZM9 1.59961C8.67502 1.59961 8.36146 1.71276 8.1123 1.91699L8.00977 2.00977C7.74722 2.27232 7.59961 2.6287 7.59961 3C7.59961 3.27677 7.68223 3.54718 7.83594 3.77734C7.98968 4.00743 8.20825 4.18698 8.46387 4.29297L8.56152 4.3291C8.79046 4.40463 9.03585 4.42031 9.27344 4.37305C9.54488 4.31898 9.79452 4.18595 9.99023 3.99023C10.1859 3.79452 10.319 3.54488 10.373 3.27344C10.4203 3.03584 10.4046 2.79047 10.3291 2.56152L10.293 2.46387C10.2002 2.24012 10.0514 2.04481 9.86133 1.89648L9.77734 1.83594C9.54719 1.68224 9.27677 1.59961 9 1.59961Z"
+                                    fill="white"
+                                    stroke="white"
+                                    stroke-width="0.2"
+                                />
+                            </svg>
+                            Invite
+                        </button>
+                    </td>
+                </tr>
+                <!-- Example Row 3 -->
+                <tr class="bg-white border border-gray-800">
+                    <td
+                        class="py-3 px-4 text-center font-semibold text-lg first:rounded-l-lg last:rounded-r-lg"
+                    >
+                        Regarding Construction
+                        <span class="text-orange-600">(Completed)</span>
+                    </td>
+                    <td class="py-3 text-center px-4">Start: 01.06.2024 06:00 AM</td>
+                    <td class="py-3 text-center px-4">End: 06.06.2024 06:00 AM</td>
+                    <td class="py-3 text-center px-4"></td>
+                    <td class="py-3 px-4">
+                        <button
+                            data-modal-target="upload-document-modal"
+                            data-modal-toggle="upload-document-modal"
+                            class="bg-[#163F75] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#163F75]/70 transition"
+                        >
+                            View Details
+                        </button>
+                    </td>
+                    <td class="py-3 text-center px-4 last:rounded-r-lg">
+                        <button
+                            disabled
+                            class="bg-[#d8f1f4] text-white text-sm font-semibold px-4 py-2.5 rounded-xl flex flex-row gap-2 items-center"
+                        >
+                            <svg
+                                width="15"
+                                height="13"
+                                viewBox="0 0 15 13"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M9 6.30176C10.2902 6.30176 11.5427 6.73933 12.5527 7.54199C13.5627 8.34464 14.2711 9.46596 14.5625 10.7227L14.5918 10.8926C14.6046 11.0068 14.6038 11.1221 14.5908 11.2363L14.5615 11.4072C14.5097 11.6318 14.407 11.8408 14.2627 12.0205L14.2637 12.0215C14.1573 12.1572 14.0287 12.2734 13.8838 12.3652L13.7334 12.4492C13.5267 12.5493 13.2999 12.5994 13.0703 12.5986V12.5996H4.92969V12.5986C4.75736 12.5998 4.58668 12.5722 4.4248 12.5156L4.26562 12.4502C4.0586 12.3499 3.87766 12.203 3.73633 12.0215V12.0205C3.6284 11.886 3.54351 11.7351 3.48633 11.5732L3.43848 11.4072C3.38659 11.1821 3.38604 10.9479 3.4375 10.7227L3.49707 10.4883C3.81872 9.32673 4.50048 8.29446 5.44727 7.54199L5.63965 7.39551C6.61422 6.68612 7.79046 6.30176 9 6.30176ZM9.00977 7.45605C8.04799 7.4561 7.11335 7.76376 6.34082 8.33105L6.18848 8.44727C5.38819 9.08909 4.83025 9.98497 4.60742 10.9863V10.9883C4.59547 11.0382 4.5951 11.0906 4.60645 11.1406L4.63184 11.2129L4.67285 11.2773L4.72461 11.3291C4.74382 11.3444 4.7648 11.3575 4.78711 11.3682C4.83148 11.3894 4.88051 11.4007 4.92969 11.4004H13.0703C13.1195 11.4007 13.1685 11.3894 13.2129 11.3682L13.2754 11.3291C13.2943 11.314 13.3119 11.2964 13.3271 11.2773L13.3311 11.2725L13.376 11.21C13.3886 11.1873 13.3982 11.1629 13.4053 11.1377L13.418 11.0615C13.419 11.0364 13.4167 11.0112 13.4121 10.9863L13.3662 10.7998C13.1349 9.93577 12.6519 9.16008 11.9785 8.57129L11.832 8.44727C11.0317 7.80538 10.0357 7.45605 9.00977 7.45605ZM2.5 3.40039C2.65913 3.40039 2.81131 3.46365 2.92383 3.57617C3.03634 3.68869 3.09961 3.84087 3.09961 4V4.90039H4C4.15913 4.90039 4.31131 4.96365 4.42383 5.07617L4.49902 5.16699C4.56434 5.26488 4.59961 5.38059 4.59961 5.5C4.59961 5.61941 4.56434 5.73512 4.49902 5.83301L4.42383 5.92383C4.31131 6.03635 4.15912 6.09961 4 6.09961H3.09961V7C3.09961 7.11941 3.06434 7.23512 2.99902 7.33301L2.92383 7.42383C2.81131 7.53634 2.65912 7.59961 2.5 7.59961C2.38059 7.59961 2.26488 7.56434 2.16699 7.49902L2.07617 7.42383C1.96366 7.31131 1.9004 7.15912 1.90039 7V6.09961H1C0.880589 6.09961 0.764877 6.06434 0.666992 5.99902L0.576172 5.92383C0.463654 5.81131 0.400395 5.65912 0.400391 5.5C0.400391 5.34087 0.463655 5.18869 0.576172 5.07617L0.666992 5.00098C0.76488 4.93565 0.880583 4.90039 1 4.90039H1.90039V4C1.90039 3.84087 1.96365 3.68869 2.07617 3.57617C2.18869 3.46365 2.34087 3.40039 2.5 3.40039ZM8.18555 0.53125C8.61063 0.391014 9.06568 0.362501 9.50684 0.450195C10.0112 0.550517 10.4753 0.797517 10.8389 1.16113L10.9697 1.30273C11.2619 1.64182 11.4621 2.05202 11.5498 2.49316L11.5801 2.68262C11.6269 3.06353 11.589 3.44999 11.4688 3.81445L11.4023 3.99512C11.2302 4.41068 10.9533 4.77326 10.6006 5.04883L10.4443 5.16211C10.0168 5.4477 9.51413 5.5996 9 5.59961C8.31045 5.59961 7.64872 5.32645 7.16113 4.83887C6.67354 4.35128 6.40039 3.68956 6.40039 3C6.40039 2.48586 6.5523 1.98318 6.83789 1.55566L6.95117 1.39941C7.22675 1.04666 7.58931 0.769792 8.00488 0.597656L8.18555 0.53125ZM9 1.59961C8.67502 1.59961 8.36146 1.71276 8.1123 1.91699L8.00977 2.00977C7.74722 2.27232 7.59961 2.6287 7.59961 3C7.59961 3.27677 7.68223 3.54718 7.83594 3.77734C7.98968 4.00743 8.20825 4.18698 8.46387 4.29297L8.56152 4.3291C8.79046 4.40463 9.03585 4.42031 9.27344 4.37305C9.54488 4.31898 9.79452 4.18595 9.99023 3.99023C10.1859 3.79452 10.319 3.54488 10.373 3.27344C10.4203 3.03584 10.4046 2.79047 10.3291 2.56152L10.293 2.46387C10.2002 2.24012 10.0514 2.04481 9.86133 1.89648L9.77734 1.83594C9.54719 1.68224 9.27677 1.59961 9 1.59961Z"
+                                    fill="white"
+                                    stroke="white"
+                                    stroke-width="0.2"
+                                />
+                            </svg>
+                            Invite
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Create Election Modal -->
+<div
+    id="create-election-modal"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full hidden"
+    aria-hidden="true"
+>
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Create Election</h3>
+                <button
+                    class="text-red-500 hover:text-red-700 text-xl"
+                    data-modal-hide="create-election-modal"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6">
+                <div class="space-y-5">
+                    <div>
+                        <!-- Election Title -->
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Election Title
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Write here"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        />
+                    </div>
+                    <div>
+                        <select
+                            id="maintenance-select"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <option disabled selected>Select Building/Complex</option>
+                            <option>Building 1</option>
+                            <option>Building 2</option>
+                        </select>
+                    </div>
+
+                    <div class="CandidateSelectContainer w-full max-w-md mx-auto mt-6">
+                        <!-- Dropdown -->
+                        <select
+                            id="candidate-select"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <option disabled selected>Select Candidates</option>
+                            <option value="Candidate 1">Candidate 1</option>
+                            <option value="Candidate 2">Candidate 2</option>
+                            <option value="Candidate 3">Candidate 3</option>
+                            <option value="Candidate 4">Candidate 4</option>
+                            <option value="Candidate 5">Candidate 5</option>
+                            <option value="Candidate 6">Candidate 6</option>
+                            <option value="Candidate 7">Candidate 7</option>
+                            <option value="Candidate 8">Candidate 8</option>
+                            <option value="Candidate 9">Candidate 9</option>
+                            <option value="Candidate 10">Candidate 10</option>
+                        </select>
+
+                        <!-- Selected Chips -->
+                        <div
+                            id="selected-candidates"
+                            class="selected-Candidates flex flex-wrap gap-2 mt-4"
+                        ></div>
+                    </div>
+
+                    <!-- elections Date -->
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Select the Start End Date & Time
+                    </label>
+
+                    <div class="flex gap-4">
+                        <!-- Date Picker -->
+                        <div class="flex-1 relative">
+                            <div
+                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                            >
+                                <svg
+                                    class="w-4 h-4 text-gray-500"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                datepicker-orientation="bottom"
+                                datepicker
+                                datepicker-autohide
+                                type="text"
+                                placeholder="Start Date"
+                                class="w-full pl-10 px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                            />
+                        </div>
+                        <!-- Date Picker -->
+                        <div class="flex-1 relative">
+                            <div
+                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                            >
+                                <svg
+                                    class="w-4 h-4 text-gray-500"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                datepicker-orientation="bottom"
+                                datepicker
+                                datepicker-autohide
+                                type="text"
+                                placeholder="End Date"
+                                class="w-full pl-10 px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- First Time Range -->
+                    <div class="grid grid-cols-3 gap-2 items-center mb-2">
+                        <div class="relative">
+                            <input
+                                placeholder=""
+                                type="time"
+                                id="start-time-1"
+                                class="w-full px-4 py-3 pl-10 bg-white rounded-xl text-gray-700 text-sm focus:outline-none shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                                min="09:00"
+                                max="18:00"
+                                required
+                            />
+                            <div
+                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                            >
+                                <svg
+                                    class="w-4 h-4 text-gray-500"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <span class="text-center text-gray-500">to</span>
+
+                        <div class="relative">
+                            <input
+                                placeholder=""
+                                type="time"
+                                id="end-time-1"
+                                class="w-full px-4 py-3 pl-10 bg-white rounded-xl text-gray-700 text-sm focus:outline-none shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                                min="09:00"
+                                max="18:00"
+                                required
+                            />
+                            <div
+                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+                            >
+                                <svg
+                                    class="w-4 h-4 text-gray-500"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex justify-center p-6 border-t border-gray-200">
+                <button
+                    data-modal-target="review-election-modal"
+                    data-modal-toggle="review-election-modal"
+                    class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
+                >
+                    Review
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Review Election Modal -->
+<div
+    id="review-election-modal"
+    class="fixed top-0 left-0 right-0 z-[999] w-full p-4 overflow-x-hidden overflow-y-auto h-screen hidden"
+>
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-[#F7F6F5] rounded-xl shadow-lg w-full max-w-md p-6">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h2 class="text-lg font-semibold text-gray-800">Review Election Details</h2>
+                <button
+                    class="text-red-500 text-sm font-semibold"
+                    data-modal-hide="review-election-modal"
+                >
+                    Close
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="space-y-5">
+                <!-- Election Title -->
+                <div>
+                    <label class="block text-sm text-gray-600 mb-1">Election Title</label>
+                    <input
+                        type="text"
+                        value="Committee Election"
+                        disabled
+                        class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-sm text-gray-700"
+                    />
+                </div>
+
+                <div>
+                    <input
+                        type="text"
+                        value="AlNaseem"
+                        disabled
+                        class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-sm text-gray-700"
+                    />
+                </div>
+
+                <!-- Selected Candidates -->
+                <div>
+                    <label class="block text-sm text-gray-600 mb-1">Selected Candidates</label>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-[#57C1D1] text-white text-sm px-3 py-1 rounded-md">
+                            Amin Abadi
+                        </span>
+                        <span class="bg-[#57C1D1] text-white text-sm px-3 py-1 rounded-md">
+                            Bassam Ali
+                        </span>
+                        <span class="bg-[#57C1D1] text-white text-sm px-3 py-1 rounded-md">
+                            Fuad Aziz
+                        </span>
+                        <span class="bg-[#57C1D1] text-white text-sm px-3 py-1 rounded-md">
+                            Safu Baba
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Start & End Date -->
+                <div>
+                    <label class="block text-sm text-gray-600 mb-1">
+                        Selected the Start End Date & Time
+                    </label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="relative">
+                            <input
+                                type="text"
+                                value="15-08-2024"
+                                disabled
+                                class="w-full px-10 py-2.5 bg-white border border-gray-300 rounded-lg text-sm text-gray-700"
+                            />
+                            <div class="absolute left-3 top-2.5 text-gray-500">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M6 2a1 1 0 112 0v1h4V2a1 1 0 112 0v1h1a2 2 0 012 2v1H3V5a2 2 0 012-2h1V2zm11 5H3v9a2 2 0 002 2h10a2 2 0 002-2V7z"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <input
+                                type="text"
+                                value="15-09-2024"
+                                disabled
+                                class="w-full px-10 py-2.5 bg-white border border-gray-300 rounded-lg text-sm text-gray-700"
+                            />
+                            <div class="absolute left-3 top-2.5 text-gray-500">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M6 2a1 1 0 112 0v1h4V2a1 1 0 112 0v1h1a2 2 0 012 2v1H3V5a2 2 0 012-2h1V2zm11 5H3v9a2 2 0 002 2h10a2 2 0 002-2V7z"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <input
+                                type="text"
+                                value="10:00 AM"
+                                disabled
+                                class="w-full px-10 py-2.5 bg-white border border-gray-300 rounded-lg text-sm text-gray-700"
+                            />
+                            <div class="absolute left-3 top-2.5 text-gray-500">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M10 2a8 8 0 100 16 8 8 0 000-16zm-.5 4a1 1 0 112 0v3.586l2.293 2.293a1 1 0 01-1.414 1.414L10 10.414V6z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <input
+                                type="text"
+                                value="10:00 AM"
+                                disabled
+                                class="w-full px-10 py-2.5 bg-white border border-gray-300 rounded-lg text-sm text-gray-700"
+                            />
+                            <div class="absolute left-3 top-2.5 text-gray-500">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M10 2a8 8 0 100 16 8 8 0 000-16zm-.5 4a1 1 0 112 0v3.586l2.293 2.293a1 1 0 01-1.414 1.414L10 10.414V6z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="flex justify-between mt-8 gap-4">
+                <button
+                    class="w-1/2 bg-[#153E74] hover:bg-[#102c56] text-white py-2.5 rounded-lg text-sm font-semibold"
+                >
+                    Edit
+                </button>
+                <button
+                    class="w-1/2 bg-[#57C1D1] hover:bg-[#4db1c1] text-white py-2.5 rounded-lg text-sm font-semibold"
+                >
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Invite to Vote Modal -->
+<div
+    id="invite-vote-modal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+>
+    <div class="bg-[#F7F6F5] rounded-xl shadow-lg w-full max-w-4xl p-6">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center border-b pb-3 mb-4">
+            <h2 class="text-lg font-semibold text-gray-800">Invite to Vote</h2>
+            <button class="text-red-500 text-sm font-semibold" data-modal-hide="invite-vote-modal">
+                Close
+            </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Left: Message Text Area -->
+            <div class="flex flex-col">
+                <label class="text-sm text-gray-600 mb-1">
+                    Write your message to invite people to vote
+                </label>
+                <textarea
+                    placeholder="Write here"
+                    rows="10"
+                    class="w-full h-full p-4 border border-gray-300 rounded-lg resize-none text-sm text-gray-700"
+                ></textarea>
+            </div>
+
+            <!-- Right: Search + Users -->
+            <div class="flex flex-col">
+                <!-- Search Bar -->
+                <div class="relative mb-4">
+                    <input
+                        type="text"
+                        placeholder="Search by Name or Flat/Villa No."
+                        class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg text-sm focus:outline-none text-gray-700"
+                    />
+                    <div class="absolute right-3 top-2.5 text-gray-500">
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Invite All Checkbox -->
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-gray-700">Invite All</span>
+                    <input
+                        type="checkbox"
+                        class="form-checkbox w-4 h-4 text-[#57C1D1] border-gray-300 rounded"
+                    />
+                </div>
+
+                <!-- Scrollable Users List -->
+                <div class="overflow-y-auto max-h-72 space-y-3 pr-2">
+                    <!-- Example User Card (Repeat via loop if using EJS/React/Vue) -->
+                    <div
+                        class="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm"
+                    >
+                        <div class="flex items-center gap-3">
+                            <img
+                                src="https://randomuser.me/api/portraits/women/1.jpg"
+                                class="w-8 h-8 rounded-full object-cover"
+                            />
+                            <div class="text-sm text-gray-800 font-medium">Theresa Webb</div>
+                            <div class="text-sm text-gray-500">Flat - 229</div>
+                        </div>
+                        <input
+                            type="checkbox"
+                            class="form-checkbox w-4 h-4 text-[#57C1D1] border-gray-300 rounded"
+                        />
+                    </div>
+
+                    <div
+                        class="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm"
+                    >
+                        <div class="flex items-center gap-3">
+                            <img
+                                src="https://randomuser.me/api/portraits/men/2.jpg"
+                                class="w-8 h-8 rounded-full object-cover"
+                            />
+                            <div class="text-sm text-gray-800 font-medium">Guy Hawkins</div>
+                            <div class="text-sm text-gray-500">Flat - 325</div>
+                        </div>
+                        <input
+                            type="checkbox"
+                            class="form-checkbox w-4 h-4 text-[#57C1D1] border-gray-300 rounded"
+                        />
+                    </div>
+
+                    <!-- Add more users dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="flex justify-center mt-6">
+            <button
+                class="bg-[#57C1D1] hover:bg-[#4db1c1] text-white font-medium px-10 py-2.5 rounded-lg text-sm shadow"
+            >
+                Invite
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function toggleDetails(button) {
+        const parentRow = button.closest("tr");
+        const id = parentRow.getAttribute("data-id");
+        const detailRow = document.querySelector(`.details-row[data-id="${id}"]`);
+        const isOpen = !detailRow.classList.contains("hidden");
+
+        if (isOpen) {
+            detailRow.classList.add("hidden");
+            button.textContent = "View Details";
+            button.classList.remove("bg-red-600", "hover:bg-red-500");
+            button.classList.add("bg-[#163F75]", "hover:bg-[#163F75]/70");
+        } else {
+            detailRow.classList.remove("hidden");
+            button.textContent = "Close";
+            button.classList.remove("bg-[#163F75]", "hover:bg-[#163F75]/70");
+            button.classList.add("bg-red-600", "hover:bg-red-500");
+        }
+    }
+
+    // Line chart logic
+    const ctx = document.getElementById("votesTallyChart-1").getContext("2d");
+
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: [
+                "Amin Abzid",
+                "Bassam Ali",
+                "Fuad Aziz",
+                "Saif Bakir",
+                "Khalid Bilal",
+                "Qadir Cham",
+                "Saif Darwish",
+                "Usama Ebeid",
+                "Ghazi Fadel",
+            ],
+            datasets: [
+                {
+                    label: "Votes",
+                    data: [180, 97, 160, 226, 200, 175, 140, 170, 80],
+                    fill: true,
+                    tension: 0.4,
+                    borderColor: "#163F75",
+                    backgroundColor: "rgba(22, 63, 117, 0.1)",
+                    pointBackgroundColor: "#163F75",
+                    pointRadius: 5,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => ` ${context.parsed.y} votes`,
+                    },
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 50,
+                    },
+                },
+            },
+        },
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const select = document.getElementById("candidate-select");
+        const chipContainer = document.getElementById("selected-candidates");
+        const selectedSet = new Set();
+
+        select.addEventListener("change", function () {
+            const selectedValue = this.value;
+            const selectedOption = this.querySelector(`option[value="${selectedValue}"]`);
+
+            if (selectedValue && !selectedSet.has(selectedValue)) {
+                selectedSet.add(selectedValue);
+
+                // Create chip
+                const chip = document.createElement("span");
+                chip.className =
+                    "bg-[#54B7C5] text-white px-3 py-1 rounded-full flex items-center text-sm";
+                chip.innerHTML = `${selectedValue}
+                    <button class="ml-2 text-white hover:text-gray-200" onclick="removeChip('${selectedValue}')">&times;</button>`;
+
+                chipContainer.appendChild(chip);
+
+                // Disable the selected option
+                selectedOption.disabled = true;
+            }
+
+            // Reset select
+            this.value = "";
+        });
+
+        // Make removeChip globally accessible
+        window.removeChip = function (value) {
+            selectedSet.delete(value);
+            // Remove from chip UI
+            [...chipContainer.children].forEach((child) => {
+                if (child.textContent.includes(value)) child.remove();
+            });
+
+            // Re-enable option
+            const optionToEnable = select.querySelector(`option[value="${value}"]`);
+            if (optionToEnable) optionToEnable.disabled = false;
+        };
+    });
+</script>

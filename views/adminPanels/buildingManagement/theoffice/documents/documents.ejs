@@ -1,0 +1,561 @@
+<div
+    class="bg-white rounded-tl-[40px] rounded-br-[90px] p-6 shadow-md flex justify-between items-center"
+>
+    <h1 class="text-2xl font-medium text-gray-500">The Office</h1>
+    <div class="flex items-center gap-4">
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                    class="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                </svg>
+            </div>
+            <input
+                type="text"
+                placeholder="Search"
+                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[#54B7C5] focus:border-[#54B7C5] sm:text-sm"
+            />
+        </div>
+        <!-- Tab Buttons -->
+        <div class="bg-[#F3F2F1] rounded-lg flex items-center mr-4">
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/documents'"
+                id="btn-resident"
+                class="px-4 py-2 rounded-lg text-white bg-[#54B7C5] transition-all"
+            >
+                Documents
+            </button>
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/election'"
+                id="btn-resident"
+                class="px-4 py-2 rounded-lg text-gray-600 hover:text-black transition-all"
+            >
+                Election
+            </button>
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/nomination'"
+                id="btn-resident"
+                class="px-4 py-2 rounded-lg text-gray-600 hover:text-black transition-all"
+            >
+                Nomination
+            </button>
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/ownersassociation'"
+                id="btn-security"
+                class="px-4 py-2 rounded-lg text-gray-600 hover:text-black transition-all"
+            >
+                Owners Association
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Card -->
+<div class="p-8 mx-auto">
+    <!-- Filter -->
+    <div class="flex justify-end gap-4 items-start pr-4 mt-4 items-center align-center">
+        <div class="flex justify-end gap-4 items-end pr-4 items-center">
+            <button
+                class="flex items-center gap-1 text-sm text-[#54B7C5] hover:underline font-medium mt-6"
+            >
+                <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M12.4068 4.23333C11.6818 4.01667 10.8818 3.875 9.99844 3.875C6.00677 3.875 2.77344 7.10833 2.77344 11.1C2.77344 15.1 6.00677 18.3333 9.99844 18.3333C13.9901 18.3333 17.2234 15.1 17.2234 11.1083C17.2234 9.625 16.7734 8.24167 16.0068 7.09167"
+                        stroke="#54B7C5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M13.4396 4.43464L11.0312 1.66797"
+                        stroke="#54B7C5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M13.4411 4.43359L10.6328 6.48359"
+                        stroke="#54B7C5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+                Reset
+            </button>
+
+            <div class="relative">
+                <label class="block text-sm font-medium text-gray-700 mb-1">From</label>
+                <div class="relative">
+                    <div
+                        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                    >
+                        <svg
+                            class="w-4 h-4 text-gray-500"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                            />
+                        </svg>
+                    </div>
+                    <input
+                        datepicker
+                        datepicker-orientation="bottom"
+                        datepicker-format="dd-mm-yyyy"
+                        type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                        placeholder="Select date"
+                    />
+                </div>
+            </div>
+
+            <div class="flex items-end gap-3">
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">To</label>
+                    <div class="relative">
+                        <div
+                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                        >
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                                />
+                            </svg>
+                        </div>
+                        <input
+                            datepicker
+                            datepicker-orientation="bottom"
+                            datepicker-format="dd-mm-yyyy"
+                            type="text"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                            placeholder="Select date"
+                        />
+                    </div>
+                </div>
+                <button
+                    class="bg-[#163F75] text-sm font-semibold text-white px-9 py-2.5 rounded-lg hover:bg-[#163F75]/80 transition"
+                    onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/documents/officedocuments'"
+                >
+                    Office Documents
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="mt-6 overflow-x-auto">
+        <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+            <thead class="bg-[#EAEAE9] text-gray-600 text-sm">
+                <tr>
+                    <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider first:rounded-l-lg last:rounded-r-lg"
+                    >
+                        <input
+                            id="checkbox-all"
+                            aria-describedby="checkbox-1"
+                            type="checkbox"
+                            class="w-4 h-4 border-gray-300 rounded bg-gray-50"
+                        />
+                    </th>
+                    <th class="text-left py-3 px-4">Flat/Villa</th>
+                    <th class="text-left py-3 px-4">Building/Complex</th>
+                    <th class="text-left py-3 px-4">User Name</th>
+                    <th class="text-left py-3 px-4">Last Update</th>
+                    <th class="text-left py-3 px-4">All Documents</th>
+                    <th class="text-left py-3 px-4">Add File</th>
+                    <th class="text-left py-3 px-4 last:rounded-r-lg">Comments</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 text-sm">
+                <!-- Example Row 1 -->
+                <tr class="border border-gray-800">
+                    <td
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider first:rounded-l-lg last:rounded-r-lg"
+                    >
+                        <input
+                            id="checkbox-all"
+                            aria-describedby="checkbox-1"
+                            type="checkbox"
+                            class="w-4 h-4 border-gray-300 rounded bg-gray-50"
+                        />
+                    </td>
+                    <td class="py-3 px-4">12- Villa</td>
+                    <td class="py-3 px-4">AlNaseem</td>
+                    <td class="py-3 px-4">Francesca Metts</td>
+                    <td class="py-3 px-4">02.08.2023</td>
+                    <td class="py-3 px-4">
+                        <button
+                            data-modal-target="all-documents-list-modal"
+                            data-modal-toggle="all-documents-list-modal"
+                            class="bg-[#54B7C5] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#54B7C5]/70 transition flex flex-row gap-2 items-center"
+                        >
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M10.1079 8.03573C10.1079 9.19973 9.16391 10.1431 7.99991 10.1431C6.83591 10.1431 5.89258 9.19973 5.89258 8.03573C5.89258 6.87107 6.83591 5.92773 7.99991 5.92773C9.16391 5.92773 10.1079 6.87107 10.1079 8.03573Z"
+                                    stroke="white"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M7.99932 12.904C10.538 12.904 12.86 11.0786 14.1673 8.03597C12.86 4.9933 10.538 3.16797 7.99932 3.16797H8.00198C5.46332 3.16797 3.14132 4.9933 1.83398 8.03597C3.14132 11.0786 5.46332 12.904 8.00198 12.904H7.99932Z"
+                                    stroke="white"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                            View
+                        </button>
+                    </td>
+                    <td class="py-3 px-4">
+                        <button
+                            data-modal-target="upload-document-modal"
+                            data-modal-toggle="upload-document-modal"
+                            class="bg-[#163F75] text-white text-sm font-semibold px-4 py-2.5 rounded-xl hover:bg-[#163F75]/70 transition"
+                        >
+                            + Upload
+                        </button>
+                    </td>
+                    <td
+                        class="px-4 py-3 max-w-[320px] whitespace-normal align-top text-sm text-gray-500"
+                    >
+                        <button
+                            data-modal-target="add-comment-for-documents-modal"
+                            data-modal-toggle="add-comment-for-documents-modal"
+                            class="w-full max-h-[120px] px-3 py-2 bg-white rounded-lg shadow-sm hover:ring-1 hover:ring-gray-300 focus:outline-none overflow-y-auto text-left"
+                        >
+                            <span
+                                class="text-gray-700 text-sm comment-text break-words whitespace-pre-line block"
+                            >
+                                Click to add comment
+                            </span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="flex justify-between items-center mt-4 px-4 text-sm text-gray-500">
+            <span>Showing 1 of 28</span>
+            <div class="flex gap-2">
+                <button class="text-gray-500">&lt;</button>
+                <button class="font-bold text-black">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <button class="text-gray-500">&gt;</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Comment Modal -->
+<div
+    id="add-comment-for-documents-modal"
+    tabindex="-1"
+    class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center"
+    aria-hidden="true"
+>
+    <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center border-b pb-2">
+            <h3 class="text-lg font-semibold text-center w-full">Add Comment</h3>
+            <button
+                type="button"
+                data-modal-hide="add-comment-for-documents-modal"
+                class="text-red-500 text-sm absolute right-6 top-5 hover:text-red-600"
+            >
+                Close &times;
+            </button>
+        </div>
+
+        <!-- Body -->
+        <div class="mt-6">
+            <textarea
+                rows="4"
+                placeholder="Write here"
+                class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#54B7C5]/50 text-sm"
+            ></textarea>
+        </div>
+        <div class="flex justify-center space-x-4 mt-8">
+            <button
+                id="save-document-comment"
+                data-modal-hide="add-comment-for-documents-modal"
+                class="bg-[#54B7C5] hover:bg-[#48aab8] text-white font-semibold rounded-[10px] px-6 py-2 w-[200px]"
+            >
+                Submit
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- All Documents Modal -->
+<div
+    id="all-documents-list-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+>
+    <div class="bg-white rounded-xl shadow-lg max-w-2xl w-full p-6 relative overflow-x-auto">
+        <!-- Header -->
+        <div class="flex justify-between items-center border-b pb-3">
+            <h2 class="text-lg font-semibold text-gray-800">All Documents</h2>
+            <button
+                data-modal-hide="all-documents-list-modal"
+                class="text-red-500 text-sm font-semibold hover:text-red-700"
+            >
+                Close ✕
+            </button>
+        </div>
+
+        <!-- Table -->
+        <div class="mt-2 max-h-[500px] overflow-y-auto">
+            <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+                <thead class="bg-[#EAEAE9] text-gray-600 text-sm">
+                    <tr>
+                        <th class="text-center py-3 px-4 first:rounded-l-lg last:rounded-r-lg">
+                            File
+                        </th>
+                        <th class="text-center py-3 px-4">Category</th>
+                        <th class="text-center py-3 px-4">Upload Date</th>
+                        <th class="text-center py-3 px-4">Size</th>
+                        <th class="text-center py-3 px-4">View</th>
+                        <th class="text-center py-3 px-4">Download</th>
+                        <th class="text-center py-3 px-4 last:rounded-r-lg">Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-sm overflow-x-auto">
+                    <!-- Example Row 1 -->
+                    <tr class="border border-gray-800">
+                        <td
+                            class="py-3 px-4 flex text-center flex-row gap-2 items-center first:rounded-l-lg last:rounded-r-lg"
+                        >
+                            <svg
+                                width="16"
+                                height="18"
+                                viewBox="0 0 16 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <g clip-path="url(#clip0_3411_40333)">
+                                    <path
+                                        d="M1.14204 0H10.8521L15.9992 5.04654V16.8743C15.9992 17.1727 15.8788 17.4588 15.6645 17.6698C15.4502 17.8807 15.1595 17.9993 14.8564 17.9993H1.1428C0.839713 17.9993 0.549037 17.8807 0.33472 17.6698C0.120403 17.4588 0 17.1727 0 16.8743V1.12495C-6.7324e-08 0.826727 0.120297 0.540704 0.334449 0.329756C0.548602 0.118808 0.839083 0.000198817 1.14204 0Z"
+                                        fill="#E2574C"
+                                    />
+                                    <path
+                                        d="M15.9827 5.19175H11.8991C11.5882 5.19155 11.29 5.06989 11.0702 4.85348C10.8504 4.63706 10.7268 4.3436 10.7266 4.03755V0.0117188L15.9827 5.19175Z"
+                                        fill="#B53629"
+                                    />
+                                    <path
+                                        d="M12.4728 9.0006C12.5688 8.98237 12.6553 8.93183 12.7175 8.85765C12.7797 8.78348 12.8137 8.6903 12.8137 8.59412C12.8137 8.49794 12.7797 8.40475 12.7175 8.33057C12.6553 8.2564 12.5688 8.20586 12.4728 8.18763H11.1579C11.1003 8.19017 11.044 8.20429 10.9922 8.2291C10.9405 8.25392 10.8944 8.28891 10.857 8.33192C10.8195 8.37493 10.7914 8.42504 10.7743 8.47917C10.7573 8.53329 10.7517 8.59028 10.7579 8.64661V11.9577C10.7579 12.2532 10.9217 12.4167 11.1434 12.4167C11.3651 12.4167 11.5243 12.2525 11.5243 11.9577V11.0488H12.3205C12.3729 11.0475 12.4245 11.0355 12.472 11.0137C12.5195 10.9919 12.562 10.9606 12.5967 10.9219C12.6314 10.8832 12.6575 10.8378 12.6736 10.7887C12.6897 10.7395 12.6952 10.6876 12.69 10.6363C12.6944 10.5856 12.6881 10.5347 12.6716 10.4865C12.6551 10.4384 12.6287 10.3941 12.594 10.3564C12.5593 10.3188 12.5172 10.2886 12.4701 10.2677C12.423 10.2468 12.3721 10.2357 12.3205 10.2351H11.5281V8.9991L12.4728 9.0006ZM8.03572 8.18763H7.07272C7.01214 8.18592 6.95188 8.19671 6.8958 8.2193C6.83971 8.24189 6.78905 8.27578 6.74708 8.3188C6.7051 8.36182 6.67273 8.41301 6.65205 8.46908C6.63138 8.52514 6.62285 8.58486 6.62702 8.64437V11.963C6.62389 12.0226 6.63362 12.0823 6.65556 12.138C6.6775 12.1937 6.71115 12.2442 6.75432 12.2862C6.79749 12.3282 6.84918 12.3607 6.90603 12.3817C6.96287 12.4026 7.02357 12.4115 7.08414 12.4077H8.09209C8.36398 12.4185 8.63509 12.3721 8.88727 12.2715C9.13946 12.1708 9.36692 12.0184 9.55444 11.8243C9.74196 11.6302 9.88522 11.3989 9.97464 11.1459C10.0641 10.8929 10.0976 10.6241 10.073 10.3573C10.1082 10.0779 10.081 9.79421 9.99334 9.52618C9.90563 9.25815 9.75951 9.01222 9.56519 8.80557C9.37086 8.59893 9.13303 8.43657 8.86832 8.32983C8.60362 8.22309 8.31842 8.17456 8.03267 8.18763H8.03572ZM8.08219 11.5895H7.49631V9.00585H8.02429C8.82349 9.00585 9.16709 9.55632 9.16709 10.316C9.16785 11.027 8.82654 11.5895 8.07914 11.5895H8.08219ZM4.56312 8.18763H3.6085C3.54882 8.18576 3.48945 8.19675 3.43453 8.21982C3.37961 8.24289 3.33048 8.2775 3.29057 8.32121C3.25066 8.36493 3.22093 8.4167 3.20347 8.47291C3.18601 8.52912 3.18123 8.5884 3.18947 8.64661V11.9577C3.18947 12.2532 3.36165 12.4167 3.5925 12.4167C3.82335 12.4167 3.99553 12.2525 3.99553 11.9577V10.9903H4.59207C4.7756 10.9923 4.95759 10.957 5.12659 10.8865C5.2956 10.816 5.44799 10.7119 5.57418 10.5807C5.70038 10.4495 5.79766 10.2941 5.85993 10.1241C5.92219 9.95417 5.94809 9.77336 5.936 9.59308C5.94723 9.40996 5.91973 9.22654 5.85524 9.05442C5.79076 8.88229 5.69069 8.72521 5.56137 8.59311C5.43204 8.46102 5.27628 8.35678 5.10393 8.28698C4.93157 8.21719 4.74638 8.18335 4.56007 8.18763H4.56312ZM4.54712 10.2126H3.99857V8.96535H4.54712C4.70088 8.9857 4.84192 9.06028 4.94405 9.17524C5.04618 9.2902 5.10247 9.43773 5.10247 9.59045C5.10247 9.74317 5.04618 9.89071 4.94405 10.0057C4.84192 10.1206 4.70088 10.1952 4.54712 10.2156V10.2126Z"
+                                        fill="white"
+                                    />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_3411_40333">
+                                        <rect width="16" height="18" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            ID Card
+                        </td>
+                        <td class="py-3 text-center px-4">Personal</td>
+                        <td class="py-3 text-center px-4">02.08.2023</td>
+                        <td class="py-3 text-center px-4">2 MB</td>
+                        <td class="py-3 text-center px-4">
+                            <button>
+                                <svg
+                                    width="18"
+                                    height="15"
+                                    viewBox="0 0 18 15"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M11.6521 7.27083C11.6521 8.76956 10.4367 9.98417 8.93794 9.98417C7.43921 9.98417 6.22461 8.76956 6.22461 7.27083C6.22461 5.77125 7.43921 4.55664 8.93794 4.55664C10.4367 4.55664 11.6521 5.77125 11.6521 7.27083Z"
+                                        stroke="#54B7C5"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M8.93828 13.5358C12.207 13.5358 15.1967 11.1855 16.88 7.26788C15.1967 3.35024 12.207 1 8.93828 1H8.94172C5.67301 1 2.68328 3.35024 1 7.26788C2.68328 11.1855 5.67301 13.5358 8.94172 13.5358H8.93828Z"
+                                        stroke="#54B7C5"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </button>
+                        </td>
+                        <td class="py-3 text-center px-4">
+                            <button>
+                                <svg
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 18 18"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <g clip-path="url(#clip0_3411_40351)">
+                                        <path
+                                            d="M8.97538 11.6753V0.976562M8.97538 11.6753L5.85241 8.10929M8.97538 11.6753L12.0983 8.10929M1.16211 13.458L1.64747 15.6734C1.70783 16.0378 1.89117 16.3706 2.16698 16.6164C2.44279 16.8621 2.79444 17.006 3.16341 17.0241H14.788C15.157 17.006 15.5086 16.8621 15.7844 16.6164C16.0602 16.3706 16.2436 16.0378 16.3039 15.6734L16.7893 13.4574"
+                                            stroke="#163F75"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_3411_40351">
+                                            <rect width="17.9518" height="18" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </button>
+                        </td>
+                        <td class="py-3 px-4 text-center last:rounded-r-lg">
+                            <button>
+                                <svg
+                                    width="17"
+                                    height="18"
+                                    viewBox="0 0 17 18"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M6.3 14.4C6.5387 14.4 6.76761 14.3052 6.9364 14.1364C7.10518 13.9676 7.2 13.7387 7.2 13.5V8.1C7.2 7.8613 7.10518 7.63239 6.9364 7.4636C6.76761 7.29482 6.5387 7.2 6.3 7.2C6.06131 7.2 5.83239 7.29482 5.6636 7.4636C5.49482 7.63239 5.4 7.8613 5.4 8.1V13.5C5.4 13.7387 5.49482 13.9676 5.6636 14.1364C5.83239 14.3052 6.06131 14.4 6.3 14.4ZM15.3 3.6H11.7V2.7C11.7 1.98392 11.4155 1.29716 10.9092 0.790812C10.4028 0.284464 9.71608 0 9 0H7.2C6.48392 0 5.79716 0.284464 5.29081 0.790812C4.78446 1.29716 4.5 1.98392 4.5 2.7V3.6H0.9C0.661305 3.6 0.432387 3.69482 0.263604 3.8636C0.0948211 4.03239 0 4.2613 0 4.5C0 4.73869 0.0948211 4.96761 0.263604 5.1364C0.432387 5.30518 0.661305 5.4 0.9 5.4H1.8V15.3C1.8 16.0161 2.08446 16.7028 2.59081 17.2092C3.09716 17.7155 3.78392 18 4.5 18H11.7C12.4161 18 13.1028 17.7155 13.6092 17.2092C14.1155 16.7028 14.4 16.0161 14.4 15.3V5.4H15.3C15.5387 5.4 15.7676 5.30518 15.9364 5.1364C16.1052 4.96761 16.2 4.73869 16.2 4.5C16.2 4.2613 16.1052 4.03239 15.9364 3.8636C15.7676 3.69482 15.5387 3.6 15.3 3.6ZM6.3 2.7C6.3 2.46131 6.39482 2.23239 6.5636 2.0636C6.73239 1.89482 6.96131 1.8 7.2 1.8H9C9.2387 1.8 9.46761 1.89482 9.6364 2.0636C9.80518 2.23239 9.9 2.46131 9.9 2.7V3.6H6.3V2.7ZM12.6 15.3C12.6 15.5387 12.5052 15.7676 12.3364 15.9364C12.1676 16.1052 11.9387 16.2 11.7 16.2H4.5C4.26131 16.2 4.03239 16.1052 3.8636 15.9364C3.69482 15.7676 3.6 15.5387 3.6 15.3V5.4H12.6V15.3ZM9.9 14.4C10.1387 14.4 10.3676 14.3052 10.5364 14.1364C10.7052 13.9676 10.8 13.7387 10.8 13.5V8.1C10.8 7.8613 10.7052 7.63239 10.5364 7.4636C10.3676 7.29482 10.1387 7.2 9.9 7.2C9.66131 7.2 9.43239 7.29482 9.2636 7.4636C9.09482 7.63239 9 7.8613 9 8.1V13.5C9 13.7387 9.09482 13.9676 9.2636 14.1364C9.43239 14.3052 9.66131 14.4 9.9 14.4Z"
+                                        fill="#F26E6E"
+                                    />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Upload Document Modal -->
+<div
+    id="upload-document-modal"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full hidden"
+    aria-hidden="true"
+>
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Upload Document</h3>
+                <button
+                    class="text-red-500 hover:text-red-700 text-xl"
+                    data-modal-hide="upload-document-modal"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6">
+                <div class="space-y-5">
+                    <!-- Please Upload Here (Image, Excel, Doc, PDF) -->
+                    <div class="flex items-center justify-center mb-0">
+                        <label
+                            class="flex items-center justify-center w-full h-16 bg-white border border-dashed border-gray-300 rounded-xl cursor-pointer shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <div class="flex items-center gap-2 text-sm text-gray-500">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-5 h-5 text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4-4m0 0l-4 4m4-4v12"
+                                    />
+                                </svg>
+                                <span>Please Upload Here (Image, Excel, Doc, PDF)</span>
+                            </div>
+                            <input type="file" class="hidden" />
+                        </label>
+                    </div>
+
+                    <div>
+                        <select
+                            id="theoffice-select"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <option disabled selected>Select Category First</option>
+                            <option>PDF</option>
+                            <option>Doc</option>
+                            <option>Excel</option>
+                            <option>Image</option>
+                        </select>
+                    </div>
+
+                    <!-- Document Name -->
+                    <input
+                        type="text"
+                        placeholder="Document Name"
+                        class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    />
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex justify-center p-6 border-t border-gray-200">
+                <button
+                    class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
+                >
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script></script>

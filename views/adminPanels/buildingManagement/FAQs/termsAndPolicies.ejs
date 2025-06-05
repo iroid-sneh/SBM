@@ -1,0 +1,329 @@
+<style>
+    .rotate-45 {
+        transform: rotate(45deg);
+    }
+</style>
+
+<div
+    class="bg-white rounded-tl-[40px] rounded-br-[90px] p-6 shadow-md flex justify-between items-center"
+>
+    <div class="flex flex-row items-center justify-center gap-4">
+        <h1 class="text-2xl font-medium text-gray-500">FAQ</h1>
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M5.6665 3.33464L10.3332 8.0013L5.6665 12.668"
+                stroke="#54B7C5"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M13.6665 3.33464L18.3332 8.0013L13.6665 12.668"
+                stroke="#54B7C5"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        <h1 class="text-2xl font-medium text-[#54B7C5]">Terms and Policies</h1>
+    </div>
+    <div class="flex items-center gap-4 mr-4">
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                    class="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                </svg>
+            </div>
+            <input
+                type="text"
+                placeholder="Search"
+                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[#54B7C5] focus:border-[#54B7C5] sm:text-sm"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="p-8 mx-auto">
+    <!-- Card -->
+    <div class="w-[1400px] bg-white rounded-2xl p-4 mx-auto">
+        <div class="flex h-[627px]">
+            <!-- Sidebar -->
+            <div class="w-60 pr-6 border-r border-gray-300">
+                <ul class="space-y-2 text-gray-700 text-sm font-medium">
+                    <li>
+                        <a
+                            href="/bmadmin/faqs/generalinformation"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            General Information
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/faqs/guidelines"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Guidelines
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/faqs/termsandpolicies"
+                            class="block px-4 py-2 rounded-md bg-[#def2f1] text-[#163f75] font-semibold"
+                        >
+                            Terms and Policies
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/faqs/accountandprofile"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Account and Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/faqs/billingandsubscription"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Billing & Subscription
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/faqs/livesupport"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Live Support
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- FAQ's Section -->
+            <div class="flex-1 pl-10 overflow-y-auto max-h-[600px] pr-6">
+                <div class="space-y-1">
+                    <!-- Privacy Policy -->
+                    <div class="faq-item border-gray-200">
+                        <!-- Clickable Header -->
+                        <div
+                            class="flex justify-between items-center border-b border-gray-300 p-4 cursor-pointer"
+                            onclick="toggleFAQ(this)"
+                        >
+                            <div class="text-m font-semibold text-gray-800">Privacy Policy</div>
+                            <svg
+                                class="transition-transform duration-300"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                viewBox="0 0 20 20"
+                                stroke="#130F26"
+                                stroke-width="1.5"
+                            >
+                                <path
+                                    d="M7.08594 4.16536L12.9193 9.9987L7.08594 15.832"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+
+                        <!-- Hidden content with transition styles -->
+                        <div
+                            class="faq-content px-4 pt-4 text-sm text-gray-600 overflow-hidden transition-all duration-300 ease-in-out h-0"
+                        >
+                            <p class="mb-4">
+                                Our support team is available through multiple channels to assist
+                                you with any queries or concerns. Choose the most convenient way to
+                                reach us.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Terms of Service -->
+                    <div class="faq-item border-gray-200">
+                        <div
+                            class="flex justify-between items-center border-b border-gray-300 p-4 cursor-pointer"
+                            onclick="toggleFAQ(this)"
+                        >
+                            <div class="text-m font-semibold text-gray-800">Terms of Service</div>
+                            <svg
+                                class="transition-transform duration-300"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                viewBox="0 0 20 20"
+                                stroke="#130F26"
+                                stroke-width="1.5"
+                            >
+                                <path
+                                    d="M7.08594 4.16536L12.9193 9.9987L7.08594 15.832"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+
+                        <div
+                            class="faq-content px-4 pt-4 text-sm text-gray-600 overflow-hidden transition-all duration-300 ease-in-out h-0"
+                        >
+                            <p class="mb-4">
+                                Our teams operate across multiple time zones to provide
+                                comprehensive support coverage. Different departments maintain
+                                specific hours of operation to serve you better.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Acceptable Content -->
+                    <div class="faq-item border-gray-200">
+                        <div
+                            class="flex justify-between items-center border-b border-gray-300 p-4 cursor-pointer"
+                            onclick="toggleFAQ(this)"
+                        >
+                            <div class="text-m font-semibold text-gray-800">Acceptable Content</div>
+                            <svg
+                                class="transition-transform duration-300"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                viewBox="0 0 20 20"
+                                stroke="#130F26"
+                                stroke-width="1.5"
+                            >
+                                <path
+                                    d="M7.08594 4.16536L12.9193 9.9987L7.08594 15.832"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+
+                        <div
+                            class="faq-content px-4 pt-4 text-sm text-gray-600 overflow-hidden transition-all duration-300 ease-in-out h-0"
+                        >
+                            <p class="mb-4">
+                                Our teams operate across multiple time zones to provide
+                                comprehensive support coverage. Different departments maintain
+                                specific hours of operation to serve you better.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- License -->
+                    <div class="faq-item border-gray-200">
+                        <div
+                            class="flex justify-between items-center border-b border-gray-300 p-4 cursor-pointer"
+                            onclick="toggleFAQ(this)"
+                        >
+                            <div class="text-m font-semibold text-gray-800">License</div>
+                            <svg
+                                class="transition-transform duration-300"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                viewBox="0 0 20 20"
+                                stroke="#130F26"
+                                stroke-width="1.5"
+                            >
+                                <path
+                                    d="M7.08594 4.16536L12.9193 9.9987L7.08594 15.832"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+
+                        <div
+                            class="faq-content px-4 pt-4 text-sm text-gray-600 overflow-hidden transition-all duration-300 ease-in-out h-0"
+                        >
+                            <p class="mb-4">
+                                Our teams operate across multiple time zones to provide
+                                comprehensive support coverage. Different departments maintain
+                                specific hours of operation to serve you better.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Intellectual Property Rights -->
+                    <div class="faq-item border-gray-200">
+                        <div
+                            class="flex justify-between items-center border-b border-gray-300 p-4 cursor-pointer"
+                            onclick="toggleFAQ(this)"
+                        >
+                            <div class="text-m font-semibold text-gray-800">
+                                Intellectual Property Rights
+                            </div>
+                            <svg
+                                class="transition-transform duration-300"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                viewBox="0 0 20 20"
+                                stroke="#130F26"
+                                stroke-width="1.5"
+                            >
+                                <path
+                                    d="M7.08594 4.16536L12.9193 9.9987L7.08594 15.832"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+
+                        <div
+                            class="faq-content px-4 pt-4 text-sm text-gray-600 overflow-hidden transition-all duration-300 ease-in-out h-0"
+                        >
+                            <p class="mb-4">
+                                Our teams operate across multiple time zones to provide
+                                comprehensive support coverage. Different departments maintain
+                                specific hours of operation to serve you better.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleFAQ(headerDiv) {
+        const faqItem = headerDiv.closest(".faq-item");
+        const content = faqItem.querySelector(".faq-content");
+        const svg = headerDiv.querySelector("svg");
+
+        if (content.style.height && content.style.height !== "0px") {
+            // Collapse
+            content.style.height = content.scrollHeight + "px"; // set current height
+            requestAnimationFrame(() => {
+                content.style.height = "0px";
+            });
+            svg.classList.remove("rotate-45");
+        } else {
+            // Expand
+            content.style.height = content.scrollHeight + "px";
+            svg.classList.add("rotate-45");
+
+            // Clear height after transition to allow auto height expansion if needed
+            content.addEventListener("transitionend", function clearHeight() {
+                if (content.style.height !== "0px") content.style.height = "auto";
+                content.removeEventListener("transitionend", clearHeight);
+            });
+        }
+    }
+</script>

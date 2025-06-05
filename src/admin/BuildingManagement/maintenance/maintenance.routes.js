@@ -7,4 +7,8 @@ router.get("/inreview", asyncWrap(maintenanceController.inReviewPage));
 
 router.get("/inprocess", asyncWrap(maintenanceController.inProcessPage));
 
+router.get("/execution", asyncWrap(maintenanceController.executionPage));
+
+router.get("/history", asyncWrap(maintenanceController.historyPage));
+
 export default router;

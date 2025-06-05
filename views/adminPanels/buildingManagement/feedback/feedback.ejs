@@ -1,0 +1,230 @@
+<div
+    class="bg-white rounded-tl-[40px] rounded-br-[90px] p-6 shadow-md flex justify-between items-center"
+>
+    <h1 class="text-2xl font-medium text-gray-500">Feedback Box</h1>
+    <div class="flex items-center gap-4">
+        <div class="gap-4 py-2 px-4 items-center mb-3">
+            <!-- Request Type Buttons -->
+            <div class="flex justify-end items-center space-x-3">
+                <div class="relative">
+                    <div
+                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                    >
+                        <svg
+                            class="h-5 w-5 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+                        </svg>
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[#54B7C5] focus:border-[#54B7C5] sm:text-sm"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <!-- File icon at the start -->
+        <button
+            class="flex items-center m-2 mr-5"
+            data-modal-target="reports-modal"
+            data-modal-toggle="reports-modal"
+        >
+            <svg
+                class="w-6 h-6 text-gray-800 transform scale-x-[-1]"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke="#163f75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z"
+                />
+            </svg>
+        </button>
+    </div>
+</div>
+
+<div class="p-8 mx-auto">
+    <!-- Filter -->
+    <div class="flex justify-between gap-4 items-start pr-4 mt-4 items-center align-center">
+        <!-- Category Slide Switcher - takes first column -->
+        <div id="transactionStatusSwitcher" class="flex space-x-6 border-gray-200">
+            <button
+                class="status-btn text-m font-semibold text-[#163F75] border-b-2 border-[#54B7C5] pb-2"
+                onclick="switchTransactionTab('all')"
+            >
+                Suggestion
+            </button>
+            <button
+                class="status-btn text-m font-semibold text-gray-500 hover:text-gray-700 pb-2"
+                onclick="switchTransactionTab('paid')"
+            >
+                Complaint
+            </button>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="mt-6 overflow-x-auto">
+        <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+            <tbody class="divide-y divide-gray-100 text-sm">
+                <!-- Example Row 1 -->
+                <tr class="rounded-xl border border-gray-200">
+                    <td class="p-4 w-full">
+                        <div
+                            class="flex gap-2 items-start border border-[#AAC8D3] rounded-xl bg-[#EDF5F7] p-4 w-full"
+                        >
+                            <!-- Left Side -->
+                            <div class="flex-1 space-y-3">
+                                <!-- Top Row: Avatar, Name, Flat, Time, Reply Button -->
+                                <div class="flex justify-between items-start">
+                                    <!-- User Info -->
+                                    <div class="flex items-center space-x-4">
+                                        <img
+                                            src="https://via.placeholder.com/40"
+                                            alt="Avatar"
+                                            class="w-10 h-10 rounded-full object-cover border"
+                                        />
+                                        <div class="text-sm">
+                                            <p class="font-semibold text-gray-800">Ashraf Nasser</p>
+                                            <p class="text-gray-500 text-xs">58 - Flat</p>
+                                        </div>
+                                    </div>
+                                    <!-- Time + Reply Button -->
+                                    <div class="flex items-center space-x-4">
+                                        <div class="text-xs text-gray-500">
+                                            11:49:02 &nbsp; 15.06.24
+                                        </div>
+                                        <button
+                                            data-modal-target="reply-modal"
+                                            data-modal-toggle="reply-modal"
+                                            class="bg-[#163F75] text-white text-md font-medium px-10 py-2.5 rounded-lg"
+                                        >
+                                            Reply
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Divider -->
+                                <div class="border-t border-gray-300"></div>
+
+                                <!-- Explain in Details and Attachments -->
+                                <div class="flex justify-between items-start gap-4">
+                                    <!-- Text -->
+                                    <div class="text-sm text-gray-700 max-w-[80%]">
+                                        <p class="text-[#163F75] font-semibold mb-1">
+                                            Explain in Details
+                                        </p>
+                                        <p>
+                                            As you can see in the attached photos and videos, the
+                                            condition of the wood and paint for the villa from
+                                            inside and outside, which we have already applied for a
+                                            month ago, and until now the necessary work has not been
+                                            done.
+                                        </p>
+                                    </div>
+
+                                    <!-- Attachments -->
+                                    <div class="flex flex-col items-start gap-1">
+                                        <p class="text-md font-medium text-[#163F75]">
+                                            Attachments
+                                        </p>
+                                        <div class="flex gap-2">
+                                            <img
+                                                src="https://via.placeholder.com/40"
+                                                class="w-20 h-20 rounded object-cover border"
+                                            />
+                                            <img
+                                                src="https://via.placeholder.com/40"
+                                                class="w-20 h-20 rounded object-cover border"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Side: Action Box -->
+                            <div class="w-2/4">
+                                <textarea
+                                    placeholder="Action"
+                                    class="w-full h-full min-h-[155px] rounded-lg border border-[#54B7C5] p-3 text-sm resize-none text-gray-700"
+                                ></textarea>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Reply Modal -->
+<div
+    id="reply-modal"
+    tabindex="-1"
+    class="fixed inset-0 z-50 hidden w-full h-full bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center"
+    aria-hidden="true"
+>
+    <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center border-b pb-2">
+            <h3 class="text-lg font-semibold text-center w-full">Reply</h3>
+            <button
+                type="button"
+                data-modal-hide="reply-modal"
+                class="text-red-500 text-sm absolute right-6 top-5 hover:text-red-600"
+            >
+                Close &times;
+            </button>
+        </div>
+
+        <!-- Body -->
+        <div class="mt-6">
+            <textarea
+                rows="4"
+                placeholder="Write here"
+                class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#54B7C5]/50 text-sm"
+            ></textarea>
+        </div>
+        <div class="flex justify-center space-x-4 mt-8">
+            <button
+                id="save-rewrads-prize-comment"
+                data-modal-hide="add-rewards-prize-comment-modal"
+                class="bg-[#54B7C5] hover:bg-[#48aab8] text-white font-semibold rounded-[10px] px-8 py-2 w-[200px]"
+            >
+                Submit
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchTransactionTab(tab) {
+        // Remove active styles from all buttons
+        document.querySelectorAll(".status-btn").forEach((btn) => {
+            btn.classList.remove("text-[##163F75]", "border-b-2", "border-[#54B7C5]");
+            btn.classList.add("text-gray-500");
+        });
+
+        // Add active styles to clicked button
+        const activeBtn = event.currentTarget;
+        activeBtn.classList.add("text-[#163F75]", "border-b-2", "border-[#54B7C5]");
+        activeBtn.classList.remove("text-gray-500");
+    }
+</script>

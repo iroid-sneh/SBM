@@ -1,0 +1,309 @@
+<div
+    class="bg-white rounded-tl-[40px] rounded-br-[90px] p-6 shadow-md flex justify-between items-center"
+>
+    <div class="flex flex-row items-center justify-center gap-4">
+        <h1 class="text-2xl font-medium text-gray-500">The Office</h1>
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M5.6665 3.33464L10.3332 8.0013L5.6665 12.668"
+                stroke="#54B7C5"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M13.6665 3.33464L18.3332 8.0013L13.6665 12.668"
+                stroke="#54B7C5"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        <h1 class="text-2xl font-medium text-[#54B7C5]">Office Documents</h1>
+    </div>
+    <div class="flex items-center gap-4">
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                    class="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                </svg>
+            </div>
+            <input
+                type="text"
+                placeholder="Search"
+                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[#54B7C5] focus:border-[#54B7C5] sm:text-sm"
+            />
+        </div>
+        <!-- Tab Buttons -->
+        <div class="bg-[#F3F2F1] rounded-lg flex items-center mr-4">
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/documents'"
+                id="btn-resident"
+                class="px-4 py-2 rounded-lg text-white bg-[#54B7C5] transition-all"
+            >
+                Documents
+            </button>
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/election'"
+                id="btn-resident"
+                class="px-4 py-2 rounded-lg text-gray-600 hover:text-black transition-all"
+            >
+                Election
+            </button>
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/nomination'"
+                id="btn-resident"
+                class="px-4 py-2 rounded-lg text-gray-600 hover:text-black transition-all"
+            >
+                Nomination
+            </button>
+            <button
+                onclick="window.location.href='<%= process.env.APP_URL_ADMIN %>/bmadmin/theoffice/ownersassociation'"
+                id="btn-security"
+                class="px-4 py-2 rounded-lg text-gray-600 hover:text-black transition-all"
+            >
+                Owners Association
+            </button>
+        </div>
+    </div>
+</div>
+
+<div></div>
+<!-- Card -->
+<div class="p-8 mx-auto">
+    <!-- Filter -->
+    <div class="flex justify-end gap-4 items-start pr-4 mt-4 items-center align-center">
+        <div class="flex justify-end gap-4 items-end pr-4 items-center">
+            <div class="flex items-end gap-3">
+                <button
+                    class="bg-white text-sm font-semibold text-[#163F75] border border-1 border-gray-300 px-9 py-2.5 rounded-lg hover:bg-white/80 transition"
+                    data-modal-target="upload-document-modal"
+                    data-modal-toggle="upload-document-modal"
+                >
+                    + Add Document
+                </button>
+                <button
+                    disabled
+                    class="bg-[#AEBBCC] text-sm font-semibold text-white px-9 py-2.5 rounded-lg cursor-not-allowed"
+                >
+                    Office Documents
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="mt-6 overflow-x-auto">
+        <table class="min-w-full border-separate border-spacing-y-2 text-sm">
+            <thead class="bg-[#EAEAE9] text-gray-600 text-sm">
+                <tr>
+                    <th class="text-center py-3 px-4 first:rounded-l-lg last:rounded-r-lg">
+                        Call Time
+                    </th>
+                    <th class="text-center py-3 px-4">Document Name</th>
+                    <th class="text-center py-3 px-4">Size</th>
+                    <th class="text-center py-3 px-4">View</th>
+                    <th class="text-center py-3 px-4">Download</th>
+                    <th class="text-center py-3 px-4 last:rounded-r-lg">Delete</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 text-sm">
+                <!-- Example Row 1 -->
+                <tr class="border border-gray-800">
+                    <td class="py-3 text-center px-4 first:rounded-l-lg last:rounded-r-lg">
+                        11:49:02 15.01.24
+                    </td>
+                    <td class="py-3 text-center px-4">Draft Lease Contract</td>
+                    <td class="py-3 text-center px-4">2 MB</td>
+                    <td class="py-3 text-center px-4">
+                        <button>
+                            <svg
+                                width="18"
+                                height="15"
+                                viewBox="0 0 18 15"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M11.6521 7.27083C11.6521 8.76956 10.4367 9.98417 8.93794 9.98417C7.43921 9.98417 6.22461 8.76956 6.22461 7.27083C6.22461 5.77125 7.43921 4.55664 8.93794 4.55664C10.4367 4.55664 11.6521 5.77125 11.6521 7.27083Z"
+                                    stroke="#54B7C5"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M8.93828 13.5358C12.207 13.5358 15.1967 11.1855 16.88 7.26788C15.1967 3.35024 12.207 1 8.93828 1H8.94172C5.67301 1 2.68328 3.35024 1 7.26788C2.68328 11.1855 5.67301 13.5358 8.94172 13.5358H8.93828Z"
+                                    stroke="#54B7C5"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </button>
+                    </td>
+                    <td class="py-3 text-center px-4">
+                        <button>
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 18 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <g clip-path="url(#clip0_3411_40351)">
+                                    <path
+                                        d="M8.97538 11.6753V0.976562M8.97538 11.6753L5.85241 8.10929M8.97538 11.6753L12.0983 8.10929M1.16211 13.458L1.64747 15.6734C1.70783 16.0378 1.89117 16.3706 2.16698 16.6164C2.44279 16.8621 2.79444 17.006 3.16341 17.0241H14.788C15.157 17.006 15.5086 16.8621 15.7844 16.6164C16.0602 16.3706 16.2436 16.0378 16.3039 15.6734L16.7893 13.4574"
+                                        stroke="#163F75"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_3411_40351">
+                                        <rect width="17.9518" height="18" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </button>
+                    </td>
+                    <td class="py-3 text-center px-4 last:rounded-r-lg">
+                        <button>
+                            <svg
+                                width="17"
+                                height="18"
+                                viewBox="0 0 17 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M6.3 14.4C6.5387 14.4 6.76761 14.3052 6.9364 14.1364C7.10518 13.9676 7.2 13.7387 7.2 13.5V8.1C7.2 7.8613 7.10518 7.63239 6.9364 7.4636C6.76761 7.29482 6.5387 7.2 6.3 7.2C6.06131 7.2 5.83239 7.29482 5.6636 7.4636C5.49482 7.63239 5.4 7.8613 5.4 8.1V13.5C5.4 13.7387 5.49482 13.9676 5.6636 14.1364C5.83239 14.3052 6.06131 14.4 6.3 14.4ZM15.3 3.6H11.7V2.7C11.7 1.98392 11.4155 1.29716 10.9092 0.790812C10.4028 0.284464 9.71608 0 9 0H7.2C6.48392 0 5.79716 0.284464 5.29081 0.790812C4.78446 1.29716 4.5 1.98392 4.5 2.7V3.6H0.9C0.661305 3.6 0.432387 3.69482 0.263604 3.8636C0.0948211 4.03239 0 4.2613 0 4.5C0 4.73869 0.0948211 4.96761 0.263604 5.1364C0.432387 5.30518 0.661305 5.4 0.9 5.4H1.8V15.3C1.8 16.0161 2.08446 16.7028 2.59081 17.2092C3.09716 17.7155 3.78392 18 4.5 18H11.7C12.4161 18 13.1028 17.7155 13.6092 17.2092C14.1155 16.7028 14.4 16.0161 14.4 15.3V5.4H15.3C15.5387 5.4 15.7676 5.30518 15.9364 5.1364C16.1052 4.96761 16.2 4.73869 16.2 4.5C16.2 4.2613 16.1052 4.03239 15.9364 3.8636C15.7676 3.69482 15.5387 3.6 15.3 3.6ZM6.3 2.7C6.3 2.46131 6.39482 2.23239 6.5636 2.0636C6.73239 1.89482 6.96131 1.8 7.2 1.8H9C9.2387 1.8 9.46761 1.89482 9.6364 2.0636C9.80518 2.23239 9.9 2.46131 9.9 2.7V3.6H6.3V2.7ZM12.6 15.3C12.6 15.5387 12.5052 15.7676 12.3364 15.9364C12.1676 16.1052 11.9387 16.2 11.7 16.2H4.5C4.26131 16.2 4.03239 16.1052 3.8636 15.9364C3.69482 15.7676 3.6 15.5387 3.6 15.3V5.4H12.6V15.3ZM9.9 14.4C10.1387 14.4 10.3676 14.3052 10.5364 14.1364C10.7052 13.9676 10.8 13.7387 10.8 13.5V8.1C10.8 7.8613 10.7052 7.63239 10.5364 7.4636C10.3676 7.29482 10.1387 7.2 9.9 7.2C9.66131 7.2 9.43239 7.29482 9.2636 7.4636C9.09482 7.63239 9 7.8613 9 8.1V13.5C9 13.7387 9.09482 13.9676 9.2636 14.1364C9.43239 14.3052 9.66131 14.4 9.9 14.4Z"
+                                    fill="#F26E6E"
+                                />
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="flex justify-between items-center mt-4 px-4 text-sm text-gray-500">
+            <span>Showing 1 of 28</span>
+            <div class="flex gap-2">
+                <button class="text-gray-500">&lt;</button>
+                <button class="font-bold text-black">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <button class="text-gray-500">&gt;</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upload Document Modal -->
+<div
+    id="upload-document-modal"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full hidden"
+    aria-hidden="true"
+>
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Upload Document</h3>
+                <button
+                    class="text-red-500 hover:text-red-700 text-xl"
+                    data-modal-hide="upload-document-modal"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6">
+                <div class="space-y-5">
+                    <!-- Please Upload Here (Image, Excel, Doc, PDF) -->
+                    <div class="flex items-center justify-center mb-0">
+                        <label
+                            class="flex items-center justify-center w-full h-16 bg-white border border-dashed border-gray-300 rounded-xl cursor-pointer shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <div class="flex items-center gap-2 text-sm text-gray-500">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-5 h-5 text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4-4m0 0l-4 4m4-4v12"
+                                    />
+                                </svg>
+                                <span>Please Upload Here (Image, Excel, Doc, PDF)</span>
+                            </div>
+                            <input type="file" class="hidden" />
+                        </label>
+                    </div>
+
+                    <div>
+                        <select
+                            id="theoffice-select"
+                            class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <option disabled selected>Select Category First</option>
+                            <option>PDF</option>
+                            <option>Doc</option>
+                            <option>Excel</option>
+                            <option>Image</option>
+                        </select>
+                    </div>
+
+                    <!-- Document Name -->
+                    <input
+                        type="text"
+                        placeholder="Document Name"
+                        class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    />
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex justify-center p-6 border-t border-gray-200">
+                <button
+                    class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
+                >
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script></script>

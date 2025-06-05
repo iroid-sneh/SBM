@@ -1,0 +1,587 @@
+<div
+    class="bg-white rounded-tl-[40px] rounded-br-[90px] p-6 shadow-md flex justify-between items-center"
+>
+    <div class="flex flex-row items-center justify-center gap-4">
+        <h1 class="text-2xl font-medium text-gray-500">Settings</h1>
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M5.6665 3.33464L10.3332 8.0013L5.6665 12.668"
+                stroke="#54B7C5"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M13.6665 3.33464L18.3332 8.0013L13.6665 12.668"
+                stroke="#54B7C5"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        <h1 class="text-2xl font-medium text-[#54B7C5]">Business Details</h1>
+    </div>
+    <div class="flex items-center gap-4 mr-4">
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                    class="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                </svg>
+            </div>
+            <input
+                type="text"
+                placeholder="Search"
+                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[#54B7C5] focus:border-[#54B7C5] sm:text-sm"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="p-8 mx-auto">
+    <!-- Card -->
+    <div class="w-[1400px] bg-white rounded-2xl p-4 mx-auto">
+        <div class="flex h-[627px]">
+            <!-- Sidebar -->
+            <div class="w-60 pr-6 border-r border-gray-300">
+                <ul class="space-y-2 text-gray-700 text-sm font-medium">
+                    <li>
+                        <a
+                            href="/bmadmin/settings/bussinessdetails"
+                            class="block px-4 py-2 rounded-md bg-[#def2f1] text-[#163f75] font-semibold"
+                        >
+                            Bussiness Details
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/adminprofile"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Admin Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/subadmin"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Sub Admin
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/residencedetails"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Residence Details
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/amenities"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Amenities
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/bankdetails"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Bank Details
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/subscriptionplan"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Subscription Plan
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Profile Info Card -->
+            <div class="flex-1 pl-10 pr-6">
+                <div class="space-y-6">
+                    <!-- Image + Buttons -->
+                    <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+                        <!-- Change from <img> to <div> for replacement -->
+                        <div
+                            id="profilePlaceholder"
+                            class="w-[65px] h-[65px] rounded-full border-4 border-[#57C1D1] flex items-center justify-center bg-gray-100 overflow-hidden"
+                        >
+                            <img
+                                src="https://i.pravatar.cc/40?img=11"
+                                alt="Profile"
+                                class="w-full h-full object-cover rounded-full"
+                            />
+                        </div>
+
+                        <div class="flex gap-3">
+                            <!-- Delete -->
+                            <button class="p-2 hover:bg-red-50 rounded-full">
+                                <svg
+                                    class="w-6 h-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="#F26E6E"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
+                                    />
+                                </svg>
+                            </button>
+
+                            <!-- Edit -->
+                            <label
+                                class="p-2 hover:bg-blue-50 rounded-full cursor-pointer inline-flex items-center"
+                            >
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    fill="none"
+                                    viewBox="0 0 20 20"
+                                    stroke="#54B7C5"
+                                    stroke-width="1.8"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6.15888 7.48807H5.38138C3.68555 7.48807 2.31055 8.86307 2.31055 10.5589V14.6214C2.31055 16.3164 3.68555 17.6914 5.38138 17.6914H14.6564C16.3522 17.6914 17.7272 16.3164 17.7272 14.6214V10.5506C17.7272 8.85974 16.3564 7.48807 14.6655 7.48807H13.8797"
+                                    />
+                                    <path
+                                        d="M10.0182 1.82521V11.8594"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M7.58984 4.26562L10.019 1.82562L12.449 4.26562"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                                <input
+                                    id="imageUpload"
+                                    type="file"
+                                    accept="image/*"
+                                    class="hidden"
+                                />
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Service Type -->
+                    <div
+                        class="flex justify-between items-center border-b border-gray-200"
+                        data-field="service-type"
+                    >
+                        <div class="w-full">
+                            <label class="block text-gray-500 text-sm">Service Type</label>
+
+                            <!-- Display mode -->
+                            <div class="flex justify-between items-center" data-display>
+                                <div class="text-m font-semibold text-gray-800" data-value>
+                                    Cleaning
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bussiness Landline -->
+                    <div
+                        class="flex justify-between items-center border-b border-gray-200"
+                        data-field="Bussiness-landline"
+                    >
+                        <div class="w-full">
+                            <label class="block text-gray-500 text-sm">Bussiness Landline</label>
+
+                            <!-- Display mode -->
+                            <div class="flex justify-between items-center" data-display>
+                                <div class="text-m font-semibold text-gray-800" data-value>
+                                    +973 12345678
+                                </div>
+                                <button type="button" class="ml-2 edit-btn">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="#54B7C5"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Edit mode -->
+                            <div class="hidden flex items-center gap-2 mt-1" data-edit>
+                                <input
+                                    type="text"
+                                    class="w-full text-lg font-semibold text-gray-800 border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#54B7C5]"
+                                    value="+973 12345678"
+                                    data-input
+                                />
+                                <button
+                                    class="bg-[#54B7C5] hover:bg-[#3eaab3] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors save-btn"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bussiness Email -->
+                    <div
+                        class="flex justify-between items-center border-b border-gray-200"
+                        data-field="Bussiness-email"
+                    >
+                        <div class="w-full">
+                            <label class="block text-gray-500 text-sm">Bussiness Email</label>
+
+                            <!-- Display mode -->
+                            <div class="flex justify-between items-center" data-display>
+                                <div class="text-m font-semibold text-gray-800" data-value>
+                                    super_clean_services_2@hotmail.com
+                                </div>
+                                <button type="button" class="ml-2 edit-btn">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="#54B7C5"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Edit mode -->
+                            <div class="hidden flex items-center gap-2 mt-1" data-edit>
+                                <input
+                                    type="text"
+                                    class="w-full text-lg font-semibold text-gray-800 border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#54B7C5]"
+                                    value="super_clean_services_2@hotmail.com"
+                                    data-input
+                                />
+                                <button
+                                    class="bg-[#54B7C5] hover:bg-[#3eaab3] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors save-btn"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- VAT Number -->
+                    <div
+                        class="flex justify-between items-center border-b border-gray-200"
+                        data-field="Bussiness-email"
+                    >
+                        <div class="w-full">
+                            <label class="block text-gray-500 text-sm">VAT Number</label>
+
+                            <!-- Display mode -->
+                            <div class="flex justify-between items-center" data-display>
+                                <div class="text-m font-semibold text-gray-800" data-value>
+                                    200000452900003
+                                </div>
+                                <button type="button" class="ml-2 edit-btn">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="#54B7C5"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Edit mode -->
+                            <div class="hidden flex items-center gap-2 mt-1" data-edit>
+                                <input
+                                    type="text"
+                                    class="w-full text-lg font-semibold text-gray-800 border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#54B7C5]"
+                                    value="200000452900003"
+                                    data-input
+                                />
+                                <button
+                                    class="bg-[#54B7C5] hover:bg-[#3eaab3] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors save-btn"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Opening Time -->
+                    <div
+                        class="flex justify-between items-center border-b border-gray-200"
+                        data-field="Bussiness-email"
+                    >
+                        <div class="w-full">
+                            <label class="block text-gray-500 text-sm">Opening Time</label>
+
+                            <!-- Display mode -->
+                            <div class="flex justify-between items-center" data-display>
+                                <div class="text-m font-semibold text-gray-800" data-value>
+                                    09:00 AM to 01:00 PM - 03:00 PM to 08:00 PM
+                                </div>
+                                <button type="button" class="ml-2 edit-btn">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="#54B7C5"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Edit mode -->
+                            <div class="hidden flex items-center gap-2 mt-1" data-edit>
+                                <input
+                                    type="text"
+                                    class="w-full text-lg font-semibold text-gray-800 border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#54B7C5]"
+                                    value="09:00 AM to 01:00 PM - 03:00 PM to 08:00 PM"
+                                    data-input
+                                />
+                                <button
+                                    class="bg-[#54B7C5] hover:bg-[#3eaab3] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors save-btn"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Working Days -->
+                    <div
+                        class="flex justify-between items-center border-b border-gray-200"
+                        data-field="Bussiness-email"
+                    >
+                        <div class="w-full">
+                            <label class="block text-gray-500 text-sm">Working Days</label>
+
+                            <!-- Display mode -->
+                            <div class="flex justify-between items-center" data-display>
+                                <div class="text-m font-semibold text-gray-800" data-value>
+                                    Sun, Mon, Tue, Wed, Thu
+                                </div>
+                                <button type="button" class="ml-2 edit-btn">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="#54B7C5"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Edit mode -->
+                            <div class="hidden flex items-center gap-2 mt-1" data-edit>
+                                <input
+                                    type="text"
+                                    class="w-full text-lg font-semibold text-gray-800 border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#54B7C5]"
+                                    value="Sun, Mon, Tue, Wed, Thu"
+                                    data-input
+                                />
+                                <button
+                                    class="bg-[#54B7C5] hover:bg-[#3eaab3] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors save-btn"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- City -->
+                    <div
+                        class="flex justify-between items-center border-b border-gray-200"
+                        data-field="Bussiness-email"
+                    >
+                        <div class="w-full">
+                            <label class="block text-gray-500 text-sm">City</label>
+
+                            <!-- Display mode -->
+                            <div class="flex justify-between items-center" data-display>
+                                <div class="text-m font-semibold text-gray-800" data-value>
+                                    Manama
+                                </div>
+                                <button type="button" class="ml-2 edit-btn">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="#54B7C5"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Edit mode -->
+                            <div class="hidden flex items-center gap-2 mt-1" data-edit>
+                                <input
+                                    type="text"
+                                    class="w-full text-lg font-semibold text-gray-800 border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#54B7C5]"
+                                    value="Manama"
+                                    data-input
+                                />
+                                <button
+                                    class="bg-[#54B7C5] hover:bg-[#3eaab3] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors save-btn"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bussiness Address -->
+                    <div
+                        class="flex justify-between items-center border-b border-gray-200"
+                        data-field="Bussiness-email"
+                    >
+                        <div class="w-full">
+                            <label class="block text-gray-500 text-sm">Bussiness Address</label>
+
+                            <!-- Display mode -->
+                            <div class="flex justify-between items-center" data-display>
+                                <div class="text-m font-semibold text-gray-800" data-value>
+                                    Shop 1m Building 2003, Road 2215, Juffair
+                                </div>
+                                <button type="button" class="ml-2 edit-btn">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="#54B7C5"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Edit mode -->
+                            <div class="hidden flex items-center gap-2 mt-1" data-edit>
+                                <input
+                                    type="text"
+                                    class="w-full text-lg font-semibold text-gray-800 border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#54B7C5]"
+                                    value="Shop 1m Building 2003, Road 2215, Juffair"
+                                    data-input
+                                />
+                                <button
+                                    class="bg-[#54B7C5] hover:bg-[#3eaab3] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors save-btn"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll(".edit-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+            const fieldWrapper = button.closest("[data-field]");
+            const display = fieldWrapper.querySelector("[data-display]");
+            const edit = fieldWrapper.querySelector("[data-edit]");
+            const input = fieldWrapper.querySelector("[data-input]");
+
+            display.classList.add("hidden");
+            edit.classList.remove("hidden");
+            input.focus();
+        });
+    });
+
+    document.querySelectorAll(".save-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+            const fieldWrapper = button.closest("[data-field]");
+            const display = fieldWrapper.querySelector("[data-display]");
+            const edit = fieldWrapper.querySelector("[data-edit]");
+            const input = fieldWrapper.querySelector("[data-input]");
+            const valueContainer = fieldWrapper.querySelector("[data-value]");
+
+            const newValue = input.value.trim();
+            if (newValue !== "") {
+                valueContainer.textContent = newValue;
+            }
+
+            display.classList.remove("hidden");
+            edit.classList.add("hidden");
+        });
+    });
+
+    // Profile image upload logic
+    const imageUpload = document.getElementById("imageUpload");
+    const profilePlaceholder = document.getElementById("profilePlaceholder");
+
+    imageUpload.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profilePlaceholder.innerHTML = `
+                <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
+            `;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

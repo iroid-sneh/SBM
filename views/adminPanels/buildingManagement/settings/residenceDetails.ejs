@@ -1,0 +1,553 @@
+<script src="https://unpkg.com/alpinejs" defer></script>
+
+<div
+    class="bg-white rounded-tl-[40px] rounded-br-[90px] p-6 shadow-md flex justify-between items-center"
+>
+    <div class="flex flex-row items-center justify-center gap-4">
+        <h1 class="text-2xl font-medium text-gray-500">Settings</h1>
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M5.6665 3.33464L10.3332 8.0013L5.6665 12.668"
+                stroke="#54B7C5"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M13.6665 3.33464L18.3332 8.0013L13.6665 12.668"
+                stroke="#54B7C5"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        <h1 class="text-2xl font-medium text-[#54B7C5]">Residence Details</h1>
+    </div>
+    <div class="flex items-center gap-4 mr-4">
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                    class="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                </svg>
+            </div>
+            <input
+                type="text"
+                placeholder="Search"
+                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[#54B7C5] focus:border-[#54B7C5] sm:text-sm"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="p-8 mx-auto">
+    <!-- Card -->
+    <div class="w-[1400px] bg-white rounded-2xl p-4 mx-auto">
+        <div class="flex h-[627px]">
+            <!-- Sidebar -->
+            <div class="w-60 pr-6 border-r border-gray-300">
+                <ul class="space-y-2 text-gray-700 text-sm font-medium">
+                    <li>
+                        <a
+                            href="/bmadmin/settings/bussinessdetails"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Bussiness Details
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/adminprofile"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Admin Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/subadmin"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Sub Admin
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/residencedetails"
+                            class="block px-4 py-2 rounded-md bg-[#def2f1] text-[#163f75] font-semibold"
+                        >
+                            Residence Details
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/amenities"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Amenities
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/bankdetails"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Bank Details
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/subscriptionplan"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Subscription Plan
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Profile Info Card -->
+            <div class="flex-1 pl-10 pr-6">
+                <div class="flex space-x-2 justify-end items-end">
+                    <button
+                        type="button"
+                        data-modal-target="add-residence-modal"
+                        data-modal-toggle="add-residence-modal"
+                        class="w-[250px] h-[38px] px-3 text-m font-semibold rounded-lg flex items-center justify-center bg-white text-[#163f75] hover:bg-gray-400 transition-colors border-[1px] border-[#163f75] shadow-sm hover:shadow-md"
+                    >
+                        + Add Residence
+                    </button>
+                </div>
+                <!-- DataTable Section -->
+                <div class="overflow-x-auto mt-4">
+                    <table id="usersTable" class="min-w-full" datatables="true">
+                        <thead class="bg-[#eaeae9] rounded-t-[30px]">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider first:rounded-l-lg last:rounded-r-lg"
+                                >
+                                    Residence Type
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Name
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Manager Name
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Permission
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider last:rounded-r-lg"
+                                >
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-[white]">
+                            <!-- User 1 -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Building
+                                </td>
+                                <td class="flex items-center p-4 space-x-1 whitespace-nowrap">
+                                    <div class="text-base font-semibold text-gray-900">
+                                        Marasi Residents
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Floyd Miles
+                                </td>
+                                <td
+                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                                >
+                                    Dashboard,Account,Push_notification
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <button
+                                        type="button"
+                                        data-modal-target="edit-sub-admin-modal"
+                                        data-modal-toggle="edit-sub-admin-modal"
+                                        class="inline-flex items-center"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-gray-800 dark:text-white"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke="#54B7C5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Residence Modal -->
+<div
+    id="add-residence-modal"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full hidden"
+    aria-hidden="true"
+>
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Residence</h3>
+                <button
+                    class="text-red-500 hover:text-red-700 text-xl"
+                    data-modal-hide="add-residence-modal"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6 space-y-3">
+                <div class="items-center grid grid-cols-[8fr_8fr] gap-1">
+                    <!-- Residenece Type -->
+                    <select
+                        name="role"
+                        id="roleSelect"
+                        class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                        required
+                    >
+                        <option value="" hidden>Residenece Type</option>
+                        <option value="Building">Building</option>
+                        <option value="Complex">Complex</option>
+                    </select>
+                    <!-- Number of Flat/Villa -->
+                    <input
+                        type="text"
+                        placeholder="Number of Flat/Villa"
+                        class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                    />
+                </div>
+                <!-- Building/Area Name -->
+                <input
+                    type="text"
+                    placeholder="Building/Area Name"
+                    class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                />
+                <!-- Residence Address (Road and Block) -->
+                <input
+                    type="text"
+                    placeholder="Residence Address (Road and Block)"
+                    class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                />
+                <!-- Select Manager Name -->
+                <select
+                    name="role"
+                    id="roleSelect"
+                    class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
+                    required
+                >
+                    <option value="" hidden>Select Manager Name</option>
+                    <option value="Manager 1">Manager 1</option>
+                    <option value="Manager 2">Manager 2</option>
+                </select>
+                <!-- Select Permissions -->
+                <div x-data="permissionSelector()" class="relative w-full">
+                    <!-- Display selected tags -->
+                    <div
+                        class="flex flex-wrap gap-2 bg-white border rounded-xl px-4 py-2 shadow-xl"
+                    >
+                        <template x-for="(permission, index) in selected" :key="index">
+                            <span
+                                class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-sm flex items-center"
+                            >
+                                <span x-text="permission"></span>
+                                <button
+                                    type="button"
+                                    class="ml-2 text-red-500 hover:text-red-700"
+                                    @click="remove(index)"
+                                >
+                                    ×
+                                </button>
+                            </span>
+                        </template>
+
+                        <!-- Trigger select -->
+                        <select
+                            @change="add($event)"
+                            class="bg-transparent focus:outline-none text-sm text-gray-500"
+                        >
+                            <option value="" hidden>Select Permission</option>
+                            <template x-for="perm in permissions" :key="perm">
+                                <option
+                                    x-show="!selected.includes(perm)"
+                                    :value="perm"
+                                    x-text="perm"
+                                ></option>
+                            </template>
+                        </select>
+                    </div>
+
+                    <!-- Hidden input to submit -->
+                    <template x-for="(permission, i) in selected" :key="i">
+                        <input type="hidden" name="permissions[]" :value="permission" />
+                    </template>
+                </div>
+
+                <!-- Upload Required FIles for the Building/Residence -->
+                <div class="items-center grid grid-cols-[8fr_0.1fr_8fr_0.1fr] gap-1 rounded-[10px]">
+                    <label class="w-full relative cursor-pointer">
+                        <!-- Upload Residence Policies -->
+                        <input
+                            type="file"
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                        />
+                        <div
+                            class="w-full px-3 py-3 bg-white rounded-xl text-gray-700 border text-sm placeholder-gray-500 shadow-xl z-0"
+                        >
+                            Upload Residence Policies
+                        </div>
+                    </label>
+                    <svg
+                        id="help-icon"
+                        data-tooltip-target="vat-num-tooltip"
+                        data-tooltip-placement="left"
+                        class=""
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M8 0C6.41775 0 4.87103 0.469192 3.55544 1.34824C2.23985 2.22729 1.21447 3.47672 0.608967 4.93853C0.00346626 6.40034 -0.15496 8.00887 0.153721 9.56072C0.462403 11.1126 1.22433 12.538 2.34315 13.6569C3.46197 14.7757 4.88743 15.5376 6.43928 15.8463C7.99113 16.155 9.59966 15.9965 11.0615 15.391C12.5233 14.7855 13.7727 13.7602 14.6518 12.4446C15.5308 11.129 16 9.58225 16 8C16 5.87827 15.1571 3.84344 13.6569 2.34315C12.1566 0.842855 10.1217 0 8 0ZM7.89107 13.263C7.70995 13.263 7.5329 13.2093 7.38231 13.1086C7.23171 13.008 7.11434 12.865 7.04503 12.6977C6.97572 12.5303 6.95758 12.3462 6.99292 12.1686C7.02825 11.9909 7.11547 11.8278 7.24354 11.6997C7.37161 11.5716 7.53478 11.4844 7.71241 11.4491C7.89005 11.4137 8.07418 11.4319 8.24151 11.5012C8.40884 11.5705 8.55186 11.6879 8.65248 11.8385C8.7531 11.9891 8.80681 12.1661 8.80681 12.3472C8.80636 12.59 8.70974 12.8226 8.5381 12.9943C8.36646 13.1659 8.1338 13.2625 7.89107 13.263ZM8.89192 8.81702C8.89192 8.81702 8.8017 8.84936 8.8017 8.90213V9.62893C8.8017 9.87068 8.70567 10.1025 8.53473 10.2735C8.3638 10.4444 8.13196 10.5404 7.89021 10.5404C7.64847 10.5404 7.41663 10.4444 7.24569 10.2735C7.07476 10.1025 6.97873 9.87068 6.97873 9.62893V8.90213C6.98273 8.49886 7.11316 8.107 7.35165 7.78179C7.59014 7.45657 7.92467 7.21439 8.30809 7.08936C8.57248 7.00113 8.80131 6.82985 8.96049 6.60105C9.11967 6.37225 9.20069 6.09815 9.19149 5.81957C9.17382 5.48274 9.02876 5.16522 8.78572 4.93134C8.54268 4.69746 8.21982 4.56472 7.88256 4.56C7.63973 4.56106 7.40213 4.63063 7.19708 4.76071C6.99202 4.89079 6.82784 5.07609 6.72341 5.29532C6.67144 5.40317 6.59873 5.49973 6.50945 5.57948C6.42016 5.65924 6.31604 5.72062 6.20303 5.76014C5.97479 5.83994 5.7242 5.82581 5.50639 5.72085C5.28857 5.61589 5.12137 5.42871 5.04157 5.20047C4.96176 4.97223 4.9759 4.72164 5.08085 4.50383C5.33215 3.9771 5.72689 3.53193 6.21976 3.2194C6.71263 2.90688 7.28364 2.73969 7.86724 2.73702H7.88596C8.69671 2.74172 9.47434 3.05929 10.0566 3.62348C10.6389 4.18767 10.9808 4.9549 11.0111 5.76511C11.0336 6.43375 10.8398 7.09182 10.4582 7.6414C10.0767 8.19099 9.52797 8.60271 8.89362 8.81532L8.89192 8.81702Z"
+                            fill="#999999"
+                        />
+                    </svg>
+                    <!-- Tooltip -->
+                    <div
+                        id="vat-num-tooltip"
+                        role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
+                    >
+                        Policies and regulations of residence, use of facilities and rights of
+                        residents.
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                    <label class="w-full relative cursor-pointer">
+                        <input
+                            type="file"
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                        />
+                        <div
+                            class="w-full px-3 py-3 bg-white rounded-xl text-gray-700 border text-sm placeholder-gray-500 shadow-xl z-0"
+                        >
+                            Upload Emergency Exits
+                        </div>
+                    </label>
+                    <svg
+                        id="help-icon"
+                        data-tooltip-target="cr-tooltip"
+                        data-tooltip-placement="top"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M8 0C6.41775 0 4.87103 0.469192 3.55544 1.34824C2.23985 2.22729 1.21447 3.47672 0.608967 4.93853C0.00346626 6.40034 -0.15496 8.00887 0.153721 9.56072C0.462403 11.1126 1.22433 12.538 2.34315 13.6569C3.46197 14.7757 4.88743 15.5376 6.43928 15.8463C7.99113 16.155 9.59966 15.9965 11.0615 15.391C12.5233 14.7855 13.7727 13.7602 14.6518 12.4446C15.5308 11.129 16 9.58225 16 8C16 5.87827 15.1571 3.84344 13.6569 2.34315C12.1566 0.842855 10.1217 0 8 0ZM7.89107 13.263C7.70995 13.263 7.5329 13.2093 7.38231 13.1086C7.23171 13.008 7.11434 12.865 7.04503 12.6977C6.97572 12.5303 6.95758 12.3462 6.99292 12.1686C7.02825 11.9909 7.11547 11.8278 7.24354 11.6997C7.37161 11.5716 7.53478 11.4844 7.71241 11.4491C7.89005 11.4137 8.07418 11.4319 8.24151 11.5012C8.40884 11.5705 8.55186 11.6879 8.65248 11.8385C8.7531 11.9891 8.80681 12.1661 8.80681 12.3472C8.80636 12.59 8.70974 12.8226 8.5381 12.9943C8.36646 13.1659 8.1338 13.2625 7.89107 13.263ZM8.89192 8.81702C8.89192 8.81702 8.8017 8.84936 8.8017 8.90213V9.62893C8.8017 9.87068 8.70567 10.1025 8.53473 10.2735C8.3638 10.4444 8.13196 10.5404 7.89021 10.5404C7.64847 10.5404 7.41663 10.4444 7.24569 10.2735C7.07476 10.1025 6.97873 9.87068 6.97873 9.62893V8.90213C6.98273 8.49886 7.11316 8.107 7.35165 7.78179C7.59014 7.45657 7.92467 7.21439 8.30809 7.08936C8.57248 7.00113 8.80131 6.82985 8.96049 6.60105C9.11967 6.37225 9.20069 6.09815 9.19149 5.81957C9.17382 5.48274 9.02876 5.16522 8.78572 4.93134C8.54268 4.69746 8.21982 4.56472 7.88256 4.56C7.63973 4.56106 7.40213 4.63063 7.19708 4.76071C6.99202 4.89079 6.82784 5.07609 6.72341 5.29532C6.67144 5.40317 6.59873 5.49973 6.50945 5.57948C6.42016 5.65924 6.31604 5.72062 6.20303 5.76014C5.97479 5.83994 5.7242 5.82581 5.50639 5.72085C5.28857 5.61589 5.12137 5.42871 5.04157 5.20047C4.96176 4.97223 4.9759 4.72164 5.08085 4.50383C5.33215 3.9771 5.72689 3.53193 6.21976 3.2194C6.71263 2.90688 7.28364 2.73969 7.86724 2.73702H7.88596C8.69671 2.74172 9.47434 3.05929 10.0566 3.62348C10.6389 4.18767 10.9808 4.9549 11.0111 5.76511C11.0336 6.43375 10.8398 7.09182 10.4582 7.6414C10.0767 8.19099 9.52797 8.60271 8.89362 8.81532L8.89192 8.81702Z"
+                            fill="#999999"
+                        />
+                    </svg>
+                    <!-- Tooltip -->
+                    <div
+                        id="cr-tooltip"
+                        role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
+                    >
+                        A map showing the special exits in the building/complex that used during
+                        emergencies such as fire.
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </div>
+
+                <div class="items-center grid grid-cols-[8fr_0.1fr] gap-1">
+                    <!-- Upload Fire Extinguisher Locations Field -->
+                    <label class="w-full relative cursor-pointer">
+                        <input
+                            type="file"
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                        />
+                        <div
+                            class="w-full px-3 py-3 bg-white rounded-xl text-gray-700 border text-sm placeholder-gray-500 shadow-xl z-0"
+                        >
+                            Upload Fire Extinguisher Locations
+                        </div>
+                    </label>
+                    <svg
+                        id="help-icon"
+                        data-tooltip-target="fireextloc-tooltip"
+                        data-tooltip-placement="top"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M8 0C6.41775 0 4.87103 0.469192 3.55544 1.34824C2.23985 2.22729 1.21447 3.47672 0.608967 4.93853C0.00346626 6.40034 -0.15496 8.00887 0.153721 9.56072C0.462403 11.1126 1.22433 12.538 2.34315 13.6569C3.46197 14.7757 4.88743 15.5376 6.43928 15.8463C7.99113 16.155 9.59966 15.9965 11.0615 15.391C12.5233 14.7855 13.7727 13.7602 14.6518 12.4446C15.5308 11.129 16 9.58225 16 8C16 5.87827 15.1571 3.84344 13.6569 2.34315C12.1566 0.842855 10.1217 0 8 0ZM7.89107 13.263C7.70995 13.263 7.5329 13.2093 7.38231 13.1086C7.23171 13.008 7.11434 12.865 7.04503 12.6977C6.97572 12.5303 6.95758 12.3462 6.99292 12.1686C7.02825 11.9909 7.11547 11.8278 7.24354 11.6997C7.37161 11.5716 7.53478 11.4844 7.71241 11.4491C7.89005 11.4137 8.07418 11.4319 8.24151 11.5012C8.40884 11.5705 8.55186 11.6879 8.65248 11.8385C8.7531 11.9891 8.80681 12.1661 8.80681 12.3472C8.80636 12.59 8.70974 12.8226 8.5381 12.9943C8.36646 13.1659 8.1338 13.2625 7.89107 13.263ZM8.89192 8.81702C8.89192 8.81702 8.8017 8.84936 8.8017 8.90213V9.62893C8.8017 9.87068 8.70567 10.1025 8.53473 10.2735C8.3638 10.4444 8.13196 10.5404 7.89021 10.5404C7.64847 10.5404 7.41663 10.4444 7.24569 10.2735C7.07476 10.1025 6.97873 9.87068 6.97873 9.62893V8.90213C6.98273 8.49886 7.11316 8.107 7.35165 7.78179C7.59014 7.45657 7.92467 7.21439 8.30809 7.08936C8.57248 7.00113 8.80131 6.82985 8.96049 6.60105C9.11967 6.37225 9.20069 6.09815 9.19149 5.81957C9.17382 5.48274 9.02876 5.16522 8.78572 4.93134C8.54268 4.69746 8.21982 4.56472 7.88256 4.56C7.63973 4.56106 7.40213 4.63063 7.19708 4.76071C6.99202 4.89079 6.82784 5.07609 6.72341 5.29532C6.67144 5.40317 6.59873 5.49973 6.50945 5.57948C6.42016 5.65924 6.31604 5.72062 6.20303 5.76014C5.97479 5.83994 5.7242 5.82581 5.50639 5.72085C5.28857 5.61589 5.12137 5.42871 5.04157 5.20047C4.96176 4.97223 4.9759 4.72164 5.08085 4.50383C5.33215 3.9771 5.72689 3.53193 6.21976 3.2194C6.71263 2.90688 7.28364 2.73969 7.86724 2.73702H7.88596C8.69671 2.74172 9.47434 3.05929 10.0566 3.62348C10.6389 4.18767 10.9808 4.9549 11.0111 5.76511C11.0336 6.43375 10.8398 7.09182 10.4582 7.6414C10.0767 8.19099 9.52797 8.60271 8.89362 8.81532L8.89192 8.81702Z"
+                            fill="#999999"
+                        />
+                    </svg>
+                    <!-- Tooltip -->
+                    <div
+                        id="fireextloc-tooltip"
+                        role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"
+                    >
+                        A map showing the locations of all types of fire extinguishers in the
+                        building/complex.
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex justify-center p-6 border-t border-gray-200">
+                <button
+                    data-modal-hide="add-residence-modal"
+                    class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
+                >
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll(".edit-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+            const fieldWrapper = button.closest("[data-field]");
+            const display = fieldWrapper.querySelector("[data-display]");
+            const edit = fieldWrapper.querySelector("[data-edit]");
+            const input = fieldWrapper.querySelector("[data-input]");
+
+            display.classList.add("hidden");
+            edit.classList.remove("hidden");
+            input.focus();
+        });
+    });
+
+    document.querySelectorAll(".save-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+            const fieldWrapper = button.closest("[data-field]");
+            const display = fieldWrapper.querySelector("[data-display]");
+            const edit = fieldWrapper.querySelector("[data-edit]");
+            const input = fieldWrapper.querySelector("[data-input]");
+            const valueContainer = fieldWrapper.querySelector("[data-value]");
+
+            const newValue = input.value.trim();
+            if (newValue !== "") {
+                valueContainer.textContent = newValue;
+            }
+
+            display.classList.remove("hidden");
+            edit.classList.add("hidden");
+        });
+    });
+
+    const imageUpload = document.getElementById("imageUpload");
+    const profilePlaceholder = document.getElementById("profilePlaceholder");
+
+    imageUpload.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profilePlaceholder.innerHTML = `
+          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
+        `;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    // For Edit Modal
+    const imageUploadEdit = document.getElementById("imageUpload-edit");
+    const profilePlaceholderEdit = document.getElementById("profilePlaceholder-edit");
+
+    imageUploadEdit.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profilePlaceholderEdit.innerHTML = `
+          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
+        `;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    function permissionSelector() {
+        return {
+            permissions: [
+                "Dashboard",
+                "Users",
+                "Events",
+                "Reservations",
+                "Security",
+                "Maintenance",
+                "The Office",
+                "Invoices",
+                "Push_Notifications",
+                "Feedback Box",
+                "Settings",
+            ],
+            selected: [],
+            add(event) {
+                const value = event.target.value;
+                if (value && !this.selected.includes(value)) {
+                    this.selected.push(value);
+                }
+                event.target.value = "";
+            },
+            remove(index) {
+                this.selected.splice(index, 1);
+            },
+        };
+    }
+</script>

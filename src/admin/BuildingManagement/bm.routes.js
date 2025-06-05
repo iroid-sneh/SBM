@@ -7,6 +7,12 @@ import eventsRoutes from "./events/events.routes";
 import reservationsRoutes from "./Reservations/reservations.routes";
 import securityRoutes from "./security/security.routes";
 import maintenanceRoutes from "./maintenance/maintenance.routes";
+import theOfficeRoutes from "./theOffice/theOffice.routes";
+import invoicesRoutes from "./invoices/invoices.routes";
+import pushNotificationRoutes from "./pushNotification/pushNotification.routes";
+import feedbackRoutes from "./feedback/feedback.routes";
+import settingsRoutes from "./settings/settings.routes";
+import faqsRoutes from "./FAQ's/FAQ's.routes";
 const router = express.Router();
 
 router.get("/", asyncWrap(bmController.loginPage));
@@ -41,5 +47,17 @@ router.use("/reservations", reservationsRoutes);
 router.use("/security", securityRoutes);
 
 router.use("/maintenance", maintenanceRoutes);
+
+router.use("/theoffice", theOfficeRoutes);
+
+router.use("/invoices", invoicesRoutes);
+
+router.use("/pushnotification", pushNotificationRoutes);
+
+router.use("/feedback", feedbackRoutes);
+
+router.use("/settings", settingsRoutes);
+
+router.use("/faqs", faqsRoutes);
 
 export default router;
