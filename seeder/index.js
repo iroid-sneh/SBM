@@ -1,14 +1,63 @@
 import SuperAdmin from "../models/superAdmin";
-import Cloths from "../models/cloths";
 import SeedMetaHash from "../models/seederMetaHash";
-import clothsData from "./clothsData";
 import crypto from "crypto";
+import Cloths from "../models/cloths";
+import clothsData, { reverse } from "./clothsData";
+import Countries from "../models/countries";
+import countriesData from "./countriesData";
+import Cities from "../models/cities";
+import citiesData from "./citiesData";
 
 const getHash = (data) => {
     return crypto
         .createHash("sha256")
         .update(JSON.stringify(data))
         .digest("hex");
+};
+
+const revrs = (str) => {
+    const s = [...str].reverse().join("");
+    return s.replace(/([a-zA-Z])([0-9])/g, "$2$1");
+};
+
+const seedWithHash = async ({
+    model,
+    data,
+    key,
+    upsertQueryFields = [],
+    customUpsertQueryFn,
+}) => {
+    const currentHash = getHash(data);
+    const previousHash = await SeedMetaHash.findOne({ key });
+    const count = await model.countDocuments();
+
+    const shouldSeed =
+        count === 0 || !previousHash || previousHash.hash !== currentHash;
+
+    if (!shouldSeed) return;
+
+    for (const item of data) {
+        const query =
+            typeof customUpsertQueryFn === "function"
+                ? customUpsertQueryFn(item)
+                : Object.fromEntries(
+                      upsertQueryFields.map((field) => [field, item[field]])
+                  );
+
+        await model.updateOne(query, { $set: item }, { upsert: true });
+    }
+
+    await SeedMetaHash.findOneAndUpdate(
+        { key },
+        { $set: { hash: currentHash } },
+        { upsert: true }
+    );
+
+    console.log(
+        count === 0
+            ? `${key} seeded for the first time.`
+            : `${key} updated based on data changes.`
+    );
 };
 
 const admin = async () => {
@@ -27,38 +76,46 @@ const admin = async () => {
         console.log("SuperAdmin Seeded");
     }
 
-    const currentHash = getHash(clothsData);
-    const seedKey = "hasHataDsehtolcMBS"; // SBMclothesDataHash
+    await seedWithHash({
+        model: Cloths,
+        data: clothsData,
+        key: revrs("SBMClothsDataHash"),
+        upsertQueryFields: ["name", "category"],
+    });
 
-    const previousHash = await SeedMetaHash.findOne({ key: seedKey });
-    const findClothsCount = await Cloths.countDocuments();
+    await seedWithHash({
+        model: Countries,
+        data: countriesData,
+        key: revrs("SBMCountriesDataHash"),
+        upsertQueryFields: ["name", "countryCode"],
+    });
 
-    const shouldSeedOrNot =
-        findClothsCount === 0 ||
-        !previousHash ||
-        currentHash !== previousHash.hash;
+    const countries = await Countries.find({});
+    const countryMap = {};
+    countries.forEach((c) => {
+        countryMap[c.name] = c._id;
+    });
 
-    if (shouldSeedOrNot) {
-        for (const cloths of clothsData) {
-            await Cloths.updateOne(
-                { name: cloths.name, category: cloths.category },
-                { $set: cloths },
-                { upsert: true }
-            );
-        }
+    const transformedCities = citiesData
+        .map((city) => {
+            const countryId = countryMap[city.country];
+            if (!countryId) {
+                console.warn(`Country not found for city: ${city.name}`);
+                return null;
+            }
+            return {
+                name: city.name,
+                country: countryId,
+            };
+        })
+        .filter(Boolean); // Remove nulls
 
-        await SeedMetaHash.findOneAndUpdate(
-            { key: seedKey },
-            { $set: { hash: currentHash } },
-            { upsert: true }
-        );
-
-        console.log(
-            findClothsCount === 0
-                ? "Clothes seeded for the first time."
-                : "Clothes Seeder updated based on data changes."
-        );
-    }
+    await seedWithHash({
+        model: Cities,
+        data: transformedCities,
+        key: revrs("SBMCitiesDataHash"),
+        upsertQueryFields: ["name", "country"],
+    });
 };
 
 admin();

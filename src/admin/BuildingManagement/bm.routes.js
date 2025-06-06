@@ -13,13 +13,20 @@ import pushNotificationRoutes from "./pushNotification/pushNotification.routes";
 import feedbackRoutes from "./feedback/feedback.routes";
 import settingsRoutes from "./settings/settings.routes";
 import faqsRoutes from "./FAQ's/FAQ's.routes";
+import storeFiles from "../../common/middleware/storeFiles";
 const router = express.Router();
 
-router.get("/", asyncWrap(bmController.loginPage));
+router.get("/login", asyncWrap(bmController.loginPage));
 
-router.post("/", asyncWrap(bmController.login));
+router.post("/login", asyncWrap(bmController.login));
 
 router.get("/bussinessdetails", asyncWrap(bmController.bussinessDetailsPage));
+
+router.post(
+    "/bussinessdetails",
+    storeFiles("public/BMadmin", "businessLogo", "single"),
+    asyncWrap(bmController.bussinessDetails)
+);
 
 router.get("/adminprofile", asyncWrap(bmController.adminProfilePage));
 

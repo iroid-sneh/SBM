@@ -53,9 +53,11 @@ app.set("layout", false);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(flash());
-app.use(function (req, res, next) {
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
+app.use((req, res, next) => {
+    res.locals.messages = {
+        success: req.flash("success"),
+        error: req.flash("error"),
+    };
     next();
 });
 

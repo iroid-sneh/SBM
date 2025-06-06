@@ -16,7 +16,17 @@ router.get(
     asyncWrap(settingsController.residencedetailsPage)
 );
 
-router.get("/amenities", asyncWrap(settingsController.bussinessdetailsPage));
+router.get("/amenities", asyncWrap(settingsController.amenitiesPage));
+
+router.get(
+    "/amenities/sports",
+    asyncWrap(settingsController.amenitiesSportsPage)
+);
+
+router.get(
+    "/amenities/halls",
+    asyncWrap(settingsController.amenitiesHallsPage)
+);
 
 router.get("/bankdetails", asyncWrap(settingsController.bankdetailsPage));
 

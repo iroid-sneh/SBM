@@ -42,6 +42,36 @@ class settingsController {
     }
 
     /**
+     * @description: amenitiesPage for admin
+     * @param {*} req
+     * @param {*} res
+     */
+    static async amenitiesPage(req, res) {
+        const data = await settingsService.amenitiesPage(req, res);
+        return;
+    }
+
+    /**
+     * @description: amenitiesSportsPage for admin
+     * @param {*} req
+     * @param {*} res
+     */
+    static async amenitiesSportsPage(req, res) {
+        const data = await settingsService.amenitiesSportsPage(req, res);
+        return;
+    }
+
+    /**
+     * @description: amenitiesHallsPage for admin
+     * @param {*} req
+     * @param {*} res
+     */
+    static async amenitiesHallsPage(req, res) {
+        const data = await settingsService.amenitiesHallsPage(req, res);
+        return;
+    }
+
+    /**
      * @description: bankdetailsPage for admin
      * @param {*} req
      * @param {*} res

@@ -42,13 +42,58 @@ class settingsService {
     }
 
     /**
-     * @description: bankdetailsPage for admin
+     * @description: residencedetailsPage for admin
      * @param {*} req
      * @param {*} res
      */
     static async residencedetailsPage(req, res) {
         return res.render(
             "adminPanels/buildingManagement/settings/residenceDetails",
+            {
+                currentPage: "settings",
+                layout: "adminPanels/buildingManagement/layouts/layout",
+            }
+        );
+    }
+
+    /**
+     * @description: amenitiesPage for admin
+     * @param {*} req
+     * @param {*} res
+     */
+    static async amenitiesPage(req, res) {
+        return res.render(
+            "adminPanels/buildingManagement/settings/amenities/amenities",
+            {
+                currentPage: "settings",
+                layout: "adminPanels/buildingManagement/layouts/layout",
+            }
+        );
+    }
+
+    /**
+     * @description: amenitiesSportsPage for admin
+     * @param {*} req
+     * @param {*} res
+     */
+    static async amenitiesSportsPage(req, res) {
+        return res.render(
+            "adminPanels/buildingManagement/settings/amenities/amenitiesSports",
+            {
+                currentPage: "settings",
+                layout: "adminPanels/buildingManagement/layouts/layout",
+            }
+        );
+    }
+
+    /**
+     * @description: amenitiesHallsPage for admin
+     * @param {*} req
+     * @param {*} res
+     */
+    static async amenitiesHallsPage(req, res) {
+        return res.render(
+            "adminPanels/buildingManagement/settings/amenities/amenitiesHalls",
             {
                 currentPage: "settings",
                 layout: "adminPanels/buildingManagement/layouts/layout",

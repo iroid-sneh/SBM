@@ -17,7 +17,7 @@ class bmController {
      * @param {*} res
      */
     static async login(req, res) {
-        const data = await bmServices.login(req, res);
+        const data = await bmServices.login(req.body, req, res);
         return;
     }
 
@@ -28,6 +28,21 @@ class bmController {
      */
     static async bussinessDetailsPage(req, res) {
         const data = await bmServices.bussinessDetailsPage(req, res);
+        return;
+    }
+
+    /**
+     * @description: bussinessDetails For Building Managment
+     * @param {*} req
+     * @param {*} res
+     */
+    static async bussinessDetails(req, res) {
+        const data = await bmServices.bussinessDetails(
+            req.body,
+            req.file,
+            req,
+            res
+        );
         return;
     }
 

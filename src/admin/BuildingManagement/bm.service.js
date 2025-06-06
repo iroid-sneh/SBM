@@ -1,3 +1,6 @@
+import Countries from "../../../models/countries";
+import Cities from "../../../models/cities";
+import BMbusinessDetails from "../../../models/BMAdmin/bussinessDetails";
 class bmServices {
     /**
      * @description: Login Page for Building Management
@@ -5,17 +8,22 @@ class bmServices {
      * @param {*} res
      */
     static async loginPage(req, res) {
+        // Fetching countries for the dropdown
+        const countries = await Countries.find({});
         return res.render("adminPanels/buildingManagement/login", {
             layout: false,
+            countries: countries,
         });
     }
 
     /**
      * @description: Login for Building Management
+     * @param {*} data
      * @param {*} req
      * @param {*} res
      */
-    static async login(req, res) {
+    static async login(data, req, res) {
+        const { countryCode, Number, password } = req.body;
         return res.redirect("/bmadmin/bussinessdetails");
     }
 
@@ -25,9 +33,49 @@ class bmServices {
      * @param {*} res
      */
     static async bussinessDetailsPage(req, res) {
+        const countries = await Countries.find({});
+        const cities = await Cities.find({}).populate("country");
         return res.render("adminPanels/buildingManagement/bussinessDetails", {
             layout: false,
+            countries: countries,
+            cities: cities,
         });
+    }
+
+    /**
+     * @description: bussinessDetails for Building Management
+     * @param {*} data
+     * @param {*} file
+     * @param {*} req
+     * @param {*} res
+     */
+    static async bussinessDetails(data, file, req, res) {
+        console.log(data);
+
+        const businessLogo = file
+            ? `/BMadmin/businessLogo-${file.filename}`
+            : null;
+
+        if (file) {
+            await BMbusinessDetails.create({
+                commercialName: data.commercialName,
+                countryCode: countryCode.data,
+                businessLandline: businessLandline.data,
+                VATnumber: VATnumber.data,
+                CRnumber: CRnumber.data,
+                bussinessEmail: bussinessEmail.data,
+                workingTime: workingTime.data,
+                workingDays: workingDays.data,
+                country: data.country,
+                city: data.city,
+                addressLat: data.addressLat,
+                addressLong: data.addressLong,
+                businessLogo: businessLogo,
+            });
+
+            req.flash("success", "Bussiness Details Added Successfully.");
+            return res.redirect("/bmadmin/adminprofile");
+        }
     }
 
     /**

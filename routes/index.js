@@ -14,6 +14,10 @@ router.get("/", (req, res) => {
     return res.redirect("/login");
 });
 
+router.get("/bmadmin", (req, res) => {
+    return res.redirect("/bmadmin/login");
+});
+
 router.get("/superadmin", (req, res) => {
     return res.redirect("/superadmin/login");
 });

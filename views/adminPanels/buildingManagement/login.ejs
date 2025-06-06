@@ -54,31 +54,33 @@
                         </label>
                         <div class="flex items-center border-b border-gray-300 pb-2">
                             <div class="relative flex items-center mr-3">
-                                <select
-                                    id="loginCountrySelect"
-                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                >
-                                    <option value="bh" selected>Bahrain</option>
-                                    <option value="sa">Saudi Arabia</option>
-                                    <option value="ae">UAE</option>
-                                    <option value="qa">Qatar</option>
-                                    <option value="kw">Kuwait</option>
-                                    <option value="om">Oman</option>
-                                </select>
-
-                                <img
-                                    id="loginFlagIcon"
-                                    src="https://flagcdn.com/w40/bh.png"
-                                    class="w-6 h-4 object-cover border rounded-sm"
-                                    alt="Country flag"
-                                />
-                                <svg
-                                    class="w-2.5 h-2.5 text-gray-600 ml-1 pointer-events-none"
-                                    fill="none"
-                                    viewBox="0 0 10 6"
-                                >
-                                    <path stroke="currentColor" stroke-width="2" d="M1 1l4 4 4-4" />
-                                </svg>
+                                    <select
+                                        class="z-10 absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                        onchange="updateFlag(this)"
+                                        data-flag-id="login-flag"
+                                        data-code-id="login-code"
+                                    >
+                                        <% countries.forEach((country, index) => { %>
+                                        <option 
+                                            value="<%= country.countryCode %>" 
+                                            data-flag="<%= country.flag %>"
+                                            <%= index === 0 ? 'selected' : '' %>
+                                        >
+                                            <%= country.countryCode %> <%= country.name %>
+                                        </option>
+                                        <% }) %>
+                                    </select>
+                                
+                                    <img
+                                        id="login-flag"
+                                        src="<%= countries[0]?.flag %>"
+                                        class="w-10 h-6 object-cover border rounded-sm z-0"
+                                        alt="Country flag"
+                                    />
+                                
+                                    <svg class="w-2.5 h-2.5 text-gray-600 ml-1 pointer-events-none" fill="none" viewBox="0 0 10 6">
+                                        <path stroke="currentColor" stroke-width="2" d="M1 1l4 4 4-4" />
+                                    </svg>
                             </div>
                             <input
                                 type="text"
@@ -152,7 +154,7 @@
                     <!-- Signup Link -->
                     <p class="text-center text-sm text-gray-600 mt-2">
                         Don’t have an account?
-                        <a href="#" class="text-[#60b5c9] font-medium hover:underline">Signup</a>
+                        <a href="/bmadmin/bussinessdetails" class="text-[#60b5c9] font-medium hover:underline">Signup</a>
                     </p>
                 </form>
 
@@ -166,30 +168,34 @@
                         <div class="flex items-center border-b border-gray-300 pb-2">
                             <div class="relative flex items-center mr-3">
                                 <select
-                                    id="forgotCountrySelect"
-                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                    class="z-10 absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                    onchange="updateFlag(this)"
+                                    data-flag-id="forgot-flag"
+                                    data-code-id="forgot-code"
                                 >
-                                    <option value="bh" selected>Bahrain</option>
-                                    <option value="sa">Saudi Arabia</option>
-                                    <option value="ae">UAE</option>
-                                    <option value="qa">Qatar</option>
-                                    <option value="kw">Kuwait</option>
-                                    <option value="om">Oman</option>
+                                    <% countries.forEach((country, index) => { %>
+                                    <option 
+                                        value="<%= country.countryCode %>" 
+                                        data-flag="<%= country.flag %>"
+                                        <%= index === 0 ? 'selected' : '' %>
+                                    >
+                                       <%= country.countryCode %> <%= country.name %>
+                                    </option>
+                                    <% }) %>
                                 </select>
+                            
                                 <img
-                                    id="forgotFlagIcon"
-                                    src="https://flagcdn.com/w40/bh.png"
-                                    class="w-6 h-4 object-cover border rounded-sm"
+                                    id="forgot-flag"
+                                    src="<%= countries[0]?.flag %>"
+                                    class="w-10 h-6 object-cover border rounded-sm z-0"
                                     alt="Country flag"
                                 />
-                                <svg
-                                    class="w-2.5 h-2.5 text-gray-600 ml-1 pointer-events-none"
-                                    fill="none"
-                                    viewBox="0 0 10 6"
-                                >
+                            
+                                <svg class="w-2.5 h-2.5 text-gray-600 ml-1 pointer-events-none" fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-width="2" d="M1 1l4 4 4-4" />
                                 </svg>
                             </div>
+
                             <input
                                 type="text"
                                 placeholder="Enter Your Phone Number"
@@ -472,24 +478,6 @@
     <script>
         let timerInterval;
 
-        const flagMap = {
-            bh: "https://flagcdn.com/w40/bh.png",
-            sa: "https://flagcdn.com/w40/sa.png",
-            ae: "https://flagcdn.com/w40/ae.png",
-            qa: "https://flagcdn.com/w40/qa.png",
-            kw: "https://flagcdn.com/w40/kw.png",
-            om: "https://flagcdn.com/w40/om.png",
-        };
-        // For login form
-        document.getElementById("loginCountrySelect").addEventListener("change", function () {
-            document.getElementById("loginFlagIcon").src = flagMap[this.value];
-        });
-
-        // For forgot password form
-        document.getElementById("forgotCountrySelect").addEventListener("change", function () {
-            document.getElementById("forgotFlagIcon").src = flagMap[this.value];
-        });
-
         document.addEventListener("DOMContentLoaded", function () {
             const otpDigits = document.querySelectorAll(".otp-digit");
 
@@ -647,5 +635,23 @@
                 });
             });
         });
+         function updateFlag(selectEl) {
+        const selectedOption = selectEl.options[selectEl.selectedIndex];
+        const flagUrl = selectedOption.dataset.flag;
+        const countryCode = selectedOption.value;
+
+        const flagImgId = selectEl.dataset.flagId;
+        const codeSpanId = selectEl.dataset.codeId;
+
+        if (flagImgId && flagUrl) {
+            const flagImg = document.getElementById(flagImgId);
+            if (flagImg) flagImg.src = flagUrl;
+        }
+
+        if (codeSpanId) {
+            const codeSpan = document.getElementById(codeSpanId);
+            if (codeSpan) codeSpan.innerText = countryCode;
+        }
+    }
     </script>
 </html>

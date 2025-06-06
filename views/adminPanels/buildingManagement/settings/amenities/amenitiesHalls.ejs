@@ -1,0 +1,633 @@
+<div
+    class="bg-white rounded-tl-[40px] rounded-br-[90px] p-6 shadow-md flex justify-between items-center"
+>
+    <div class="flex flex-row items-center justify-center gap-4">
+        <h1 class="text-2xl font-medium text-gray-500">Settings</h1>
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M5.6665 3.33464L10.3332 8.0013L5.6665 12.668"
+                stroke="#54B7C5"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M13.6665 3.33464L18.3332 8.0013L13.6665 12.668"
+                stroke="#54B7C5"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        <h1 class="text-2xl font-medium text-[#54B7C5]">Amenities</h1>
+    </div>
+    <div class="flex items-center gap-4 mr-4">
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                    class="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                </svg>
+            </div>
+            <input
+                type="text"
+                placeholder="Search"
+                class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-[#54B7C5] focus:border-[#54B7C5] sm:text-sm"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="p-8 mx-auto">
+    <!-- Card -->
+    <div class="w-[1400px] bg-white rounded-2xl p-4 mx-auto">
+        <div class="flex h-[627px]">
+            <!-- Sidebar -->
+            <div class="w-60 pr-6 border-r border-gray-300">
+                <ul class="space-y-2 text-gray-700 text-sm font-medium">
+                    <li>
+                        <a
+                            href="/bmadmin/settings/bussinessdetails"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Bussiness Details
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/adminprofile"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Admin Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/subadmin"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Sub Admin
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/residencedetails"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Residence Details
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/amenities"
+                            class="block px-4 py-2 rounded-md bg-[#def2f1] text-[#163f75] font-semibold"
+                        >
+                            Amenities
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/bankdetails"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Bank Details
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/bmadmin/settings/subscriptionplan"
+                            class="block px-4 py-2 rounded-md hover:bg-gray-100"
+                        >
+                            Subscription Plan
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Profile Info Card -->
+            <div class="flex-1 pl-10 pr-6">
+                <div class="space-y-5 pt-2">
+                    <!-- Top Header with Arrow, Centered Title, and Add Hall Button -->
+                    <div
+                        class="relative flex items-center justify-center w-full border-b border-gray-300 py-3"
+                    >
+                        <!-- Back Arrow (left aligned) -->
+                        <button
+                            onclick="window.location.href='/bmadmin/settings/amenities'"
+                            class="absolute left-6 top-1/2 -translate-y-1/2"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6 text-black"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15 19l-7-7 7-7"
+                                />
+                            </svg>
+                        </button>
+
+                        <!-- Centered Title -->
+                        <h1 class="text-center text-xl font-semibold text-gray-800 pb-2">Halls</h1>
+
+                        <!-- Add Hall Button (right aligned) -->
+                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pb-3">
+                            <button
+                                data-modal-target="add-hall-modal"
+                                data-modal-toggle="add-hall-modal"
+                                type="button"
+                                class="text-sm w-[200px] h-[38px] font-medium text-[#163f75] border border-[#163f75] px-4 py-1.5 rounded-lg hover:bg-gray-100 transition-all"
+                            >
+                                + Add Hall
+                            </button>
+                        </div>
+                    </div>
+                    <!-- DataTable Section -->
+                    <div class="overflow-x-auto mt-8">
+                        <table class="min-w-full rounded-xl overflow-hidden">
+                            <thead class="bg-[#eaeae9]">
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 text-center text-sm font-semibold text-gray-700"
+                                    >
+                                        Hall Name
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 text-center text-sm font-semibold text-gray-700"
+                                    >
+                                        Address
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 text-center text-sm font-semibold text-gray-700"
+                                    >
+                                        Seating Capacity
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 text-center text-sm font-semibold text-gray-700"
+                                    >
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <!-- Hall 1 -->
+                                <tr>
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <div class="flex items-center gap-3">
+                                            <img
+                                                src="<%= process.env.APP_URL_ADMIN %>/images/sports/TheGrandHall.png"
+                                                alt="Hall Image"
+                                                class="w-[90px] h-12 rounded-md object-cover"
+                                            />
+                                            <span class="text-gray-800 font-medium text-sm">
+                                                The Grand Hall
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 text-sm text-center text-gray-700 leading-5"
+                                    >
+                                        2nd Floor, Building 772 Road 4307,
+                                        <br />
+                                        Block 943 Riffa Views, Al Mazrowiah Riffa, 943
+                                    </td>
+                                    <td class="px-6 py-4 text-center text-sm text-gray-700">
+                                        150 m²
+                                    </td>
+                                    <td class="px-6 py-4 text-center space-x-3">
+                                        <!-- Delete Button -->
+                                        <button class="inline-flex items-center">
+                                            <svg
+                                                class="w-6 h-6 mt-1 text-gray-800 dark:text-white"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 15 20"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M5.6 12.8C5.81217 12.8 6.01566 12.7157 6.16569 12.5657C6.31571 12.4157 6.4 12.2122 6.4 12V7.2C6.4 6.98783 6.31571 6.78434 6.16569 6.63432C6.01566 6.48429 5.81217 6.4 5.6 6.4C5.38783 6.4 5.18434 6.48429 5.03432 6.63432C4.88429 6.78434 4.8 6.98783 4.8 7.2V12C4.8 12.2122 4.88429 12.4157 5.03432 12.5657C5.18434 12.7157 5.38783 12.8 5.6 12.8ZM13.6 3.2H10.4V2.4C10.4 1.76348 10.1471 1.15303 9.69706 0.702944C9.24697 0.252856 8.63652 0 8 0H6.4C5.76348 0 5.15303 0.252856 4.70294 0.702944C4.25286 1.15303 4 1.76348 4 2.4V3.2H0.8C0.587827 3.2 0.384344 3.28429 0.234315 3.43431C0.0842854 3.58434 0 3.78783 0 4C0 4.21217 0.0842854 4.41566 0.234315 4.56569C0.384344 4.71571 0.587827 4.8 0.8 4.8H1.6V13.6C1.6 14.2365 1.85286 14.847 2.30294 15.2971C2.75303 15.7471 3.36348 16 4 16H10.4C11.0365 16 11.647 15.7471 12.0971 15.2971C12.5471 14.847 12.8 14.2365 12.8 13.6V4.8H13.6C13.8122 4.8 14.0157 4.71571 14.1657 4.56569C14.3157 4.41566 14.4 4.21217 14.4 4C14.4 3.78783 14.3157 3.58434 14.1657 3.43431C14.0157 3.28429 13.8122 3.2 13.6 3.2ZM5.6 2.4C5.6 2.18783 5.68429 1.98434 5.83432 1.83431C5.98434 1.68429 6.18783 1.6 6.4 1.6H8C8.21217 1.6 8.41566 1.68429 8.56569 1.83431C8.71572 1.98434 8.8 2.18783 8.8 2.4V3.2H5.6V2.4ZM11.2 13.6C11.2 13.8122 11.1157 14.0157 10.9657 14.1657C10.8157 14.3157 10.6122 14.4 10.4 14.4H4C3.78783 14.4 3.58434 14.3157 3.43431 14.1657C3.28429 14.0157 3.2 13.8122 3.2 13.6V4.8H11.2V13.6ZM8.8 12.8C9.01217 12.8 9.21566 12.7157 9.36569 12.5657C9.51572 12.4157 9.6 12.2122 9.6 12V7.2C9.6 6.98783 9.51572 6.78434 9.36569 6.63432C9.21566 6.48429 9.01217 6.4 8.8 6.4C8.58783 6.4 8.38434 6.48429 8.23432 6.63432C8.08429 6.78434 8 6.98783 8 7.2V12C8 12.2122 8.08429 12.4157 8.23432 12.5657C8.38434 12.7157 8.58783 12.8 8.8 12.8Z"
+                                                    fill="#F26E6E"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <!-- Edit Button -->
+                                        <button class="inline-flex items-center">
+                                            <svg
+                                                class="w-6 h-6 text-gray-800 dark:text-white"
+                                                aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke="#54B7C5"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Hall Modal -->
+<div
+    id="add-hall-modal"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full hidden"
+    aria-hidden="true"
+>
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Add Hall</h3>
+                <button
+                    class="text-red-500 hover:text-red-700 text-xl"
+                    data-modal-hide="add-hall-modal"
+                >
+                    Close &times;
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6">
+                <div class="space-y-5">
+                    <!-- Upload Hall Photo -->
+                    <div class="flex items-center justify-center mb-0">
+                        <label
+                            class="flex items-center justify-center w-full h-16 bg-white border border-dashed border-gray-300 rounded-xl cursor-pointer shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                        >
+                            <div class="flex items-center gap-2 text-sm text-gray-500">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-5 h-5 text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4-4m0 0l-4 4m4-4v12"
+                                    />
+                                </svg>
+                                <span>Upload Hall Photo</span>
+                            </div>
+                            <input type="file" class="hidden" />
+                        </label>
+                    </div>
+
+                    <!-- Hall Name -->
+                    <input
+                        type="text"
+                        placeholder="Hall Name"
+                        class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    />
+
+                    <!-- Location -->
+                    <input
+                        type="text"
+                        placeholder="Location"
+                        class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    />
+
+                    <!-- Select Building/Complex Dropdown -->
+                    <select
+                        id="preference-select"
+                        class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    >
+                        <option value="" disabled selected>Select Building/Complex</option>
+                        <option value="">Building 1</option>
+                        <option value="">Building 2</option>
+                        <option value="">Building 3</option>
+                    </select>
+
+                    <!-- Seating Capacity in m2 -->
+                    <input
+                        type="number"
+                        placeholder="Seating Capacity in m²"
+                        class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    />
+
+                    <!-- Seating Style Template -->
+                    <div
+                        class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    >
+                        <label class="flex items-center gap-2 text-sm text-gray-700">
+                            <input
+                                type="checkbox"
+                                class="style-toggle"
+                                data-target="classroom-guests"
+                                checked
+                            />
+                            Classroom Style :
+                        </label>
+                        <div id="classroom-guests" class="flex items-center gap-2">
+                            <button
+                                type="button"
+                                class="decrement bg-[#EAEAEA] text-gray-600 w-6 h-6 rounded-full text-sm"
+                            >
+                                -
+                            </button>
+                            <input
+                                type="number"
+                                value="132"
+                                min="0"
+                                class="w-12 text-center bg-transparent text-sm outline-none guest-input"
+                            />
+                            <span class="text-sm text-gray-700">Guests</span>
+                            <button
+                                type="button"
+                                class="increment bg-[#EAEAEA] text-gray-600 w-6 h-6 rounded-full text-sm"
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Repeat for other styles -->
+                    <div
+                        class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    >
+                        <label class="flex items-center gap-2 text-sm text-gray-700">
+                            <input
+                                type="checkbox"
+                                class="style-toggle"
+                                data-target="theatre-guests"
+                                checked
+                            />
+                            Theatre Style :
+                        </label>
+                        <div id="theatre-guests" class="flex items-center gap-2">
+                            <button
+                                type="button"
+                                class="decrement bg-[#EAEAEA] text-gray-600 w-6 h-6 rounded-full text-sm"
+                            >
+                                -
+                            </button>
+                            <input
+                                type="number"
+                                value="132"
+                                min="0"
+                                class="w-12 text-center bg-transparent text-sm outline-none guest-input"
+                            />
+                            <span class="text-sm text-gray-700">Guests</span>
+                            <button
+                                type="button"
+                                class="increment bg-[#EAEAEA] text-gray-600 w-6 h-6 rounded-full text-sm"
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    >
+                        <label class="flex items-center gap-2 text-sm text-gray-700">
+                            <input
+                                type="checkbox"
+                                class="style-toggle"
+                                data-target="buffet-guests"
+                                checked
+                            />
+                            Buffet Style :
+                        </label>
+                        <div id="buffet-guests" class="flex items-center gap-2">
+                            <button
+                                type="button"
+                                class="decrement bg-[#EAEAEA] text-gray-600 w-6 h-6 rounded-full text-sm"
+                            >
+                                -
+                            </button>
+                            <input
+                                type="number"
+                                value="132"
+                                min="0"
+                                class="w-12 text-center bg-transparent text-sm outline-none guest-input"
+                            />
+                            <span class="text-sm text-gray-700">Guests</span>
+                            <button
+                                type="button"
+                                class="increment bg-[#EAEAEA] text-gray-600 w-6 h-6 rounded-full text-sm"
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    >
+                        <label class="flex items-center gap-2 text-sm text-gray-700">
+                            <input
+                                type="checkbox"
+                                class="style-toggle"
+                                data-target="plated-guests"
+                            />
+                            Plated Meal :
+                        </label>
+                        <div
+                            id="plated-guests"
+                            class="flex items-center gap-2 opacity-50 pointer-events-none"
+                        >
+                            <button
+                                type="button"
+                                class="decrement bg-[#EAEAEA] text-gray-600 w-6 h-6 rounded-full text-sm"
+                            >
+                                -
+                            </button>
+                            <input
+                                type="number"
+                                value="0"
+                                min="0"
+                                class="w-12 text-center bg-transparent text-sm outline-none guest-input"
+                            />
+                            <span class="text-sm text-gray-700">Guests</span>
+                            <button
+                                type="button"
+                                class="increment bg-[#EAEAEA] text-gray-600 w-6 h-6 rounded-full text-sm"
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex items-center justify-between bg-white rounded-xl px-4 py-3 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                    >
+                        <label class="flex items-center gap-2 text-sm text-gray-700">
+                            <input
+                                type="checkbox"
+                                class="style-toggle"
+                                data-target="ushape-guests"
+                            />
+                            U-Shape :
+                        </label>
+                        <div
+                            id="ushape-guests"
+                            class="flex items-center gap-2 opacity-50 pointer-events-none"
+                        >
+                            <button
+                                type="button"
+                                class="decrement bg-[#EAEAEA] text-gray-600 w-6 h-6 rounded-full text-sm"
+                            >
+                                -
+                            </button>
+                            <input
+                                type="number"
+                                value="0"
+                                min="0"
+                                class="w-12 text-center bg-transparent text-sm outline-none guest-input"
+                            />
+                            <span class="text-sm text-gray-700">Guests</span>
+                            <button
+                                type="button"
+                                class="increment bg-[#EAEAEA] text-gray-600 w-6 h-6 rounded-full text-sm"
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Amenities Multi-Select -->
+                    <div class="space-y-3">
+                        <!-- Dropdown and Add Button -->
+                        <div class="flex items-center gap-2">
+                            <select
+                                id="amenity-select"
+                                class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
+                            >
+                                <option value="" disabled selected>Select Amenities</option>
+                                <option value="Parking">Parking</option>
+                                <option value="Restrooms">Restrooms</option>
+                                <option value="Wi-Fi">Wi-Fi</option>
+                                <option value="Audio-Visual Equipment">
+                                    Audio-Visual Equipment
+                                </option>
+                                <option value="Catering Services">Catering Services</option>
+                                <option value="Climate Control">Climate Control</option>
+                                <option value="Security">Security</option>
+                                <option value="Stage and Lighting">Stage and Lighting</option>
+                                <option value="Cleaning Services">Cleaning Services</option>
+                            </select>
+                            <button
+                                type="button"
+                                id="add-amenity"
+                                class="bg-[#163F75] hover:bg-[#0f2f5c] text-white px-4 py-2 rounded-xl text-sm"
+                            >
+                                + Add
+                            </button>
+                        </div>
+
+                        <!-- Selected Chips -->
+                        <div id="amenity-chips" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex justify-center p-6 border-t border-gray-200">
+                <button
+                    class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-9 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
+                >
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Enable/Disable Guest Inputs on Checkbox Toggle
+    document.querySelectorAll(".style-toggle").forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+            const targetId = checkbox.dataset.target;
+            const targetDiv = document.getElementById(targetId);
+            if (checkbox.checked) {
+                targetDiv.classList.remove("opacity-50", "pointer-events-none");
+            } else {
+                targetDiv.classList.add("opacity-50", "pointer-events-none");
+            }
+        });
+    });
+
+    // Handle Increment/Decrement
+    document.querySelectorAll(".increment").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const input = btn.parentElement.querySelector(".guest-input");
+            input.value = parseInt(input.value || 0) + 1;
+        });
+    });
+
+    document.querySelectorAll(".decrement").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const input = btn.parentElement.querySelector(".guest-input");
+            input.value = Math.max(0, parseInt(input.value || 0) - 1);
+        });
+    });
+
+    const selectEl = document.getElementById("amenity-select");
+    const addBtn = document.getElementById("add-amenity");
+    const chipContainer = document.getElementById("amenity-chips");
+    const selectedAmenities = new Set();
+
+    function createAmenityChip(value) {
+        const chip = document.createElement("div");
+        chip.className = "flex items-center bg-[#57C1D1] text-white px-3 py-1 rounded-full text-sm";
+        chip.innerHTML = `
+            <span class="mr-2">${value}</span>
+            <button type="button" class="text-white hover:text-gray-200 text-sm font-bold">&times;</button>
+        `;
+
+        chip.querySelector("button").addEventListener("click", () => {
+            chip.remove();
+            selectedAmenities.delete(value);
+        });
+
+        chipContainer.appendChild(chip);
+    }
+
+    addBtn.addEventListener("click", () => {
+        const value = selectEl.value;
+        if (value && !selectedAmenities.has(value)) {
+            selectedAmenities.add(value);
+            createAmenityChip(value);
+        }
+        selectEl.selectedIndex = 0;
+    });
+</script>
