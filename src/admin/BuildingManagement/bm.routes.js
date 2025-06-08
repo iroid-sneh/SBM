@@ -14,6 +14,7 @@ import feedbackRoutes from "./feedback/feedback.routes";
 import settingsRoutes from "./settings/settings.routes";
 import faqsRoutes from "./FAQ's/FAQ's.routes";
 import storeFiles from "../../common/middleware/storeFiles";
+import signupStepsCheck from "../../common/middleware/signupStepsCheck";
 const router = express.Router();
 
 router.get("/login", asyncWrap(bmController.loginPage));
@@ -23,12 +24,24 @@ router.post("/login", asyncWrap(bmController.login));
 router.get("/bussinessdetails", asyncWrap(bmController.bussinessDetailsPage));
 
 router.post(
-    "/bussinessdetails",
+    "/bussinessdetails/step1",
+    signupStepsCheck(1),
     storeFiles("public/BMadmin", "businessLogo", "single"),
     asyncWrap(bmController.bussinessDetails)
 );
 
 router.get("/adminprofile", asyncWrap(bmController.adminProfilePage));
+
+router.post(
+    "/adminprofile/step2",
+    signupStepsCheck(1),
+    storeFiles("public/BMadmin", "adminProfilePhoto", "sinlge"),
+    asyncWrap(bmController.adminProfile)
+);
+
+router.post("/verifyotp", asyncWrap(bmController.verifyOtp));
+
+router.post("/resendotp", asyncWrap(bmController.resendOtp));
 
 router.get("/residencedetails", asyncWrap(bmController.residenceDetailsPage));
 

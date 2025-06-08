@@ -1,7 +1,6 @@
 <html>
     <head>
         <style>
-            /* Optional animation */
             @keyframes shake {
                 0%,
                 100% {
@@ -23,11 +22,57 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     </head>
     <body
         class="bg-cover bg-no-repeat min-h-screen relative overflow-hidden bg-gradient-to-t from-[#163F75]/50 to-[#54B7C5]/50"
     >
+        <% if (messages.success && messages.success.length > 0) { %>
+        <script>
+            const SBM_PRIMARY = "#54B7C5";
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: `<%= messages.success[0]?.replace(/"/g, '') %>`,
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: "#ffffff",
+                color: "#222",
+                iconColor: SBM_PRIMARY,
+                customClass: {
+                    popup: "shadow-lg rounded-xl border border-gray-200",
+                    title: "text-[#222] font-medium",
+                    timerProgressBar: "bg-[#54B7C5]",
+                },
+            });
+        </script>
+        <% } %> <% if (messages.error && messages.error.length > 0) { %>
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: `<%= messages.error[0]?.replace(/"/g, '') %>`,
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: "#ffffff",
+                color: "#222",
+                iconColor: "#e74c3c",
+                customClass: {
+                    popup: "shadow-lg rounded-xl border border-gray-200",
+                    title: "text-[#222] font-medium",
+                    timerProgressBar: "bg-red-400",
+                },
+            });
+        </script>
+        <% } %>
+
         <!-- Background image with reduced opacity -->
         <div
             class="absolute inset-0 bg-cover bg-no-repeat opacity-20 z-0"
@@ -48,32 +93,32 @@
                 class="absolute top-3 right-40 w-[280px] z-20"
             />
         </div>
-
-        <!-- Main Content -->
-        <div class="mx-auto flex items-start justify-between px-[220px] relative z-10 top-[30px]">
-            <!-- Auth Box -->
-            <div class="w-[472px] px-6">
-                <div id="auth-container">
-                    <div class="flex justify-center items-center">
-                        <!-- Title -->
-                        <h2
-                            class="text-2xl items-start justify-start text-center text-white mb-1"
-                            id="form-title"
-                        >
-                            Admin Profile
-                        </h2>
-                    </div>
-                    <!-- Admin Profile Form -->
-                    <form id="login-form" class="space-y-3">
-                        <!-- Add Profile Photo -->
+        <form
+            id="admin-form"
+            enctype="multipart/form-data"
+            action="/bmadmin/adminprofile/step2"
+            method="post"
+            class="space-y-3"
+        >
+            <div
+                class="mx-auto flex items-start justify-between px-[220px] relative z-10 top-[30px]"
+            >
+                <div class="w-[472px] px-6">
+                    <div id="auth-container">
+                        <div class="flex justify-center items-center">
+                            <h2
+                                class="text-2xl items-start justify-start text-center text-white mb-1"
+                                id="form-title"
+                            >
+                                Admin Profile
+                            </h2>
+                        </div>
                         <div class="flex justify-center mb-1">
                             <div class="relative w-24 h-24">
-                                <!-- Circular Background with Centered SVG -->
                                 <div
                                     id="profilePlaceholder"
                                     class="w-[95px] h-[95px] rounded-full border-4 border-[#57C1D1] flex items-center justify-center bg-gray-100 overflow-hidden"
                                 >
-                                    <!-- Your SVG Icon -->
                                     <svg
                                         class="w-10 h-10 text-gray-500"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -89,16 +134,13 @@
                                         />
                                     </svg>
                                 </div>
-
-                                <!-- Hidden File Input -->
                                 <input
                                     id="imageUpload"
+                                    name="adminProfilePhoto"
                                     type="file"
                                     accept="image/*"
                                     class="hidden"
                                 />
-
-                                <!-- Camera Icon Button -->
                                 <label
                                     for="imageUpload"
                                     class="absolute bottom-0 right-0 bg-[#57C1D1] text-white p-2 rounded-full shadow-[0px_4px_10px_rgba(0,0,0,0.05)] cursor-pointer"
@@ -126,37 +168,36 @@
                                 </label>
                             </div>
                         </div>
-                        <!-- First Name -->
                         <div
                             class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
                         >
                             <input
+                                name="firstName"
                                 type="text"
                                 placeholder="First Name"
                                 class="w-full h-[14px] text-m focus:outline-none"
                             />
                         </div>
-                        <!-- Middle Name -->
                         <div
                             class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
                         >
                             <input
+                                name="middleName"
                                 type="text"
                                 placeholder="Middle Name"
                                 class="w-full h-[14px] text-m focus:outline-none"
                             />
                         </div>
-                        <!-- Last Name -->
                         <div
                             class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
                         >
                             <input
+                                name="lastName"
                                 type="text"
                                 placeholder="Last Name"
                                 class="w-full h-[14px] text-m focus:outline-none"
                             />
                         </div>
-                        <!-- Styled Native Role Select -->
                         <div class="flex bg-white px-4 py-4 rounded-[10px] border shadow-xl">
                             <select
                                 name="role"
@@ -169,65 +210,62 @@
                                 <option value="management">Management</option>
                             </select>
                         </div>
-                        <!-- Email -->
                         <div
                             class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
                         >
                             <input
+                                name="email"
                                 type="text"
                                 placeholder="Email"
                                 class="w-full h-[14px] text-m focus:outline-none"
                             />
                         </div>
-                        <!-- Phone Input with Flag -->
                         <div
                             class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
                         >
                             <div class="relative flex items-center mr-3">
                                 <select
-                                    id="loginCountrySelect"
-                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                    name="countryCode"
+                                    class="z-10 absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                    onchange="updateFlag(this)"
+                                    data-flag-id="admin-contact-flag"
+                                    data-code-id="admin-contact-code"
                                 >
-                                    <option value="bh" selected>Bahrain</option>
-                                    <option value="sa">Saudi Arabia</option>
-                                    <option value="ae">UAE</option>
-                                    <option value="qa">Qatar</option>
-                                    <option value="kw">Kuwait</option>
-                                    <option value="om">Oman</option>
+                                    <% countries.forEach((country, index) => { %>
+                                    <!-- <option value='<%= country.countryCode %>' data-flag='<%= country.flag %>' <%= index === 0 ? 'selected' : '' %>
+                                        >
+                                            <%= country.countryCode %> <%= country.name %>
+                                        </option> -->
+                                    <% }) %>
                                 </select>
+
                                 <img
-                                    id="loginFlagIcon"
-                                    src="https://flagcdn.com/w40/bh.png"
-                                    class="w-6 h-4 object-cover border rounded-sm"
+                                    id="admin-contact-flag"
+                                    src="<%= countries[0]?.flag %>"
+                                    class="w-10 h-6 object-cover border rounded-sm z-0"
                                     alt="Country flag"
                                 />
+
                                 <svg
                                     class="w-2.5 h-2.5 text-gray-600 ml-1 pointer-events-none"
-                                    xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 10 6"
                                 >
-                                    <path
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="m1 1 4 4 4-4"
-                                    />
+                                    <path stroke="currentColor" stroke-width="2" d="M1 1l4 4 4-4" />
                                 </svg>
                             </div>
                             <input
+                                name="contactNumber"
                                 type="text"
                                 placeholder="Contact Number"
                                 class="w-full h-[14px] text-m focus:outline-none"
                             />
                         </div>
-
-                        <!-- Password Field -->
                         <div
                             class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
                         >
                             <input
+                                name="password"
                                 id="password-input"
                                 type="password"
                                 placeholder="Create Password"
@@ -256,8 +294,6 @@
                                 </svg>
                             </button>
                         </div>
-
-                        <!-- Password Field -->
                         <div
                             class="flex items-center bg-white px-4 py-4 rounded-[10px] border shadow-xl"
                         >
@@ -298,55 +334,47 @@
                                 Add Admin Assistant
                             </button>
                         </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="absolute right-[15%] top-1/2 -translate-y-[-40px]">
+                    <h2 class="text-5xl text-white">We will transfer you to the</h2>
+                    <h2 class="text-5xl mt-2 text-white">modern property management</h2>
                 </div>
             </div>
+            <div>
+                <img
+                    src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBottom.svg"
+                    alt="Bottom Left Decoration"
+                    class="absolute bottom-0 left-0 w-[1044px] pointer-events-none"
+                />
+                <div
+                    class="absolute bottom-8 left-0 w-full flex items-center justify-between px-[280px]"
+                >
+                    <div class="">
+                        <h2 class="text-4xl font-semibold text-gray-800">
+                            Step 2
+                            <span class="text-gray-500 font-normal">out of 6</span>
+                        </h2>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <button
+                            onclick="window.location.href='<%= process.env.APP_ADMIN_URL %>/bmadmin/bussinessdetails'"
+                            class="text-base font-medium text-white hover:underline"
+                        >
+                            &lt; Back
+                        </button>
 
-            <!-- Logo -->
-            <div class="absolute right-[15%] top-1/2 -translate-y-[-40px]">
-                <h2 class="text-5xl text-white">We will transfer you to the</h2>
-                <h2 class="text-5xl mt-2 text-white">modern property management</h2>
-            </div>
-        </div>
-
-        <!-- Bottom Curve and Portal Text -->
-        <div>
-            <img
-                src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBottom.svg"
-                alt="Bottom Left Decoration"
-                class="absolute bottom-0 left-0 w-[1044px] pointer-events-none"
-            />
-            <!-- Bottom Footer: Step + Navigation -->
-            <div
-                class="absolute bottom-8 left-0 w-full flex items-center justify-between px-[280px]"
-            >
-                <!-- Step Text -->
-                <div class="">
-                    <h2 class="text-4xl font-semibold text-gray-800">
-                        Step 2
-                        <span class="text-gray-500 font-normal">out of 6</span>
-                    </h2>
-                </div>
-
-                <!-- Navigation Buttons -->
-                <div class="flex items-center gap-6">
-                    <button
-                        onclick="window.location.href='<%= process.env.APP_ADMIN_URL %>/bmadmin/bussinessdetails'"
-                        class="text-base font-medium text-white hover:underline"
-                    >
-                        &lt; Back
-                    </button>
-
-                    <button
-                        type="submit"
-                        onclick="showOTPModal()"
-                        class="bg-[#54B7C5] hover:bg-[#54B7C5]/80 text-white text-lg font-medium rounded-xl px-[100px] py-3 transition"
-                    >
-                        Save & Continue
-                    </button>
+                        <button
+                            type="submit"
+                            onclick="showOTPModal()"
+                            class="bg-[#54B7C5] hover:bg-[#54B7C5]/80 text-white text-lg font-medium rounded-xl px-[100px] py-3 transition"
+                        >
+                            Save & Continue
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </body>
     <!-- OTP Modal -->
     <div
@@ -497,7 +525,6 @@
                 input.addEventListener("input", (e) => {
                     let value = e.target.value;
 
-                    // Allow only digits
                     if (!/^\d$/.test(value)) {
                         e.target.value = "";
                         return;
@@ -514,16 +541,14 @@
                     }
                 });
 
-                // Prevent typing non-digits using keypress
                 input.addEventListener("keypress", (e) => {
                     if (!/[0-9]/.test(e.key)) {
                         e.preventDefault();
                     }
                 });
 
-                // Optional: Clear input on focus
                 input.addEventListener("focus", (e) => {
-                    e.target.select(); // highlights the number for easy replacement
+                    e.target.select();
                 });
             });
         }
@@ -533,11 +558,7 @@
                 input.value = "";
                 input.classList.remove("border-red-500", "ring-2", "ring-red-200");
             });
-
-            // Also hide error toast if it's still showing
             hideOtpError();
-
-            // Optional: reset "Send OTP Again" label if modal was left open too long
             const timerDisplay = document.getElementById("otp-timer");
             if (timerDisplay.innerText === "Send OTP Again") {
                 timerDisplay.innerText = "00:50";
@@ -554,7 +575,7 @@
         }
 
         function closeOTPModal() {
-            clearOTPInputs(); // must come before hiding modal
+            clearOTPInputs();
             clearInterval(timerInterval);
             document.getElementById("otp-modal").classList.add("hidden");
         }
@@ -570,7 +591,6 @@
                 clearOTPInputs();
             } else {
                 showOtpError("Please enter all 6 digits of the OTP code");
-                // Optionally highlight empty fields
                 otpDigits.forEach((digit) => {
                     if (!digit.value) {
                         digit.classList.add("border-red-500", "ring-2", "ring-red-200");
@@ -591,7 +611,7 @@
             const messageEl = document.getElementById("otp-error-message");
             messageEl.textContent = message || "Please enter complete 6-digit OTP";
             toast.classList.remove("hidden");
-            setTimeout(hideOtpError, 5000); // Auto-hide after 5 seconds
+            setTimeout(hideOtpError, 5000);
         }
 
         function hideOtpError() {
@@ -642,22 +662,6 @@
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     profilePlaceholder.innerHTML = `
-          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
-        `;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-        // For Edit Modal
-        const imageUploadEdit = document.getElementById("imageUpload-edit");
-        const profilePlaceholderEdit = document.getElementById("profilePlaceholder-edit");
-
-        imageUploadEdit.addEventListener("change", function () {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    profilePlaceholderEdit.innerHTML = `
           <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
         `;
                 };

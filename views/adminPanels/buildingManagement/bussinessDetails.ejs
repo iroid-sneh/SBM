@@ -18,15 +18,24 @@
     >
         <% if (messages.success && messages.success.length > 0) { %>
         <script>
+            const SBM_PRIMARY = "#54B7C5";
             Swal.fire({
                 icon: "success",
                 title: "Success",
-                text: "<%= messages.success[0] %>",
+                text: `<%= messages.success[0]?.replace(/"/g, '') %>`,
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
                 timer: 3000,
                 timerProgressBar: true,
+                background: "#ffffff",
+                color: "#222",
+                iconColor: SBM_PRIMARY,
+                customClass: {
+                    popup: "shadow-lg rounded-xl border border-gray-200",
+                    title: "text-[#222] font-medium",
+                    timerProgressBar: "bg-[#54B7C5]",
+                },
             });
         </script>
         <% } %> <% if (messages.error && messages.error.length > 0) { %>
@@ -34,24 +43,30 @@
             Swal.fire({
                 icon: "error",
                 title: "Error",
-                text: "<%= messages.error[0] %>",
+                text: `<%= messages.error[0]?.replace(/"/g, '') %>`,
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
                 timer: 3000,
                 timerProgressBar: true,
+                background: "#ffffff",
+                color: "#222",
+                iconColor: "#e74c3c",
+                customClass: {
+                    popup: "shadow-lg rounded-xl border border-gray-200",
+                    title: "text-[#222] font-medium",
+                    timerProgressBar: "bg-red-400",
+                },
             });
         </script>
         <% } %>
 
-        <!-- Background image with reduced opacity -->
         <div
             class="absolute inset-0 bg-cover bg-no-repeat opacity-20 z-0"
             style="
                 background-image: url('<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBg.png');
             "
         ></div>
-        <!-- Top Curve and Logo -->
         <div class="relative w-full">
             <img
                 src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthTop.svg"
@@ -65,12 +80,16 @@
             />
         </div>
 
-        <form method="post" class="space-y-3">
-            <!-- Main Content -->
+        <form
+            id="business-form"
+            method="post"
+            class="space-y-3"
+            action="/bmadmin/bussinessdetails/step1"
+            enctype="multipart/form-data"
+        >
             <div
                 class="mx-auto flex items-start justify-between px-[220px] relative z-10 top-[180px]"
             >
-                <!-- Auth Box -->
                 <div class="w-[472px] flex-shrink-0 px-6">
                     <div id="auth-container">
                         <div class="flex justify-center items-center">
@@ -106,7 +125,7 @@
 
                                     <input
                                         id="imageUpload"
-                                        name="image"
+                                        name="businessLogo"
                                         type="file"
                                         accept="image/*"
                                         class="hidden"
@@ -151,16 +170,14 @@
                             >
                                 <div class="relative flex items-center mr-3">
                                     <select
+                                        name="countryCode"
                                         class="z-10 absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                         onchange="updateFlag(this)"
                                         data-flag-id="business-landline-flag"
                                         data-code-id="business-landline-code"
                                     >
                                         <% countries.forEach((country, index) => { %>
-                                        <option 
-                                            value="<%= country.countryCode %>" 
-                                            data-flag="<%= country.flag %>"
-                                            <%= index === 0 ? 'selected' : '' %>
+                                        <option value='<%= country.countryCode %>' data-flag='<%= country.flag %>' <%= index === 0 ? 'selected' : '' %>
                                         >
                                             <%= country.countryCode %> <%= country.name %>
                                         </option>
@@ -282,17 +299,13 @@
                     <!-- Divider 1 -->
                     <div class="w-px bg-gray-300 mx-8"></div>
 
-                    <!-- Brief Form Section -->
                     <div class="w-[550px] mr-6 flex flex-col justify-between">
                         <div>
-                            <!-- Time -->
                             <label class="block mb-2 text-sm font-medium text-gray-700">
                                 Working Time
                             </label>
                             <div class="flex justify-between gap-4 mb-6">
-                                <!-- Open Time -->
                                 <div class="relative w-40">
-                                    <!-- Time input -->
                                     <input
                                         name="openTime[]"
                                         id="open1"
@@ -300,13 +313,9 @@
                                         class="w-full px-4 pt-6 pb-2 bg-white rounded-xl text-gray-700 text-sm border focus:outline-none shadow-xl cursor-pointer"
                                     />
                                 </div>
-
-                                <!-- to -->
                                 <div class="flex items-center">
                                     <span class="text-sm text-gray-600">to</span>
                                 </div>
-
-                                <!-- Close Time -->
                                 <div class="relative w-40">
                                     <input
                                         name="closeTime[]"
@@ -315,8 +324,6 @@
                                         class="peer w-full px-4 pt-6 pb-2 bg-white rounded-xl text-gray-700 text-sm border focus:outline-none shadow-xl"
                                     />
                                 </div>
-
-                                <!-- Open Time 2 -->
                                 <div class="relative w-40">
                                     <input
                                         name="openTime[]"
@@ -325,13 +332,9 @@
                                         class="peer w-full px-4 pt-6 pb-2 bg-white rounded-xl text-gray-700 text-sm border focus:outline-none shadow-xl"
                                     />
                                 </div>
-
-                                <!-- to -->
                                 <div class="flex items-center">
                                     <span class="text-sm text-gray-600">to</span>
                                 </div>
-
-                                <!-- Close Time 2 -->
                                 <div class="relative w-40">
                                     <input
                                         name="closeTime[]"
@@ -341,11 +344,7 @@
                                     />
                                 </div>
                             </div>
-
-                            <!-- Working Days -->
                             <div class="mb-6">
-                                <!-- Working Days -->
-
                                 <label class="block mb-2 text-sm font-medium text-gray-700">
                                     Working Day
                                 </label>
@@ -403,10 +402,9 @@
                                 <div id="selectedDaysInput"></div>
                             </div>
 
-                            <!-- City + Address -->
                             <div class="grid grid-cols-3 gap-4 mb-4">
-                                <!-- Country Dropdown -->
                                 <select
+                                    name="country"
                                     id="countrySelect"
                                     class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
                                 >
@@ -415,9 +413,8 @@
                                     <option value="<%= country.name %>"><%= country.name %></option>
                                     <% }) %>
                                 </select>
-
-                                <!-- City Dropdown -->
                                 <select
+                                    name="city"
                                     id="citySelect"
                                     class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
                                 >
@@ -461,26 +458,21 @@
                     <input type="hidden" name="addressLong" id="longitudeInput" />
                 </div>
             </div>
-            <!-- Bottom Curve and Portal Text -->
             <div>
                 <img
                     src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBottom.svg"
                     alt="Bottom Left Decoration"
                     class="absolute bottom-0 left-0 w-[1044px] pointer-events-none"
                 />
-                <!-- Bottom Footer: Step + Navigation -->
                 <div
                     class="absolute bottom-8 left-0 w-full flex items-center justify-between px-[280px]"
                 >
-                    <!-- Step Text -->
                     <div class="">
                         <h2 class="text-4xl font-semibold text-gray-800">
                             Step 1
                             <span class="text-gray-500 font-normal">out of 6</span>
                         </h2>
                     </div>
-
-                    <!-- Navigation Buttons -->
                     <div class="flex items-center gap-6">
                         <button
                             type="submit"
@@ -507,22 +499,17 @@
         map.on("click", function (e) {
             const { lat, lng } = e.latlng;
 
-            // Remove the previous marker if it exists
             if (currentMarker) {
                 map.removeLayer(currentMarker);
             }
 
-            // Add a new marker
             currentMarker = L.marker([lat, lng])
                 .addTo(map)
                 .bindPopup("Selected Location")
                 .openPopup();
 
-            // ✅ Update hidden inputs for form submission
             document.getElementById("latitudeInput").value = lat;
             document.getElementById("longitudeInput").value = lng;
-
-            console.log("lat:", lat, "lng:", lng);
         });
 
         const imageUpload = document.getElementById("imageUpload");
@@ -565,30 +552,111 @@
 
             document.querySelectorAll(".day-btn").forEach((btn) => {
                 btn.addEventListener("click", () => {
-                    btn.classList.toggle("selected-day");
-
                     const day = btn.dataset.day;
-                    console.log("Day clicked:", day);
+                    const isSelected = btn.classList.toggle("selected-day");
 
                     const existingInput = document.querySelector(
                         `input[name="workingDays[]"][value="${day}"]`
                     );
 
-                    if (btn.classList.contains("selected-day")) {
-                        if (!existingInput) {
-                            const input = document.createElement("input");
-                            input.type = "hidden";
-                            input.name = "workingDays[]";
-                            input.value = day;
-                            selectedDaysInputContainer.appendChild(input);
-                        }
+                    if (isSelected) {
+                        const hiddenInput = document.createElement("input");
+                        hiddenInput.type = "hidden";
+                        hiddenInput.name = "workingDays";
+                        hiddenInput.value = day;
+                        hiddenInput.dataset.day = day;
+                        document.getElementById("selectedDaysInput").appendChild(hiddenInput);
                     } else {
-                        if (existingInput) {
-                            existingInput.remove();
-                        }
+                        document
+                            .querySelector(`#selectedDaysInput input[data-day="${day}"]`)
+                            ?.remove();
                     }
                 });
             });
+        });
+
+        // Form Validation Errors Toast
+        document.getElementById("business-form").addEventListener("submit", function (e) {
+            const errors = [];
+            const commercialName = document
+                .querySelector('input[name="commercialName"]')
+                .value.trim();
+            const businessEmail = document
+                .querySelector('input[name="businessEmail"]')
+                .value.trim();
+            const businessLogoUploaded = document.getElementById("imageUpload").files.length > 0;
+            const test1 = document.querySelector('select[name="countryCode"]');
+            const countryCode = test1 ? test1.value.trim() : "";
+
+            const businessLandline = document
+                .querySelector('input[name="businessLandline"]')
+                .value.trim();
+            const VATnumber = document.querySelector('input[name="VATnumber"]').value.trim();
+            const CRnumber = document.querySelector('input[name="CRnumber"]').value.trim();
+            const city = document.querySelector('select[name="city"]').value.trim();
+            const country = document.querySelector('select[name="country"]').value.trim();
+            const workingDaysElements = document.querySelectorAll('input[name="workingDays"]');
+            const workingDays = Array.from(workingDaysElements).map((el) => el.value);
+            const openTimes = Array.from(document.querySelectorAll('input[name="openTime[]"]')).map(
+                (el) => el.value.trim()
+            );
+            const closeTimes = Array.from(
+                document.querySelectorAll('input[name="closeTime[]"]')
+            ).map((el) => el.value.trim());
+            const addressLat = document.querySelector('input[name="addressLat"]').value.trim();
+            const addressLong = document.querySelector('input[name="addressLong"]').value.trim();
+            if (!commercialName) errors.push("Commercial Name is required.");
+            if (!businessEmail || !businessEmail.includes("@"))
+                errors.push("Valid Business Email is required.");
+            if (!businessLogoUploaded) errors.push("Business Logo is required.");
+            if (!countryCode) errors.push("Country Code is required.");
+            if (!businessLandline) errors.push("Business Landline is required.");
+            if (!VATnumber) errors.push("VAT Number is required.");
+            if (!CRnumber) errors.push("CR Number is required.");
+            if (!country || country === "Select Country") errors.push("Country is required.");
+            if (!city || city === "Select City") errors.push("City is required.");
+            if (workingDays.length === 0) errors.push("At least one Working Day must be selected.");
+            for (let i = 0; i < openTimes.length; i++) {
+                if (!openTimes[i]) errors.push(`Open time #${i + 1} is required.`);
+                if (!closeTimes[i]) errors.push(`Close time #${i + 1} is required.`);
+            }
+            if (!addressLat || isNaN(Number(addressLat)))
+                errors.push("Select a Valid Address in Map.");
+
+            if (errors.length > 0) {
+                e.preventDefault();
+
+                let swalOptions = {
+                    icon: "error",
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                    background: "#fff",
+                    iconColor: "#e74c3c",
+                    color: "#222",
+                    customClass: {
+                        popup: "shadow-lg rounded-xl border border-gray-200",
+                        title: "text-[#222] font-medium",
+                        timerProgressBar: "bg-red-400",
+                    },
+                };
+                const totalRequiredFieldsCount = 10 + openTimes.length + closeTimes.length;
+
+                if (errors.length === totalRequiredFieldsCount) {
+                    swalOptions.title = "All input fields are required.";
+                    swalOptions.text = "";
+                } else if (errors.length === 1) {
+                    swalOptions.title = errors[0];
+                    swalOptions.text = "";
+                } else {
+                    swalOptions.title = "Please input these fields:";
+                    swalOptions.html = errors.map((e) => `<div>${e}</div>`).join("");
+                }
+
+                Swal.fire(swalOptions);
+            }
         });
     </script>
 </html>

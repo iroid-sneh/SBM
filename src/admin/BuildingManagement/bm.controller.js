@@ -57,6 +57,41 @@ class bmController {
     }
 
     /**
+     * @description: adminProfile For Building Managment
+     * @param {*} req
+     * @param {*} res
+     */
+    static async adminProfile(req, res) {
+        const data = await bmServices.adminProfile(
+            req.body,
+            req.file,
+            req,
+            res
+        );
+        return;
+    }
+
+    /**
+     * @description: verifyOtp For Building Managment
+     * @param {*} req
+     * @param {*} res
+     */
+    static async verifyOtp(req, res) {
+        const data = await bmServices.verifyOtp(req, res);
+        return;
+    }
+
+    /**
+     * @description: resendOtp For Building Managment
+     * @param {*} req
+     * @param {*} res
+     */
+    static async resendOtp(req, res) {
+        const data = await bmServices.resendOtp(req, res);
+        return;
+    }
+
+    /**
      * @description: residenceDetails For Building Managment
      * @param {*} req
      * @param {*} res

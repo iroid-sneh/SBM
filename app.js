@@ -12,6 +12,8 @@ import MongoStore from "connect-mongo";
 import { mongoConnection } from "./models/connection";
 import expressEjsLayouts from "express-ejs-layouts";
 import "./seeder/index";
+import flashMessages from "./src/common/middleware/flashMessages";
+import errorHandler from "./src/common/middleware/errorHandler";
 
 const app = express();
 const port = process.env.PORT || 2002;
@@ -22,20 +24,22 @@ app.use(express.static(path.join(__dirname, "public")));
 if (process.env.ENV === "local") {
     app.use(
         session({
-            secret: "unichoice3241",
-            resave: "false",
+            secret: "sbm9321",
+            resave: false,
+            saveUninitialized: true,
+            cookie: { maxAge: 30 * 60 * 1000 },
             store: MongoStore.create({
                 mongoUrl: process.env.MONGO_DB_URL,
             }),
-            saveUninitialized: "true",
         })
     );
 } else {
     app.use(
         session({
-            secret: "unichoice3241",
-            resave: "false",
-            saveUninitialized: "true",
+            secret: "sbm9321",
+            resave: false,
+            saveUninitialized: true,
+            cookie: { maxAge: 30 * 60 * 1000 },
         })
     );
 }
@@ -55,13 +59,16 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(flash());
 app.use((req, res, next) => {
     res.locals.messages = {
-        success: req.flash("success"),
-        error: req.flash("error"),
+        success: req.session.success ? [req.session.success] : [],
+        error: req.session.error ? [req.session.error] : [],
     };
+    delete req.session.success;
+    delete req.session.error;
     next();
 });
 
-app.use("/", routes);
+app.use("/", flashMessages, routes);
+app.use(errorHandler);
 
 const isSecure = process.env.IS_SECURE === "true";
 
