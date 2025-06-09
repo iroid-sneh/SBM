@@ -46,7 +46,7 @@
                 </p>
 
                 <!-- Login Form -->
-                <form id="login-form" method="post" class="space-y-6">
+                <form id="login-form" action="/bmadmin/login" method="post" class="space-y-6">
                     <!-- Phone Number -->
                     <div>
                         <label class="text-sm font-semibold text-gray-700 block mb-1">
@@ -55,6 +55,7 @@
                         <div class="flex items-center border-b border-gray-300 pb-2">
                             <div class="relative flex items-center mr-3">
                                     <select
+                                    name="countryCode"
                                         class="z-10 absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                         onchange="updateFlag(this)"
                                         data-flag-id="login-flag"
@@ -83,6 +84,7 @@
                                     </svg>
                             </div>
                             <input
+                                name="contactNumber"
                                 type="text"
                                 placeholder="Enter Your Phone Number"
                                 class="w-full bg-transparent focus:outline-none text-sm placeholder-gray-400"
@@ -474,7 +476,7 @@
             </button>
         </div>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         let timerInterval;
 
@@ -653,5 +655,14 @@
             if (codeSpan) codeSpan.innerText = countryCode;
         }
     }
+
+    $(document).ready(function () {
+        $("#login-from").submit(function(e) {
+            console.log("Login form submitted");
+            console.log("Phone Number: ", $("input[name='contactNumber']").val());
+            console.log("Country Code: ", $("select[name='countryCode']").val());
+            console.log("Password: ", $("input[name='password']").val());
+        })
+    });
     </script>
 </html>

@@ -77,7 +77,7 @@ class bmController {
      * @param {*} res
      */
     static async verifyOtp(req, res) {
-        const data = await bmServices.verifyOtp(req, res);
+        const data = await bmServices.verifyOtp(req.body, req, res);
         return;
     }
 
@@ -98,6 +98,16 @@ class bmController {
      */
     static async residenceDetailsPage(req, res) {
         const data = await bmServices.residenceDetailsPage(req, res);
+        return;
+    }
+
+    /**
+     * @description: residenceDetails For Building Managment
+     * @param {*} req
+     * @param {*} res
+     */
+    static async residenceDetails(req, res) {
+        const data = await bmServices.residenceDetails(req, res);
         return;
     }
 

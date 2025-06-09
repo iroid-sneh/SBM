@@ -32,6 +32,7 @@ const storeFiles =
                 multer({ storage: multerStorage }).fields([
                     { name: filename.first },
                     { name: filename.second },
+                    { name: filename.third },
                 ])(req, res, next);
             } else {
                 multer({ storage: multerStorage }).array(filename)(

@@ -4,6 +4,8 @@ import BMbusinessDetails from "../../../models/BMAdmin/BMbussinessDetails";
 import BMadminProfile from "../../../models/BMAdmin/BMadminProfile";
 import { randomOtpGenerator } from "../../common/helper";
 import { hashPassword } from "../../common/authHelper";
+import argon2 from "argon2";
+import BMresidenceDetails from "../../../models/BMAdmin/BMresidenceDetails";
 
 class bmServices {
     /**
@@ -26,9 +28,33 @@ class bmServices {
      * @param {*} req
      * @param {*} res
      */
+    /**
+     * @description: Login for Building Management
+     * @param {*} data
+     * @param {*} req
+     * @param {*} res
+     */
     static async login(data, req, res) {
-        const { countryCode, Number, password } = req.body;
-        return res.redirect("/bmadmin/bussinessdetails");
+        const { countryCode, contactNumber, password } = req.body;
+
+        const admin = await BMadminProfile.findOne({
+            contactNumber,
+            countryCode: countryCode,
+        });
+
+        if (!admin) {
+            req.flash("error", "Invalid credentials. Please try again.");
+            return res.redirect("/bmadmin/login");
+        }
+
+        const isValid = await argon2.verify(admin.password, password);
+
+        if (!isValid) {
+            req.flash("error", "Invalid credentials. Please try again.");
+            return res.redirect("/bmadmin/login");
+        }
+
+        return res.redirect("/bmadmin/dashboard");
     }
 
     /**
@@ -73,7 +99,7 @@ class bmServices {
             }
 
             if (file) {
-                await BMbusinessDetails.create({
+                const businessDetail = await BMbusinessDetails.create({
                     commercialName: data.commercialName,
                     countryCode: data.countryCode,
                     businessLandline: data.businessLandline,
@@ -88,6 +114,11 @@ class bmServices {
                     addressLong: data.addressLong,
                     businessLogo: businessLogo,
                 });
+
+                req.session.signup = {
+                    businessId: businessDetail._id,
+                    step: 2,
+                };
 
                 req.flash("success", "Business Details Added Successfully.");
                 return res.redirect("/bmadmin/adminprofile");
@@ -105,6 +136,9 @@ class bmServices {
      * @param {*} res
      */
     static async adminProfilePage(req, res) {
+        if (!req.session.signup || req.session.signup.step < 2) {
+            return res.redirect("/bmadmin/bussinessdetails");
+        }
         const countries = await Countries.find({});
         return res.render("adminPanels/buildingManagement/adminProfile", {
             layout: false,
@@ -174,6 +208,7 @@ class bmServices {
             console.log(`OTP for ${contactNumber}: ${otp}`);
 
             return res.status(200).json({
+                success: true,
                 message: "OTP sent successfully",
                 profileId: adminProfile._id,
             });
@@ -185,40 +220,53 @@ class bmServices {
 
     /**
      * @description: verifyOtp for Building Management
+     * @param {*} data
      * @param {*} req
      * @param {*} res
      */
-    static async verifyOtp(req, res) {
-        const adminId = req.user;
-        const { otp } = req.body;
+    static async verifyOtp(data, req, res) {
+        const profileId = req.session.signup.profileId;
+        const { otp } = data;
 
-        const admin = await BMadminProfile.findById(adminId);
+        const admin = await BMadminProfile.findById(profileId);
 
         if (!admin) {
-            return res.status(404).json({ message: "Admin not found" });
+            return res
+                .status(404)
+                .json({ message: "Admin not found", success: false });
         }
 
         if (admin.otp !== otp || admin.otpExpiry < new Date()) {
-            return res.status(400).json({ message: "Invalid or expired OTP" });
+            return res
+                .status(400)
+                .json({ message: "Invalid or expired OTP", success: false });
         }
 
-        await BMadminProfile.findByIdAndUpdate(
-            adminId,
-            {
-                otp: newOtp,
-                otpExpiry,
-                isOtpVerified: true,
-            },
-            { new: true } // returns the updated document
-        );
+        // Mark OTP as verified
+        const confirmOtp = await BMadminProfile.findOne({
+            _id: profileId,
+            otp,
+            otpExpiry: { $gt: new Date() },
+        });
+
+        if (!confirmOtp) {
+            return res
+                .status(404)
+                .json({ message: "otp does not match", success: false });
+        }
+
+        await BMadminProfile.findByIdAndUpdate(profileId, {
+            otp: null,
+            otpExpiry: null,
+            isOtpVerified: true,
+        });
 
         req.session.signup.step = 3;
 
         req.flash("success", "Admin Profile Added Successfully");
         return res
             .status(200)
-            .json({ message: "OTP verified successfully" })
-            .redirect("/bmadmin/residencedetails");
+            .json({ message: "OTP verified successfully", success: true });
     }
 
     /**
@@ -228,7 +276,12 @@ class bmServices {
      */
     static async resendOtp(req, res) {
         try {
-            const { adminId } = req.user;
+            const adminId = req.session.signup.profileId;
+            if (!adminId) {
+                return res
+                    .status(400)
+                    .json({ message: "Admin ID not found", success: false });
+            }
 
             const findBMadmin = await BMadminProfile.findById(adminId);
 
@@ -250,13 +303,17 @@ class bmServices {
 
             // TODO: Send OTP via SMS gateway
             console.log(
-                `Resent OTP to ${findBMadmin.contectNumber}: ${newOtp}`
+                `Resent OTP to ${findBMadmin.contactNumber}: ${newOtp}`
             );
 
-            return res.status(200).json({ message: "OTP resent successfully" });
+            return res
+                .status(200)
+                .json({ message: "OTP sent successfully", success: true });
         } catch (err) {
             console.error("Resend OTP failed", err);
-            return res.status(500).json({ message: "Server error" });
+            return res
+                .status(500)
+                .json({ message: "Server error", success: false });
         }
     }
 
@@ -266,9 +323,82 @@ class bmServices {
      * @param {*} res
      */
     static async residenceDetailsPage(req, res) {
+        if (!req.session.signup || req.session.signup.step < 3) {
+            return res.redirect("/bmadmin/bussinessdetails");
+        }
         return res.render("adminPanels/buildingManagement/residenceDetails", {
             layout: false,
         });
+    }
+
+    /**
+     * @description: residenceDetails for Building Management
+     * @param {*} req
+     * @param {*} res
+     */
+    static async residenceDetails(req, res) {
+        try {
+            console.log("Received residence details:", req.body);
+            const {
+                residenceType,
+                numberOfFlatOrVilla,
+                buildingNameOrAreaName,
+                residenceAddressOrRoadBlock,
+                managerName,
+                residenceLat,
+                residenceLong,
+            } = req.body;
+
+            const residencePolicies = req.files?.residencePolicies?.[0]
+                ?.filename
+                ? `/BMadmin/${req.files.residencePolicies[0].filename}`
+                : null;
+
+            const emergencyExits = req.files?.emergencyExits?.[0]?.filename
+                ? `/BMadmin/${req.files.emergencyExits[0].filename}`
+                : null;
+
+            const fireExtingushierLocations = req.files
+                ?.fireExtingushierLocations?.[0]?.filename
+                ? `/BMadmin/${req.files.fireExtingushierLocations[0].filename}`
+                : null;
+
+            console.log(
+                "files",
+                residencePolicies,
+                emergencyExits,
+                fireExtingushierLocations
+            );
+
+            const permissions = req.body.permissions || [];
+
+            const residenceDetails = {
+                residenceType,
+                numberOfFlatOrVilla,
+                buildingNameOrAreaName,
+                residenceAddressOrRoadBlock,
+                managerName,
+                permissions: permissions,
+                residencePolicies: residencePolicies,
+                emergencyExits: emergencyExits,
+                fireExtingushierLocations: fireExtingushierLocations,
+                residenceLat: parseFloat(residenceLat),
+                residenceLong: parseFloat(residenceLong),
+            };
+
+            if (req.files) {
+                await BMresidenceDetails.create(residenceDetails);
+                req.session.signup.step = 4;
+                req.flash("success", "Residence Details Added Successfully.");
+                return res.redirect("/bmadmin/bankdetails");
+            }
+        } catch (error) {
+            console.error("Error in residenceDetails:", error);
+            return res.status(500).json({
+                message: "Internal Server Error",
+                success: false,
+            });
+        }
     }
 
     /**
