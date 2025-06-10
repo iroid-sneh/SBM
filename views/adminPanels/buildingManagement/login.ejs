@@ -1,13 +1,57 @@
 <html>
     <head>
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body
         class="bg-cover bg-no-repeat min-h-screen relative overflow-hidden"
         style="background-image: url('<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBg.png')"
     >
-        <!-- Top Curve and Logo -->
         <div class="relative w-full">
+            <% if (messages.success && messages.success.length > 0) { %>
+        <script>
+            const SBM_PRIMARY = "#54B7C5";
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: `<%= messages.success[0]?.replace(/"/g, '') %>`,
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: "#ffffff",
+                color: "#222",
+                iconColor: SBM_PRIMARY,
+                customClass: {
+                    popup: "shadow-lg rounded-xl border border-gray-200",
+                    title: "text-[#222] font-medium",
+                    timerProgressBar: "bg-[#54B7C5]",
+                },
+            });
+        </script>
+        <% } %> <% if (messages.error && messages.error.length > 0) { %>
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: `<%= messages.error[0]?.replace(/"/g, '') %>`,
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: "#ffffff",
+                color: "#222",
+                iconColor: "#e74c3c",
+                customClass: {
+                    popup: "shadow-lg rounded-xl border border-gray-200",
+                    title: "text-[#222] font-medium",
+                    timerProgressBar: "bg-red-400",
+                },
+            });
+        </script>
+        <% } %>
             <img
                 src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthTop.svg"
                 alt="Top Right Decoration"
@@ -19,8 +63,6 @@
                 class="absolute top-3 right-40 w-[280px] z-20"
             />
         </div>
-
-        <!-- Bottom Curve and Portal Text -->
         <div>
             <img
                 src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBottom.svg"
@@ -33,21 +75,15 @@
                 Building Management Portal
             </div>
         </div>
-
-        <!-- Main Content: Login Left / Text Right -->
         <div class="relative flex items-start justify-start h-full w-full pt-40 pl-[8%]">
             <div class="w-[420px] h-[490px] bg-white rounded-2xl shadow-lg px-8 py-8 z-30">
-                <!-- Header -->
                 <h2 class="text-3xl text-center font-semibold text-gray-800 mb-1" id="title">
                     Login
                 </h2>
                 <p class="text-2xl text-gray-500 text-center mb-8" id="sub-title">
                     Welcome Partner
                 </p>
-
-                <!-- Login Form -->
-                <form id="login-form" action="/bmadmin/login" method="post" class="space-y-6">
-                    <!-- Phone Number -->
+                <form id="login-form" action="/bmadmin/login" method="post" enctype="application/x-www-form-urlencoded" class="space-y-6">
                     <div>
                         <label class="text-sm font-semibold text-gray-700 block mb-1">
                             Phone Number
@@ -91,8 +127,6 @@
                             />
                         </div>
                     </div>
-
-                    <!-- Password -->
                     <div>
                         <label class="text-sm font-semibold text-gray-700 block mb-1">
                             Password
@@ -131,8 +165,6 @@
                             </button>
                         </div>
                     </div>
-
-                    <!-- Forgot Password -->
                     <div class="text-right text-sm">
                         <a
                             href="#"
@@ -142,8 +174,6 @@
                             Forgot your password?
                         </a>
                     </div>
-
-                    <!-- Submit Button -->
                     <div class="flex justify-center">
                         <button
                             class="bg-[#60b5c9] text-white rounded-md w-[300px] py-2 font-semibold hover:bg-[#4fa3b8] transition"
@@ -152,15 +182,11 @@
                             Login
                         </button>
                     </div>
-
-                    <!-- Signup Link -->
                     <p class="text-center text-sm text-gray-600 mt-2">
                         Don’t have an account?
                         <a href="/bmadmin/bussinessdetails" class="text-[#60b5c9] font-medium hover:underline">Signup</a>
                     </p>
                 </form>
-
-                <!-- Forgot Password Form -->
                 <form id="forgot-form" class="hidden space-y-9 p-5">
                     <!-- Phone Number -->
                     <div>
@@ -221,8 +247,6 @@
                         </button>
                     </p>
                 </form>
-
-                <!-- Reset Password Form -->
                 <form id="reset-form" class="hidden space-y-9 p-7">
                     <!-- New Password -->
                     <div>
@@ -335,8 +359,6 @@
                     </p>
                 </form>
             </div>
-
-            <!-- Side Heading on Right -->
             <div class="absolute right-[15%] top-1/2 -translate-y-1/2">
                 <h1 class="text-6xl font-md text-white leading-snug text-right">
                     Everything you need to
@@ -484,7 +506,6 @@
             const otpDigits = document.querySelectorAll(".otp-digit");
 
             otpDigits.forEach((digit, index) => {
-                // Handle input
                 digit.addEventListener("input", (e) => {
                     if (e.target.value.length === 1) {
                         if (index < otpDigits.length - 1) {
@@ -492,15 +513,11 @@
                         }
                     }
                 });
-
-                // Handle backspace
                 digit.addEventListener("keydown", (e) => {
                     if (e.key === "Backspace" && e.target.value === "" && index > 0) {
                         otpDigits[index - 1].focus();
                     }
                 });
-
-                // Only allow numbers
                 digit.addEventListener("keypress", (e) => {
                     if (isNaN(String.fromCharCode(e.keyCode))) {
                         e.preventDefault();
@@ -615,24 +632,20 @@
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            // Eye icon SVGs
             const eyeOpenSVG = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />`;
 
             const eyeClosedSVG = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />`;
 
-            // Add click event to all toggle buttons
             document.querySelectorAll(".toggle-password").forEach((button) => {
                 button.addEventListener("click", function () {
                     const container = this.closest(".password-input-container");
                     const input = container.querySelector(".password-input");
                     const icon = container.querySelector(".eye-icon");
 
-                    // Toggle input type
                     const isPassword = input.type === "password";
                     input.type = isPassword ? "text" : "password";
 
-                    // Toggle icon
                     icon.innerHTML = isPassword ? eyeClosedSVG : eyeOpenSVG;
                 });
             });

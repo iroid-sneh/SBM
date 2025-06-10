@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const BMbusinessDetailsSchema = mongoose.Schema(
     {
+        signupId: { type: mongoose.Schema.Types.ObjectId, required: true },
         businessLogo: {
             type: String,
             required: true,
@@ -33,11 +34,11 @@ const BMbusinessDetailsSchema = mongoose.Schema(
         workingTime: [
             {
                 openTime: {
-                    type: String,
+                    type: Date,
                     required: true,
                 },
                 closeTime: {
-                    type: String,
+                    type: Date,
                     required: true,
                 },
             },

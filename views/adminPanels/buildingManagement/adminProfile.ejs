@@ -1,24 +1,5 @@
 <html>
     <head>
-        <style>
-            @keyframes shake {
-                0%,
-                100% {
-                    transform: translateX(0);
-                }
-                20%,
-                60% {
-                    transform: translateX(-5px);
-                }
-                40%,
-                80% {
-                    transform: translateX(5px);
-                }
-            }
-            .shake {
-                animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-            }
-        </style>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -72,15 +53,12 @@
             });
         </script>
         <% } %>
-
-        <!-- Background image with reduced opacity -->
         <div
             class="absolute inset-0 bg-cover bg-no-repeat opacity-20 z-0"
             style="
                 background-image: url('<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthBg.png');
             "
         ></div>
-        <!-- Top Curve and Logo -->
         <div class="relative w-full">
             <img
                 src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthTop.svg"
@@ -635,6 +613,7 @@
                             timer: 3000,
                             timerProgressBar: true,
                         });
+                        clearOTPInputs();
                     } else {
                     }
                 },

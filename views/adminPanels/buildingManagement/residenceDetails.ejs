@@ -96,7 +96,6 @@
                                 <select
                                     name="residenceType"
                                     class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
-                                    required
                                 >
                                     <option value="" hidden>Residenece Type</option>
                                     <option value="Building">Building</option>
@@ -124,7 +123,6 @@
                             <select
                                 name="managerName"
                                 class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 border text-sm focus:outline-none placeholder-gray-500 shadow-xl"
-                                required
                             >
                                 <option value="" hidden>Select Manager Name</option>
                                 <option value="Manager 1">Manager 1</option>
@@ -340,6 +338,7 @@
             </div>
         </form>
     </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const map = L.map("map").setView([21.207988848466304, 72.835750579834], 13); // Example: Surat
 
@@ -358,29 +357,27 @@
                 map.removeLayer(currentMarker);
             }
 
-            currentMarker = L.marker([lat, lng])
-                .addTo(map)
-                .bindPopup("Selected Location")
-                .openPopup();
+            // Reverse Geocoding using Nominatim
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    const locationName = data.display_name || "Unknown location";
 
-            document.getElementById("latitudeInput").value = lat;
-            document.getElementById("longitudeInput").value = lng;
-        });
+                    currentMarker = L.marker([lat, lng])
+                        .addTo(map)
+                        .bindPopup(`<b>${locationName}</b>`)
+                        .openPopup();
 
-        const imageUpload = document.getElementById("imageUpload");
-        const profilePlaceholder = document.getElementById("profilePlaceholder");
+                    document.getElementById("latitudeInput").value = lat;
+                    document.getElementById("longitudeInput").value = lng;
 
-        imageUpload.addEventListener("change", function () {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    profilePlaceholder.innerHTML = `
-          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
-        `;
-                };
-                reader.readAsDataURL(file);
-            }
+                    // Optional: Display location name somewhere
+                    const locationInput = document.getElementById("locationNameInput");
+                    if (locationInput) locationInput.value = locationName;
+                })
+                .catch((error) => {
+                    console.error("Reverse geocoding failed:", error);
+                });
         });
 
         function permissionSelector() {
@@ -411,5 +408,88 @@
                 },
             };
         }
+
+        document.getElementById("residence-form").addEventListener("submit", function (e) {
+            const errors = [];
+            const residenceType = document
+                .querySelector('select[name="residenceType"]')
+                .value.trim();
+            const numberOfFlatOrVilla = document
+                .querySelector('input[name="numberOfFlatOrVilla"]')
+                .value.trim();
+            const buildingNameOrAreaName = document
+                .querySelector('input[name="buildingNameOrAreaName"]')
+                .value.trim();
+            const residenceAddress = document
+                .querySelector('input[name="residenceAddressOrRoadBlock"]')
+                .value.trim();
+            const managerName = document.querySelector('select[name="managerName"]').value.trim();
+
+            const residencePoliciesUploaded =
+                document.querySelector('input[name="residencePolicies"]').files.length > 0;
+            const emergencyExitsUploaded =
+                document.querySelector('input[name="emergencyExits"]').files.length > 0;
+            const fireExtingushierLocationsUploaded =
+                document.querySelector('input[name="fireExtingushierLocations"]').files.length > 0;
+
+            const permissionsSelected = document.querySelectorAll('input[name="permission[]"]');
+            const latitude = document.getElementById("latitudeInput").value.trim();
+            const longitude = document.getElementById("longitudeInput").value.trim();
+
+            // === Field Validations ===
+            if (!residenceType) errors.push("Residence Type is required.");
+            if (!numberOfFlatOrVilla || isNaN(Number(numberOfFlatOrVilla)))
+                errors.push("Valid Number of Flat/Villa is required.");
+            if (!buildingNameOrAreaName) errors.push("Building/Area Name is required.");
+            if (!residenceAddress) errors.push("Residence Address is required.");
+            if (!managerName) errors.push("Manager Name selection is required.");
+
+            if (!residencePoliciesUploaded) errors.push("Residence Policies file is required.");
+            if (!emergencyExitsUploaded) errors.push("Emergency Exits file is required.");
+            if (!fireExtingushierLocationsUploaded)
+                errors.push("Fire Extinguisher Locations file is required.");
+
+            if (permissionsSelected.length === 0)
+                errors.push("At least one Permission must be selected.");
+            if (!latitude || !longitude || isNaN(latitude) || isNaN(longitude)) {
+                errors.push("Please select a valid location from the map.");
+            }
+
+            // === Handle errors ===
+            if (errors.length > 0) {
+                e.preventDefault();
+
+                let swalOptions = {
+                    icon: "error",
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                    background: "#fff",
+                    iconColor: "#e74c3c",
+                    color: "#222",
+                    customClass: {
+                        popup: "shadow-lg rounded-xl border border-gray-200",
+                        title: "text-[#222] font-medium",
+                        timerProgressBar: "bg-red-400",
+                    },
+                };
+                const totalRequiredFieldsCount = 10;
+                if (errors.length === totalRequiredFieldsCount) {
+                    swalOptions.title = "All input fields are required.";
+                    swalOptions.text = "";
+                } else if (errors.length === 1) {
+                    swalOptions.title = errors[0];
+                    swalOptions.text = "";
+                } else {
+                    swalOptions.title = "Please fix the following:";
+                    swalOptions.html = errors.map((e) => `<div>${e}</div>`).join("");
+                }
+
+                Swal.fire(swalOptions);
+                return;
+            }
+        });
     </script>
 </html>

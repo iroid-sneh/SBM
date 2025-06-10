@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const BMadminProfileSchema = mongoose.Schema(
     {
+        signupId: { type: mongoose.Schema.Types.ObjectId, required: true },
         adminProfilePhoto: {
             type: String,
             required: true,

@@ -6,7 +6,11 @@ import { randomOtpGenerator } from "../../common/helper";
 import { hashPassword } from "../../common/authHelper";
 import argon2 from "argon2";
 import BMresidenceDetails from "../../../models/BMAdmin/BMresidenceDetails";
-
+import BMbankDetails from "../../../models/BMAdmin/BMbankDetails";
+import BMsubscriptionPlan from "../../../models/BMAdmin/BMsubscriptionPlan";
+import BMadmin from "../../../models/BMAdmin/BMadmin";
+import mongoose from "mongoose";
+import moment from "moment-timezone";
 class bmServices {
     /**
      * @description: Login Page for Building Management
@@ -22,12 +26,6 @@ class bmServices {
         });
     }
 
-    /**
-     * @description: Login for Building Management
-     * @param {*} data
-     * @param {*} req
-     * @param {*} res
-     */
     /**
      * @description: Login for Building Management
      * @param {*} data
@@ -51,7 +49,6 @@ class bmServices {
 
         if (!isValid) {
             req.flash("error", "Invalid credentials. Please try again.");
-            return res.redirect("/bmadmin/login");
         }
 
         return res.redirect("/bmadmin/dashboard");
@@ -81,6 +78,12 @@ class bmServices {
      */
     static async bussinessDetails(data, file, req, res) {
         try {
+            if (!req.session.signup || !req.session.signup.signupId) {
+                req.session.signup = {
+                    signupId: new mongoose.Types.ObjectId(),
+                    step: 2,
+                };
+            }
             const businessLogo = file
                 ? `/BMadmin/businessLogo-${file.filename}`
                 : null;
@@ -90,9 +93,22 @@ class bmServices {
             if (Array.isArray(data.openTime) && Array.isArray(data.closeTime)) {
                 for (let i = 0; i < data.openTime.length; i++) {
                     if (data.openTime[i] && data.closeTime[i]) {
+                        // Parse the input times with timezone
+                        const openMoment = moment.tz(
+                            data.openTime[i],
+                            "HH:mm A",
+                            "Asia/Kolkata"
+                        );
+                        const closeMoment = moment.tz(
+                            data.closeTime[i],
+                            "HH:mm A",
+                            "Asia/Kolkata"
+                        );
+
+                        // Store as Date objects (UTC)
                         workingTime.push({
-                            openTime: data.openTime[i],
-                            closeTime: data.closeTime[i],
+                            openTime: openMoment.toDate(),
+                            closeTime: closeMoment.toDate(),
                         });
                     }
                 }
@@ -100,6 +116,7 @@ class bmServices {
 
             if (file) {
                 const businessDetail = await BMbusinessDetails.create({
+                    signupId: req.session.signup.signupId,
                     commercialName: data.commercialName,
                     countryCode: data.countryCode,
                     businessLandline: data.businessLandline,
@@ -115,17 +132,14 @@ class bmServices {
                     businessLogo: businessLogo,
                 });
 
-                req.session.signup = {
-                    businessId: businessDetail._id,
-                    step: 2,
-                };
-
                 req.flash("success", "Business Details Added Successfully.");
                 return res.redirect("/bmadmin/adminprofile");
             }
         } catch (error) {
+            console.error("Error in bussinessDetails:", error);
             return res.status(500).json({
                 message: "Internal Server Error",
+                error: error.message,
             });
         }
     }
@@ -185,6 +199,7 @@ class bmServices {
             }
 
             const adminProfile = await BMadminProfile.create({
+                signupId: req.session.signup.signupId,
                 adminProfilePhoto,
                 firstName,
                 middleName,
@@ -200,8 +215,8 @@ class bmServices {
             });
 
             req.session.signup = {
-                profileId: adminProfile._id,
-                step: 2,
+                signupId: req.session.signup.signupId,
+                step: 3,
             };
 
             // TODO: Integrate SMS gateway here
@@ -225,10 +240,10 @@ class bmServices {
      * @param {*} res
      */
     static async verifyOtp(data, req, res) {
-        const profileId = req.session.signup.profileId;
+        const signupId = req.session.signup.signupId;
         const { otp } = data;
 
-        const admin = await BMadminProfile.findById(profileId);
+        const admin = await BMadminProfile.findOne({ signupId: signupId });
 
         if (!admin) {
             return res
@@ -244,7 +259,7 @@ class bmServices {
 
         // Mark OTP as verified
         const confirmOtp = await BMadminProfile.findOne({
-            _id: profileId,
+            signupId: signupId,
             otp,
             otpExpiry: { $gt: new Date() },
         });
@@ -255,11 +270,14 @@ class bmServices {
                 .json({ message: "otp does not match", success: false });
         }
 
-        await BMadminProfile.findByIdAndUpdate(profileId, {
-            otp: null,
-            otpExpiry: null,
-            isOtpVerified: true,
-        });
+        await BMadminProfile.findOneAndUpdate(
+            { signupId: signupId },
+            {
+                otp: null,
+                otpExpiry: null,
+                isOtpVerified: true,
+            }
+        );
 
         req.session.signup.step = 3;
 
@@ -276,14 +294,17 @@ class bmServices {
      */
     static async resendOtp(req, res) {
         try {
-            const adminId = req.session.signup.profileId;
-            if (!adminId) {
+            const signupId = req.session.signup.signupId;
+            if (!signupId) {
                 return res
                     .status(400)
                     .json({ message: "Admin ID not found", success: false });
             }
 
-            const findBMadmin = await BMadminProfile.findById(adminId);
+            const findBMadmin = await BMadminProfile.findOne({
+                signupId: signupId,
+            });
+            console.log("Found BMadmin:", findBMadmin);
 
             if (!findBMadmin) {
                 return res.status(404).json({ message: "Admin not found" });
@@ -292,8 +313,8 @@ class bmServices {
             const newOtp = randomOtpGenerator(6);
             const otpExpiry = new Date(Date.now() + 2 * 60 * 1000);
 
-            await BMadminProfile.findByIdAndUpdate(
-                adminId,
+            await BMadminProfile.findOneAndUpdate(
+                { signupId: signupId },
                 {
                     otp: newOtp,
                     otpExpiry,
@@ -338,7 +359,6 @@ class bmServices {
      */
     static async residenceDetails(req, res) {
         try {
-            console.log("Received residence details:", req.body);
             const {
                 residenceType,
                 numberOfFlatOrVilla,
@@ -363,16 +383,10 @@ class bmServices {
                 ? `/BMadmin/${req.files.fireExtingushierLocations[0].filename}`
                 : null;
 
-            console.log(
-                "files",
-                residencePolicies,
-                emergencyExits,
-                fireExtingushierLocations
-            );
-
             const permissions = req.body.permissions || [];
 
             const residenceDetails = {
+                signupId: req.session.signup.signupId,
                 residenceType,
                 numberOfFlatOrVilla,
                 buildingNameOrAreaName,
@@ -387,8 +401,13 @@ class bmServices {
             };
 
             if (req.files) {
-                await BMresidenceDetails.create(residenceDetails);
-                req.session.signup.step = 4;
+                const residenceDetail = await BMresidenceDetails.create(
+                    residenceDetails
+                );
+                req.session.signup = {
+                    signupId: req.session.signup.signupId,
+                    step: 4,
+                };
                 req.flash("success", "Residence Details Added Successfully.");
                 return res.redirect("/bmadmin/bankdetails");
             }
@@ -407,9 +426,67 @@ class bmServices {
      * @param {*} res
      */
     static async bankDetailsPage(req, res) {
+        if (!req.session.signup || req.session.signup.step < 4) {
+            return res.redirect("/bmadmin/bussinessdetails");
+        }
         return res.render("adminPanels/buildingManagement/bankDetails", {
             layout: false,
         });
+    }
+
+    /**
+     * @description: bankDetails for Building Management
+     * @param {*} data
+     * @param {*} req
+     * @param {*} res
+     */
+    static async bankDetails(data, req, res) {
+        if (!req.session.signup || req.session.signup.step < 4) {
+            return res.redirect("/bmadmin/residencedetails");
+        }
+        try {
+            const {
+                accountName,
+                accountNumber,
+                IBAN,
+                bankName,
+                billingAddress,
+            } = data;
+
+            const bankDetails = {
+                signupId: req.session.signup.signupId,
+                bankName,
+                accountNumber,
+                accountName,
+                IBAN,
+                billingAddress,
+            };
+            const existingBankDetails = await BMbankDetails.findOne({
+                accountNumber: bankDetails.accountNumber,
+            });
+
+            if (existingBankDetails) {
+                return res.status(400).json({
+                    message: "Bank account already exists.",
+                    success: false,
+                });
+            } else {
+                const bankDetail = await BMbankDetails.create(bankDetails);
+                req.session.signup = {
+                    signupId: req.session.signup.signupId,
+                    step: 5,
+                };
+            }
+            req.flash("success", "Bank Details Added Successfully.");
+
+            return res.redirect("/bmadmin/subscriptiondetails");
+        } catch (error) {
+            console.error("Error in bankDetails:", error);
+            return res.status(500).json({
+                message: "Internal Server Error",
+                success: false,
+            });
+        }
     }
 
     /**
@@ -418,12 +495,47 @@ class bmServices {
      * @param {*} res
      */
     static async subscriptionDetailsPage(req, res) {
+        if (!req.session.signup || req.session.signup.step < 5) {
+            return res.redirect("/bmadmin/bussinessdetails");
+        }
         return res.render(
             "adminPanels/buildingManagement/subscriptionDetails",
             {
                 layout: false,
             }
         );
+    }
+
+    /**
+     * @description: subscriptionDetails for Building Management
+     * @param {*} req
+     * @param {*} res
+     */
+    static async subscriptionDetails(req, res) {
+        if (!req.session.signup || req.session.signup.step < 5) {
+            return res.redirect("/bmadmin/bussinessdetails");
+        }
+        const { planName, setupFee, monthlyFee, commissionRate } = req.body;
+        try {
+            await BMsubscriptionPlan.create({
+                signupId: req.session.signup.signupId,
+                planName,
+                setupFee: Number(setupFee),
+                monthlyFee: Number(monthlyFee),
+                commissionRate: Number(commissionRate),
+            });
+
+            req.session.signup = {
+                signupId: req.session.signup.signupId,
+                step: 6,
+            };
+            req.flash("success", "Subscription selected successfully.");
+            res.redirect("/bmadmin/reviewdetails");
+        } catch (err) {
+            console.error("Subscription save failed:", err);
+            req.flash("error", "Something went wrong.");
+            res.redirect("back");
+        }
     }
 
     /**
@@ -444,9 +556,114 @@ class bmServices {
      * @param {*} res
      */
     static async reviewDetailsPage(req, res) {
+        const signupId = req.session.signup.signupId;
+        const businessDetails = await BMbusinessDetails.findOne({
+            signupId: signupId,
+        });
+        if (!businessDetails) {
+            req.flash("error", "Business details not found.");
+            return res.redirect("/bmadmin/bussinessdetails");
+        }
+        const adminProfile = await BMadminProfile.findOne({
+            signupId: signupId,
+        });
+        if (!adminProfile) {
+            req.flash("error", "Admin profile not found.");
+            return res.redirect("/bmadmin/adminprofile");
+        }
+        const residenceDetails = await BMresidenceDetails.findOne({
+            signupId: signupId,
+        });
+        if (!residenceDetails) {
+            req.flash("error", "Residence details not found.");
+            return res.redirect("/bmadmin/residencedetails");
+        }
+        const bankDetails = await BMbankDetails.findOne({ signupId: signupId });
+        if (!bankDetails) {
+            req.flash("error", "Bank details not found.");
+            return res.redirect("/bmadmin/bankdetails");
+        }
+        const subscriptionPlan = await BMsubscriptionPlan.findOne({
+            signupId: signupId,
+        });
+        if (!subscriptionPlan) {
+            req.flash("error", "Subscription plan not found.");
+            return res.redirect("/bmadmin/subscriptiondetails");
+        }
         return res.render("adminPanels/buildingManagement/reviewDetails", {
             layout: false,
+            moment: moment,
+            businessDetails: businessDetails,
+            adminProfile: adminProfile,
+            residenceDetails: residenceDetails,
+            bankDetails: bankDetails,
+            subscriptionPlan: subscriptionPlan,
         });
+    }
+
+    /**
+     * @description: reviewDetails for Building Management
+     * @param {*} req
+     * @param {*} res
+     */
+    static async reviewDetails(req, res) {
+        const signupId = req.session.signup.signupId;
+        const businessDetails = await BMbusinessDetails.findOne({
+            signupId: signupId,
+        });
+        if (!businessDetails) {
+            req.flash("error", "Business details not found.");
+            return res.redirect("/bmadmin/bussinessdetails");
+        }
+        const adminProfile = await BMadminProfile.findOne({
+            signupId: signupId,
+        });
+        if (!adminProfile) {
+            req.flash("error", "Admin profile not found.");
+            return res.redirect("/bmadmin/adminprofile");
+        }
+        const residenceDetails = await BMresidenceDetails.findOne({
+            signupId: signupId,
+        });
+        if (!residenceDetails) {
+            req.flash("error", "Residence details not found.");
+            return res.redirect("/bmadmin/residencedetails");
+        }
+        const bankDetails = await BMbankDetails.findOne({
+            signupId: signupId,
+        });
+        if (!bankDetails) {
+            req.flash("error", "Bank details not found.");
+            return res.redirect("/bmadmin/bankdetails");
+        }
+        const subscriptionPlan = await BMsubscriptionPlan.findOne({
+            signupId: signupId,
+        });
+        if (!subscriptionPlan) {
+            req.flash("error", "Subscription plan not found.");
+            return res.redirect("/bmadmin/subscriptiondetails");
+        }
+
+        if (
+            businessDetails &&
+            adminProfile &&
+            residenceDetails &&
+            bankDetails &&
+            subscriptionPlan
+        ) {
+            await BMadmin.create({
+                signupId: signupId,
+                businessDetailsId: businessDetails._id,
+                adminProfileId: adminProfile._id,
+                residenceDetailsId: residenceDetails._id,
+                bankDetailsId: bankDetails._id,
+                subscriptionId: subscriptionPlan._id,
+                isFinalSubmitted: true,
+            });
+            req.flash("success", "Review details submitted successfully.");
+            req.session.signup = null; // Clear the session after submission
+            return res.redirect("/bmadmin/login");
+        }
     }
 }
 

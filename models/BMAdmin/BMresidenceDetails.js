@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const BMresidenceDetailsSchema = mongoose.Schema(
     {
+        signupId: { type: mongoose.Schema.Types.ObjectId, required: true },
         residenceType: {
             type: String,
             required: true,

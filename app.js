@@ -29,7 +29,7 @@ if (process.env.ENV === "local") {
             secret: "sbm9321",
             resave: false,
             saveUninitialized: true,
-            cookie: { maxAge: 30 * 60 * 1000 },
+            cookie: { maxAge: 90 * 60 * 1000 },
             store: MongoStore.create({
                 mongoUrl: process.env.MONGO_DB_URL,
             }),
@@ -41,7 +41,7 @@ if (process.env.ENV === "local") {
             secret: "sbm9321",
             resave: false,
             saveUninitialized: true,
-            cookie: { maxAge: 30 * 60 * 1000 },
+            cookie: { maxAge: 90 * 60 * 1000 },
         })
     );
 }
@@ -103,7 +103,7 @@ if (isSecure) {
     var http = require("http").Server(app);
     http.listen(port, "0.0.0.0", () => {
         console.log(
-            `Listening on port: ${process.env.APP_URL}:${process.env.PORT}`
+            `Listening on port: ${process.env.BASE_URL}:${process.env.PORT}`
         );
     });
 }

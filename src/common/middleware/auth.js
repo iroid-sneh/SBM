@@ -1,6 +1,7 @@
 import passport from "../config/passport.js";
 import { HttpStatus } from "../utils/errorException";
 // import User from "../models/user.model.js";
+import BMadmin from "../../../models/BMAdmin/BMadmin.js";
 import AccessToken from "../../../models/accessToken.js";
 
 export default (req, res, next) => {

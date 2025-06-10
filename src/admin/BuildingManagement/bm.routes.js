@@ -61,14 +61,28 @@ router.post(
 
 router.get("/bankdetails", asyncWrap(bmController.bankDetailsPage));
 
+router.post(
+    "/bankdetails/step4",
+    ensureSignupStep(4),
+    asyncWrap(bmController.bankDetails)
+);
+
 router.get(
     "/subscriptiondetails",
     asyncWrap(bmController.subscriptionDetailsPage)
 );
 
+router.post(
+    "/subscriptiondetails/step5",
+    ensureSignupStep(5),
+    asyncWrap(bmController.subscriptionDetails)
+);
+
 router.get("/notification", asyncWrap(bmController.notificationPage));
 
 router.get("/reviewdetails", asyncWrap(bmController.reviewDetailsPage));
+
+router.post("/reviewdetails", asyncWrap(bmController.reviewDetails));
 
 router.use("/dashboard", dashboardRoutes);
 

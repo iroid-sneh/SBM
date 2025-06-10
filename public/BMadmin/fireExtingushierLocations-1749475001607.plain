@@ -1,2 +1,0 @@
-console.log(`NODE_ENV: ${procces.env.NODE_ENV}`)
-console.log(`app: ${app.get(env)}`);

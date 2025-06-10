@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const BMadminSchema = mongoose.Schema(
     {
+        signupId: { type: mongoose.Schema.Types.ObjectId, required: true },
         businessDetailsId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "BMbusinessDetails",
