@@ -1,9 +1,23 @@
 import express from "express";
 import asyncWrap from "express-async-wrapper";
 import usersController from "./users.controller";
+import storeFiles from "../../../common/middleware/storeFiles";
 const router = express.Router();
 
 router.get("/residentowner", asyncWrap(usersController.residentOwnerPage));
+
+router.post(
+    "/residentowner",
+    storeFiles(
+        "public/users",
+        {
+            first: "personalPhoto",
+            second: "agreementPdf",
+        },
+        "fields"
+    ),
+    asyncWrap(usersController.addResidentOwners)
+);
 
 router.get("/security", asyncWrap(usersController.securityPage));
 

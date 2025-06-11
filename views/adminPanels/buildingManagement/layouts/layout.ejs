@@ -6,6 +6,7 @@
         <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <style>
             .active-menu-item {
                 background-color: #f7f6f5 !important;
@@ -26,15 +27,24 @@
     <body class="bg-gradient-to-b from-[#163F75] to-[#54B7C5] h-screen flex">
         <% if (messages.success && messages.success.length > 0) { %>
         <script>
+            const SBM_PRIMARY = "#54B7C5";
             Swal.fire({
                 icon: "success",
                 title: "Success",
-                text: "<%= messages.success[0] %>",
+                text: `<%= messages.success[0]?.replace(/"/g, '') %>`,
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
                 timer: 3000,
                 timerProgressBar: true,
+                background: "#ffffff",
+                color: "#222",
+                iconColor: SBM_PRIMARY,
+                customClass: {
+                    popup: "shadow-lg rounded-xl border border-gray-200",
+                    title: "text-[#222] font-medium",
+                    timerProgressBar: "bg-[#54B7C5]",
+                },
             });
         </script>
         <% } %> <% if (messages.error && messages.error.length > 0) { %>
@@ -42,12 +52,20 @@
             Swal.fire({
                 icon: "error",
                 title: "Error",
-                text: "<%= messages.error[0] %>",
+                text: `<%= messages.error[0]?.replace(/"/g, '') %>`,
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
                 timer: 3000,
                 timerProgressBar: true,
+                background: "#ffffff",
+                color: "#222",
+                iconColor: "#e74c3c",
+                customClass: {
+                    popup: "shadow-lg rounded-xl border border-gray-200",
+                    title: "text-[#222] font-medium",
+                    timerProgressBar: "bg-red-400",
+                },
             });
         </script>
         <% } %>

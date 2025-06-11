@@ -30,28 +30,29 @@
                 },
             });
         </script>
-        <% } %> <% if (messages.error && messages.error.length > 0) { %>
-        <script>
-            Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: `<%= messages.error[0]?.replace(/"/g, '') %>`,
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                background: "#ffffff",
-                color: "#222",
-                iconColor: "#e74c3c",
-                customClass: {
-                    popup: "shadow-lg rounded-xl border border-gray-200",
-                    title: "text-[#222] font-medium",
-                    timerProgressBar: "bg-red-400",
-                },
-            });
-        </script>
-        <% } %>
+        <% } %> <% if (messages?.error && messages.error.length > 0) { %>
+<script>
+    Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `<%= messages.error[0].replace(/"/g, '') %>`,
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        background: "#ffffff",
+        color: "#222",
+        iconColor: "#e74c3c",
+        customClass: {
+            popup: "shadow-lg rounded-xl border border-gray-200",
+            title: "text-[#222] font-medium",
+            timerProgressBar: "bg-red-400",
+        },
+    });
+</script>
+<% } %>
+
             <img
                 src="<%= process.env.APP_URL_ADMIN %>/Icons/images/BMAuthTop.svg"
                 alt="Top Right Decoration"
@@ -669,13 +670,52 @@
         }
     }
 
-    $(document).ready(function () {
-        $("#login-from").submit(function(e) {
-            console.log("Login form submitted");
-            console.log("Phone Number: ", $("input[name='contactNumber']").val());
-            console.log("Country Code: ", $("select[name='countryCode']").val());
-            console.log("Password: ", $("input[name='password']").val());
-        })
-    });
+    $("#login-form").submit(function (e) {
+  e.preventDefault();
+
+  $.ajax({
+    type: "POST",
+    url: "/bmadmin/login",
+    data: $(this).serialize(),
+    success: function (response) {
+      // only status 200 comes here
+      if (response.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: response.message,
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+
+        setTimeout(() => {
+          window.location.href = response.redirectTo;
+        }, 1000);
+      }
+    },
+    error: function (xhr) {
+      // ✅ Check if server sent a JSON message
+      const errorMessage =
+        xhr.responseJSON?.message ||
+        "Something went wrong. Please try again.";
+
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: errorMessage,
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+    },
+  });
+});
+
+
     </script>
 </html>

@@ -11,6 +11,16 @@ class usersController {
     }
 
     /**
+     * @description: addResidentOwners For the Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async addResidentOwners(req, res) {
+        const data = await usersServices.addResidentOwners(req.body, req, res);
+        return;
+    }
+
+    /**
      * @description: securityPage For the Admin Panel
      * @param {*} req
      * @param {*} res

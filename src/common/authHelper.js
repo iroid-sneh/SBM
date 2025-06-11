@@ -59,7 +59,7 @@ class AuthHelper {
      * @returns {string} refresh token
      */
     static async refreshTokenGenerator(userId, jti) {
-        const token = crypto.randomBytes(64).toString("hex");
+        const token = crypto.randomBytes(100).toString("hex");
         await this.storeRefreshToken(userId, token, jti);
         return token;
     }
@@ -71,7 +71,7 @@ class AuthHelper {
      * @returns {object} tokens
      */
     static async tokensGenerator(userId, payloadExtras = {}) {
-        const jti = crypto.randomBytes(16).toString("hex");
+        const jti = crypto.randomBytes(75).toString("hex");
 
         const accessToken = await this.accessTokenGenerator(
             userId,
@@ -106,7 +106,12 @@ class AuthHelper {
         const expiredAt = moment()
             .add(TOKEN_EXPIRY_HOURS.ACCESS, "hours")
             .toDate();
-        await AccessToken.create({ token: jti, userId, expires_at: expiredAt });
+        await AccessToken.create({
+            token: jti,
+            jti,
+            userId,
+            expires_at: expiredAt,
+        });
     }
 
     /**
@@ -128,5 +133,4 @@ class AuthHelper {
         });
     }
 }
-
-module.exports = AuthHelper;
+export default AuthHelper;

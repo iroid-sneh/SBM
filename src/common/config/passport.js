@@ -1,10 +1,21 @@
 import passport from "passport";
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
-import { JWT } from "../constants/constant";
-import AccessToken from "../../../models/accessToken";
+import { JWT } from "../constants/constant.js";
+import AccessToken from "../../../models/accessToken.js";
+
+const cookieExtractor = function (req) {
+    let token = null;
+    if (req && req.cookies) {
+        token = req.cookies["accessToken"];
+    }
+    return token;
+};
 
 const options = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: ExtractJwt.fromExtractors([
+        ExtractJwt.fromAuthHeaderAsBearerToken(), // For mobile
+        cookieExtractor, // For web
+    ]),
     secretOrKey: JWT.SECRET,
 };
 
@@ -19,7 +30,12 @@ passport.use(
 
             if (!accessToken) return done(null, false);
 
-            return done(null, { userId: jwtPayload.id, jti: jwtPayload.jti });
+            return done(null, {
+                userId: jwtPayload.id,
+                jti: jwtPayload.jti,
+                role: jwtPayload.role,
+                panel: jwtPayload.panel,
+            });
         } catch (err) {
             return done(err, false);
         }

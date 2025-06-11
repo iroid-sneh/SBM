@@ -3,8 +3,7 @@ import Cities from "../../../models/cities";
 import BMbusinessDetails from "../../../models/BMAdmin/BMbussinessDetails";
 import BMadminProfile from "../../../models/BMAdmin/BMadminProfile";
 import { randomOtpGenerator } from "../../common/helper";
-import { hashPassword } from "../../common/authHelper";
-import argon2 from "argon2";
+import AuthHelper from "../../common/authHelper";
 import BMresidenceDetails from "../../../models/BMAdmin/BMresidenceDetails";
 import BMbankDetails from "../../../models/BMAdmin/BMbankDetails";
 import BMsubscriptionPlan from "../../../models/BMAdmin/BMsubscriptionPlan";
@@ -33,25 +32,69 @@ class bmServices {
      * @param {*} res
      */
     static async login(data, req, res) {
-        const { countryCode, contactNumber, password } = req.body;
+        try {
+            const { countryCode, contactNumber, password } = req.body;
 
-        const admin = await BMadminProfile.findOne({
-            contactNumber,
-            countryCode: countryCode,
-        });
+            const admin = await BMadminProfile.findOne({
+                contactNumber,
+                countryCode: countryCode,
+            });
 
-        if (!admin) {
-            req.flash("error", "Invalid credentials. Please try again.");
-            return res.redirect("/bmadmin/login");
+            if (!admin) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Admin Not Found with this Number. Signup first.",
+                });
+            }
+
+            if (!admin.isOtpVerified) {
+                return res.status(403).json({
+                    success: false,
+                    message: "Please Verify OTP first",
+                });
+            }
+
+            const isMatch = await AuthHelper.matchHashedPassword(
+                password,
+                admin.password
+            );
+
+            if (!isMatch) {
+                return res.status(401).json({
+                    success: false,
+                    message: "Invalid credentials. Please try again.",
+                });
+            }
+
+            const payload = {
+                id: admin._id,
+                role: "admin",
+                panel: "web",
+            };
+
+            const tokens = await AuthHelper.tokensGenerator(admin._id, payload);
+            // Only set cookie if it's a web request (e.g., from browser, not mobile app)
+            if (req.headers["user-agent"]?.includes("Mozilla")) {
+                res.cookie("accessToken", tokens.accessToken, {
+                    httpOnly: true,
+                    secure: false, // set to true in production with HTTPS
+                    sameSite: "Lax",
+                    maxAge: 120 * 60 * 1000, // 2 hour
+                });
+            }
+            return res.status(200).json({
+                success: true,
+                message: "Login successful",
+                tokenType: "Bearer",
+                accessToken: tokens.accessToken,
+                refreshToken: tokens.refreshToken,
+                expiresIn: tokens.expiresIn,
+                redirectTo: "/bmadmin/dashboard",
+            });
+        } catch (error) {
+            console.log("error: ", error);
+            return res.status(500).json({ message: "Internal Server Error" });
         }
-
-        const isValid = await argon2.verify(admin.password, password);
-
-        if (!isValid) {
-            req.flash("error", "Invalid credentials. Please try again.");
-        }
-
-        return res.redirect("/bmadmin/dashboard");
     }
 
     /**
@@ -186,7 +229,7 @@ class bmServices {
 
             const otp = randomOtpGenerator(6);
             const otpExpiry = new Date(Date.now() + 2 * 60 * 1000); // 2 minutes
-            const hashedPassword = await hashPassword(password); // Use argon2
+            const hashedPassword = await AuthHelper.hashPassword(password); // Use argon2
 
             const existing = await BMadminProfile.findOne({
                 contactNumber,

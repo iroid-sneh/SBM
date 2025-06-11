@@ -14,6 +14,8 @@ import expressEjsLayouts from "express-ejs-layouts";
 import "./seeder/index";
 import flashMessages from "./src/common/middleware/flashMessages";
 import errorHandler from "./src/common/middleware/errorHandler";
+import "./src/common/config/passport";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const port = process.env.PORT || 2002;
@@ -49,6 +51,7 @@ if (process.env.ENV === "local") {
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(cookieParser());
 app.use(cors());
 
 app.use(expressEjsLayouts);

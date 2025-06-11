@@ -15,6 +15,8 @@ import settingsRoutes from "./settings/settings.routes";
 import faqsRoutes from "./FAQ's/FAQ's.routes";
 import storeFiles from "../../common/middleware/storeFiles";
 import { ensureSignupStep } from "../../common/middleware/ensureSignupStep";
+import auth from "../../common/middleware/auth";
+import { checkRole } from "../../common/middleware/checkRole";
 const router = express.Router();
 
 router.get("/login", asyncWrap(bmController.loginPage));
@@ -84,28 +86,33 @@ router.get("/reviewdetails", asyncWrap(bmController.reviewDetailsPage));
 
 router.post("/reviewdetails", asyncWrap(bmController.reviewDetails));
 
-router.use("/dashboard", dashboardRoutes);
+router.use("/dashboard", auth, checkRole("admin"), dashboardRoutes);
 
-router.use("/users", usersRoutes);
+router.use("/users", auth, checkRole("admin"), usersRoutes);
 
-router.use("/events", eventsRoutes);
+router.use("/events", auth, checkRole("admin"), eventsRoutes);
 
-router.use("/reservations", reservationsRoutes);
+router.use("/reservations", auth, checkRole("admin"), reservationsRoutes);
 
-router.use("/security", securityRoutes);
+router.use("/security", auth, checkRole("admin"), securityRoutes);
 
-router.use("/maintenance", maintenanceRoutes);
+router.use("/maintenance", auth, checkRole("admin"), maintenanceRoutes);
 
-router.use("/theoffice", theOfficeRoutes);
+router.use("/theoffice", auth, checkRole("admin"), theOfficeRoutes);
 
-router.use("/invoices", invoicesRoutes);
+router.use("/invoices", auth, checkRole("admin"), invoicesRoutes);
 
-router.use("/pushnotification", pushNotificationRoutes);
+router.use(
+    "/pushnotification",
+    auth,
+    checkRole("admin"),
+    pushNotificationRoutes
+);
 
-router.use("/feedback", feedbackRoutes);
+router.use("/feedback", auth, checkRole("admin"), feedbackRoutes);
 
-router.use("/settings", settingsRoutes);
+router.use("/settings", auth, checkRole("admin"), settingsRoutes);
 
-router.use("/faqs", faqsRoutes);
+router.use("/faqs", auth, checkRole("admin"), faqsRoutes);
 
 export default router;

@@ -1,45 +1,48 @@
 import passport from "../config/passport.js";
 import { HttpStatus } from "../utils/errorException";
-// import User from "../models/user.model.js";
-import BMadmin from "../../../models/BMAdmin/BMadmin.js";
+import { getModelByRole } from "../middleware/getModelByRole.js";
 import AccessToken from "../../../models/accessToken.js";
 
 export default (req, res, next) => {
-    passport.authenticate("jwt", { session: false }, async (err, user) => {
-        if (!user) {
-            return res
-                .status(HttpStatus.UNAUTHORIZED)
-                .json({ message: "Unauthorized" });
+    passport.authenticate(
+        "jwt",
+        { session: false },
+        async (err, user, info) => {
+            if (err) {
+                console.error("Passport error:", err);
+                req.flash("error", "Internal authentication error");
+                return res.redirect("/bmadmin/login");
+            }
+
+            // Token expired or not present
+            if (!user) {
+                if (info?.name === "TokenExpiredError") {
+                    req.flash("error", "Session expired. Please login again.");
+                } else {
+                    req.flash("error", "Unauthorized access.");
+                }
+                return res.redirect("/bmadmin/login");
+            }
+
+            const validToken = await AccessToken.findOne({
+                token: user.jti,
+                userId: user.userId,
+                isRevoked: false,
+            }).lean();
+
+            if (!validToken) {
+                req.flash("error", "Session invalid or revoked.");
+                return res.redirect("/bmadmin/login");
+            }
+
+            try {
+                req.user = user;
+                return next();
+            } catch (err) {
+                console.error("Auth error:", err.message);
+                req.flash("error", "Something went wrong. Try again.");
+                return res.redirect("/bmadmin/login");
+            }
         }
-
-        const validToken = await AccessToken.findOne({
-            token: user.jti,
-            userId: user.userId,
-            isRevoked: false,
-        });
-
-        if (!validToken) {
-            return res
-                .status(HttpStatus.UNAUTHORIZED)
-                .json({ message: "Invalid access token" });
-        }
-
-        const today = new Date();
-        const start = new Date(today.setHours(0, 0, 0, 0));
-        const end = new Date(today.setHours(23, 59, 59, 999));
-
-        const lastLogin = await User.findOne({
-            _id: user.userId,
-            lastLoginAt: { $gte: start, $lte: end },
-        });
-
-        if (!lastLogin) {
-            await User.findByIdAndUpdate(user.userId, {
-                lastLoginAt: new Date(),
-            });
-        }
-
-        req.user = user;
-        return next();
-    })(req, res, next);
+    )(req, res, next);
 };
