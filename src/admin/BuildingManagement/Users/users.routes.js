@@ -19,6 +19,24 @@ router.post(
     asyncWrap(usersController.addResidentOwners)
 );
 
+router.get(
+    "/residentowner/list",
+    asyncWrap(usersController.residentOwnersList)
+);
+
+router.put(
+    "/residentowner/:id",
+    storeFiles(
+        "public/users",
+        {
+            first: "personalPhoto",
+            second: "agreementPdf",
+        },
+        "fields"
+    ),
+    asyncWrap(usersController.updateResidentOwner)
+);
+
 router.get("/security", asyncWrap(usersController.securityPage));
 
 router.get("/technician", asyncWrap(usersController.technicianPage));

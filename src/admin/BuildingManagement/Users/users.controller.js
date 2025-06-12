@@ -21,6 +21,35 @@ class usersController {
     }
 
     /**
+     * @description: residentOwnersList For the Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async residentOwnersList(req, res) {
+        const data = await usersServices.residentOwnersList(
+            req.query,
+            req,
+            res
+        );
+        return;
+    }
+
+    /**
+     * @description: updateResidentOwner For the Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async updateResidentOwner(req, res) {
+        const data = await usersServices.updateResidentOwner(
+            req.params.id,
+            req.body,
+            req,
+            res
+        );
+        return;
+    }
+
+    /**
      * @description: securityPage For the Admin Panel
      * @param {*} req
      * @param {*} res

@@ -11,12 +11,13 @@ const userSchema = mongoose.Schema(
             required: true,
         },
         nationality: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Nationality",
             required: true,
         },
         buildingOrComplexName: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "bmresidencedetails",
+            ref: "BMresidenceDetails",
             required: true,
         },
         flatVillaNumber: {

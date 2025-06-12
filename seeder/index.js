@@ -7,6 +7,8 @@ import Countries from "../models/countries";
 import countriesData from "./countriesData";
 import Cities from "../models/cities";
 import citiesData from "./citiesData";
+import Nationality from "../models/nationality";
+import nationalityData from "./nationalityData";
 
 const getHash = (data) => {
     return crypto
@@ -115,6 +117,13 @@ const admin = async () => {
         data: transformedCities,
         key: revrs("SBMCitiesDataHash"),
         upsertQueryFields: ["name", "country"],
+    });
+
+    await seedWithHash({
+        model: Nationality,
+        data: nationalityData,
+        key: revrs("SBNationalityDataHash"),
+        upsertQueryFields: ["name"],
     });
 };
 
