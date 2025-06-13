@@ -105,18 +105,6 @@ class usersServices {
     }
 
     /**
-     * @description: securityPage for admin Panel
-     * @param {*} req
-     * @param {*} res
-     */
-    static async securityPage(req, res) {
-        return res.render("adminPanels/buildingManagement/users/security", {
-            currentPage: "users",
-            layout: "adminPanels/buildingManagement/layouts/layout",
-        });
-    }
-
-    /**
      * @description: residentOwnersList for admin Panel
      * @param {*} query
      * @param {*} req
@@ -233,47 +221,66 @@ class usersServices {
     static async updateResidentOwner(id, data, req, res) {
         const findUser = await commonService.findById(Users, { _id: id });
         if (!findUser) {
-            return res.status(404).json({
-                success: false,
-                message: "User Not found",
-            });
+            console.log(
+                "Error in updateResidentOwner: User not found with id: " + id
+            );
+            req.flash("error", "user not found");
         }
         try {
             const updatedData = {
                 ...data,
             };
-            if (files) {
-                const agreementPdf = req.files?.agreementPdf?.[0]?.filename
-                    ? `/users/${req.files.agreementPdf[0].filename}`
-                    : null;
+            if (req.files) {
+                // Default to existing values
+                let agreementPdf = findUser.agreementPdf;
+                let personalPhoto = findUser.personalPhoto;
 
-                const personalPhoto = req.files?.personalPhoto?.[0]?.filename
-                    ? `/users/${req.files.personalPhoto[0].filename}`
-                    : null;
+                // Check and update if new PDF uploaded
+                if (req.files.agreementPdf && req.files.agreementPdf[0]) {
+                    // Delete old PDF if exists
+                    if (agreementPdf) {
+                        try {
+                            fs.unlinkSync(
+                                path.join(
+                                    __dirname,
+                                    "../../../../public/",
+                                    agreementPdf
+                                )
+                            );
+                        } catch (err) {
+                            console.log(
+                                "Error deleting old agreement PDF:",
+                                err
+                            );
+                        }
+                    }
+                    // Update with new path
+                    agreementPdf = `/users/${req.files.agreementPdf[0].filename}`;
+                }
 
+                // Check and update if new photo uploaded
+                if (req.files.personalPhoto && req.files.personalPhoto[0]) {
+                    // Delete old photo if exists
+                    if (personalPhoto) {
+                        try {
+                            fs.unlinkSync(
+                                path.join(
+                                    __dirname,
+                                    "../../../../public/",
+                                    personalPhoto
+                                )
+                            );
+                        } catch (err) {
+                            console.log("Error deleting old photo:", err);
+                        }
+                    }
+                    // Update with new path
+                    personalPhoto = `/users/${req.files.personalPhoto[0].filename}`;
+                }
+
+                // Save updated file paths
                 updatedData.agreementPdf = agreementPdf;
                 updatedData.personalPhoto = personalPhoto;
-
-                try {
-                    if (findUser.personalPhoto || findUser.agreementPdf) {
-                        fs.unlinkSync(
-                            path.join(
-                                __dirname,
-                                "../../../../public/users/",
-                                findUser.personalPhoto
-                            )
-                        );
-                        fs.unlinkSync(
-                            path.join(
-                                __dirname,
-                                "../../../../public/users/",
-                                findUser.agreementPdf
-                            )
-                        );
-                    }
-                } catch (error) {
-                    console.log("Error in updating users files", error);
-                }
             }
 
             await commonService.findByIdAndUpdate(
@@ -281,8 +288,11 @@ class usersServices {
                 { _id: id },
                 updatedData
             );
-            req.flash("success", "User Updated Successfully");
-            return res.redirect("/bmadmin/users/residentowner");
+            // req.flash("success", "User Updated Successfully");
+            return res.status(200).json({
+                success: true,
+                message: "User Updated Successfully",
+            });
         } catch (error) {
             console.log("Error in updating users", error);
             return res.status(500).json({
@@ -291,6 +301,62 @@ class usersServices {
             });
         }
     }
+
+    /**
+     * @description: deleteResidentOwner for admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async deleteResidentOwner(id, req, res) {
+        try {
+            const findUser = await commonService.findById(Users, { _id: id });
+            if (!findUser) {
+                req.flash("error", "User not found");
+                return res.status(404).json({
+                    success: false,
+                    message: "User not found",
+                });
+            }
+
+            await commonService.findByIdAndDelete(Users, { _id: id });
+            return res.status(200).json({
+                success: true,
+                message: "User deleted successfully",
+            });
+        } catch (error) {
+            console.log("Error in deleteResidentOwner", error);
+            return res.status(500).json({
+                success: false,
+                message: "Internal Server Error",
+            });
+        }
+    }
+
+    /**
+     * @description: securityPage for admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async securityPage(req, res) {
+        const buildingOrComplex = await BMresidenceDetails.find({});
+        const nationality = await Nationality.find({});
+        const countries = await Countries.find({});
+
+        return res.render("adminPanels/buildingManagement/users/security", {
+            currentPage: "users",
+            layout: "adminPanels/buildingManagement/layouts/layout",
+            countries: countries,
+            buildingOrComplex: buildingOrComplex,
+            nationality: nationality,
+        });
+    }
+
+    /**
+     * @description: addSecurity for admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async addSecurity(req, res) {}
 
     /**
      * @description: technicianPage for admin Panel

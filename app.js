@@ -25,28 +25,22 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-if (process.env.ENV === "local") {
-    app.use(
-        session({
-            secret: "sbm9321",
-            resave: false,
-            saveUninitialized: true,
-            cookie: { maxAge: 90 * 60 * 1000 },
-            store: MongoStore.create({
-                mongoUrl: process.env.MONGO_DB_URL,
-            }),
-        })
-    );
-} else {
-    app.use(
-        session({
-            secret: "sbm9321",
-            resave: false,
-            saveUninitialized: true,
-            cookie: { maxAge: 90 * 60 * 1000 },
-        })
-    );
-}
+app.use(
+    session({
+        secret: "sbm9321",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year in ms
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+        },
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGO_DB_URL,
+            ttl: 60 * 60 * 24 * 365, // 1 year in seconds
+        }),
+    })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -73,13 +73,13 @@ class bmServices {
             };
 
             const tokens = await AuthHelper.tokensGenerator(admin._id, payload);
-            // Only set cookie if it's a web request (e.g., from browser, not mobile app)
+
             if (req.headers["user-agent"]?.includes("Mozilla")) {
                 res.cookie("accessToken", tokens.accessToken, {
                     httpOnly: true,
                     secure: false, // set to true in production with HTTPS
-                    sameSite: "Lax",
-                    maxAge: 120 * 60 * 1000, // 2 hour
+                    maxAge: 1000 * 60 * 60 * 24 * 365, // 365 days in ms = 31,536,000,000
+                    sameSite: "strict",
                 });
             }
             return res.status(200).json({

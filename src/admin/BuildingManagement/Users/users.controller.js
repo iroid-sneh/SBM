@@ -50,12 +50,36 @@ class usersController {
     }
 
     /**
+     * @description: deleteResidentOwner For the Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async deleteResidentOwner(req, res) {
+        const data = await usersServices.deleteResidentOwner(
+            req.params.id,
+            req,
+            res
+        );
+        return;
+    }
+
+    /**
      * @description: securityPage For the Admin Panel
      * @param {*} req
      * @param {*} res
      */
     static async securityPage(req, res) {
         const data = await usersServices.securityPage(req, res);
+        return;
+    }
+
+    /**
+     * @description: addSecurity For the Admin Panel
+     * @param {*} req
+     * @param {*} res
+     */
+    static async addSecurity(req, res) {
+        const data = await usersServices.addSecurity(req, res);
         return;
     }
 

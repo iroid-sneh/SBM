@@ -120,16 +120,6 @@
                     <th
                         class="px-6 py-3 text-center text-xs font-medium text-black uppercase tracking-wider first:rounded-l-lg last:rounded-r-lg"
                     >
-                        <input
-                            type="checkbox"
-                            id="select-all-checkbox"
-                            class="h-4 w-4 text-[#54B7C5]"
-                        />
-                    </th>
-
-                    <th
-                        class="px-6 py-3 text-center text-xs font-medium text-black uppercase tracking-wider"
-                    >
                         Flat/Villa
                     </th>
                     <th
@@ -369,13 +359,13 @@
                                 data-code-id="contact-no-code"
                             >
                                 <% countries.forEach((country, index) => { %>
-                                <!-- <option 
+                                <option 
                                             value="<%= country.countryCode %>" 
                                             data-flag="<%= country.flag %>"
                                             <%= index === 0 ? 'selected' : '' %>
                                         >
                                             <%= country.countryCode %> <%= country.name %>
-                                        </option> -->
+                                        </option>
                                 <% }) %>
                             </select>
 
@@ -413,13 +403,13 @@
                                 data-code-id="emergency-no-code"
                             >
                                 <% countries.forEach((country, index) => { %>
-                                <!-- <option 
+                                <option 
                                             value="<%= country.countryCode %>" 
                                             data-flag="<%= country.flag %>"
                                             <%= index === 0 ? 'selected' : '' %>
                                         >
                                             <%= country.countryCode %> <%= country.name %>
-                                        </option> -->
+                                        </option>
                                 <% }) %>
                             </select>
 
@@ -501,20 +491,20 @@
             </button>
         </div>
         <form id="editUserForm" enctype="multipart/form-data">
+            <input type="hidden" id="editUserId" name="editUserId" />
             <div class="p-6">
                 <div class="flex justify-center mb-6">
                     <div class="relative w-24 h-24">
                         <div
-                            id="editProfilePreview"
+                            id="profilePlaceholder"
                             class="w-[95px] h-[95px] rounded-full border-4 border-[#57C1D1] flex items-center justify-center bg-gray-100 overflow-hidden"
                         >
                             <img
                                 id="editProfileImage"
-                                src="/images/default-user.png"
+                                src="<%= process.env.APP_ADMIN_URL %>/Icons/images/securityimage.png"
                                 class="w-full h-full object-cover rounded-full"
                             />
                         </div>
-
                         <input
                             id="imageUpload"
                             name="personalPhoto"
@@ -651,8 +641,8 @@
                                 name="countryCode1"
                                 class="z-10 absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                 onchange="updateFlag(this)"
-                                data-flag-id="contact-no-flag"
-                                data-code-id="contact-no-code"
+                                data-flag-id="edit-contact-no-flag"
+                                data-code-id="edit-contact-no-code"
                             >
                                 <% countries.forEach((country, index) => { %>
                                 <option 
@@ -666,7 +656,7 @@
                             </select>
 
                             <img
-                                id="contact-no-flag"
+                                id="edit-contact-no-flag"
                                 src="<%= countries[0]?.flag %>"
                                 class="w-10 h-6 object-cover border rounded-sm z-0"
                                 alt="Country flag"
@@ -697,8 +687,8 @@
                                 name="countryCode2"
                                 class="z-10 absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                 onchange="updateFlag(this)"
-                                data-flag-id="emergency-no-flag"
-                                data-code-id="emergency-no-code"
+                                data-flag-id="edit-emergency-no-flag"
+                                data-code-id="edit-emergency-no-code"
                             >
                                 <% countries.forEach((country, index) => { %>
                                 <option 
@@ -712,7 +702,7 @@
                             </select>
 
                             <img
-                                id="emergency-no-flag"
+                                id="edit-emergency-no-flag"
                                 src="<%= countries[0]?.flag %>"
                                 class="w-10 h-6 object-cover border rounded-sm z-0"
                                 alt="Country flag"
@@ -735,7 +725,7 @@
                         />
                     </div>
                 </div>
-                <div class="flex items-center justify-center mt-4">
+                <div id="agreementpdfeditdiv" class="flex items-center justify-center mt-4">
                     <label
                         class="flex items-center justify-center w-full h-16 bg-white border border-dashed border-gray-300 rounded-xl cursor-pointer shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                     >
@@ -758,12 +748,12 @@
                         </div>
                         <input name="agreementPdf" id="editPdf" type="file" class="hidden" />
                     </label>
-                    <div id="existingPdfContainer" class="mt-2 flex items-center gap-2">
-                        <span id="existingPdfName" class="text-sm text-gray-600"></span>
-                        <button type="button" id="removePdfBtn" class="text-red-500 text-xs">
-                            Remove
-                        </button>
-                    </div>
+                </div>
+                <div id="existingPdfContainer" class="m-3 flex items-center justify-center gap-2">
+                    <span id="existingPdfName" class="text-md text-gray-600"></span>
+                    <button type="button" id="removePdfBtn" class="text-red-500 text-xs">
+                        Remove
+                    </button>
                 </div>
                 <div class="flex justify-center p-6 border-t border-gray-200">
                     <button
@@ -879,9 +869,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap5.min.css" />
-<script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap5.min.css" />
 
 <script>
     function updateFlag(selectEl) {
@@ -920,7 +910,6 @@
     });
 
     $("#add-users-form").on("submit", function (e) {
-        console.log("form submited");
         e.preventDefault();
         const form = new FormData(this);
         $.ajax({
@@ -978,15 +967,6 @@
                     },
                 },
                 columns: [
-                    {
-                        data: null,
-                        orderable: false,
-                        searchable: false,
-                        className: "text-center",
-                        render: function (data, type, row) {
-                            return `<input type="checkbox" class="row-checkbox" value="${row._id}" />`;
-                        },
-                    },
                     {
                         data: "flatVillaNumber",
                         class: "px-6 py-3 text-center text-xs font-medium text-black uppercase tracking-wider first:rounded-l-lg last:rounded-r-lg",
@@ -1106,12 +1086,9 @@
                         data: null,
                         class: "px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center",
                         render: function (data, row, type) {
-                            console.log("button clicked");
                             return `<button
-                                type="button"
-                                data-modal-target="delete-user-modal"
-                                data-modal-toggle="delete-user-modal"
-                                class="inline-flex items-center px-3 py-2"
+                                onclick="deleteUser('${data._id}')"
+                                class="delete-user-btn inline-flex items-center mr-2 px-3 py-2"
                             >
                                 <svg
                                     class="w-6 h-6 text-gray-800 dark:text-white"
@@ -1133,7 +1110,7 @@
                             </button>
                             <button
                                 type="button"
-                                data-id="${row._id}"
+                                data-id="${data._id}"
                                 data-modal-target="edit-user-modal"
                                 data-modal-toggle="edit-user-modal"
                                 class="edit-user-btn inline-flex items-center"
@@ -1203,57 +1180,57 @@
                 renderPagination(table);
             });
 
-            const selectedContactFlag = $("#countryCode1 option:selected").data("flag");
-            $("#contact-no-flag").attr("src", selectedContactFlag);
+            const selectedContactFlag = $("#countryCode1 option:selected").data(
+                "edit-contact-no-flag"
+            );
 
-            const selectedEmergencyFlag = $("#countryCode2 option:selected").data("flag");
-            $("#emergency-no-flag").attr("src", selectedEmergencyFlag);
+            const selectedEmergencyFlag = $("#countryCode2 option:selected").data(
+                "edit-emergency-no-flag"
+            );
 
-            $("#usersTable").on("draw.dt", function () {
-                console.log("Edit user button called");
-                $(".edit-user-btn")
+            $("#usersTable").on("click", ".edit-user-btn", function () {
+                const rowData = $("#usersTable").DataTable().row($(this).closest("tr")).data();
+                $("#editUserId").val(rowData._id);
+                $("#editProfileImage").attr(
+                    "src",
+                    rowData.personalPhoto || "/images/default-user.png"
+                );
+                $("#fullName").val(rowData.fullName);
+                $("#IDno").val(rowData.IDno);
+                $("#nationality").val(rowData.nationality?._id);
+                $("#buildingOrComplexName").val(rowData.buildingOrComplexName?._id);
+                $("#flatVillaNumber").val(rowData.flatVillaNumber);
+                $("#editresident").prop("checked", rowData.resident === true);
+                $("#editowner").prop("checked", rowData.owner === true);
+                $("#editassociationMember").prop("checked", rowData.associationMember === true);
+                $("#contactNumber").val(rowData.contactNumber);
+                $("#emergencyNumber").val(rowData.emergencyNumber);
+                $("#countryCode1").val(rowData.countryCode1).trigger("change");
+                $("#countryCode2").val(rowData.countryCode2).trigger("change");
+
+                const emergencyFlag = $(`#countryCode2 option:selected`).data("flag");
+                const contactFlag = $(`#countryCode1 option:selected`).data("flag");
+
+                $("#edit-emergency-no-flag").attr("src", emergencyFlag);
+                $("#edit-contact-no-flag").attr("src", contactFlag);
+
+                if (rowData.agreementPdf) {
+                    const fileName = rowData.agreementPdf.split("/").pop();
+                    $("#existingPdfName").text(fileName);
+                    $("#existingPdfContainer").show();
+                    $("#agreementpdfeditdiv").hide();
+                } else {
+                    $("#agreementpdfeditdiv").show();
+                    $("#existingPdfContainer").hide();
+                }
+
+                $("#removePdfBtn")
                     .off("click")
                     .on("click", function () {
-                        const rowData = table.row($(this).closest("tr")).data();
-
-                        // Populate form fields
-                        $("#editProfileImage").attr(
-                            "src",
-                            rowData.personalPhoto || "/images/default-user.png"
-                        );
-                        $("#fullName").val(rowData.fullName);
-                        $("#IDno").val(rowData.IDno);
-                        $("#nationality").val(rowData.nationality?._id); // if populated
-                        $("#buildingOrComplexName").val(rowData.buildingOrComplexName?._id);
-                        $("#flatVillaNumber").val(rowData.flatVillaNumber);
-                        $("#editresident").prop("checked", rowData.resident === true);
-                        $("#editowner").prop("checked", rowData.owner === true);
-                        $("#editassociationMember").prop(
-                            "checked",
-                            rowData.associationMember === true
-                        );
-
-                        $("#contactNumber").val(rowData.contactNumber);
-                        $("#emergencyNumber").val(rowData.emergencyNumber);
-                        $("#countryCode1").val(rowData.countryCode1).trigger("change");
-                        $("#countryCode2").val(rowData.countryCode2).trigger("change");
-
-                        if (rowData.agreementPdf) {
-                            const fileName = rowData.agreementPdf.split("/").pop();
-                            $("#existingPdfName").text(fileName);
-                            $("#existingPdfContainer").show();
-                        } else {
-                            $("#existingPdfContainer").hide();
-                        }
-
-                        $("#removePdfBtn").on("click", function () {
-                            $("#existingPdfName").text("");
-                            $("#existingPdfContainer").hide();
-                            $("#editPdf").val(""); // clear file input
-                        });
-
-                        $("#countryCode1").trigger("change");
-                        $("#countryCode2").trigger("change");
+                        $("#existingPdfName").text("");
+                        $("#existingPdfContainer").hide();
+                        $("#agreementpdfeditdiv").show();
+                        $("#editPdf").val("");
                     });
             });
         } else {
@@ -1261,69 +1238,26 @@
         }
     });
 
-    // Select/Deselect All Rows
-    $("#select-all-checkbox").on("change", function () {
-        const isChecked = $(this).is(":checked");
-        $(".row-checkbox").prop("checked", isChecked);
-    });
-
-    // Optional: Update "select all" checkbox state if individual checkbox changes
-    $(document).on("change", ".row-checkbox", function () {
-        const allChecked = $(".row-checkbox").length === $(".row-checkbox:checked").length;
-        $("#select-all-checkbox").prop("checked", allChecked);
-    });
-
-    // Get selected IDs (for delete/edit)
-    function getSelectedIds() {
-        return $(".row-checkbox:checked")
-            .map(function () {
-                return $(this).val();
-            })
-            .get(); // returns array of selected IDs
-    }
-
-    $("#bulkDeleteBtn").on("click", function () {
-        const ids = getSelectedIds();
-        if (ids.length === 0) return alert("No rows selected.");
-        console.log("Deleting IDs:", ids);
-        // Call your delete API here
-    });
-
-    $("#collegesTable").on("click", ".btn-set-update", function (ev) {
-        ev.preventDefault();
-        let row = $(this).closest("tr");
-        let data = $("#collegesTable").DataTable().row(row).data();
-
-        Swal.fire({
-            title: "Update Status",
-            text: "Do you want to toggle the update status?",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, toggle it",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = `/admin/colleges/toggleUpdate/${data._id}`;
-            }
-        });
-    });
-
     // Edit users
     $("#editUserForm").on("submit", function (e) {
+        console.log("Edit user form submitted");
         e.preventDefault();
 
         const userId = $("#editUserId").val();
         const formData = new FormData();
+
+        let member =  $("#editassociationMember").prop("checked") ? true : false;
+        let resident = $("#editresident").prop("checked") ? true : false;
+        let owner = $("#editowner").prop("checked") ? true : false;
 
         formData.append("fullName", $("#fullName").val());
         formData.append("IDno", $("#IDno").val());
         formData.append("nationality", $("#nationality").val());
         formData.append("buildingOrComplexName", $("#buildingOrComplexName").val());
         formData.append("flatVillaNumber", $("#flatVillaNumber").val());
-        formData.append("associationMember", $("#associationMember").val());
-        formData.append("resident", $("#resident").val());
-        formData.append("owner", $("#owner").val());
+        formData.append("associationMember", member);
+        formData.append("resident", resident);
+        formData.append("owner", owner);
         formData.append("countryCode1", $("#countryCode1").val());
         formData.append("contactNumber", $("#contactNumber").val());
         formData.append("countryCode2", $("#countryCode2").val());
@@ -1341,14 +1275,50 @@
             data: formData,
             processData: false,
             contentType: false,
-            success: function () {
-                $("#edit-user-modal").modal("hide"); // if using Flowbite you might not need this
-                Swal.fire("Success", "User updated successfully", "success");
-                table.ajax.reload();
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: response.message,
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                    });
+                    window.location.href = `/bmadmin/users/residentowner`;
+                }
             },
             error: function () {
                 Swal.fire("Error", "Failed to update user", "error");
             },
         });
     });
+
+    function deleteUser(id) {
+        console.log("Delete Function Called");
+        $.ajax({
+            url: `/bmadmin/users/residentowner/${id}`,
+            type: "DELETE",
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: response.message,
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                    });
+                    setTimeout(() => {
+                        window.location.href = `/bmadmin/users/residentowner`;
+                    }, 1000);
+                }
+            },
+            error: function () {
+                Swal.fire("Error", "Failed to Delete user", "error");
+            },
+        });
+    }
 </script>

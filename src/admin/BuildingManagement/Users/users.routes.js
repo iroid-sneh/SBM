@@ -37,7 +37,14 @@ router.put(
     asyncWrap(usersController.updateResidentOwner)
 );
 
+router.delete(
+    "/residentowner/:id",
+    asyncWrap(usersController.deleteResidentOwner)
+);
+
 router.get("/security", asyncWrap(usersController.securityPage));
+
+router.post("/security", asyncWrap(usersController.addSecurity));
 
 router.get("/technician", asyncWrap(usersController.technicianPage));
 

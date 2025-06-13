@@ -27,31 +27,6 @@
                 Technician
             </button>
         </div>
-
-        <!-- File icon at the start -->
-        <button
-            class="flex items-center m-2 mr-5"
-            data-modal-target="reports-modal"
-            data-modal-toggle="reports-modal"
-        >
-            <svg
-                class="w-6 h-6 text-gray-800 transform scale-x-[-1]"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    stroke="#163f75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M10 3v4a1 1 0 0 1-1 1H5m4 8h6m-6-4h6m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z"
-                />
-            </svg>
-        </button>
     </div>
 </div>
 
@@ -273,7 +248,7 @@
                     </div>
 
                     <!-- Hidden File Input -->
-                    <input id="imageUpload" type="file" accept="image/*" class="hidden" />
+                    <input id="imageUpload" name="" type="file" accept="image/*" class="hidden" />
 
                     <!-- Camera Icon Button -->
                     <label
@@ -319,9 +294,6 @@
                         class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                     >
                         <option value="" disabled selected>Select Nationality</option>
-                        <option value="">USA</option>
-                        <option value="">Armenia</option>
-                        <option value="">Camer</option>
                     </select>
                 </div>
 
@@ -330,9 +302,6 @@
                         class="w-full px-4 py-3 bg-white rounded-xl text-gray-700 text-sm focus:outline-none placeholder-gray-500 shadow-[0px_4px_10px_rgba(0,0,0,0.05)]"
                     >
                         <option value="" disabled selected>Select Building/Complex</option>
-                        <option value="">AlNaseem</option>
-                        <option value="">Marasai Residence</option>
-                        <option value="">Marasai Park</option>
                     </select>
                 </div>
 
@@ -342,23 +311,31 @@
                 >
                     <div class="relative flex items-center mr-3">
                         <select
-                            id="contactSelect"
-                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                            id="countryCode2"
+                            name="countryCode2"
+                            class="z-10 absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                            onchange="updateFlag(this)"
+                            data-flag-id="edit-emergency-no-flag"
+                            data-code-id="edit-emergency-no-code"
                         >
-                            <option value="bh" selected>Bahrain</option>
-                            <option value="sa">Saudi Arabia</option>
-                            <option value="ae">UAE</option>
-                            <option value="qa">Qatar</option>
-                            <option value="kw">Kuwait</option>
-                            <option value="om">Oman</option>
+                            <% countries.forEach((country, index) => { %>
+                            <!-- <option 
+                                            value="<%= country.countryCode %>" 
+                                            data-flag="<%= country.flag %>"
+                                            <%= index === 0 ? 'selected' : '' %>
+                                        >
+                                            <%= country.countryCode %> <%= country.name %>
+                                        </option> -->
+                            <% }) %>
                         </select>
 
                         <img
-                            id="contactSelectFlagIcon"
-                            src="https://flagcdn.com/w40/bh.png"
-                            class="w-6 h-4 object-cover border rounded-sm"
+                            id="edit-emergency-no-flag"
+                            src="<%= countries[0]?.flag %>"
+                            class="w-10 h-6 object-cover border rounded-sm z-0"
                             alt="Country flag"
                         />
+
                         <svg
                             class="w-2.5 h-2.5 text-gray-600 ml-1 pointer-events-none"
                             fill="none"
@@ -393,127 +370,29 @@
     </div>
 </div>
 
-<!-- Reports Modal -->
-<div
-    id="reports-modal"
-    tabindex="-1"
-    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full"
-    aria-hidden="true"
->
-    <!-- Modal Container -->
-    <div class="bg-[#F7F6F5] rounded-2xl shadow-xl w-full max-w-md">
-        <!-- Modal Header -->
-        <div class="flex justify-between items-center p-6 border-b border-gray-200">
-            <h3 class="text-xl font-semibold text-gray-800">Reports</h3>
-            <button
-                data-modal-hide="reports-modal"
-                class="text-red-400 hover:text-red-600 text-2xl"
-            >
-                Close &times;
-            </button>
-        </div>
-
-        <!-- Modal Content -->
-        <div class="p-6">
-            <div class="flex flex-col space-y-3">
-                <div class="relative">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">From</label>
-                    <div class="relative">
-                        <div
-                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
-                        >
-                            <svg
-                                class="w-4 h-4 text-gray-500"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
-                                />
-                            </svg>
-                        </div>
-                        <input
-                            datepicker
-                            datepicker-orientation="bottom"
-                            datepicker-format="dd-mm-yyyy"
-                            type="text"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
-                            placeholder="Select date"
-                        />
-                    </div>
-                </div>
-
-                <div class="relative">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">To</label>
-                    <div class="relative">
-                        <div
-                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
-                        >
-                            <svg
-                                class="w-4 h-4 text-gray-500"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
-                                />
-                            </svg>
-                        </div>
-                        <input
-                            datepicker
-                            datepicker-orientation="bottom"
-                            datepicker-format="dd-mm-yyyy"
-                            type="text"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
-                            placeholder="Select date"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="flex justify-center p-6 gap-2 border-gray-200">
-                <button
-                    class="bg-[#57C1D1] hover:bg-[#4BB3C2] text-white py-3 px-16 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
-                >
-                    View
-                </button>
-                <button
-                    class="bg-[#163F75] hover:bg-[#163F75]/90 text-white py-3 px-16 rounded-lg font-medium text-base shadow-[0px_4px_10px_rgba(0,0,0,0.05)] transition"
-                >
-                    Extract
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap5.min.css" />
 <script>
-    const flagMap = {
-        bh: "https://flagcdn.com/w40/bh.png",
-        sa: "https://flagcdn.com/w40/sa.png",
-        ae: "https://flagcdn.com/w40/ae.png",
-        qa: "https://flagcdn.com/w40/qa.png",
-        kw: "https://flagcdn.com/w40/kw.png",
-        om: "https://flagcdn.com/w40/om.png",
-    };
-    // For login form
-    document.getElementById("contactSelect").addEventListener("change", function () {
-        document.getElementById("contactSelectFlagIcon").src = flagMap[this.value];
-    });
+    function updateFlag(selectEl) {
+        const selectedOption = selectEl.options[selectEl.selectedIndex];
+        const flagUrl = selectedOption.dataset.flag;
+        const countryCode = selectedOption.value;
 
-    const buttons = document.querySelectorAll(".inactive-tab, .active-tab");
+        const flagImgId = selectEl.dataset.flagId;
+        const codeSpanId = selectEl.dataset.codeId;
 
-    buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            buttons.forEach((b) => b.classList.remove("bg-[#54B7C5]", "text-white", "active-tab"));
-            btn.classList.add("bg-[#54B7C5]", "text-white", "active-tab");
-        });
-    });
+        if (flagImgId && flagUrl) {
+            const flagImg = document.getElementById(flagImgId);
+            if (flagImg) flagImg.src = flagUrl;
+        }
+
+        if (codeSpanId) {
+            const codeSpan = document.getElementById(codeSpanId);
+            if (codeSpan) codeSpan.innerText = countryCode;
+        }
+    }
 
     const imageUpload = document.getElementById("imageUpload");
     const profilePlaceholder = document.getElementById("profilePlaceholder");
@@ -524,22 +403,6 @@
             const reader = new FileReader();
             reader.onload = function (e) {
                 profilePlaceholder.innerHTML = `
-          <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
-        `;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-    // For Edit Modal
-    const imageUploadEdit = document.getElementById("imageUpload-edit");
-    const profilePlaceholderEdit = document.getElementById("profilePlaceholder-edit");
-
-    imageUploadEdit.addEventListener("change", function () {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                profilePlaceholderEdit.innerHTML = `
           <img src="${e.target.result}" alt="Profile" class="w-full h-full object-cover rounded-full" />
         `;
             };

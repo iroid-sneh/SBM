@@ -1,13 +1,3 @@
-<script>
-    fetch("/bmadmin/dashboard", {
-        headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        },
-    })
-        .then((res) => res.json())
-        .then(console.log)
-        .catch(console.error);
-</script>
 <div
     class="bg-white rounded-tl-[40px] rounded-br-[90px] p-6 shadow-md flex justify-between items-center"
 >
